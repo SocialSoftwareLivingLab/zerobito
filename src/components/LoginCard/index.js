@@ -25,7 +25,7 @@ function LoginCard() {
       <div className="LoginCard">
             <div class="container">
               <div class="header-card">
-                Login
+                ENTRAR
               </div>
               <div class="body-card">
                 <form onSubmit={handleSubmit}>

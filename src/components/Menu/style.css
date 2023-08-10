@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.menu{
+    width: 100%;
+    height: 5.1rem;
+    padding: 0 10rem;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) ;
+    display: flex;
+    justify-content: left;
+    font-family: Lato;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.menu ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.menu ul li{
+    margin: 0 1rem;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+}
+
+.menu .Zer{
+    font-size: 2.25rem; 
+    color: rgba(172,184,196,1);
+}
+
+.menu .Obito{
+    font-size: 2.25rem;
+    color: rgba(2,39,79,1);
+}

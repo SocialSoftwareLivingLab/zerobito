@@ -1,12 +1,31 @@
 import './style.css';
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 function Menu() {
     return (
         <div className="Menu">
-            
-        </div>
+          
+            <nav class="menu">
+              <ul>   
+                <li>
+                  <span class="Zer">Zer</span><span class="Obito">Óbito</span>
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/cadastro">Cadastrar-se</Link>
+                </li>
+                <li>
+                  <Link to="/sobre">Sobre nós</Link>
+                </li>
+                <li>
+                  <Link to="/contato">Contato</Link>
+                </li>
+              </ul>
+            </nav>
+            </div>
     );
   };
   
