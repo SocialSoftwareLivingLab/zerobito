@@ -8,8 +8,11 @@ import {
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Cadastro from "./pages/Cadastro";
-import Login from "./pages/Login";
+
+import Cadastro from "./pages/Cadastro/index.tsx";
+import SobreNos from "./pages/SobreNos/index.tsx";
+import Contato from "./pages/Contato/index.tsx";
+import Login from "./pages/Login/index.tsx";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +21,9 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/sobre" element={<SobreNos />} />
+      <Route path="/contato" element={<Contato />} />
+
     </Routes>
   </BrowserRouter>,
 );
