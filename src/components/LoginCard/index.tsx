@@ -1,23 +1,26 @@
 import './style.css';
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 function LoginCard() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    };
-
-    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        // Lógica para autenticar o usuário com o email e senha
-        console.log('Email:', email);
-        console.log('Senha:', password);
+
+        try {
+            const response = await axios.post('http://seu-backend.com/login', {
+                email,
+                password,
+            });
+
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+        }
     };
 
     return (
@@ -34,8 +37,7 @@ function LoginCard() {
                                 type="email"
                                 id="email"
                                 value={email}
-                                onChange={handleEmailChange}
-                                required
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div>
@@ -44,7 +46,7 @@ function LoginCard() {
                                 type="password"
                                 id="password"
                                 value={password}
-                                onChange={handlePasswordChange}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                         </div>

@@ -8,13 +8,9 @@ function Menu(): React.JSX.Element {
             <nav className="menu">
                 <ul>
                     <li>
-                        <span className="Zer">Zer</span><span className="Obito">Óbito</span>
-                    </li>
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
-                    <li>
-                        <Link to="/cadastro">Cadastrar-se</Link>
+                        <Link to="/">
+                            <span className="Zer">Zer</span><span className="Obito">Óbito</span>
+                        </Link>
                     </li>
                     <li>
                         <Link to="/sobre">Sobre nós</Link>
@@ -22,6 +18,13 @@ function Menu(): React.JSX.Element {
                     <li>
                         <Link to="/contato">Contato</Link>
                     </li>
+                </ul>
+                <ul className='LoginButton'>
+                    <button className="button">
+                        <Link to="/login">
+                            Entrar
+                        </Link>
+                    </button>
                 </ul>
             </nav>
         </div>
