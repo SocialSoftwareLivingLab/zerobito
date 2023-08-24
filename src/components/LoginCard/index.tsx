@@ -1,37 +1,30 @@
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../contexts/auth';
 import './style.css';
-import React from 'react';
-import { useState} from 'react';
-import axios from "axios";
 
-function LoginCard() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const LoginCard = () => {
 
-    const handleSubmit = async e => {
+    const { authenticated, login} = useContext(AuthContext);
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = (e) => {
         e.preventDefault();
+        console.log('submit', {email, password}); 
 
-        try {
-            const response = await axios.post('http://seu-backend.com/login', {
-                email,
-                password,
-            });
-
-            const token = response.data.token;
-            localStorage.setItem('token', token);
-            
-        } catch (error) {
-            console.error('Erro ao fazer login:', error);
-        }
+        login(email, password);
     };
 
     return (
         <div className="LoginCard">
             <div className="container">
                 <div className="header-card">
-                    ENTRAR
+                    ENTRAR 
+                    <p>{String(authenticated)}</p>
                 </div>
                 <div className="body-card">
-                    <form onSubmit={handleSubmit}>
+                    <form className="form" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="email">Email:</label>
                             <input

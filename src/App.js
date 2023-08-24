@@ -1,12 +1,10 @@
 import './App.css';
-import Home from "./pages/Home/index.tsx";
-import Menu from './components/Menu/index.tsx';
+import AppRoutes from './AppRoutes';
 
 function App() {
   return (
-    <div className='App'>
-          <Menu/>
-          <Home/>
+    <div className='app'>
+          <AppRoutes/>
     </div>
   );
 }

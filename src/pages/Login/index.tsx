@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
-import Menu from "../../components/Menu/index.tsx";
-import LoginCard from '../../components/LoginCard/index.tsx';
+import Menu from "../../components/Menu/";
+import LoginCard from '../../components/LoginCard/';
 
 function Login(): React.JSX.Element{
   return(
