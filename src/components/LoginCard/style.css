@@ -50,6 +50,10 @@ body {
     font:bold;
 }
 
+.body-card button:hover{
+    background-color: rgba(12, 43, 77, 0.8);
+}
+
 .body-card input{
     background-color: rgb(226, 227, 228);
     border-radius: 0.2rem;

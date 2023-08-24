@@ -12,7 +12,7 @@ body {
 
 .container-register{
     width: 25rem;
-    height: 24rem;
+    height: 25rem;
     border-radius:.3em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
@@ -45,6 +45,10 @@ body {
     border: none;
     color: aliceblue;
     font:bold;
+}
+
+.body-card button:hover{
+    background-color: rgba(12, 43, 77, 0.8);
 }
 
 .body-card input{
