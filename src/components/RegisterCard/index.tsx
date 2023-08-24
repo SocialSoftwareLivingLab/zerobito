@@ -32,9 +32,9 @@ function SignupCard() {
 
   return (
     <div className="SingupCard">
-      <div className="container">
-        <div className="header-card">
-          Cadastro
+      <div className="container-register">
+        <div className="header-card-register">
+          CADASTRO
         </div>
         <div className="body-card">
           <form onSubmit={handleSubmit}>

@@ -10,9 +10,9 @@ body {
     height: 100vh;
 }
 
-.container{
+.container-register{
     width: 25rem;
-    height: 250px;
+    height: 24rem;
     border-radius:.3em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
@@ -22,13 +22,14 @@ body {
     align-items: center;
 }
 
-.header-card{
+.header-card-register{
     color:aliceblue;
     font-size: 2rem;
-    background-color: #2954e4;
+    background-color: rgba(19,71,128,1);
     text-align: center;
     width: 100%;
-    height: 50px;
+    height: 8rem;
+    padding-top: 2.5rem;
     border-radius: .3em .3em 0 0;
 }
 
@@ -39,7 +40,7 @@ body {
 .body-card button{
     width: 6rem;
     height: 2.5rem;
-    background-color: #2954e4;
+    background-color: rgba(19,71,128,1);
     border-radius: 0.5rem;
     border: none;
     color: aliceblue;
