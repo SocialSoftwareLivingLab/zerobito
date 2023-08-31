@@ -1,30 +1,19 @@
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../contexts/auth';
+import React from 'react';
 import './style.css';
+import useLoginViewModel from './view.model';
 
 const LoginCard = () => {
 
-    const { authenticated, login} = useContext(AuthContext);
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('submit', {email, password}); 
-
-        login(email, password);
-    };
+    const { email, password, setEmail, setPassword, isLoading, onSubmit } = useLoginViewModel();
 
     return (
         <div className="LoginCard">
             <div className="container">
                 <div className="header-card">
-                    ENTRAR 
-                    <p>{String(authenticated)}</p>
+                    ENTRAR
                 </div>
                 <div className="body-card">
-                    <form className="form" onSubmit={handleSubmit}>
+                    <form className="form">
                         <div>
                             <label htmlFor="email">Email:</label>
                             <input
@@ -32,6 +21,7 @@ const LoginCard = () => {
                                 id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                         </div>
                         <div>
@@ -44,7 +34,7 @@ const LoginCard = () => {
                                 required
                             />
                         </div>
-                        <button type="submit">Entrar</button>
+                        <button type="submit" onClick={onSubmit} disabled={isLoading}>Entrar</button>
                     </form>
                 </div>
             </div>

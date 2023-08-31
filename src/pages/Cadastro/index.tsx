@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
 import Menu from '../../components/Menu/index.tsx';
-import SignupCard from '../../components/RegisterCard/index.tsx';
+import SignupCard from '../../components/Register/index.tsx';
 
 function Login() {
   return (

@@ -1,17 +1,17 @@
 import React from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
-import Menu from "../../components/Menu/";
-import LoginCard from '../../components/LoginCard/';
+import Menu from "../../components/Menu";
+import LoginCard from '../../components/Login';
 
-function Login(): React.JSX.Element{
+const LoginView: React.FC = () => {
   return(
     <div>
       <Menu />
-      <LoginCard />
+      <LoginCard/>
       Caso não tenha um login, <Link to="../cadastro">Clique Aqui</Link>
     </div>
   );
 };
 
-export default Login;
+export default LoginView;
