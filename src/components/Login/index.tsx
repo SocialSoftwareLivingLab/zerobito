@@ -4,23 +4,24 @@ import useLoginViewModel from './view.model';
 
 const LoginCard = () => {
 
-    const { email, password, setEmail, setPassword, isLoading, onSubmit } = useLoginViewModel();
+    const { email, password, error, handleSubmit, handleChange } = useLoginViewModel();
 
     return (
         <div className="LoginCard">
-            <div className="container">
+            <div className="container"> 
                 <div className="header-card">
                     ENTRAR
-                </div>
+                </div>  
                 <div className="body-card">
-                    <form className="form">
+                    <form className="form" onSubmit={handleSubmit}>
+                    {!!error && <p>{error}</p>}
                         <div>
                             <label htmlFor="email">Email:</label>
                             <input
                                 type="email"
-                                id="email"
+                                name="email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
@@ -28,13 +29,13 @@ const LoginCard = () => {
                             <label htmlFor="password">Senha:</label>
                             <input
                                 type="password"
-                                id="password"
+                                name="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
-                        <button type="submit" onClick={onSubmit} disabled={isLoading}>Entrar</button>
+                        <button type="submit" >Entrar</button>
                     </form>
                 </div>
             </div>
