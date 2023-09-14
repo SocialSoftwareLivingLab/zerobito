@@ -1,8 +1,7 @@
-import client from "../../client";
+import api from "../../api";
 import { UserModel } from "./user.model";
 
-
-client.interceptors.request.use(
+api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     config.headers.authorization = `Bearer ${token}`;
@@ -13,7 +12,7 @@ client.interceptors.request.use(
   }
 );
 
-client.interceptors.response.use(
+api.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -26,28 +25,31 @@ client.interceptors.response.use(
   }
 );
 
-export const login = async ({email, password} : any) => {
+export const login = async({ email, senha }: any) => {
+
   try {
-    const response = await client.post<UserModel>(`/login`, {
+    const response = await api.post(`/login`, { 
       email,
-      password,
+      senha
     });
+
     const token = response.data.token;
     storeData(token);
+    return response.data;
 
-    return response;
-  } catch (error: any) {
+  } catch (error) {
+    
     return Promise.reject(error.response.data.error);
   }
 };
 
 
 export const storeData = (token: string) => {
-    localStorage.setItem("adminToken", token);
+    localStorage.setItem("token", token);
 };
   
 export const removeData = () => {
-    localStorage.removeItem("adminToken");
+    localStorage.removeItem("token");
     window.location.href = "/";
 };
 

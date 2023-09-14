@@ -1,18 +1,18 @@
-import { UserModel } from "./user.model";
-import client from "../../client";
+import api from "../../api";
 
 export interface registerDTO{
-    name: string;
+    nome: string;
     email: string;
-    password: string;
+    senha: string;
 }
 
-export const register = async({name, email, password}: registerDTO) => {
-    const response = await client.post<UserModel>("/register", {
-        name, 
+export const register = async({nome, email, senha}: registerDTO) => {
+    const response = await api.post("/register", {
+        nome, 
         email, 
-        password
+        senha
     });
+
     return response;
 };
 

@@ -4,7 +4,7 @@ import useLoginViewModel from './view.model';
 
 const LoginCard = () => {
 
-    const { email, password, error, handleSubmit, handleChange } = useLoginViewModel();
+    const { email, senha, error, handleSubmit, handleChange } = useLoginViewModel();
 
     return (
         <div className="LoginCard">
@@ -29,8 +29,8 @@ const LoginCard = () => {
                             <label htmlFor="password">Senha:</label>
                             <input
                                 type="password"
-                                name="password"
-                                value={password}
+                                name="senha"
+                                value={senha}
                                 onChange={handleChange}
                                 required
                             />

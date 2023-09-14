@@ -3,7 +3,7 @@ import React from 'react';
 import useSignupViewModel from './view.model';
 
 function SignupCard() {
-  const { name, email, password, setName,setEmail, setPassword, onSubmit } = useSignupViewModel();
+  const { nome, email, senha, setNome,setEmail, setSenha, onSubmit } = useSignupViewModel();
  
   return (
     <div className="SingupCard">
@@ -18,8 +18,8 @@ function SignupCard() {
               <input
                 type="text"
                 id="name"
-                value={name}
-                onChange={(e)=>setName(e.target.value)}
+                value={nome}
+                onChange={(e)=>setNome(e.target.value)}
                 required
               />
             </div>
@@ -38,8 +38,8 @@ function SignupCard() {
               <input
                 type="password"
                 id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
                 required
               />
             </div>

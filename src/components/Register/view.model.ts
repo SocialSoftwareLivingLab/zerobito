@@ -2,28 +2,28 @@ import { useState } from "react";
 import { register } from "../../common/models/user/create.user";
 
 const useRegisterViewModel = () => {
-    const [name, setName] = useState<string>("");
+    const [nome, setNome] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [senha, setSenha] = useState<string>("");
 
     const onSubmit = async () => {
-        console.log({ name, email, password });
+        console.log({ nome, email, senha });
         try {
-            const response = await register({ name, email, password });
+            const response = await register({ nome, email, senha });
             console.log(response);
         } catch (error) {
             console.log(error);
-            alert("Erro ao fazer login");
+            alert("Erro ao fazer registrar");
         }
     };
 
     return {
-        name,
+        nome,
         email,
-        password,
-        setName,
+        senha,
+        setNome,
         setEmail,
-        setPassword,
+        setSenha,
         onSubmit,
     };
 };

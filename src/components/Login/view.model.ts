@@ -5,28 +5,27 @@ import { login } from "../../common/models/user/auth";
 const useLoginViewModel = () => {
     const history = useHistory();
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [senha, setSenha] = useState<string>("");
     const [error, setError] = useState<String>();
     const [token, setToken] = useState(localStorage.getItem("token"));
-    
-    useEffect(() => {
-        if (!!token) {
-          history.replace("/");
-        }
-      }, [history, token]);
 
+    useEffect(() => {
+      if (!!token) {
+        history.replace("/questions");
+      }
+    }, [history, token]);
+  
     const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        try {
-          const response = await login({ email: email, password});
-          setToken(response.data.token);
-          console.log("Deu Certo");
-        } catch (error: any) {
-          setError(String(error));
-          console.log(error);
-        }    
+      e.preventDefault();
+      try {
+        const response = await login({ email: email, senha });
+        setToken(response.data.token);
+      } catch (error: any) {
+        setError(String(error));
+      }
     };
-    
+  
+  
     const handleChange = (e: any) => {
       e.preventDefault();
       const { name, value } = e.target;
@@ -35,8 +34,8 @@ const useLoginViewModel = () => {
         case "email":
           setEmail(value);
           break;
-        case "password":
-          setPassword(value);
+        case "senha":
+          setSenha(value);
           break;
         default:
           break;
@@ -46,7 +45,7 @@ const useLoginViewModel = () => {
 
     return {
         email,
-        password,
+        senha,
         error,
         handleSubmit,
         handleChange
