@@ -2,11 +2,15 @@ import React from 'react';
 import Menu from '../../components/Menu';
 import './style.css';
 
-
-const Home = () =>{
+const Home = () => {
   return (
-    <div className='header'>
+    <div>
       <Menu />
+      <div className='body'>
+        <div className='body-text'>
+          <h1>Seja bem vindo ao nosso site!</h1>
+        </div>
+      </div>
     </div>
   );
 }

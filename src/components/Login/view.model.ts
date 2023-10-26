@@ -11,7 +11,7 @@ const useLoginViewModel = () => {
 
     useEffect(() => {
       if (!!token) {
-        history.replace("/questions");
+        history.replace("/home");
       }
     }, [history, token]);
   

@@ -6,6 +6,7 @@ import {
 
 import PrivateRoute from "../../components/PrivateRoute"
 import Cadastro from "../../pages/Cadastro";
+import PainelControle from "../../pages/PainelControle";
 import SobreNos from "../../pages/SobreNos";
 import Contato from "../../pages/Contato";
 import Login from "../../pages/Login";
@@ -19,12 +20,12 @@ const AppRoutes = () => {
                     <Route exact path="/" render={() => <Redirect to="/login" />} />
                     <Route exact path="/login" component={Login} />
                     <Redirect exact path="/" to="/profile" />
-                    <PrivateRoute exact path="/home" component={Home} />
-                    <PrivateRoute exact path="/profile" component={Profile} />
+                    <PrivateRoute path="/home" component={Home} />
+                    <PrivateRoute path="/profile" component={Profile} />
+                    <PrivateRoute path="/painel" component={PainelControle} />
                     <Route exact path="/cadastro" component={Cadastro} />
                     <Route exact path="/sobre" component={SobreNos} />
                     <Route exact path="/contato" component={Contato} />
-
                 </Switch>
         </BrowserRouter>
     );

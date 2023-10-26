@@ -18,6 +18,9 @@ function Menu(): React.JSX.Element {
                     <li>
                         <Link to="/contato">Contato</Link>
                     </li>
+                    <li>
+                        <Link to="/painel">Painel de Controle</Link>
+                    </li>
                 </ul>
                 <ul className='LoginButton'>
                     <button className="button">
