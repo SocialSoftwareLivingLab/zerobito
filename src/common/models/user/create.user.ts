@@ -1,12 +1,6 @@
 import api from "../../api";
 
-export interface registerDTO{
-    nome: string;
-    email: string;
-    senha: string;
-}
-
-export const register = async({nome, email, senha}: registerDTO) => {
+export const register = async(nome: string, email: string, senha:string) => {
     const response = await api.post("/register", {
         nome, 
         email, 

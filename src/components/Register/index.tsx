@@ -1,9 +1,9 @@
 import './style.css'
 import React from 'react';
-import useSignupViewModel from './view.model';
+import useRegisterViewModel from './view.model';
 
 function SignupCard() {
-  const { nome, email, senha, setNome,setEmail, setSenha, onSubmit } = useSignupViewModel();
+  const { nome, email, senha, senhaValidation, handleSubmit, handleChangeNome, handleChangeEmail, handleChangeSenha, handleChangeSenhaValidation } = useRegisterViewModel();
  
   return (
     <div className="SingupCard">
@@ -12,14 +12,13 @@ function SignupCard() {
           CADASTRO
         </div>
         <div className="body-card">
-          <form className='form'>
+          <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name">Nome:</label>
               <input
-                type="text"
-                id="name"
+                name="nome"
                 value={nome}
-                onChange={(e)=>setNome(e.target.value)}
+                onChange={handleChangeNome}
                 required
               />
             </div>
@@ -27,9 +26,9 @@ function SignupCard() {
               <label htmlFor="email">Email:</label>
               <input
                 type="email"
-                id="email"
+                name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChangeEmail}
                 required
               />
             </div>
@@ -37,13 +36,23 @@ function SignupCard() {
               <label htmlFor="password">Senha:</label>
               <input
                 type="password"
-                id="password"
+                name="senha"
                 value={senha}
-                onChange={(e) => setSenha(e.target.value)}
+                onChange={handleChangeSenha}
                 required
               />
             </div>
-            <button type="submit" onClick={onSubmit}>Cadastrar</button>
+            <div>
+              <label htmlFor="password">Confirmar Senha:</label>
+              <input
+                type="password"
+                name="senhaValidation"
+                value={senhaValidation}
+                onChange={handleChangeSenhaValidation}
+                required
+              />
+            </div>
+            <button type="submit">Cadastrar</button>
           </form>
         </div>
       </div>

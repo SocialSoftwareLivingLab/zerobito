@@ -11,8 +11,8 @@ body {
 }
 
 .container-register{
-    width: 25rem;
-    height: 25rem;
+    width: 30rem;
+    height: 30rem;
     border-radius:.3em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
