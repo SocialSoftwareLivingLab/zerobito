@@ -1,17 +1,10 @@
-*{
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    font-family: Lato;
-}
-
-body {
+.container-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-
-  }
+    margin: 0 auto;
+    margin-top: 20rem;
+}
 
 .container{
     width: 25rem;
@@ -22,7 +15,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    text-align: center;
 }
 
 .header-card{

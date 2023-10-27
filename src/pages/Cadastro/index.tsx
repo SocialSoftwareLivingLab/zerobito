@@ -7,9 +7,13 @@ import SignupCard from '../../components/Register/index.tsx';
 function Login() {
   return (
     <div>
-      <Menu />
-      <SignupCard />
-      Caso já tenha um login, <Link to="../login">Clique Aqui</Link>
+      <div className='container-principal'>
+        <Menu />
+        <SignupCard />
+        <div className="text-login">
+          Caso ja tenha uma conta, <Link to="../login">Clique Aqui</Link>
+        </div>
+      </div>
     </div>
   );
 }

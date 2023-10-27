@@ -5,11 +5,15 @@ import Menu from "../../components/Menu";
 import LoginCard from '../../components/Login';
 
 const LoginView: React.FC = () => {
-  return(
+  return (
     <div>
-      <Menu />
-      <LoginCard/>
-      Caso não tenha um login, <Link to="../cadastro">Clique Aqui</Link>
+      <div className='container-principal'>
+        <Menu />
+        <LoginCard />
+        <div className="text-login">
+          Caso não tenha um login, <Link to="../cadastro">Clique Aqui</Link>
+        </div>
+      </div>
     </div>
   );
 };

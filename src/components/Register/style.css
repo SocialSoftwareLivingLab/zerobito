@@ -1,31 +1,27 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-   
-body {
+.container-body-register {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin: 0 auto;
+    margin-top: 20rem;
 }
 
-.container-register{
+.container-register {
     width: 30rem;
-    height: 30rem;
-    border-radius:.3em;
+    height: 31rem;
+    border-radius: .3em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
-    display: block;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
-.header-card-register{
-    color:aliceblue;
+.header-card-register {
+    color: aliceblue;
     font-size: 2rem;
-    background-color: rgba(19,71,128,1);
+    background-color: rgba(19, 71, 128, 1);
     text-align: center;
     width: 100%;
     height: 8rem;
@@ -33,25 +29,25 @@ body {
     border-radius: .3em .3em 0 0;
 }
 
-.body-card{
+.body-card {
     padding: 1rem;
 }
 
-.body-card button{
+.body-card button {
     width: 6rem;
     height: 2.5rem;
-    background-color: rgba(19,71,128,1);
+    background-color: rgba(19, 71, 128, 1);
     border-radius: 0.5rem;
     border: none;
     color: aliceblue;
-    font:bold;
+    font: bold;
 }
 
-.body-card button:hover{
+.body-card button:hover {
     background-color: rgba(12, 43, 77, 0.8);
 }
 
-.body-card input{
+.body-card input {
     background-color: rgb(226, 227, 228);
     border-radius: 0.2rem;
     border: none;

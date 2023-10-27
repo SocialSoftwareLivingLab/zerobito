@@ -1,12 +1,43 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 .header{
     position: fixed;
     top: 0;
+}
+
+.container-header{
+    display: static;
+    align-items: center;
+    background-color: #134780;
+    height: 14rem;
+    padding: 1% 10% 0% 10%;
+    color: #fff;
+}
+
+.container-header h1{
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.container-header .text{
+    width: 39%;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: aliceblue;
+}
+
+.container-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 5% 10% 0% 10%;
+    background-color:#F1F0F5;;
 }
 
 .grid{
