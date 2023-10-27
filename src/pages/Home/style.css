@@ -40,6 +40,47 @@
     background-color:#F1F0F5;;
 }
 
+.container-content button{
+    border-radius: 0.3rem;
+    border: none;
+    width: 5rem;
+    height: 2rem;
+    background-color: #134780;
+    color: #fff;
+}
+
+.container-content button:hover{
+    background-color: #0D2C4C;
+}
+
+.container-content button:last-child{
+    width: 10rem;
+}
+
+.container-content-imprensa{
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 5% 10% 0% 10%;
+    background-color:#F1F0F5;;
+}
+
+.container-content-imprensa h2{
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.container-content-imprensa button{
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    border: none;
+    width: 30rem;
+    height: 2rem;
+    background-color: #134780;
+    color: #fff;
+}
+
 .grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

@@ -1,10 +1,10 @@
 import React from 'react';
-import './style.css'; // Se você desejar adicionar estilos específicos
+import '../style.css'; // Se você desejar adicionar estilos específicos
 
-const TabelaDenuncia = ({ eventos }) => {
+const TabelaAcompanhamento = ({ eventos }) => {
   return (
     <div className='table-container'>
-      <h2>Comunicação de Evento</h2>
+      <h2>Casos</h2>
       <table>
         <thead>
           <tr>
@@ -25,9 +25,7 @@ const TabelaDenuncia = ({ eventos }) => {
               <td>{evento.gravidade}</td>
               <td>{evento.andamentoCaso}</td>
               <td>
-                <button onClick={() => {/* função para agrupar */}}>Agrupar</button>
-                <button onClick={() => {/* função para aceitar */}}>Aceitar</button>
-                <button onClick={() => {/* função para não incorporar */}}>Não Incorporar</button>
+                <button onClick={() => {/* função para agrupar */}}>Acompanhar</button>
               </td>
             </tr>
           ))}
@@ -37,4 +35,4 @@ const TabelaDenuncia = ({ eventos }) => {
   );
 }
 
-export default TabelaDenuncia;
+export default TabelaAcompanhamento;

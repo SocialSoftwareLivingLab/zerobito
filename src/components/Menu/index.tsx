@@ -16,15 +16,27 @@ function Menu(): React.JSX.Element {
                     </li>
                     {!!token ? (
                         <>
-                            <li>
-                                <Link to="/painel">Painel de Controle</Link>
-                            </li>
                             <ul>
+                                <li>
+                                    <Link to="/painel">Painel de Controle</Link>
+                                </li>
+                                <li>
+                                    <Link to="/biblioteca">Biblioteca de Casos</Link>
+                                </li>
+                                <li>
+                                    <Link to="/material">Material para Consulta</Link>
+                                </li>
+                                <li>
+                                    <Link to="/imprensa">Imprensa</Link>
+                                </li>
+                                <li>
+                                    <Link to="/ajuda">Ajuda</Link>
+                                </li>
                                 <li>
                                     <Link to="/profile">Perfil</Link>
                                 </li>
                                 <li>
-                                    <Link to="/logout" onClick={removeData}>Sair</Link>
+                                    <a onClick={removeData}>Sair</a>
                                 </li>
                             </ul>
                         </>
@@ -32,7 +44,8 @@ function Menu(): React.JSX.Element {
                         <>
                             <li>
                                 <Link to="/sobre">Sobre nós</Link>
-                            </li><li>
+                            </li>
+                            <li>
                                 <Link to="/contato">Contato</Link>
                             </li>
                             <ul className='LoginButton'>

@@ -7,6 +7,7 @@ import {
 import PrivateRoute from "../../components/PrivateRoute"
 import Cadastro from "../../pages/Cadastro";
 import PainelControle from "../../pages/PainelControle";
+import Imprensa from "../../pages/Imprensa";
 import SobreNos from "../../pages/SobreNos";
 import Contato from "../../pages/Contato";
 import Login from "../../pages/Login";
@@ -23,6 +24,7 @@ const AppRoutes = () => {
                     <PrivateRoute path="/home" component={Home} />
                     <PrivateRoute path="/profile" component={Profile} />
                     <PrivateRoute path="/painel" component={PainelControle} />
+                    <PrivateRoute path="/imprensa" component={Imprensa} />
                     <Route exact path="/cadastro" component={Cadastro} />
                     <Route exact path="/sobre" component={SobreNos} />
                     <Route exact path="/contato" component={Contato} />

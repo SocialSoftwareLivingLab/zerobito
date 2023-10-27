@@ -7,8 +7,8 @@ import LoginCard from '../../components/Login';
 const LoginView: React.FC = () => {
   return (
     <div>
+      <Menu />
       <div className='container-principal'>
-        <Menu />
         <LoginCard />
         <div className="text-login">
           Caso não tenha um login, <Link to="../cadastro">Clique Aqui</Link>

@@ -1,10 +1,10 @@
 import React from 'react';
-import './style.css'; // Se você desejar adicionar estilos específicos
+import '../style.css';
 
-const TabelaEvento = ({ eventos }) => {
+const TabelaOcorrencia = ({ eventos }) => {
   return (
     <div className='table-container'>
-      <h2>Comunicação de Evento</h2>
+      <h2>Comunicação de Evento <button>Adicionar</button></h2>
       <table>
         <thead>
           <tr>
@@ -25,9 +25,9 @@ const TabelaEvento = ({ eventos }) => {
               <td>{evento.gravidade}</td>
               <td>{evento.andamentoCaso}</td>
               <td>
-                <button onClick={() => {/* função para agrupar */}}>Agrupar</button>
-                <button onClick={() => {/* função para aceitar */}}>Aceitar</button>
-                <button onClick={() => {/* função para não incorporar */}}>Não Incorporar</button>
+                <button onClick={() => {}}>Agrupar</button>
+                <button onClick={() => {}}>Aceitar</button>
+                <button onClick={() => {}}>Não Incorporar</button>
               </td>
             </tr>
           ))}
@@ -37,4 +37,4 @@ const TabelaEvento = ({ eventos }) => {
   );
 }
 
-export default TabelaEvento;
+export default TabelaOcorrencia;

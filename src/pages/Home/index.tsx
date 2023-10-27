@@ -1,6 +1,7 @@
 import React from 'react';
 import Menu from '../../components/Menu';
-import TabelaEvento from '../../components/TabelaEvento';
+import TabelaAcompanhamento from '../../components/Tabelas/TabelaAcompanhamento';
+import TabelaOcorencia from '../../components/Tabelas/TabelaOcorrencia';
 import './style.css';
 
 const eventos = [
@@ -28,10 +29,19 @@ const Home = () => {
           ao sistema e tambem os casos que ele já aceitou acompanhar
         </div>
       </div>
+      <div className='busca'>
+
+      </div >
       <div className='container-content'>
-      <TabelaEvento eventos={eventos} /> {/* Use o componente aqui */}
+        <TabelaOcorencia eventos={eventos} /> { }
+        <TabelaAcompanhamento eventos={eventos} /> { }
       </div>
-      
+      <div className='container-content-imprensa'>
+        <h2>Noticias da Imprensa | Alerta de Caso <button>Fazer Denuncia a partir de noticia</button></h2>
+        <hr />
+        <h2>SINAN, RAAT, SIM <button>Fazer Denuncia a partir dos Serviços de Saude</button></h2>
+        <hr />
+      </div>
     </div>
   );
 }

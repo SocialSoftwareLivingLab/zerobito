@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { login } from "../../common/models/user/auth";
 
 const useLoginViewModel = () => {
@@ -20,7 +20,8 @@ const useLoginViewModel = () => {
       try {
         const response = await login({ email: email, senha });
         setToken(response.data.token);
-      } catch (error: any) {
+        history.replace("/home");
+      } catch (error) {
         setError(String(error));
       }
     };
