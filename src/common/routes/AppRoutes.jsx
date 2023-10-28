@@ -6,7 +6,7 @@ import {
 
 import PrivateRoute from "../../components/PrivateRoute"
 import Cadastro from "../../pages/Cadastro";
-import PainelControle from "../../pages/PainelControle";
+import PainelControle from "../../pages/PainelControleUsuario";
 import Imprensa from "../../pages/Imprensa";
 import SobreNos from "../../pages/SobreNos";
 import Contato from "../../pages/Contato";

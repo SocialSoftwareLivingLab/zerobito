@@ -21,7 +21,7 @@ const useRegisterViewModel = () => {
         try {
             const response = await register(nome, email, senha);
             if (response.status === 200) {
-                history.push("/");
+                history.replace("/");
             }
         } catch (error: any) {
             setError(

@@ -26,19 +26,17 @@ api.interceptors.response.use(
 );
 
 export const login = async({ email, senha }: any) => {
-
+ 
   try {
     const response = await api.post(`/login`, { 
       email,
       senha
     });
-
     const token = response.data.token;
     storeData(token);
-    return response.data;
+    return response;
 
-  } catch (error) {
-    
+  } catch (error: any) {
     return Promise.reject(error.response.data.error);
   }
 };

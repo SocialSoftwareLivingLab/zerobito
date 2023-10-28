@@ -18,7 +18,7 @@ const useLoginViewModel = () => {
     const handleSubmit = async (e: any) => {
       e.preventDefault();
       try {
-        const response = await login({ email: email, senha });
+        const response = await login({ email: email, senha: senha });
         setToken(response.data.token);
         history.replace("/home");
       } catch (error) {
@@ -27,21 +27,16 @@ const useLoginViewModel = () => {
     };
   
   
-    const handleChange = (e: any) => {
-      e.preventDefault();
-      const { name, value } = e.target;
+    const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
   
-      switch (name) {
-        case "email":
-          setEmail(value);
-          break;
-        case "senha":
-          setSenha(value);
-          break;
-        default:
-          break;
-      }
+      setEmail(value);
+    };
+
+    const handleChangeSenha = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
   
+      setSenha(value);
     };
 
     return {
@@ -49,7 +44,8 @@ const useLoginViewModel = () => {
         senha,
         error,
         handleSubmit,
-        handleChange
+        handleChangeEmail,
+        handleChangeSenha
     };
 };
 

@@ -13,7 +13,7 @@ function SignupCard() {
             CADASTRO
           </div>
           <div className="body-card">
-            <form onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name">Nome:</label>
                 <input

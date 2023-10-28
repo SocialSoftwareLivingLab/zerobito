@@ -1,11 +1,10 @@
 import React from 'react';
 import './style.css';
-import { Link } from 'react-router-dom';
 import useLoginViewModel from './view.model';
 
 const LoginCard = () => {
 
-    const { email, senha, error, handleSubmit, handleChange } = useLoginViewModel();
+    const { email, senha, error, handleSubmit, handleChangeEmail, handleChangeSenha } = useLoginViewModel();
 
     return (
         <div className="LoginCard">
@@ -23,7 +22,7 @@ const LoginCard = () => {
                                     type="email"
                                     name="email"
                                     value={email}
-                                    onChange={handleChange}
+                                    onChange={handleChangeEmail}
                                     required
                                 />
                             </div>
@@ -33,7 +32,7 @@ const LoginCard = () => {
                                     type="password"
                                     name="senha"
                                     value={senha}
-                                    onChange={handleChange}
+                                    onChange={handleChangeSenha}
                                     required
                                 />
                             </div>
