@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Menu from '../../components/Menu';
 import TabelaUsuarios from '../../components/Tabelas/TabelaUsuarios';
 import usePainelViewModel from './view.model';
