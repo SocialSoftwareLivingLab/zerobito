@@ -147,7 +147,7 @@ const useOcorrenciaViewModel = () => {
         setTelefoneContato(value);
     }
 
-    const handleChangeDescricao = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeDescricao = (event) => {
         const value = event.target.value;
 
         setDescricao(value);

@@ -70,7 +70,7 @@ const ComunicacaoEvento = () => {
                             <div className=''>
                                 {getCompStep()}
                             </div>
-                            <div>
+                            <div className='form-container-group-button'>
                                 {step === 1 ? null :
                                     <button onClick={handleVoltarClick}>
                                         Voltar

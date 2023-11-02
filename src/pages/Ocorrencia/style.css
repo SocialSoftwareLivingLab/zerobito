@@ -23,21 +23,13 @@
   color: #134780;
 }
 
-.form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 40%;
-  margin-bottom: 5%;
-}
-
 .content-bar{
   padding-top: 5rem;
   width: 100%;
   height: 10rem;
   background-color: #134780;
   color: #fff;
+  margin-bottom: 10rem;
 }
 
 .content-bar-subtext{
@@ -67,17 +59,18 @@
   font-weight: bold;
 }
 
-.form-container{
-  width: 60%;
-  border-radius: 2%;
+.form-container input{
+  width: 90%;
+  border-radius: 0.5rem;
   border: 1px solid grey;
-  padding: 3%;
+  padding: 10px;
   font-size: 16px;
-
+  margin-top: 1rem;
 }
 
-.form-container input{
-  width: 98%;
+.form-container-textarea{
+  width: 90%;
+  height: 10rem;
   border-radius: 0.5rem;
   border: 1px solid grey;
   padding: 10px;
@@ -86,7 +79,7 @@
 }
 
 .form-container button{
-  width: 100%;
+  width: 25%;
   height: 2.5rem;
   border-radius: 0.5rem;
   border: none;
@@ -95,8 +88,17 @@
   margin-top: 1rem;
 }
 
+.form-container-group-button{
+  /* quero que os botões fiquem centralizados */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 98%;
+}
+
 .form-container select{
-  width: 100%;
+  width: 92%;
   border-radius: 0.5rem;
   border: 1px solid grey;
   padding: 10px;

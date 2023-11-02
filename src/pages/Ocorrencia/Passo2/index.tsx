@@ -17,6 +17,7 @@ const PassoDois = () => {
         <div>
             <h1>Informaçõe sobre vitimas:</h1>
                 <input
+                    className='form-container-input'
                     type="text"
                     name='nomeVitima'
                     value={nomeVitima}
@@ -24,6 +25,7 @@ const PassoDois = () => {
                     placeholder='Nome da vítima'
                 />
                 <input
+                    className='form-container-input'
                     type="text"
                     name='empresaEmpregadora'
                     value={empresaEmpregadora}
@@ -31,15 +33,16 @@ const PassoDois = () => {
                     placeholder='Empresa empregadora'
                 />
                 <input
+                    className='form-container-input'   
                     type="enum"
                     name='vinculo'
                     value={vinculo}
                     onChange={handleChangeVinculo}
                     placeholder='Vínculo'
                 />
-                <input
-                    type="text"
+                <textarea
                     name='descricao'
+                    className='form-container-textarea'
                     value={descricao}
                     onChange={handleChangeDescricao}
                     placeholder='Digite algo...'
