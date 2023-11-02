@@ -23,7 +23,7 @@ const useOcorrenciaViewModel = () => {
     const [telefoneContato, setTelefoneContato] = useState<string>("");
     const [descricao, setDescricao] = useState<string>("");
 
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         const ocorrencia = {
             denuncia,

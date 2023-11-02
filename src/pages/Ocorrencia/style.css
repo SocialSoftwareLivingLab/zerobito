@@ -25,7 +25,8 @@
 
 .content-bar{
   padding-top: 5rem;
-  width: 100%;
+  padding-left: 3%;
+  padding-bottom: 0rem;
   height: 10rem;
   background-color: #134780;
   color: #fff;

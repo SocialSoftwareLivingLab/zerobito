@@ -18,8 +18,7 @@ const PassoTres = () => {
 
     return (
         <div>
-            <h1>Informaçõe sobre os Fontes de informações:</h1>
-            Voce gostaria de deixar seus Dados para contato?
+            <h1>Informação sobre os Fontes de informações:</h1>
 
             <select
                 id='tipoOcorrencia'

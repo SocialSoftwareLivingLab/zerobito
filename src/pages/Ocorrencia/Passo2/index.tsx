@@ -32,14 +32,19 @@ const PassoDois = () => {
                     onChange={handleChangeEmpresaEmpregadora}
                     placeholder='Empresa empregadora'
                 />
-                <input
-                    className='form-container-input'   
-                    type="enum"
+                <select
                     name='vinculo'
-                    value={vinculo}
-                    onChange={handleChangeVinculo}
                     placeholder='Vínculo'
-                />
+                >   
+                    <option value="" >Vínculo</option>
+                    <option value="">CLT</option>
+                    <option value="">PJ</option>
+                    <option value="">Estagiário</option>
+                    <option value="">Aprendiz</option>
+                    <option value="">Temporário</option>
+                    <option value="">Terceirizado</option>
+                    <option value="">Outro</option>
+                </select>
                 <textarea
                     name='descricao'
                     className='form-container-textarea'
