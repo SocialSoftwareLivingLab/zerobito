@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Menu from '../../components/Menu';
 import useOcorrenciaViewModel from './view.model';
-import Step from '../../components/Step';
 import PassoUm from './Passo1';
 import PassoDois from './Passo2';
 import PassoTres from './Passo3';
+import PassoQuatro from './Passo4';
 import './style.css';
+
 
 const ComunicacaoEvento = () => {
     const { handleSubmit } = useOcorrenciaViewModel();
@@ -14,6 +15,7 @@ const ComunicacaoEvento = () => {
         passo1: {},
         passo2: {},
         passo3: {},
+        passo4: {},
     });
 
     const handleUpdateData = (step, data) => {
@@ -31,25 +33,25 @@ const ComunicacaoEvento = () => {
                 return <PassoDois />;
             case 3:
                 return <PassoTres />;
+            case 4:
+                return <PassoQuatro />;
             default:
                 return <PassoUm />;
         }
     };
 
-    const Steps = [1, 2, 3];
-
     const handleContinuarClick = (e) => {
         e.preventDefault(); // Adicione esta linha
-        if (step === 1 || step === 2) {
+        if (step === 1 || step === 2 || step === 3) {
             setStep(step + 1);
-        } else if (step === 3) {
+        } else if (step === 4) {
             handleSubmit(formData); // Aqui você passa o formData para o handleSubmit
         }
     };
 
     const handleVoltarClick = (e) => {
         e.preventDefault(); // Adicione esta linha
-        if (step === 2 || step === 3) {
+        if (step === 2 || step === 3 || step === 4) {
             setStep(step - 1);
         }
     };
@@ -77,7 +79,7 @@ const ComunicacaoEvento = () => {
                                     </button>
                                 }
                                 <button onClick={handleContinuarClick}>
-                                    {step === 3 ?
+                                    {step === 4 ?
                                         'Enviar' : 'Continuar'
                                     }
                                 </button>

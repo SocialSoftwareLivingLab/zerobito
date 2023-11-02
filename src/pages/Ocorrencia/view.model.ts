@@ -87,7 +87,7 @@ const useOcorrenciaViewModel = () => {
         setNomeVitima(value);
     };
 
-    const handleChangeCondicaoAcidentado = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeCondicaoAcidentado = (event) => {
         const value = event.target.value;
 
         setCondicaoAcidentado(value);
@@ -105,7 +105,7 @@ const useOcorrenciaViewModel = () => {
         setStatus(value);
     };
 
-    const handleChangeVinculo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeVinculo = (event) => {
         const value = event.target.value;
 
         setVinculo(value);
@@ -123,7 +123,7 @@ const useOcorrenciaViewModel = () => {
         setEmpresaTomadora(value);
     };
 
-    const handleChangeTipoOcorrencia = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeTipoOcorrencia = (event) => {
         const value = event.target.value;
 
         setTipoOcorrencia(value);

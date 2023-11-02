@@ -24,6 +24,7 @@ const PassoTres = () => {
                 id='tipoOcorrencia'
                 value={tipoOcorrencia}
                 name='tipoOcorrencia'
+                onChange={handleChangeTipoOcorrencia}
             >
                 <option value="Anonimo">Anonimo</option>
                 <option value="Sim">Sim</option>
