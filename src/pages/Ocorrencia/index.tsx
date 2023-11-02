@@ -63,13 +63,6 @@ const ComunicacaoEvento = () => {
                     Esta etapa o usuario sera capaz de adicionar um evento novo, preenchendo as Informações abaixo
                 </div>
             </div>
-            <div className='wizard'>
-                <b className='wizard-text'>
-                    {Steps.map((item) => (
-                        <Step key={item} index={item} active={step === item} />
-                    ))}
-                </b>
-            </div>
             <div className='ocorrencia-content'>
                 <form className='form-container'>
                     <div className="steps">
@@ -79,14 +72,11 @@ const ComunicacaoEvento = () => {
                             </div>
                             <div>
                                 {step === 1 ? null :
-                                    <button
-                                        onClick={handleVoltarClick}
-                                    >
+                                    <button onClick={handleVoltarClick}>
                                         Voltar
-                                    </button>}
-                                <button
-                                    onClick={handleContinuarClick}
-                                >
+                                    </button>
+                                }
+                                <button onClick={handleContinuarClick}>
                                     {step === 3 ?
                                         'Enviar' : 'Continuar'
                                     }

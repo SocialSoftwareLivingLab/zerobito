@@ -4,47 +4,55 @@ import useOcorrenciaViewModel from '../view.model';
 
 const PassoTres = () => {
     const {
-        nomeVitima,
-        empresaEmpregadora,
-        vinculo,
-        descricao,
-        handleChangeNomeVitima,
-        handleChangeEmpresaEmpregadora,
-        handleChangeVinculo,
-        handleChangeDescricao,
+        tipoOcorrencia,
+        nomeContato,
+        emailContato,
+        telefoneContato,
+        handleChangeTipoOcorrencia,
+        handleChangeNomeContato,
+        handleChangeEmailContato,
+        handleChangeTelefoneContato,
     } = useOcorrenciaViewModel();
+
+    const isDisabled = tipoOcorrencia === 'Anonimo';
 
     return (
         <div>
-            <h1>Informaçõe sobre vitimas:</h1>
-                <input
-                    type="text"
-                    name='nomeVitima'
-                    value={nomeVitima}
-                    onChange={handleChangeNomeVitima}
-                    placeholder='Nome da vítima'
-                />
-                <input
-                    type="text"
-                    name='empresaEmpregadora'
-                    value={empresaEmpregadora}
-                    onChange={handleChangeEmpresaEmpregadora}
-                    placeholder='Empresa empregadora'
-                />
-                <input
-                    type="enum"
-                    name='vinculo'
-                    value={vinculo}
-                    onChange={handleChangeVinculo}
-                    placeholder='Vínculo'
-                />
-                <input
-                    type="text"
-                    name='descricao'
-                    value={descricao}
-                    onChange={handleChangeDescricao}
-                    placeholder='Digite algo...'
-                />
+            <h1>Informaçõe sobre os Fontes de informações:</h1>
+            Voce gostaria de deixar seus Dados para contato?
+
+            <select
+                id='tipoOcorrencia'
+                value={tipoOcorrencia}
+                name='tipoOcorrencia'
+            >
+                <option value="Anonimo">Anonimo</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input
+                type="text"
+                name='nomeContato'
+                value={nomeContato}
+                onChange={handleChangeNomeContato}
+                placeholder='Nome'
+                disabled={isDisabled}
+            />
+            <input
+                type="email"
+                name='emailContato'
+                value={emailContato}
+                onChange={handleChangeEmailContato}
+                placeholder='E-mail'
+                disabled={isDisabled}
+            />
+            <input
+                type="text"
+                name='telefoneContato'
+                value={telefoneContato}
+                onChange={handleChangeTelefoneContato}
+                placeholder='Telefone / Celular'
+                disabled={isDisabled}
+            />
         </div>
     );
 };

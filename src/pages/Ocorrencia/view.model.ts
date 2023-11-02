@@ -18,6 +18,9 @@ const useOcorrenciaViewModel = () => {
     const [empresaEmpregadora, setEmpresaEmpregadora] = useState<string>("");
     const [empresaTomadora, setEmpresaTomadora] = useState<string>("");
     const [tipoOcorrencia, setTipoOcorrencia] = useState<string>("");
+    const [nomeContato, setNomeContato] = useState<string>("");
+    const [emailContato, setEmailContato] = useState<string>("");
+    const [telefoneContato, setTelefoneContato] = useState<string>("");
     const [descricao, setDescricao] = useState<string>("");
 
     const handleSubmit = async (e:any) => {
@@ -25,7 +28,7 @@ const useOcorrenciaViewModel = () => {
         const ocorrencia = {
             denuncia,
             data,
-            local,
+            gerarEndereco,
             nomeVitima,
             condicaoAcidentado,
             gravidade,
@@ -34,6 +37,9 @@ const useOcorrenciaViewModel = () => {
             empresaEmpregadora,
             empresaTomadora,
             tipoOcorrencia,
+            nomeContato,
+            emailContato,
+            telefoneContato,
             descricao,
         };
         const response = await api.post("/ocorrencia", ocorrencia);
@@ -123,6 +129,24 @@ const useOcorrenciaViewModel = () => {
         setTipoOcorrencia(value);
     };
 
+    const handleChangeNomeContato = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+
+        setNomeContato(value);
+    }
+
+    const handleChangeEmailContato = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+
+        setEmailContato(value);
+    }
+
+    const handleChangeTelefoneContato = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+
+        setTelefoneContato(value);
+    }
+
     const handleChangeDescricao = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
@@ -145,6 +169,9 @@ const useOcorrenciaViewModel = () => {
         empresaEmpregadora,
         empresaTomadora,
         tipoOcorrencia,
+        nomeContato,
+        emailContato,
+        telefoneContato,
         descricao,
         handleSubmit,
         handleChangeDenuncia,
@@ -161,6 +188,9 @@ const useOcorrenciaViewModel = () => {
         handleChangeEmpresaEmpregadora,
         handleChangeEmpresaTomadora,
         handleChangeTipoOcorrencia,
+        handleChangeNomeContato,
+        handleChangeEmailContato,
+        handleChangeTelefoneContato,
         handleChangeDescricao,
     };
 };
