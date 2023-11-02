@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../style.css';
 
 const TabelaOcorrencia = ({ eventos }) => {
   return (
     <div className='table-container'>
-      <h2>Comunicação de Evento <button>Adicionar</button></h2>
+      <h2>Comunicação de Evento <Link to="/ocorrencia"><button>Adicionar</button></Link></h2>
       <table>
         <thead>
           <tr>

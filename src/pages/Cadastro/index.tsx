@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Menu from '../../components/Menu/index.tsx';
 import SignupCard from '../../components/Register/index.tsx';
 
-function Login() {
+function Cadastro() {
   return (
     <div>
       <div className='container-principal'>
@@ -18,4 +18,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Cadastro;

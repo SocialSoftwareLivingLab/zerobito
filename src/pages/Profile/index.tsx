@@ -2,7 +2,6 @@
 import React from 'react';
 import './style.css';
 import Menu from "../../components/Menu";
-import Card from "../../components/Card";
 
 const LoginView: React.FC = () => {
     return(
