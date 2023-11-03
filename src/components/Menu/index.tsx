@@ -35,10 +35,10 @@ function Menu(): React.JSX.Element {
                                 <li>
                                     <Link to="/profile">Perfil</Link>
                                 </li>
-                                <li>
-                                    <a onClick={removeData}>Sair</a>
-                                </li>
                             </ul>
+                            <button className='button-exit'>
+                                <a onClick={removeData}>Sair</a>
+                            </button>
                         </>
                     ) : (
                         <>

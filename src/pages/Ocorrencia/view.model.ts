@@ -1,9 +1,6 @@
-import api from "../../common/api";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 
 const useOcorrenciaViewModel = () => {
-    const history = useHistory();
     const [denuncia, setDenuncia] = useState<string>("");
     const [data, setData] = useState('');
     const [estado, setEstado] = useState<string>("");
@@ -22,66 +19,62 @@ const useOcorrenciaViewModel = () => {
     const [emailContato, setEmailContato] = useState<string>("");
     const [telefoneContato, setTelefoneContato] = useState<string>("");
     const [descricao, setDescricao] = useState<string>("");
+   
 
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
+    const handleSubmit = async (formData) => {
+        
         const ocorrencia = {
-            denuncia,
-            data,
-            gerarEndereco,
-            nomeVitima,
-            condicaoAcidentado,
-            gravidade,
-            status,
-            vinculo,
-            empresaEmpregadora,
-            empresaTomadora,
-            tipoOcorrencia,
-            nomeContato,
-            emailContato,
-            telefoneContato,
-            descricao,
+            local: (formData.passo1.estado + formData.passo1.local + formData.passo1.referenciaLocalidade + formData.passo1.cidade),
+            data:formData.passo1.data,
+            nomeVitima:formData.passo2.nomeVitima,
+            empresaEmpregadora:formData.passo2.empresaEmpregadora,
+            vinculo:formData.passo2.vinculo,
+            denuncia: formData.passo2.descricao,
+            tipoOcorrencia:formData.passo3.tipoOcorrencia,
+            nomeContato:formData.passo3.nomeContato,
+            emailContato:formData.passo3.emailContato,
+            telefoneContato:formData.passo3.telefoneContato,
+            condicaoAcidentado:formData.passo4.condicaoAcidentado,
+            gravidade:formData.passo5.gravidade,
+            status:formData.passo3.status,
+            empresaTomadora:formData.passo3.empresaTomadora,
+            descricao:formData.passo5.descricao,
         };
-        const response = await api.post("/ocorrencia", ocorrencia);
-        history.push("/");
-        return response;
+        
+        return console.log(ocorrencia);
     };
 
-    const handleChangeDenuncia = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeDenuncia = (event) => {
         const value = event.target.value;
 
         setDenuncia(value);
     };
 
-    const handleChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeData = (event) => {
         const value = event.target.value;
 
         setData(value);
     };
 
-    const handleChangeLocal = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeLocal = (event) => {
         const value = event.target.value;
 
         setLocal(value);
     };
 
-    const handleChangeEstado = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeEstado = (event) => {
         setEstado(event.target.value);
     };
 
-    const handleChangeCidade = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeCidade = (event) => {
         setCidade(event.target.value);
     };
 
-    const handleChangeReferenciaLocalidade = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeReferenciaLocalidade = (event) => {
         setReferenciaLocalidade(event.target.value);
     };
 
-    const gerarEndereco = () => {
-        return `${estado}, ${cidade}, ${local}, ${referenciaLocalidade}`;
-    };
-
-    const handleChangeNomeVitima = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeNomeVitima = (event) => {
         const value = event.target.value;
 
         setNomeVitima(value);
@@ -93,7 +86,7 @@ const useOcorrenciaViewModel = () => {
         setCondicaoAcidentado(value);
     };
 
-    const handleChangeGravidade = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeGravidade = (event) => {
         const value = event.target.value;
 
         setGravidade(value);
@@ -160,7 +153,6 @@ const useOcorrenciaViewModel = () => {
         estado,
         cidade,
         referenciaLocalidade,
-        endereco: gerarEndereco(),
         nomeVitima,
         condicaoAcidentado,
         gravidade,

@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
-import useOcorrenciaViewModel from '../view.model';
+import React from 'react';
 
-const PassoDois = () => {
-    const {
-        nomeVitima,
-        empresaEmpregadora,
-        vinculo,
-        descricao,
-        handleChangeNomeVitima,
-        handleChangeEmpresaEmpregadora,
-        handleChangeVinculo,
-        handleChangeDescricao,
-    } = useOcorrenciaViewModel();
+const PassoDois = ({
+    handleChangeNomeVitima,
+    handleChangeEmpresaEmpregadora,
+    handleChangeVinculo,
+    handleChangeDescricao,
+    nomeVitima,
+    empresaEmpregadora,
+    vinculo,
+    descricao 
+}) => {
 
     return (
         <div>
@@ -21,7 +19,7 @@ const PassoDois = () => {
                 type="text"
                 name='nomeVitima'
                 value={nomeVitima}
-                onChange={handleChangeNomeVitima}
+                onChange={(e) => handleChangeNomeVitima(e.target.value)}
                 placeholder='Nome da vítima'
             />
             <input
@@ -29,13 +27,13 @@ const PassoDois = () => {
                 type="text"
                 name='empresaEmpregadora'
                 value={empresaEmpregadora}
-                onChange={handleChangeEmpresaEmpregadora}
+                onChange={(e) => handleChangeEmpresaEmpregadora(e.target.value)}
                 placeholder='Empresa empregadora'
             />
             <select
                 name='vinculo'
                 value={vinculo} // Defina o valor para o estado atual
-                onChange={handleChangeVinculo} // Adicione o manipulador de evento onChange
+                onChange={(e)=> handleChangeVinculo(e.target.value)} // Adicione o manipulador de evento onChange
                 className='form-container-select' // Supondo que você tenha estilos para isto
             >
                 <option value="" disabled>Vínculo</option>
@@ -51,8 +49,8 @@ const PassoDois = () => {
                 name='descricao'
                 className='form-container-textarea'
                 value={descricao}
-                onChange={handleChangeDescricao}
-                placeholder='Digite algo...'
+                onChange={(e) => handleChangeDescricao(e.target.value)}
+                placeholder='Descrição'
             />
         </div>
     );

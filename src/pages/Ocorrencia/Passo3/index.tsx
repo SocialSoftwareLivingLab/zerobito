@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
-import useOcorrenciaViewModel from '../view.model';
+import React from 'react';
 
-
-const PassoTres = () => {
-    const {
-        tipoOcorrencia,
-        nomeContato,
-        emailContato,
-        telefoneContato,
-        handleChangeTipoOcorrencia,
-        handleChangeNomeContato,
-        handleChangeEmailContato,
-        handleChangeTelefoneContato,
-    } = useOcorrenciaViewModel();
+const PassoTres = ({
+    handleChangeTipoOcorrencia,
+    handleChangeNomeContato,
+    handleChangeEmailContato,
+    handleChangeTelefoneContato,
+    tipoOcorrencia,
+    nomeContato,
+    emailContato,
+    telefoneContato,
+}) => {
 
     const isDisabled = tipoOcorrencia === 'Anonimo';
 
@@ -24,16 +21,16 @@ const PassoTres = () => {
                 id='tipoOcorrencia'
                 value={tipoOcorrencia}
                 name='tipoOcorrencia'
-                onChange={handleChangeTipoOcorrencia}
+                onChange={(e) => handleChangeTipoOcorrencia(e.target.value)}
             >
                 <option value="Anonimo">Anonimo</option>
-                <option value="Sim">Sim</option>
+                <option value="Contato">Sim</option>
             </select>
             <input
                 type="text"
                 name='nomeContato'
                 value={nomeContato}
-                onChange={handleChangeNomeContato}
+                onChange={(e) => handleChangeNomeContato(e.target.value)}
                 placeholder='Nome'
                 disabled={isDisabled}
             />
@@ -41,7 +38,7 @@ const PassoTres = () => {
                 type="email"
                 name='emailContato'
                 value={emailContato}
-                onChange={handleChangeEmailContato}
+                onChange={(e) => handleChangeEmailContato(e.target.value)}
                 placeholder='E-mail'
                 disabled={isDisabled}
             />
@@ -49,7 +46,7 @@ const PassoTres = () => {
                 type="text"
                 name='telefoneContato'
                 value={telefoneContato}
-                onChange={handleChangeTelefoneContato}
+                onChange={(e) => handleChangeTelefoneContato(e.target.value)}
                 placeholder='Telefone / Celular'
                 disabled={isDisabled}
             />

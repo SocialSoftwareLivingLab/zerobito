@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import useOcorrenciaViewModel from '../view.model';
+import React from 'react';
 
-
-const PassoQuatro = () => {
-    const {
-        condicaoAcidentado,
-        handleChangeCondicaoAcidentado
-    } = useOcorrenciaViewModel();
+const PassoQuatro = ({
+    condicaoAcidentado,
+    handleChangeCondicaoAcidentado
+}) => {
 
     return (
         <div>
@@ -16,7 +13,7 @@ const PassoQuatro = () => {
                 id='condicaoAcidentado'
                 value={condicaoAcidentado}
                 name='condicaoAcidentado'
-                onChange={handleChangeCondicaoAcidentado}
+                onChange={(e) => handleChangeCondicaoAcidentado(e.target.value)}
             >
                 <option value="Obito">Com Óbito</option>
                 <option value="Sem Obito">Sem Óbito</option>

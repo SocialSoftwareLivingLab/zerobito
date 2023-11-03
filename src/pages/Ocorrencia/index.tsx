@@ -5,55 +5,154 @@ import PassoUm from './Passo1';
 import PassoDois from './Passo2';
 import PassoTres from './Passo3';
 import PassoQuatro from './Passo4';
+import PassoCinco from './Passo5';
 import './style.css';
 
 
 const ComunicacaoEvento = () => {
-    const { handleSubmit } = useOcorrenciaViewModel();
+    const {
+        handleSubmit
+    } = useOcorrenciaViewModel();
+
     const [step, setStep] = useState(1);
+
     const [formData, setFormData] = useState({
-        passo1: {},
-        passo2: {},
-        passo3: {},
-        passo4: {},
+        passo1: {
+            estado: '',
+            cidade: '',
+            local: '',
+            referenciaLocalidade: '',
+            data: '',
+        },
+        passo2: {
+            nomeVitima: '',
+            empresaEmpregadora: '',
+            vinculo: '',
+            descricao: '',
+        },
+        passo3: {
+            tipoOcorrencia: '',
+            nomeContato: '',
+            emailContato: '',
+            telefoneContato: '',
+        },
+        passo4: {
+            condicaoAcidentado: '',
+        },
+        passo5: {
+            gravidade: '',
+        },
     });
 
-    const handleUpdateData = (step, data) => {
-        setFormData({
-            ...formData,
-            [`passo${step}`]: data,
-        });
+    const passoHandlers = {
+        handleChangeCidade: (value) => handleChange('passo1', 'cidade', value),
+        handleChangeEstado: (value) => handleChange('passo1', 'estado', value),
+        handleChangeLocal: (value) => handleChange('passo1', 'local', value),
+        handleChangeReferenciaLocalidade: (value) => handleChange('passo1', 'referenciaLocalidade', value),
+        handleChangeData: (value) => handleChange('passo1', 'data', value),
+        handleChangeNomeVitima: (value) => handleChange('passo2', 'nomeVitima', value),
+        handleChangeEmpresaEmpregadora: (value) => handleChange('passo2', 'empresaEmpregadora', value),
+        handleChangeVinculo: (value) => handleChange('passo2', 'vinculo', value),
+        handleChangeDescricao: (value) => handleChange('passo2', 'descricao', value),
+        handleChangeTipoOcorrencia: (value) => handleChange('passo3', 'tipoOcorrencia', value),
+        handleChangeNomeContato: (value) => handleChange('passo3', 'nomeContato', value),
+        handleChangeEmailContato: (value) => handleChange('passo3', 'emailContato', value),
+        handleChangeTelefoneContato: (value) => handleChange('passo3', 'telefoneContato', value),
+        handleChangeCondicaoAcidentado: (value) => handleChange('passo4', 'condicaoAcidentado', value),
+        handleChangeGravidade: (value) => handleChange('passo5', 'gravidade', value),
     };
 
     const getCompStep = () => {
         switch (step) {
             case 1:
-                return <PassoUm />;
+                return <PassoUm
+                    handleChangeCidade={passoHandlers.handleChangeCidade}
+                    handleChangeEstado={passoHandlers.handleChangeEstado}
+                    handleChangeLocal={passoHandlers.handleChangeLocal}
+                    handleChangeReferenciaLocalidade={passoHandlers.handleChangeReferenciaLocalidade}
+                    handleChangeData={passoHandlers.handleChangeData}
+                    estado={formData.passo1.estado || ''}
+                    cidade={formData.passo1.cidade || ''}
+                    local={formData.passo1.local || ''}
+                    referenciaLocalidade={formData.passo1.referenciaLocalidade || ''}
+                    data={formData.passo1.data || ''}
+                />;
             case 2:
-                return <PassoDois />;
+                return <PassoDois
+                    handleChangeNomeVitima={passoHandlers.handleChangeNomeVitima}
+                    handleChangeEmpresaEmpregadora={passoHandlers.handleChangeEmpresaEmpregadora}
+                    handleChangeVinculo={passoHandlers.handleChangeVinculo}
+                    handleChangeDescricao={passoHandlers.handleChangeDescricao}
+                    nomeVitima={formData.passo2.nomeVitima || ''}
+                    empresaEmpregadora={formData.passo2.empresaEmpregadora || ''}
+                    vinculo={formData.passo2.vinculo || ''}
+                    descricao={formData.passo2.descricao || ''}
+                />;
             case 3:
-                return <PassoTres />;
+                return <PassoTres
+                    handleChangeTipoOcorrencia={passoHandlers.handleChangeTipoOcorrencia}
+                    handleChangeNomeContato={passoHandlers.handleChangeNomeContato}
+                    handleChangeEmailContato={passoHandlers.handleChangeEmailContato}
+                    handleChangeTelefoneContato={passoHandlers.handleChangeTelefoneContato}
+                    tipoOcorrencia={formData.passo3.tipoOcorrencia || ''}
+                    nomeContato={formData.passo3.nomeContato || ''}
+                    emailContato={formData.passo3.emailContato || ''}
+                    telefoneContato={formData.passo3.telefoneContato || ''}
+                />;
             case 4:
-                return <PassoQuatro />;
+                return <PassoQuatro
+                    handleChangeCondicaoAcidentado={passoHandlers.handleChangeCondicaoAcidentado}
+                    condicaoAcidentado={formData.passo4.condicaoAcidentado || ''}
+                />;
+            case 5:
+                return <PassoCinco
+                    handleChangeGravidade={passoHandlers.handleChangeGravidade}
+                    gravidade={formData.passo5.gravidade || ''}
+                />;
             default:
-                return <PassoUm />;
+                return <PassoUm
+                    handleChangeCidade={passoHandlers.handleChangeCidade}
+                    handleChangeEstado={passoHandlers.handleChangeEstado}
+                    handleChangeLocal={passoHandlers.handleChangeLocal}
+                    handleChangeReferenciaLocalidade={passoHandlers.handleChangeReferenciaLocalidade}
+                    handleChangeData={passoHandlers.handleChangeData}
+                    estado={formData.passo1.estado || ''}
+                    cidade={formData.passo1.cidade || ''}
+                    local={formData.passo1.local || ''}
+                    referenciaLocalidade={formData.passo1.referenciaLocalidade || ''}
+                    data={formData.passo1.data || ''}
+                />;
         }
     };
 
     const handleContinuarClick = (e) => {
-        e.preventDefault(); // Adicione esta linha
-        if (step === 1 || step === 2 || step === 3) {
+        e.preventDefault();
+        // Check if the current step is 4 and if the condition of the accident is 'óbito'.
+        if (step === 4 && formData.passo4.condicaoAcidentado === 'Sem Obito') {
+            handleSubmit(formData);
+        } else if (step < 5) {
             setStep(step + 1);
-        } else if (step === 4) {
-            handleSubmit(formData); // Aqui você passa o formData para o handleSubmit
+        } else {
+            handleSubmit(formData);
         }
     };
 
+
     const handleVoltarClick = (e) => {
         e.preventDefault(); // Adicione esta linha
-        if (step === 2 || step === 3 || step === 4) {
+        if (step === 2 || step === 3 || step === 4 || step === 5) {
             setStep(step - 1);
         }
+    };
+
+    const handleChange = (stepKey, field, value) => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [stepKey]: {
+                ...prevFormData[stepKey],
+                [field]: value,
+            },
+        }));
     };
 
     return (
@@ -74,12 +173,12 @@ const ComunicacaoEvento = () => {
                             </div>
                             <div className='form-container-group-button'>
                                 {step === 1 ? null :
-                                    <button onClick={handleVoltarClick}>
+                                    <button className="button" onClick={handleVoltarClick}>
                                         Voltar
                                     </button>
                                 }
-                                <button onClick={handleContinuarClick}>
-                                    {step === 4 ?
+                                <button className="button" onClick={handleContinuarClick}>
+                                    {step === 5 || (step === 4 && formData.passo4.condicaoAcidentado === 'Sem Obito') ?
                                         'Enviar' : 'Continuar'
                                     }
                                 </button>
@@ -93,3 +192,4 @@ const ComunicacaoEvento = () => {
 };
 
 export default ComunicacaoEvento;
+
