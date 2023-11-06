@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { createOcorrencia } from "../../common/models/ocorrencias/create.ocorrencia";
 
 const useOcorrenciaViewModel = () => {
+    const history = useHistory();
+    const [error, setError] = useState<string>("");
     const [denuncia, setDenuncia] = useState<string>("");
     const [data, setData] = useState('');
     const [estado, setEstado] = useState<string>("");
@@ -19,29 +23,48 @@ const useOcorrenciaViewModel = () => {
     const [emailContato, setEmailContato] = useState<string>("");
     const [telefoneContato, setTelefoneContato] = useState<string>("");
     const [descricao, setDescricao] = useState<string>("");
-   
+
 
     const handleSubmit = async (formData) => {
-        
+
         const ocorrencia = {
             local: (formData.passo1.estado + formData.passo1.local + formData.passo1.referenciaLocalidade + formData.passo1.cidade),
-            data:formData.passo1.data,
-            nomeVitima:formData.passo2.nomeVitima,
-            empresaEmpregadora:formData.passo2.empresaEmpregadora,
-            vinculo:formData.passo2.vinculo,
-            denuncia: formData.passo2.descricao,
-            tipoOcorrencia:formData.passo3.tipoOcorrencia,
-            nomeContato:formData.passo3.nomeContato,
-            emailContato:formData.passo3.emailContato,
-            telefoneContato:formData.passo3.telefoneContato,
-            condicaoAcidentado:formData.passo4.condicaoAcidentado,
-            gravidade:formData.passo5.gravidade,
-            status:formData.passo3.status,
-            empresaTomadora:formData.passo3.empresaTomadora,
-            descricao:formData.passo5.descricao,
+            data: formData.passo1.data,
+            nomeVitima: formData.passo2.nomeVitima,
+            empresaEmpregadora: formData.passo2.empresaEmpregadora,
+            // vinculo:formData.passo2.vinculo,
+            // denuncia: formData.passo2.descricao,
+            // tipoOcorrencia:formData.passo3.tipoOcorrencia,
+            // nomeContato:formData.passo3.nomeContato,
+            // emailContato:formData.passo3.emailContato,
+            // telefoneContato:formData.passo3.telefoneContato,
+            condicaoAcidentado: formData.passo4.condicaoAcidentado,
+            gravidade: formData.passo5.gravidade,
+            status: formData.passo3.status,
+            descricao: formData.passo5.descricao,
         };
-        
-        return console.log(ocorrencia);
+        //Quero que faça um post para a rota /ocorrencia/create e retorne para a tela de ocorrencia
+        try {
+            const response = await createOcorrencia(
+                ocorrencia.data,
+                ocorrencia.local,
+                ocorrencia.nomeVitima,
+                ocorrencia.condicaoAcidentado,
+                ocorrencia.gravidade,
+                ocorrencia.status,
+                ocorrencia.empresaEmpregadora,
+                ocorrencia.descricao,
+            );
+
+            if (response.status === 200) {
+                history.replace("/");
+            }
+        } catch (error: any) {
+            setError(
+                String(error.response.data?.error ?? error.response.data.message)
+            );
+        }
+
     };
 
     const handleChangeDenuncia = (event) => {
