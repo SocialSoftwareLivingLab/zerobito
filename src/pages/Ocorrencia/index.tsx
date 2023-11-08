@@ -5,7 +5,6 @@ import PassoUm from './Passo1';
 import PassoDois from './Passo2';
 import PassoTres from './Passo3';
 import PassoQuatro from './Passo4';
-import PassoCinco from './Passo5';
 import './style.css';
 
 
@@ -38,10 +37,9 @@ const ComunicacaoEvento = () => {
         },
         passo4: {
             condicaoAcidentado: '',
-        },
-        passo5: {
             gravidade: '',
-        },
+            statusEvento: 'Aguardando análisie'
+        }
     });
 
     const passoHandlers = {
@@ -59,7 +57,7 @@ const ComunicacaoEvento = () => {
         handleChangeEmailContato: (value) => handleChange('passo3', 'emailContato', value),
         handleChangeTelefoneContato: (value) => handleChange('passo3', 'telefoneContato', value),
         handleChangeCondicaoAcidentado: (value) => handleChange('passo4', 'condicaoAcidentado', value),
-        handleChangeGravidade: (value) => handleChange('passo5', 'gravidade', value),
+        handleChangeGravidade: (value) => handleChange('passo4', 'gravidade', value),
     };
 
     const getCompStep = () => {
@@ -102,12 +100,9 @@ const ComunicacaoEvento = () => {
             case 4:
                 return <PassoQuatro
                     handleChangeCondicaoAcidentado={passoHandlers.handleChangeCondicaoAcidentado}
-                    condicaoAcidentado={formData.passo4.condicaoAcidentado || ''}
-                />;
-            case 5:
-                return <PassoCinco
                     handleChangeGravidade={passoHandlers.handleChangeGravidade}
-                    gravidade={formData.passo5.gravidade || ''}
+                    condicaoAcidentado={formData.passo4.condicaoAcidentado || ''}
+                    gravidade={formData.passo4.gravidade || ''}
                 />;
             default:
                 return <PassoUm
@@ -130,7 +125,7 @@ const ComunicacaoEvento = () => {
         // Check if the current step is 4 and if the condition of the accident is 'óbito'.
         if (step === 4 && formData.passo4.condicaoAcidentado === 'Sem Obito') {
             handleSubmit(formData);
-        } else if (step < 5) {
+        } else if (step < 4) {
             setStep(step + 1);
         } else {
             handleSubmit(formData);
@@ -139,8 +134,8 @@ const ComunicacaoEvento = () => {
 
 
     const handleVoltarClick = (e) => {
-        e.preventDefault(); // Adicione esta linha
-        if (step === 2 || step === 3 || step === 4 || step === 5) {
+        e.preventDefault();
+        if (step === 2 || step === 3 || step === 4) {
             setStep(step - 1);
         }
     };
@@ -178,7 +173,7 @@ const ComunicacaoEvento = () => {
                                     </button>
                                 }
                                 <button className="button" onClick={handleContinuarClick}>
-                                    {step === 5 || (step === 4 && formData.passo4.condicaoAcidentado === 'Sem Obito') ?
+                                    {step === 4 ?
                                         'Enviar' : 'Continuar'
                                     }
                                 </button>

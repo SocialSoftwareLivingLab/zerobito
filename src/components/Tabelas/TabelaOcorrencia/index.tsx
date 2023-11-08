@@ -24,7 +24,7 @@ const TabelaOcorrencia = ({ eventos }) => {
               <td>{evento.data}</td>
               <td>{evento.condicaoAcidentado}</td>
               <td>{evento.gravidade}</td>
-              <td>{evento.andamentoCaso}</td>
+              <td>{evento.status}</td>
               <td>
                 <button onClick={() => {}}>Agrupar</button>
                 <button onClick={() => {}}>Aceitar</button>

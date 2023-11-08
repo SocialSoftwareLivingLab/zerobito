@@ -24,7 +24,6 @@ const useOcorrenciaViewModel = () => {
     const [telefoneContato, setTelefoneContato] = useState<string>("");
     const [descricao, setDescricao] = useState<string>("");
 
-
     const handleSubmit = async (formData) => {
 
         const ocorrencia = {
@@ -33,29 +32,30 @@ const useOcorrenciaViewModel = () => {
             nomeVitima: formData.passo2.nomeVitima,
             empresaEmpregadora: formData.passo2.empresaEmpregadora,
             // vinculo:formData.passo2.vinculo,
-            // denuncia: formData.passo2.descricao,
+            denuncia: formData.passo2.descricao,
             // tipoOcorrencia:formData.passo3.tipoOcorrencia,
             // nomeContato:formData.passo3.nomeContato,
             // emailContato:formData.passo3.emailContato,
             // telefoneContato:formData.passo3.telefoneContato,
             condicaoAcidentado: formData.passo4.condicaoAcidentado,
-            gravidade: formData.passo5.gravidade,
+            gravidade: formData.passo4.gravidade,
             status: formData.passo3.status,
-            descricao: formData.passo5.descricao,
+            descricao: formData.passo2.denuncia,
+            statusEvento: formData.passo4.statusEvento
         };
         //Quero que faça um post para a rota /ocorrencia/create e retorne para a tela de ocorrencia
         try {
             const response = await createOcorrencia(
+                ocorrencia.denuncia,
                 ocorrencia.data,
                 ocorrencia.local,
                 ocorrencia.nomeVitima,
                 ocorrencia.condicaoAcidentado,
-                ocorrencia.gravidade,
-                ocorrencia.status,
                 ocorrencia.empresaEmpregadora,
-                ocorrencia.descricao,
-            );
+                ocorrencia.gravidade,
+                ocorrencia.statusEvento,
 
+            );
             if (response.status === 200) {
                 history.replace("/");
             }
@@ -64,7 +64,6 @@ const useOcorrenciaViewModel = () => {
                 String(error.response.data?.error ?? error.response.data.message)
             );
         }
-
     };
 
     const handleChangeDenuncia = (event) => {
@@ -103,11 +102,15 @@ const useOcorrenciaViewModel = () => {
         setNomeVitima(value);
     };
 
-    const handleChangeCondicaoAcidentado = (event) => {
-        const value = event.target.value;
-
+    const handleChangeCondicaoAcidentado = (value) => {
+        // Atualiza a condição do acidentado
         setCondicaoAcidentado(value);
-    };
+      
+        // Se a condição do acidentado é "Com Óbito", define a gravidade para "Óbito"
+        if (value === "Obito") {
+          setGravidade("Óbito");
+        }
+      };
 
     const handleChangeGravidade = (event) => {
         const value = event.target.value;
