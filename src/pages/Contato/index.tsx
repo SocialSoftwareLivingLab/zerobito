@@ -1,31 +1,20 @@
 import React from 'react';
 import Menu from "../../components/Menu/index.tsx";
+import ContactList from '../../components/ContactList/index.tsx';
 import "./style.css";
 
 function Contato(){
     return(
         <div className="Contato">
-            <Menu/>
-            <div className="">
-                <div className="">
-                    Contato
-                </div>
-                <div className="">
-                    <p>
-                        Nome:
-                        <input type="text" name="nome" />
-                    </p>
-                    <p>
-                        Email:
-                        <input type="text" name="email" />
-                    </p>
-                    <p>
-                        Mensagem:
-                        <input type="text" name="mensagem" />
-                    </p>
-                    <p>
-                        <button type="submit">Enviar</button>
-                    </p>
+            <Menu />
+            <div className="container-body-contato">
+                <div className="container-contato">
+                    <div className="header-card-contato">
+                        CONTATOS
+                    </div>
+                    <div className="body-card-contato">
+                        <ContactList />
+                    </div>
                 </div>
             </div>
         </div>
