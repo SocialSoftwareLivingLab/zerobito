@@ -2,6 +2,12 @@ button {
   margin-right: 5px;
   padding: 5px;
 }
+
+.button-tabela-aceitar{
+  background-color: #03A803 !important;
+  color: #FFFFFF  !important;
+}
+
 .table-container{
   background-color: #FFFFFF;
   width: 80%;

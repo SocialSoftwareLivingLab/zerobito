@@ -1,7 +1,27 @@
-import React from 'react';
-import '../style.css'; // Se você desejar adicionar estilos específicos
+import React, { useState } from 'react';
+import '../style.css';
 
 const TabelaAcompanhamento = ({ eventos }) => {
+  const itemsPerPage = 12;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const eventosPaginaAtual = eventos.slice(startIndex, endIndex);
+
+  const nextPage = () => {
+    if (currentPage < Math.ceil(eventos.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <div className='table-container'>
       <h2>Casos</h2>
@@ -17,7 +37,7 @@ const TabelaAcompanhamento = ({ eventos }) => {
           </tr>
         </thead>
         <tbody>
-          {eventos.map((evento) => (
+          {eventosPaginaAtual.map((evento) => (
             <tr key={evento.id}>
               <td>{evento.denuncia}</td>
               <td>{evento.data}</td>
@@ -25,12 +45,17 @@ const TabelaAcompanhamento = ({ eventos }) => {
               <td>{evento.gravidade}</td>
               <td>{evento.andamentoCaso}</td>
               <td>
-                <button onClick={() => {/* função para agrupar */}}>Acompanhar</button>
+                <button onClick={() => {}}>Acompanhar</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div className="pagination">
+        
+        <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
+        <button onClick={nextPage} disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>Próxima</button>
+      </div>
     </div>
   );
 }

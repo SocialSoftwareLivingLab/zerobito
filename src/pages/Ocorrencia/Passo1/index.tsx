@@ -26,6 +26,7 @@ const PassoUm = ({
                 value={estado}
                 onChange={(e) => handleChangeEstado(e.target.value)}
                 placeholder="Estado"
+                required
             />
             <input
                 type="text"
@@ -33,6 +34,7 @@ const PassoUm = ({
                 value={cidade}
                 onChange={(e) => handleChangeCidade(e.target.value)}
                 placeholder="Cidade"
+                required
             />
             <input
                 type="text"
@@ -40,6 +42,7 @@ const PassoUm = ({
                 value={local}
                 onChange={(e) => handleChangeLocal(e.target.value)}
                 placeholder="Onde foi o acidente?"
+                required
             />
             <input
                 type="text"
@@ -57,6 +60,7 @@ const PassoUm = ({
                     value={data}
                     onChange={(e) => handleChangeData(e.target.value)}
                     placeholder='Data do acidente'
+                    required
                 />
             )}
         </div>

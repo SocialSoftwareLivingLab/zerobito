@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 
 function Menu(): React.JSX.Element {
     const token = localStorage.getItem('token');
+    const nome = localStorage.getItem('nome');
+    const role = localStorage.getItem('role');
+
     return (
         <div className="Menu">
             <nav className="menu">
@@ -17,8 +20,13 @@ function Menu(): React.JSX.Element {
                     {!!token ? (
                         <>
                             <ul>
+                                {role === "ADMIN" && (
+                                    <li>
+                                        <Link to="/painel">Painel de Controle</Link>
+                                    </li>
+                                )}
                                 <li>
-                                    <Link to="/painel">Painel de Controle</Link>
+                                    <Link to="/contato">Contatos Importantes</Link>
                                 </li>
                                 <li>
                                     <Link to="/biblioteca">Biblioteca de Casos</Link>
@@ -33,8 +41,9 @@ function Menu(): React.JSX.Element {
                                     <Link to="/ajuda">Ajuda</Link>
                                 </li>
                                 <li>
-                                    <Link to="/profile">Perfil</Link>
+                                    <Link to="/perfil">Perfil</Link>
                                 </li>
+                                <span>Bem-vindo, {nome}</span>
                             </ul>
                             <button className='button-exit'>
                                 <a onClick={removeData}>Sair</a>
@@ -42,17 +51,9 @@ function Menu(): React.JSX.Element {
                         </>
                     ) : (
                         <>
-                            <ul className='LoginButton'>
-                                <button className="button">
-                                    <Link to="/login">
-                                        Entrar
-                                    </Link>
-                                </button>
-                            </ul>
                         </>
                     )}
                 </ul>
-
             </nav>
         </div>
     );

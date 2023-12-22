@@ -15,8 +15,7 @@ const PassoTres = ({
 
     return (
         <div>
-            <h1>Informação sobre os Fontes de informações:</h1>
-
+            <h1>Informação do Denunciante:</h1>
             <select
                 id='tipoOcorrencia'
                 value={tipoOcorrencia}
@@ -24,7 +23,11 @@ const PassoTres = ({
                 onChange={(e) => handleChangeTipoOcorrencia(e.target.value)}
             >
                 <option value="Anonimo">Anonimo</option>
-                <option value="Contato">Sim</option>
+                <option value="Vitima">Vitima</option>
+                <option value="Familiar">Familiar</option>
+                <option value="Colega de Trabalho">Colega de Trabalho</option>
+                <option value="Testemunha">Testemunha</option>
+                <option value="Outros">Outros</option>
             </select>
             <input
                 type="text"

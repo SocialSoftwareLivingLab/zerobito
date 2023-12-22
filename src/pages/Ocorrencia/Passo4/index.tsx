@@ -20,8 +20,8 @@ const PassoQuatro = ({
                     <option value="Obito">Com Óbito</option>
                     <option value="Sem Obito">Sem Óbito</option>
                 </select>
+
             </div>
-            {/* Se condicaoAcidentado for com obito a gravidade é automaticamente " " */}
             {condicaoAcidentado === 'Sem Obito' && (
                 <div>
                     <h1>Qual a gravidade do acidente:</h1>
