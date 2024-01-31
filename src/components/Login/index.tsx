@@ -15,7 +15,6 @@ const LoginCard = () => {
                     </div>
                     <div className="body-card">
                         <form className="form" onSubmit={handleSubmit}>
-                            {!!error && <p>{error}</p>}
                             <div>
                                 <label htmlFor="email">Email:</label>
                                 <input
@@ -36,6 +35,7 @@ const LoginCard = () => {
                                     required
                                 />
                             </div>
+                            {!!error && <p>{error}</p>}
                             <button type="submit" >Entrar</button>
                         </form>
                     </div>

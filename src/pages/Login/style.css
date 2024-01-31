@@ -1,9 +1,11 @@
 .container-principal {
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin-left: -25px;
 }
 
 .text-login {
     margin-top: 3px;
     text-align: center;
 }
+

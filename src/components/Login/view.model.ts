@@ -15,14 +15,15 @@ const useLoginViewModel = () => {
       }
     }, [history, token]);
   
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
+
       try {
         const response = await login({ email: email, senha: senha });
         setToken(response.data.token);
         history.replace("/home");
       } catch (error) {
-        setError(String(error));
+        setError("Erro ao tentar fazer login.");
       }
     };
   
