@@ -8,24 +8,26 @@ const LoginCard = () => {
 
     return (
         <div className="LoginCard">
-            <div className='container-body'>
+            <body className='container-body'>
                 <div className="container">
-                    <div className="header-card">
+
+                    <h1 className='header-card'>
                         ENTRAR
-                    </div>
-                    <div className="body-card">
-                        <form className="form" onSubmit={handleSubmit}>
-                            <div>
-                                <label htmlFor="email">Email:</label>
-                                <input
+                    </h1>
+
+
+                    <div className='content'>
+                        <form className='form' onSubmit={handleSubmit}>
+
+                                <label htmlFor='email'>Email:</label>
+                                <input 
                                     type="email"
                                     name="email"
                                     value={email}
                                     onChange={handleChangeEmail}
                                     required
                                 />
-                            </div>
-                            <div>
+
                                 <label htmlFor="password">Senha:</label>
                                 <input
                                     type="password"
@@ -34,13 +36,15 @@ const LoginCard = () => {
                                     onChange={handleChangeSenha}
                                     required
                                 />
-                            </div>
-                            {!!error && <p>{error}</p>}
-                            <button type="submit" >Entrar</button>
+
+                                {!!error && <p className="error_login">{error}</p>}
+
+                                <button type="submit" >Entrar</button>
                         </form>
                     </div>
+
                 </div>
-            </div>
+            </body>
         </div>
     );
 }

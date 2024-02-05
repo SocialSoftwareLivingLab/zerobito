@@ -1,7 +1,6 @@
 .container-body {
     display: flex;
     justify-content: center;
-    align-items: center;
     margin: 0 auto;
     margin-top: 15rem;
     margin-left: 10px;
@@ -9,33 +8,48 @@
 
 .container{
     width: 25rem;
-    height: 21rem;
+    height: 22rem;
     border-radius:.2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
 .header-card{
     color:aliceblue;
     font-size: 2rem;
-    background-color: rgba(19,71,128,1);
+    background-color: rgba(19, 71, 128, 1);
     text-align: center;
+    margin: 0 auto;
     width: 100%;
-    height: 8rem;
+    height: 5rem;
     padding-top: 2.5rem;
     border-radius: .2em .2em 0 0;
 }
 
-.body-card{
-    padding: 1rem;
+.content{
+    padding: 1rem 1rem;
 }
 
-.body-card button{
+
+.content label{
+    display: inline-block;
+    width: 60px;
+}
+
+.content input{
+    display: inline-block;
+    background-color: rgb(226, 227, 228);
+    border-radius: 0.2rem;
+    border: none;
+    width: 15rem;
+    height: 2rem;
+    margin: 1rem 1rem;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.content button{
     width: 6rem;
     height: 2.5rem;
     background-color: rgba(19,71,128,1);
@@ -43,24 +57,16 @@
     border: none;
     color: aliceblue;
     font:bold;
+    margin-top: 15px;
 }
 
-.body-card button:hover{
+.content button:hover{
     background-color: rgba(12, 43, 77, 0.8);
 }
 
-.body-card input{
-    background-color: rgb(226, 227, 228);
-    border-radius: 0.2rem;
-    border: none;
-    width: 15rem;
-    height: 2rem;
-    margin: 1rem 1rem;
+.error_login{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: red;
 }
-
-.form p {
-    margin-top: 3px; /* Espaçamento superior */
-    margin-bottom: 10px;
-    color: red; /* Cor do texto para erros */
-  }
 
