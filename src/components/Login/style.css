@@ -2,12 +2,10 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    margin-top: 15rem;
-    margin-left: 10px;
 }
 
 .container{
-    width: 25rem;
+    width: 30rem;
     height: 22rem;
     border-radius:.2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);

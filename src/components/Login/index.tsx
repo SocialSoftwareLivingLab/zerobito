@@ -18,7 +18,8 @@ const LoginCard = () => {
 
                     <div className='content'>
                         <form className='form' onSubmit={handleSubmit}>
-
+                            
+                            <div>
                                 <label htmlFor='email'>Email:</label>
                                 <input 
                                     type="email"
@@ -27,7 +28,9 @@ const LoginCard = () => {
                                     onChange={handleChangeEmail}
                                     required
                                 />
+                            </div>
 
+                            <div>
                                 <label htmlFor="password">Senha:</label>
                                 <input
                                     type="password"
@@ -36,10 +39,11 @@ const LoginCard = () => {
                                     onChange={handleChangeSenha}
                                     required
                                 />
+                            </div>
 
-                                {!!error && <p className="error_login">{error}</p>}
+                            {!!error && <p className="error_login">{error}</p>}
 
-                                <button type="submit" >Entrar</button>
+                            <button type="submit" >Entrar</button>
                         </form>
                     </div>
 

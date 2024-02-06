@@ -3,17 +3,20 @@ import React from 'react';
 import useRegisterViewModel from './view.model';
 
 function SignupCard() {
-  const { nome, email, senha, senhaValidation, handleSubmit, handleChangeNome, handleChangeEmail, handleChangeSenha, handleChangeSenhaValidation } = useRegisterViewModel();
+  const { nome, email, senha, senhaValidation, error, handleSubmit, handleChangeNome, handleChangeEmail, handleChangeSenha, handleChangeSenhaValidation } = useRegisterViewModel();
 
   return (
     <div className="SingupCard">
       <div className='container-body-register'>
         <div className="container-register">
-          <div className="header-card-register">
+          
+          <h1 className="header-card-register">
             CADASTRO
-          </div>
+          </h1>
+
           <div className="body-card">
             <form className="form" onSubmit={handleSubmit}>
+
               <div>
                 <label htmlFor="name">Nome:</label>
                 <input
@@ -23,6 +26,7 @@ function SignupCard() {
                   required
                 />
               </div>
+
               <div>
                 <label htmlFor="email">Email:</label>
                 <input
@@ -33,6 +37,7 @@ function SignupCard() {
                   required
                 />
               </div>
+
               <div>
                 <label htmlFor="password">Senha:</label>
                 <input
@@ -43,6 +48,7 @@ function SignupCard() {
                   required
                 />
               </div>
+
               <div>
                 <label htmlFor="password">Confirmar Senha:</label>
                 <input
@@ -53,6 +59,9 @@ function SignupCard() {
                   required
                 />
               </div>
+
+              {!!error && <p className="error_register">{error}</p>}
+
               <button type="submit">Cadastrar</button>
             </form>
           </div>

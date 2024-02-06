@@ -1,9 +1,7 @@
 .container-body-register {
     display: flex;
     justify-content: center;
-    align-items: center;
     margin: 0 auto;
-    margin-top: 20rem;
 }
 
 .container-register {
@@ -12,9 +10,6 @@
     border-radius: .3em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
@@ -23,15 +18,34 @@
     font-size: 2rem;
     background-color: rgba(19, 71, 128, 1);
     text-align: center;
+    margin: 0 auto;
     width: 100%;
-    height: 8rem;
+    height: 5rem;
     padding-top: 2.5rem;
     border-radius: .3em .3em 0 0;
     ;
 }
 
 .body-card {
-    padding: 1rem;
+    padding: 1rem 0rem;
+}
+
+.body-card label{
+    display: inline-block;
+    width: 125px;
+    margin-left: 4px;
+}
+
+.body-card input{
+    display: inline-block;
+    background-color: rgb(226, 227, 228);
+    border-radius: 0.2rem;
+    border: none;
+    width: 16rem;
+    height: 2rem;
+    margin: 1rem 1rem;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .body-card button {
@@ -42,17 +56,15 @@
     border: none;
     color: aliceblue;
     font: bold;
+    margin-top: 15px;
 }
 
 .body-card button:hover {
     background-color: rgba(12, 43, 77, 0.8);
 }
 
-.body-card input {
-    background-color: rgb(226, 227, 228);
-    border-radius: 0.2rem;
-    border: none;
-    width: 15rem;
-    height: 2rem;
-    margin: 1rem 1rem;
+.error_register{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: red;
 }
