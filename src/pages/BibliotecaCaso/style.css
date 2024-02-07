@@ -1,0 +1,19 @@
+.search-container{
+    display: static;
+    align-items: center;
+    background-color: #c0d6ee;
+    height: 3rem;
+    padding: 1% 10% 0% 10%;
+    color: #fff;
+}
+
+.search-container input{
+    background-color: white;
+    border-radius: 0.2rem;
+    border: 1px solid black;
+    width: 15rem;
+    height: 1.80rem;
+    margin-top: 2px;
+    padding-left: 4px;
+    color:rgb(129, 129, 129);
+}

@@ -6,12 +6,16 @@ function BibliotecaCasos(){
     return(
         <div className="Contato">
             <Menu />
-            <div className="container-body-contato">
+            <div className="container-header">
+                <h1>Biblioteca de Casos</h1>
                 <div className="container-contato">
-                    <div className="body-card-contato">
-                        Biblioteca de Casos
+                    <div className='text'>
+                        Aqui o VISITANTE EXTERNO consulta os casos disponíveis na biblioteca
                     </div>
                 </div>
+            </div>
+            <div className='search-container'>
+            <input type="text" value="digite alguma coisa"/>
             </div>
         </div>
     );
