@@ -30,6 +30,12 @@ enum UserRole {
   USER = 2
 }
 
+let isMockAuth = false;
+
+export const setMockAuth = (value: boolean) => {
+  isMockAuth = value;
+};
+
 export const login = async ({ email, senha }: any) => {
 
   try {
