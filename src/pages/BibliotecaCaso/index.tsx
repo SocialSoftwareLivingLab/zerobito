@@ -1,8 +1,17 @@
 import React from 'react';
 import Menu from "../../components/Menu/index.tsx";
 import "./style.css";
+import {useHistory} from 'react-router-dom';
 
 function BibliotecaCasos(){
+
+    const history = useHistory();
+
+    const handleObservatorioClick = () => {
+        history.push('/observatorio')
+    }
+
+
     return(
         <div className="Contato">
             <Menu />
@@ -17,7 +26,7 @@ function BibliotecaCasos(){
             <div className='search-container'>
                 <input type="text" value="digite alguma coisa"/>
                 <button className='search-container-pesquisar' type="submit" >Pesquisar</button>
-                <button className="search-container-observatorio" type="submit" >Observatório ZerÓbito</button>
+                <button className="search-container-observatorio" type="submit" onClick={handleObservatorioClick}>Observatório ZerÓbito</button>
             </div>
             <div className='casos-acompanhados'>
                 <div className='casos-acompanhados-header'>
