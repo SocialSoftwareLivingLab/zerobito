@@ -2,6 +2,8 @@ import React from 'react';
 import Menu from "../../components/Menu/index.tsx";
 import "./style.css";
 import {useHistory} from 'react-router-dom';
+import TabelaBiblioteca from '../../components/Tabelas/TabelaBiblioteca/index.tsx';
+import { ocorrencias } from '../../common/models/ocorrencias/ocorrencias_testes.ts';
 
 function BibliotecaCasos(){
 
@@ -47,24 +49,8 @@ function BibliotecaCasos(){
 
                 </div>
             </div>
-            <div className='casos-acompanhados'>
-                <div className='casos-acompanhados-header'>
-                    <h1>Todos os casos</h1>
-                </div>
-                <div className='indices-casos'>
-                    <input type="checkbox"/>
-                    <label>Data</label>
-                    <label>Denúncia</label>
-                    <label>Causa</label>
-                    <label>Gravidade</label>
-                    <label>Status</label>
-                    <label>Cidade</label>
-                    <label>Região</label>
-                </div>
-                <div className='lista-casos-acompanhados'>
 
-                </div>
-            </div>
+            <TabelaBiblioteca eventos={ocorrencias} />
         </div>
     );
 };
