@@ -1,5 +1,8 @@
 import './style.css';
 import React from 'react';
+import { BsBookmarkFill } from "react-icons/bs";
+import { FaUniversity, FaMicrophone } from "react-icons/fa";
+import { BiSolidHelpCircle } from "react-icons/bi";
 import { removeData } from '../../common/models/user/auth';
 import { Link } from 'react-router-dom';
 
@@ -26,28 +29,26 @@ function Menu(): React.JSX.Element {
                                     </li>
                                 )}
                                 <li>
-                                    <Link to="/contato">Contatos Importantes</Link>
-                                </li>
-                                <li>
+                                    <span className="icon"><BsBookmarkFill /></span>
                                     <Link to="/biblioteca">Biblioteca de Casos</Link>
                                 </li>
                                 <li>
+                                    <span className="icon"><FaUniversity /></span>
                                     <Link to="/material">Material para Consulta</Link>
                                 </li>
                                 <li>
+                                    <span className="icon"><FaMicrophone /></span>
                                     <Link to="/imprensa">Imprensa</Link>
                                 </li>
                                 <li>
+                                    <span className="icon-help"><BiSolidHelpCircle /></span>
                                     <Link to="/ajuda">Ajuda</Link>
                                 </li>
                                 <li>
                                     <Link to="/perfil">Perfil</Link>
                                 </li>
-                                <span>Bem-vindo, {nome}</span>
+                                <span>Função</span>
                             </ul>
-                            <button className='button-exit'>
-                                <a onClick={removeData}>Sair</a>
-                            </button>
                         </>
                     ) : (
                         <>
