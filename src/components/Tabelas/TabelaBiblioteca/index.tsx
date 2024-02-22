@@ -36,7 +36,7 @@ const TabelaBiblioteca = ({ eventos }) => {
       <table>
       <thead>
           <tr>
-            <input type="checkbox"/>
+            <th><input type="checkbox"/></th>
             <th>Data</th>
             <th>Denúncia</th>
             <th>Causa</th>
@@ -49,11 +49,13 @@ const TabelaBiblioteca = ({ eventos }) => {
         <tbody>
           {eventosPaginaAtual.map((evento) => (
             <tr key={evento.id}>
-              <input type="checkbox"/>
+              <td><input type="checkbox"/></td>
               <td>{evento.data}</td>
               <td>{evento.denuncia}</td>
               <td>{evento.causa}</td>
-              <td>{evento.gravidade}</td>
+              <td>
+              <span className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>{evento.gravidade}</span>
+              </td>
               <td>{evento.status}</td>
               <td>{evento.cidade}</td>
               <td>{evento.regiao}</td>

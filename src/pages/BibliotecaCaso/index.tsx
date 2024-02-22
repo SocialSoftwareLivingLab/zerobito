@@ -49,8 +49,9 @@ function BibliotecaCasos(){
 
                 </div>
             </div>
-
-            <TabelaBiblioteca eventos={ocorrencias} />
+            <div className='tabela_biblioteca'>
+                <TabelaBiblioteca eventos={ocorrencias} />
+            </div>
         </div>
     );
 };
