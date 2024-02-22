@@ -1,6 +1,6 @@
-.container-principal {
-    justify-content: center;
-    align-items: center;
+.container-principal-register {
+    margin-top: 10rem;
+    margin-left: -2rem;
 }
 
 .text-login {
