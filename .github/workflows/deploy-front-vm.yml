@@ -55,5 +55,5 @@ jobs:
         key: ${{ secrets.VM_SSH_KEY }}
         port: ${{ secrets.VM_PORT }}
         timeout: 240s
-        source: "build/"
+        source: "build/*"
         target: ${{ secrets.VM_OUTPUT_APP_FOLDER }}
