@@ -11,7 +11,7 @@ jobs:
   backup-versao-atual:
     runs-on: ubuntu-latest
     steps:
-      - name: multiple command
+      - name: Executar backup da última versão do front
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VM_HOST }}
@@ -19,8 +19,8 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           port: ${{ secrets.VM_PORT }}
           script: |
-            whoami
-            ls -al
+            CURRENT_DATE_FRONT=$(date +"%Y%m%d%H%M%S")
+            mkdir -p /opt/backup/frontend/${CURRENT_DATE}
 
   # build-and-deploy:
   #   runs-on: ubuntu-latest
