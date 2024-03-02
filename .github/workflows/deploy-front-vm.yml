@@ -20,7 +20,7 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           script: |
             CURRENT_DATE_FRONT=$(date +"%Y%m%d%H%M%S")
-            mkdir -p /opt/backup/frontend/${CURRENT_DATE}
+            sudo mkdir -p /opt/backup/frontend/${CURRENT_DATE}
 
   # build-and-deploy:
   #   runs-on: ubuntu-latest
