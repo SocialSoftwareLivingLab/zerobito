@@ -43,11 +43,7 @@ jobs:
 
     - name: Construir webapp React final
       run: npm run build
-    
-    - name: Configurar chave SSH para acessar VM
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.VM_SSH_KEY }}
+      run: ls
 
     - name: Enviar build final para a VM
       uses: appleboy/scp-action@v0.1.7
@@ -56,5 +52,5 @@ jobs:
         username: ${{ secrets.VM_USERNAME }}
         key: ${{ secrets.VM_SSH_KEY }}
         port: ${{ secrets.VM_PORT }}
-        source: "./build"
+        source: "./build/**"
         target: ${{ secrets.VM_OUTPUT_APP_FOLDER }}
