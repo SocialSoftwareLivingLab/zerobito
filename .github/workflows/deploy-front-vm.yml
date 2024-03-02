@@ -49,5 +49,12 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.VM_SSH_KEY }}
 
-    - name: Enviar arquivos do build para a 
-      run: rsync -avz --delete ./build/ ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/opt/apps/frontend/
+    - name: Enviar build final para a VM
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USERNAME }}
+        key: ${{ secrets.VM_SSH_KEY }}
+        port: ${{ secrets.VM_PORT }}
+        source: "./build"
+        target: ${{ secrets.VM_OUTPUT_APP_FOLDER }}
