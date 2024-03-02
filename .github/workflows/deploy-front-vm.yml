@@ -20,7 +20,7 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           script: |
             CURRENT_DATE_FRONT=$(date +"%Y%m%d%H%M%S")
-            mkdir -p /opt/backup/frontend/${CURRENT_DATE_FRONT}
+            sudo mkdir -p /opt/backup/frontend/${CURRENT_DATE_FRONT}
             echo "Pasta /opt/backup/frontend/${CURRENT_DATE_FRONT} criada com sucesso."
             echo "Realizando backup..."
             sudo cp -r /opt/apps/frontend/ /opt/backup/frontend/${CURRENT_DATE_FRONT}
