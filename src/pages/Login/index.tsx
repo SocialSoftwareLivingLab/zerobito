@@ -11,7 +11,7 @@ const LoginView: React.FC = () => {
       <div className='container-principal'>
         <LoginCard />
         <div className="text-login">
-          Caso não tenha um login, testando upload, <Link to="../cadastro">Clique Aqui</Link>
+          Caso não tenha um login, <Link to="../cadastro">clique aqui</Link>
         </div>
       </div>
     </div>
