@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../style.css';
+import { FaCheckCircle } from "react-icons/fa";
+import { LiaPaperPlane } from "react-icons/lia";
+import './style.css';
 
 const TabelaOcorrencia = ({ eventos }) => {
-  const itemsPerPage = 12; // Número máximo de itens por página
+  const itemsPerPage = 6; // Número máximo de itens por página
   const [currentPage, setCurrentPage] = useState(1);
 
   // Calcule o índice inicial e final dos itens a serem exibidos na página atual
@@ -30,7 +32,7 @@ const TabelaOcorrencia = ({ eventos }) => {
   return (
     <div className='table-container'>
       <h2>Comunicação de Evento <Link to="/ocorrencia"><button>Adicionar</button></Link></h2>
-      <table>
+      <table className='casos'>
         <thead>
           <tr>
             <th>Denúncia</th>
@@ -46,19 +48,21 @@ const TabelaOcorrencia = ({ eventos }) => {
             <tr key={evento.id}>
               <td>{evento.denuncia}</td>
               <td>{evento.data}</td>
-              <td>{evento.condicaoAcidentado}</td>
-              <td>{evento.gravidade}</td>
+              <td>{evento.condicao}</td>
+              <td>
+              <span className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>{evento.gravidade}</span>
+              </td>
               <td>{evento.status}</td>
               <td>
-                <button className='button-tabela-aceitar' onClick={() => {}}>Aceitar</button>
-                <button onClick={() => {}}>Não Incorporar</button>
+                <button className='button-tabela-aceitar' onClick={() => {}}> <FaCheckCircle /> Aceitar</button>
+                <button className='button-nao-incorporar' onClick={() => {}}><LiaPaperPlane /> Não Incorporar</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="pagination">
-        <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
+        <button onClick={prevPage} disabled={currentPage === 1}>Anterior </button>
         <button onClick={nextPage} disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>Próxima</button>
       </div>
     </div>

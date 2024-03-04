@@ -5,4 +5,9 @@ export interface OcorrenciaModel{
     condicao: string;
     gravidade: string;
     status: string;
+    andamentoCaso: string;
+    acao: string;
+    causa: string;
+    cidade: string;
+    regiao: string;
 }

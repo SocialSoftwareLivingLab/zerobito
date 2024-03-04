@@ -1,6 +1,7 @@
 import api from "../../api";
 
 export const createOcorrencia = async (
+    
     denuncia: String,
     data: Date,
     local: String,

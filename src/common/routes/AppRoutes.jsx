@@ -16,6 +16,7 @@ import Contato from "../../pages/Contato";
 import Login from "../../pages/Login";
 import Home from "../../pages/Home";
 import Perfil from "../../pages/Perfil";
+import ObservatorioZeroObito from "../../pages/ObservatorioZeroObito"
 
 
 const AppRoutes = () => {
@@ -33,6 +34,7 @@ const AppRoutes = () => {
                     <PrivateRoute path="/painel" component={PainelControle} />
                     <PrivateRoute path="/imprensa" component={Imprensa} />
                     <PrivateRoute path="/perfil" component={Perfil} />
+                    <PrivateRoute path="/observatorio" component={ObservatorioZeroObito} />
                     <Route exact path="/cadastro" component={Cadastro} />
                     <Route exact path="/sobre" component={SobreNos} />
                     <Route exact path="/contato" component={Contato} />

@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
-import { LuEye } from "react-icons/lu";
-import '../style.css';
+import { Link } from 'react-router-dom';
+import './style-lib.css';
 
-const TabelaAcompanhamento = ({ eventos }) => {
-  const itemsPerPage = 6;
+
+const TabelaBiblioteca = ({ eventos }) => {
+  const itemsPerPage = 8; // Número máximo de itens por página
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Calcule o índice inicial e final dos itens a serem exibidos na página atual
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  // Filtrar os eventos a serem exibidos na página atual
   const eventosPaginaAtual = eventos.slice(startIndex, endIndex);
 
+  // Função para avançar para a próxima página
   const nextPage = () => {
     if (currentPage < Math.ceil(eventos.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
 
+  // Função para voltar para a página anterior
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -25,37 +30,40 @@ const TabelaAcompanhamento = ({ eventos }) => {
 
   return (
     <div className='table-container'>
-      <h2>Casos</h2>
+      <div className='table-header'>
+        <h2>Todos os Casos</h2>
+      </div>
       <table>
-        <thead>
+      <thead>
           <tr>
-            <th>Denúncia</th>
+            <th><input type="checkbox"/></th>
             <th>Data</th>
-            <th>Condição do Acidentado</th>
+            <th>Denúncia</th>
+            <th>Causa</th>
             <th>Gravidade</th>
-            <th>Andamento de Caso</th>
-            <th>Ação</th>
+            <th>Status</th>
+            <th>Cidade</th>
+            <th>Região</th>
           </tr>
         </thead>
         <tbody>
           {eventosPaginaAtual.map((evento) => (
             <tr key={evento.id}>
-              <td>{evento.denuncia}</td>
+              <td><input type="checkbox"/></td>
               <td>{evento.data}</td>
-              <td>{evento.condicao}</td>
+              <td>{evento.denuncia}</td>
+              <td>{evento.causa}</td>
               <td>
               <span className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>{evento.gravidade}</span>
               </td>
-              <td>{evento.andamentoCaso}</td>
-              <td>
-                <button onClick={() => {}}><LuEye />Acompanhar</button>
-              </td>
+              <td>{evento.status}</td>
+              <td>{evento.cidade}</td>
+              <td>{evento.regiao}</td>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="pagination">
-        
         <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
         <button onClick={nextPage} disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>Próxima</button>
       </div>
@@ -63,4 +71,4 @@ const TabelaAcompanhamento = ({ eventos }) => {
   );
 }
 
-export default TabelaAcompanhamento;
+export default TabelaBiblioteca;

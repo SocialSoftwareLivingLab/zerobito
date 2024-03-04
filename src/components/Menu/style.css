@@ -2,32 +2,38 @@
 
 .menu{
     height: 4rem;
-    padding: 0 10rem;
+    padding: 0 10%;
     background-color: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) ;
     display: flex;
     justify-content: space-between; /* Change justify-content to space-between */
     align-items: center; /* Add this line */
-    font-family: Lato;
+    font-family: lato;
     top: 0;
     left: 0;
 }
 
 .menu ul{
-    margin-left: 10%;
+    margin-left: -15px;
     list-style: none;
     display: flex;
     align-items: center;
 }
 
 .menu ul li{
-    margin: 0 1rem;
+    margin: 0 1.5rem;
+    width: auto;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .menu ul li a{
     text-decoration: none;
-    color: black;
+    color: #134780;
     font-size: 1.2rem;
+    font-family: lato;
+    font-weight: 700;
 }
 
 .menu .button {
@@ -58,6 +64,7 @@
     font-family: 'Nunito', sans-serif;
     font-size: 2.25rem;
     color: rgba(2,39,79,1);
+    margin-right: 15rem;
 }
 
 .button-exit{
@@ -72,3 +79,21 @@
     align-items: center;
 }
 
+.icon{
+    color: #134780;
+    margin-right: 6px;
+}
+
+.icon-help{
+    color: #134780;
+    margin-right: 6px;
+    font-size: 22px;
+}
+
+.icon-button{
+    color: #9c9c9c;
+    margin-right: 6px;
+    font-size: 22px;
+    margin-top: 6px;
+    margin-right: 15px;
+}

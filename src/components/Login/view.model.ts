@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { login } from "../../common/models/user/auth";
+import { login, setMockAuth } from "../../common/models/user/auth";
 
 const useLoginViewModel = () => {
     const history = useHistory();
@@ -19,9 +19,12 @@ const useLoginViewModel = () => {
       e.preventDefault();
 
       try {
+
+        setMockAuth(false)
         const response = await login({ email: email, senha: senha });
         setToken(response.data.token);
         history.replace("/home");
+        setMockAuth(false)
       } catch (error) {
         setError("Erro ao tentar fazer login.");
       }

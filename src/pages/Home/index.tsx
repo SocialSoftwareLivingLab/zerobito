@@ -3,10 +3,11 @@ import Menu from '../../components/Menu';
 import useHomeViewModel from './view.model'
 import TabelaAcompanhamento from '../../components/Tabelas/TabelaAcompanhamento';
 import TabelaOcorencia from '../../components/Tabelas/TabelaOcorrencia';
+import { ocorrencias } from '../../common/models/ocorrencias/ocorrencias_testes.ts';
 import './style.css';
 
 const Home = () => {
-  const { ocorrencias } = useHomeViewModel();
+  
   return (
     <div>
       <Menu />
@@ -25,9 +26,9 @@ const Home = () => {
         <TabelaAcompanhamento eventos={ocorrencias} />
       </div>
       <div className='container-content-imprensa'>
-        <h2>Noticias da Imprensa | Alerta de Caso <button>Fazer Denuncia a partir de noticia</button></h2>
+        <h2>Noticias da Imprensa | Alerta de Caso <button className='button-denuncia'>Fazer Denuncia a partir de noticia</button></h2>
         <hr />
-        <h2>SINAN, RAAT, SIM <button>Fazer Denuncia a partir dos Serviços de Saude</button></h2>
+        <h2>SINAN, RAAT, SIM <button className='button-denuncia'>Fazer Denuncia a partir dos Serviços de Saude</button></h2>
         <hr />
       </div>
     </div>
