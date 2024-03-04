@@ -1,0 +1,59 @@
+name: Realizar build e deploy do webapp
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+      - 'feature/**'
+
+jobs:
+  backup-versao-atual:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Executar backup da última versão do front
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: ${{ secrets.VM_PORT }}
+          script: |
+            CURRENT_DATE_FRONT=$(date +"%Y%m%d%H%M%S")
+            sudo mkdir -p /opt/backup/frontend/${CURRENT_DATE_FRONT}
+            echo "Pasta /opt/backup/frontend/${CURRENT_DATE_FRONT} criada com sucesso."
+            echo "Realizando backup..."
+            sudo cp -r /opt/apps/frontend/ /opt/backup/frontend/${CURRENT_DATE_FRONT}
+            echo "Backup finalizado!"
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    needs: backup-versao-atual
+    steps:
+    - name: Baixar repositório na branch atual
+      uses: actions/checkout@v2
+
+    - name: Configurar NodeJS na versão 18
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
+    - name: Instalar Dependências
+      run: npm install
+
+    - name: Construir webapp React final
+      run: npm run build
+
+    - name: Verificar output do webapp
+      run: ls
+
+    - name: Enviar build final para a VM
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USERNAME }}
+        key: ${{ secrets.VM_SSH_KEY }}
+        port: ${{ secrets.VM_PORT }}
+        timeout: 240s
+        source: "build/*"
+        target: ${{ secrets.VM_OUTPUT_APP_FOLDER }}
