@@ -15,8 +15,9 @@ const useLoginViewModel = () => {
       }
     }, [history, token]);
   
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
+
       try {
 
         setMockAuth(true)
@@ -25,7 +26,7 @@ const useLoginViewModel = () => {
         history.replace("/home");
         setMockAuth(false)
       } catch (error) {
-        setError(String(error));
+        setError("Erro ao tentar fazer login.");
       }
     };
   

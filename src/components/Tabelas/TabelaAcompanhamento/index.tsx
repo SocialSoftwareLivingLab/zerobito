@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { LuEye } from "react-icons/lu";
 import '../style.css';
 
 const TabelaAcompanhamento = ({ eventos }) => {
-  const itemsPerPage = 12;
+  const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -41,11 +42,13 @@ const TabelaAcompanhamento = ({ eventos }) => {
             <tr key={evento.id}>
               <td>{evento.denuncia}</td>
               <td>{evento.data}</td>
-              <td>{evento.condicaoAcidentado}</td>
-              <td>{evento.gravidade}</td>
+              <td>{evento.condicao}</td>
+              <td>
+              <span className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>{evento.gravidade}</span>
+              </td>
               <td>{evento.andamentoCaso}</td>
               <td>
-                <button onClick={() => {}}>Acompanhar</button>
+                <button onClick={() => {}}><LuEye />Acompanhar</button>
               </td>
             </tr>
           ))}

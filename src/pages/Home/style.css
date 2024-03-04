@@ -40,22 +40,11 @@
     background-color:#F1F0F5;;
 }
 
-.container-content button{
-    border-radius: 0.3rem;
-    border: none;
-    width: 5rem;
-    height: 2rem;
-    background-color: #134780;
-    color: #fff;
-}
 
-.container-content button:hover{
+.button-denuncia:hover{
     background-color: #0D2C4C;
 }
 
-.container-content button:last-child{
-    width: 10rem;
-}
 
 .container-content-imprensa{
     flex-direction: column;
@@ -71,7 +60,7 @@
     margin-bottom: 1rem;
 }
 
-.container-content-imprensa button{
+.button-denuncia{
     font-size: 1rem;
     border-radius: 0.3rem;
     border: none;

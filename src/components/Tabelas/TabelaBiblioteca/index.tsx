@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './style.css';
+import './style-lib.css';
 
 
 const TabelaBiblioteca = ({ eventos }) => {

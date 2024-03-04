@@ -4,7 +4,7 @@ import { register } from "../../common/models/user/create.user";
 
 const useRegisterViewModel = () => {
     const history = useHistory();
-    const [error, setError] = useState<string>("");
+    const [error, setError] = useState<string>();
     const [nome, setNome] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [senha, setSenha] = useState<string>("");
@@ -62,6 +62,7 @@ const useRegisterViewModel = () => {
         email,
         senha,
         senhaValidation,
+        error,
         setNome,
         setEmail,
         setSenha,
