@@ -11,43 +11,18 @@
     font:bold;
     margin-bottom: 20px;
   }
-
-
-
-  .button-acompanhar{
-    background-color: rgb(241, 241, 241);
-    border: 1px solid rgb(153, 153, 153);
-    color: rgb(153, 153, 153);
-    font:bold;
-    width: 10rem;
-    margin-right: 6rem;
-    margin-left: -1rem;
-    font-size: 16px;
-  }
-
-  .button-acompanhar svg{
-    margin-right: 8px;
-  }
   
   .button-tabela-aceitar{
-    background-color: #03A803 ;
-    color: #FFFFFF;
-    margin-left: -1rem;
-    width: 8rem;
-    font-size: 16px;
-  }
-
-  .button-tabela-aceitar svg{
-    margin-right: 6px;
+    background-color: #03A803 !important;
+    color: #FFFFFF  !important;
   }
   
   .table-container{
     background-color: #FFFFFF;
     margin: 0 auto;
-    height: 30%;
+    height: 33rem;
     border-radius: .2em;
     width: 100%;
-    margin-bottom: 80px;
   }
   
   .table-header{
@@ -60,37 +35,24 @@
     padding-top: 20px;
   }
   
-  .table- h2{
+  .table-header h2{
     color: #134780;
     margin-left: 2rem;
   }
   
   .table-container table{
     width: 100%;
-  
   }
   
   .table-container table th{
     background-color: #FFFFFF;
     color: black;
     height: 3rem;
-    padding-left: 2rem;
   }
   
   .table-container table tr{
-    text-align: left;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    height: 3rem;
   }
-  .table-container table td:nth-child(4) {
-    padding-left: 0rem;
-    text-align: left;
-  }
-  
-  .table-container table th:nth-child(4) {
-    text-align: left;
-    padding-left: 2.2rem;
-  }
-  
   
   .table-container thead{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -102,8 +64,7 @@
   
   .table-container table td{
     padding: 5px;
-    text-align: left;
-    padding-left: 2rem;
+    text-align: center;
   }
   
   
@@ -116,16 +77,14 @@
   
   .quadrado {
     display: inline-block;
-    width: 150px; 
-    height: 20px; 
-    margin-right: 4px; 
+    width: 150px; /* Ajuste conforme necessário */
+    height: 20px; /* Ajuste conforme necessário */
+    margin-right: 4px; /* Espaço entre o quadrado e o texto */
     position: relative;
     border-radius: .2em;
     color: white;
-    text-align: center;
   }
-
-
+  
   .verde {
     background-color: green;
   }
