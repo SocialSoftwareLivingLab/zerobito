@@ -20,7 +20,7 @@ const useLoginViewModel = () => {
 
       try {
 
-        setMockAuth(true)
+        setMockAuth(false)
         const response = await login({ email: email, senha: senha });
         setToken(response.data.token);
         history.replace("/home");
