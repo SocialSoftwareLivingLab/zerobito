@@ -31,8 +31,10 @@ const TabelaOcorrencia = ({ eventos }) => {
 
   return (
     <div className='table-container'>
-      <h2>Comunicação de Evento <Link to="/ocorrencia"><button>Adicionar</button></Link></h2>
-      <table className='casos'>
+      <div className='table-header'>
+      <h2>Comunicação de Evento</h2>
+      </div>
+      <table>
         <thead>
           <tr>
             <th>Denúncia</th>
@@ -52,7 +54,7 @@ const TabelaOcorrencia = ({ eventos }) => {
               <td>
               <span className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>{evento.gravidade}</span>
               </td>
-              <td>{evento.status}</td>
+              <td>{evento.andamentoCaso}</td>
               <td>
                 <button className='button-tabela-aceitar' onClick={() => {}}> <FaCheckCircle /> Aceitar</button>
                 <button className='button-nao-incorporar' onClick={() => {}}><LiaPaperPlane /> Não Incorporar</button>

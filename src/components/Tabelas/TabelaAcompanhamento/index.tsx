@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LuEye } from "react-icons/lu";
-import '../style.css';
+import './style.css';
 
 const TabelaAcompanhamento = ({ eventos }) => {
   const itemsPerPage = 6;
@@ -25,7 +25,9 @@ const TabelaAcompanhamento = ({ eventos }) => {
 
   return (
     <div className='table-container'>
-      <h2>Casos</h2>
+      <div className='table-header'>
+        <h2>Casos</h2>
+      </div>
       <table>
         <thead>
           <tr>
@@ -48,7 +50,7 @@ const TabelaAcompanhamento = ({ eventos }) => {
               </td>
               <td>{evento.andamentoCaso}</td>
               <td>
-                <button onClick={() => {}}><LuEye />Acompanhar</button>
+                <button className='button-acompanhar' onClick={() => {}}><LuEye />Acompanhar</button>
               </td>
             </tr>
           ))}

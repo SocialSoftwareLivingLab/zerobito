@@ -1,0 +1,18 @@
+.button-acompanhar{
+  background-color: rgb(241, 241, 241);
+  border: 1px solid rgb(153, 153, 153);
+  color: rgb(153, 153, 153);
+  font:bold;
+  width: 10rem;
+  margin-right: 6rem;
+  margin-left: -1rem;
+  font-size: 16px;
+  vertical-align: middle;
+  margin-bottom: 10px;
+
+}
+
+.button-acompanhar svg{
+  margin-right: 8px;
+}
+
