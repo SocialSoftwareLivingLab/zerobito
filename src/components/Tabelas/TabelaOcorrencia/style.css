@@ -9,12 +9,16 @@
   margin-bottom: 10px;
 }
 
+.button-tabela-aceitar:hover{
+  background-color: #028102 ;
+}
+
 .button-tabela-aceitar svg{
   margin-right: 6px;
 }
 
 .button-nao-incorporar{
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(250, 249, 249);
   border: 1px solid rgb(153, 153, 153);
   color: rgb(153, 153, 153);
   font:bold;
@@ -22,6 +26,10 @@
   width: 10rem;
   margin-right: -4rem;
   font-size: 16px;
+}
+
+.button-nao-incorporar:hover{
+  background-color: rgb(243, 241, 241);
 }
 .button-nao-incorporar svg{
   margin-right: 6px;

@@ -12,6 +12,9 @@ button {
     margin-bottom: 20px;
   }
 
+button:hover{
+  background-color: #0D2C4C;
+}
 
 .table-header h2{
 color: #134780;
