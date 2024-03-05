@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LuEye } from "react-icons/lu";
-import '../style.css';
+import './style.css';
 
 const TabelaAcompanhamento = ({ eventos }) => {
   const itemsPerPage = 6;
