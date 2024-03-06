@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { carregarOcorrencias } from "../../common/models/ocorrencias/get.ocorrencia";
 
 const useHomeViewModel = () => {
-    const [ocorrencias, setOcorrencias] = useState<any[]>([]);
+    const [casos, setOcorrencias] = useState<any[]>([]);
 
     useEffect(() => {
         carregarOcorrencias().then((response) => {
@@ -11,7 +11,7 @@ const useHomeViewModel = () => {
     }, []);
 
     return {
-        ocorrencias
+        casos
     };
 };
 

@@ -31,12 +31,12 @@ const TabelaAcompanhamento = ({ eventos }) => {
       <table>
         <thead>
           <tr>
-            <th>Denúncia</th>
-            <th>Data</th>
-            <th>Condição do Acidentado</th>
-            <th>Gravidade</th>
-            <th>Andamento de Caso</th>
-            <th>Ação</th>
+            <th style={{width: '15%'}}>Denúncia</th>
+            <th style={{width: '10%'}}>Data</th>
+            <th style={{width: '20%'}}>Condição do Acidentado</th>
+            <th style={{width: '15%'}}>Gravidade</th>
+            <th style={{width: '15%'}}>Andamento de Caso</th>
+            <th style={{width: '35%'}}>Ação</th>
           </tr>
         </thead>
         <tbody>
