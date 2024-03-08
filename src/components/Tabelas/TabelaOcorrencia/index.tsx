@@ -5,6 +5,7 @@ import { LiaPaperPlane } from "react-icons/lia";
 import './style.css';
 import { GoInfo } from "react-icons/go";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { IoBagAdd } from "react-icons/io5";
 
 const TabelaOcorrencia = ({ eventos }) => {
   const itemsPerPage = 6; // Número máximo de itens por página
@@ -34,7 +35,7 @@ const TabelaOcorrencia = ({ eventos }) => {
   return (
     <div className='table-container'>
       <div className='table-header'>
-      <h2>Comunicação de Evento <Link to="/ocorrencia"><button className='button-novo-evento'> <IoMdAddCircleOutline />Adicionar novo evento</button></Link></h2>
+      <h2>Comunicação de Evento <Link to="/ocorrencia"><button className='button-novo-evento'> <IoBagAdd />Adicionar novo evento</button></Link></h2>
      
       </div>
       <table>
@@ -55,7 +56,7 @@ const TabelaOcorrencia = ({ eventos }) => {
               <td>{evento.data}</td>
               <td>{evento.condicaoAcidentado}</td>
               <td>
-              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgencia' ? 'amarelo-claro' : 'amarelo'}`}>{evento.gravidade}
+              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgencia' ? 'amarelo-claro' : evento.gravidade === 'Urgencia' ? 'amarelo' : 'vazio'}`}>{evento.gravidade}
               <GoInfo  title={`Explicação do evento: ${evento.gravidade}`} />
               </span>
               </td>

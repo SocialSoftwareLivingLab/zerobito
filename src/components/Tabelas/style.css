@@ -138,6 +138,11 @@ box-shadow: 2px 2px 4px rgba(90, 1, 1, 0.5);
   border: groove 2px rgba(165, 42, 42, 0.63);
 }
 
+.vazio{
+  background-color: #FFFFFF;
+  box-shadow: none;
+}
+
 .pagination{
   display: flex;
   justify-content: flex-start;
