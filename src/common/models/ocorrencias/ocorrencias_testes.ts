@@ -4,7 +4,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Investigado',
         status: 'Aguardando parecer',
         andamentoCaso: 'Andamento do Caso 1',
@@ -16,7 +16,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123ABC',
         data: '2022-02-20',
-        condicao: 'Condição 2',
+        condicaoAcidentado: 'Condição 2',
         gravidade: 'Em investigação',
         status: 'Aguardando Finalização',
         andamentoCaso: 'Andamento do Caso 2',
@@ -28,7 +28,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Em investigação',
         status: 'Status 1',
         andamentoCaso: 'Andamento do Caso 1',
@@ -40,7 +40,7 @@ export const ocorrencias: OcorrenciaModel[] = [
       {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Investigado',
         status: 'Aguardando parecer',
         andamentoCaso: 'Andamento do Caso 1',
@@ -52,7 +52,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123ABC',
         data: '2022-02-20',
-        condicao: 'Condição 2',
+        condicaoAcidentado: 'Condição 2',
         gravidade: 'Em investigação',
         status: 'Aguardando Finalização',
         andamentoCaso: 'Andamento do Caso 2',
@@ -64,7 +64,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Em investigação',
         status: 'Status 1',
         andamentoCaso: 'Andamento do Caso 1',
@@ -76,7 +76,7 @@ export const ocorrencias: OcorrenciaModel[] = [
       {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Investigado',
         status: 'Aguardando parecer',
         andamentoCaso: 'Andamento do Caso 1',
@@ -88,7 +88,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123ABC',
         data: '2022-02-20',
-        condicao: 'Condição 2',
+        condicaoAcidentado: 'Condição 2',
         gravidade: 'Em investigação',
         status: 'Aguardando Finalização',
         andamentoCaso: 'Andamento do Caso 2',
@@ -100,7 +100,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Em investigação',
         status: 'Status 1',
         andamentoCaso: 'Andamento do Caso 1',
@@ -112,7 +112,7 @@ export const ocorrencias: OcorrenciaModel[] = [
       {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Investigado',
         status: 'Aguardando parecer',
         andamentoCaso: 'Andamento do Caso 1',
@@ -124,7 +124,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123ABC',
         data: '2022-02-20',
-        condicao: 'Condição 2',
+        condicaoAcidentado: 'Condição 2',
         gravidade: 'Em investigação',
         status: 'Aguardando Finalização',
         andamentoCaso: 'Andamento do Caso 2',
@@ -136,7 +136,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Em investigação',
         status: 'Status 1',
         andamentoCaso: 'Andamento do Caso 1',
@@ -148,7 +148,7 @@ export const ocorrencias: OcorrenciaModel[] = [
       {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Investigado',
         status: 'Aguardando parecer',
         andamentoCaso: 'Andamento do Caso 1',
@@ -160,7 +160,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123ABC',
         data: '2022-02-20',
-        condicao: 'Condição 2',
+        condicaoAcidentado: 'Condição 2',
         gravidade: 'Em investigação',
         status: 'Aguardando Finalização',
         andamentoCaso: 'Andamento do Caso 2',
@@ -172,7 +172,7 @@ export const ocorrencias: OcorrenciaModel[] = [
     {
         denuncia: '123XYZ',
         data: '2022-02-19',
-        condicao: 'Condição 1',
+        condicaoAcidentado: 'Condição 1',
         gravidade: 'Em investigação',
         status: 'Status 1',
         andamentoCaso: 'Andamento do Caso 1',
@@ -184,7 +184,7 @@ export const ocorrencias: OcorrenciaModel[] = [
       {
         denuncia: '123ABC',
         data: '2022-02-20',
-        condicao: 'Condição 2',
+        condicaoAcidentado: 'Condição 2',
         gravidade: 'Investigado',
         status: 'Status 2',
         andamentoCaso: 'Andamento do Caso 2',

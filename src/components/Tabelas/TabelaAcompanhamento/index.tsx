@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LuEye } from "react-icons/lu";
 import './style.css';
+import { GoInfo } from "react-icons/go";
 
 const TabelaAcompanhamento = ({ eventos }) => {
   const itemsPerPage = 6;
@@ -44,9 +45,9 @@ const TabelaAcompanhamento = ({ eventos }) => {
             <tr key={evento.id}>
               <td>{evento.denuncia}</td>
               <td>{evento.data}</td>
-              <td>{evento.condicao}</td>
+              <td>{evento.condicaoAcidentado}</td>
               <td>
-              <span className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>{evento.gravidade}</span>
+              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgencia' ? 'amarelo-claro' : 'amarelo'}`}>{evento.gravidade}</span>
               </td>
               <td>{evento.andamentoCaso}</td>
               <td>
@@ -60,6 +61,7 @@ const TabelaAcompanhamento = ({ eventos }) => {
         
         <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
         <button onClick={nextPage} disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>Próxima</button>
+        <span className="page-info">{currentPage} / {Math.ceil(eventos.length / itemsPerPage)}</span> {/* erro quando são 0 casos */}
       </div>
     </div>
   );

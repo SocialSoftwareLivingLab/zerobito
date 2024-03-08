@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaCheckCircle } from "react-icons/fa";
 import { LiaPaperPlane } from "react-icons/lia";
 import './style.css';
+import { GoInfo } from "react-icons/go";
 
 const TabelaOcorrencia = ({ eventos }) => {
   const itemsPerPage = 6; // Número máximo de itens por página
@@ -50,11 +51,13 @@ const TabelaOcorrencia = ({ eventos }) => {
             <tr key={evento.id}>
               <td>{evento.denuncia}</td>
               <td>{evento.data}</td>
-              <td>{evento.condicao}</td>
+              <td>{evento.condicaoAcidentado}</td>
               <td>
-              <span className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>{evento.gravidade}</span>
+              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgencia' ? 'amarelo-claro' : 'amarelo'}`}>{evento.gravidade}
+              <GoInfo  title={`Explicação do evento: ${evento.gravidade}`} />
+              </span>
               </td>
-              <td>{evento.andamentoCaso}</td>
+              <td>{evento.status}</td>
               <td>
                 <button className='button-tabela-aceitar' onClick={() => {}}> <FaCheckCircle /> Aceitar</button>
                 <button className='button-nao-incorporar' onClick={() => {}}><LiaPaperPlane /> Não Incorporar</button>
@@ -66,6 +69,7 @@ const TabelaOcorrencia = ({ eventos }) => {
       <div className="pagination">
         <button onClick={prevPage} disabled={currentPage === 1}>Anterior </button>
         <button onClick={nextPage} disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>Próxima</button>
+        <span className="page-info">{currentPage} / {Math.ceil(eventos.length / itemsPerPage)}</span>
       </div>
     </div>
   );

@@ -60,12 +60,12 @@ height: 3rem
 }
 .table-container table td:nth-child(4) {
 padding-left: 0rem;
-text-align: left;
+text-align: center;
 }
 
 .table-container table th:nth-child(4) {
 text-align: left;
-padding-left: 2.2rem;
+padding-left: 2.2em;
 }
 
 
@@ -81,7 +81,6 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 padding: 5px;
 text-align: left;
 padding-left: 2rem;
-max-width: 20rem;
 }
 
 
@@ -89,22 +88,66 @@ max-width: 20rem;
 
 .quadrado {
 display: inline-block;
-width: 150px; 
+width: auto;
 height: 25px; 
-margin-right: 4px; 
+margin-right: 5.5rem; 
 position: relative;
-border-radius: .2em;
+border-radius: .6em;
 color: white;
 text-align: center;
 line-height: 25px;
 vertical-align: middle;
+padding: 0 8px;
+box-shadow: 2px 2px 4px rgba(90, 1, 1, 0.5);
+
 }
 
-
-.verde {
-background-color: green;
+.quadrado svg{
+  margin-left: 4px;
+  position: relative;
+  top: 2px;
+  stroke-width: 1;
+  cursor: pointer;
 }
+
+.amarelo {
+  background-color: rgb(255, 208, 0);
+  border: groove 2px rgba(255, 208, 0, 0.63);
+  }
 
 .laranja {
-background-color: orange;
+  background-color: orange;
+  border: groove 2px rgba(255, 166, 0, 0.63);
 }
+
+.amarelo-claro{
+  background-color: rgb(247, 222, 0);
+  border: groove 2px rgba(247, 222, 0, 0.63);
+}
+
+.vermelho{
+  background-color: red;
+  border: groove 2px rgba(255, 0, 0, 0.63);
+}
+
+.vinho{
+  background-color: brown;
+  border: groove 2px rgba(165, 42, 42, 0.63);
+}
+
+.pagination{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.pagination button{
+  margin-right: -5px;
+}
+
+.page-info{
+  text-align: right;
+  margin-left: auto;
+  margin-right: 15px;
+}
+
