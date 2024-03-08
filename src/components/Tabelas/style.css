@@ -10,6 +10,7 @@ button {
     color: aliceblue;
     font:bold;
     margin-bottom: 20px;
+    cursor: pointer;
   }
 
 button:hover{
@@ -20,6 +21,8 @@ button:hover{
 color: #134780;
 margin-left: 2rem;
 }
+
+
 
 .table-container{
 background-color: #FFFFFF;

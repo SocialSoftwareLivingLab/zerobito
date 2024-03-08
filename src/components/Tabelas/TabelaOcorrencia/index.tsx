@@ -4,6 +4,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { LiaPaperPlane } from "react-icons/lia";
 import './style.css';
 import { GoInfo } from "react-icons/go";
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 const TabelaOcorrencia = ({ eventos }) => {
   const itemsPerPage = 6; // Número máximo de itens por página
@@ -33,7 +34,8 @@ const TabelaOcorrencia = ({ eventos }) => {
   return (
     <div className='table-container'>
       <div className='table-header'>
-      <h2>Comunicação de Evento</h2>
+      <h2>Comunicação de Evento <Link to="/ocorrencia"><button className='button-novo-evento'> <IoMdAddCircleOutline />Adicionar novo evento</button></Link></h2>
+     
       </div>
       <table>
         <thead>
