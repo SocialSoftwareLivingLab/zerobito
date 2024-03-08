@@ -57,7 +57,11 @@ const TabelaOcorrencia = ({ eventos }) => {
               <td>{evento.condicaoAcidentado}</td>
               <td>
               <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgencia' ? 'amarelo-claro' : evento.gravidade === 'Urgencia' ? 'amarelo' : 'vazio'}`}>{evento.gravidade}
-              <GoInfo  title={`Explicação do evento: ${evento.gravidade}`} />
+                {evento.gravidade && (
+                  <>
+                    <GoInfo title={`Explicação do evento: ${evento.gravidade}`} />
+                  </>
+                )}
               </span>
               </td>
               <td>{evento.status}</td>
