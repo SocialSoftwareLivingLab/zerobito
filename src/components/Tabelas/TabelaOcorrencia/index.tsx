@@ -5,6 +5,7 @@ import { LiaPaperPlane } from "react-icons/lia";
 import './style.css';
 import { GoInfo } from "react-icons/go";
 import { IoBagAdd } from "react-icons/io5";
+import { IoMdCloseCircle } from "react-icons/io";
 
 const TabelaOcorrencia = ({ eventos }) => {
   const itemsPerPage = 6; // Número máximo de itens por página
@@ -91,7 +92,9 @@ const TabelaOcorrencia = ({ eventos }) => {
       {showCard && (
         <div className="card-overlay">
           <div className="card">
-            <button onClick={closeCard}>Fechar</button>
+            <button>Monitorar Denúncia</button>
+            <button>Encaminhar Denúncia</button>
+            <button className='close-button' onClick={closeCard}><IoMdCloseCircle /></button>
             {/* Conteúdo do card */}
           </div>
         </div>
