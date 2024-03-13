@@ -3,13 +3,12 @@ import Menu from '../../components/Menu';
 import useHomeViewModel from './view.model'
 import TabelaAcompanhamento from '../../components/Tabelas/TabelaAcompanhamento';
 import TabelaOcorencia from '../../components/Tabelas/TabelaOcorrencia';
-import { ocorrencias } from '../../common/models/ocorrencias/ocorrencias_testes.ts';
 import './style.css';
 import {Link} from "react-router-dom";
 import ComunicacaoEvento from '../Ocorrencia/index.tsx';
 
 const Home = () => {
-  const { casos } = useHomeViewModel();
+  const { eventos } = useHomeViewModel();
   
   return (
     <div>
@@ -25,8 +24,8 @@ const Home = () => {
 
       </div >
       <div className='container-content'>
-        <TabelaOcorencia eventos={casos} />
-        <TabelaAcompanhamento eventos={ocorrencias} />
+        <TabelaOcorencia eventos={eventos} />
+        <TabelaAcompanhamento eventos={eventos} />
       </div>
       <div className='container-content-imprensa'>
         <h2>Noticias da Imprensa | Alerta de Caso <Link to="/ocorrencia"><button className='button-denuncia'>Fazer Denuncia a partir de noticia</button></Link></h2>

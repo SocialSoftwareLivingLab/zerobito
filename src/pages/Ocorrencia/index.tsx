@@ -38,7 +38,7 @@ const ComunicacaoEvento = () => {
         passo4: {
             condicaoAcidentado: '',
             gravidade: '',
-            statusEvento: 'Aguardando análisie'
+            statusEvento: ''
         }
     });
 
@@ -123,9 +123,10 @@ const ComunicacaoEvento = () => {
     const handleContinuarClick = (e) => {
         e.preventDefault();
         // Check if the current step is 4 and if the condition of the accident is 'óbito'.
-        if (step === 4 && formData.passo4.condicaoAcidentado === 'Sem Obito') {
+        if (step === 4 && formData.passo4.condicaoAcidentado === 'Sem Óbito') {
             handleSubmit(formData);
-        } else if (step < 4) {
+        } 
+        else if (step < 4) {
             setStep(step + 1);
         } else {
             handleSubmit(formData);

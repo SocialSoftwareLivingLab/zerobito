@@ -11,7 +11,7 @@ const PassoTres = ({
     telefoneContato,
 }) => {
 
-    const isDisabled = tipoOcorrencia === 'Anonimo';
+    const isDisabled = tipoOcorrencia === 'Anônimo';
 
     return (
         <div>
@@ -22,8 +22,8 @@ const PassoTres = ({
                 name='tipoOcorrencia'
                 onChange={(e) => handleChangeTipoOcorrencia(e.target.value)}
             >
-                <option value="Anonimo">Anonimo</option>
-                <option value="Vitima">Vitima</option>
+                <option value="Anônimo">Anônimo</option>
+                <option value="Vítima">Vítima</option>
                 <option value="Familiar">Familiar</option>
                 <option value="Colega de Trabalho">Colega de Trabalho</option>
                 <option value="Testemunha">Testemunha</option>

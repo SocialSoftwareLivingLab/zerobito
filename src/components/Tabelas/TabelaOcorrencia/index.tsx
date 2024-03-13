@@ -4,12 +4,12 @@ import { FaCheckCircle } from "react-icons/fa";
 import { LiaPaperPlane } from "react-icons/lia";
 import './style.css';
 import { GoInfo } from "react-icons/go";
-import { IoMdAddCircleOutline } from "react-icons/io";
 import { IoBagAdd } from "react-icons/io5";
 
 const TabelaOcorrencia = ({ eventos }) => {
   const itemsPerPage = 6; // Número máximo de itens por página
   const [currentPage, setCurrentPage] = useState(1);
+  const [showCard, setShowCard] = useState(false);
 
   // Calcule o índice inicial e final dos itens a serem exibidos na página atual
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -30,6 +30,16 @@ const TabelaOcorrencia = ({ eventos }) => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
+  };
+
+  // Função para abrir o card
+  const openCard = () => {
+    setShowCard(true);
+  };
+
+  // Função para fechar o card
+  const closeCard = () => {
+    setShowCard(false);
   };
 
   return (
@@ -56,7 +66,7 @@ const TabelaOcorrencia = ({ eventos }) => {
               <td>{evento.data}</td>
               <td>{evento.condicaoAcidentado}</td>
               <td>
-              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgencia' ? 'amarelo-claro' : evento.gravidade === 'Urgencia' ? 'amarelo' : 'vazio'}`}>{evento.gravidade}
+              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgência' ? 'amarelo-claro' : evento.gravidade === 'Urgência' ? 'amarelo' : 'vazio'}`}>{evento.gravidade}
                 {evento.gravidade && (
                   <>
                     <GoInfo title={`Explicação do evento: ${evento.gravidade}`} />
@@ -67,7 +77,7 @@ const TabelaOcorrencia = ({ eventos }) => {
               <td>{evento.status}</td>
               <td>
                 <button className='button-tabela-aceitar' onClick={() => {}}> <FaCheckCircle /> Aceitar</button>
-                <button className='button-nao-incorporar' onClick={() => {}}><LiaPaperPlane /> Não Incorporar</button>
+                <button className='button-nao-incorporar' onClick={() => {openCard()}}><LiaPaperPlane /> Não Incorporar</button>
               </td>
             </tr>
           ))}
@@ -78,7 +88,16 @@ const TabelaOcorrencia = ({ eventos }) => {
         <button onClick={nextPage} disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>Próxima</button>
         <span className="page-info">{currentPage} / {Math.ceil(eventos.length / itemsPerPage)}</span>
       </div>
+      {showCard && (
+        <div className="card-overlay">
+          <div className="card">
+            <button onClick={closeCard}>Fechar</button>
+            {/* Conteúdo do card */}
+          </div>
+        </div>
+      )}
     </div>
+    
   );
 }
 

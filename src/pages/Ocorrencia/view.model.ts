@@ -110,7 +110,7 @@ const useOcorrenciaViewModel = () => {
         setCondicaoAcidentado(value);
       
         // Se a condição do acidentado é "Com Óbito", define a gravidade para "Óbito"
-        if (value === "Obito") {
+        if (value === "Óbito") {
           setGravidade("Óbito");
         }
       };
@@ -119,6 +119,7 @@ const useOcorrenciaViewModel = () => {
         const value = event.target.value;
 
         setGravidade(value);
+        
     };
 
     const handleChangeStatus = (event: React.ChangeEvent<HTMLInputElement>) => {

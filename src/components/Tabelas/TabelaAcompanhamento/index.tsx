@@ -47,7 +47,13 @@ const TabelaAcompanhamento = ({ eventos }) => {
               <td>{evento.data}</td>
               <td>{evento.condicaoAcidentado}</td>
               <td>
-              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgencia' ? 'amarelo-claro' : 'amarelo'}`}>{evento.gravidade}</span>
+              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgência' ? 'amarelo-claro' : evento.gravidade === 'Urgência' ? 'amarelo' : 'vazio'}`}>{evento.gravidade}
+                {evento.gravidade && (
+                  <>
+                    <GoInfo title={`Explicação do evento: ${evento.gravidade}`} />
+                  </>
+                )}
+              </span>
               </td>
               <td>{evento.andamentoCaso}</td>
               <td>
