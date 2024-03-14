@@ -11,6 +11,11 @@ const TabelaOcorrencia = ({ eventos }) => {
   const itemsPerPage = 6; // Número máximo de itens por página
   const [currentPage, setCurrentPage] = useState(1);
   const [showCard, setShowCard] = useState(false);
+  const [showMonitorCard, setMonitorCard] = useState(false);
+  const [showEncaminharCard, setEncaminharCard] = useState(false);
+  const [email, setEmail] = useState('');
+  const [instituicao, setInstituicao] = useState('');
+  const [descricao, setDescricao] = useState('');
 
   // Calcule o índice inicial e final dos itens a serem exibidos na página atual
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -33,6 +38,23 @@ const TabelaOcorrencia = ({ eventos }) => {
     }
   };
 
+  const openMonitorCard = () => {
+    setMonitorCard(true);
+  }
+
+  const closeMonitorCard = () => {
+    setMonitorCard(false);
+  }
+
+  const openEncaminharCard = () => {
+    setEncaminharCard(true);
+  }
+
+  const closeEncaminharCard = () => {
+    setEncaminharCard(false);
+  }
+
+
   // Função para abrir o card
   const openCard = () => {
     setShowCard(true);
@@ -41,6 +63,19 @@ const TabelaOcorrencia = ({ eventos }) => {
   // Função para fechar o card
   const closeCard = () => {
     setShowCard(false);
+  };
+
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleInstituicaoChange = (event) => {
+    setInstituicao(event.target.value);
+  };
+
+  const handleDescricaoChange = (event) => {
+    setDescricao(event.target.value);
   };
 
   return (
@@ -92,13 +127,47 @@ const TabelaOcorrencia = ({ eventos }) => {
       {showCard && (
         <div className="card-overlay">
           <div className="card">
-            <button>Monitorar Denúncia</button>
-            <button>Encaminhar Denúncia</button>
+            <button onClick={() => { closeCard(); openMonitorCard(); }}>Monitorar Denúncia</button>
+            <button onClick={() => {closeCard(); openEncaminharCard();}}>Encaminhar Denúncia</button>
             <button className='close-button' onClick={closeCard}><IoMdCloseCircle /></button>
-            {/* Conteúdo do card */}
           </div>
         </div>
       )}
+      {showMonitorCard && (
+        <div className='card-overlay'>
+            <div className='card'>
+              <h2>Monitorar denúncia por</h2>
+              <button className='dias-monitoramento' onClick={closeMonitorCard}>7 dias</button>
+              <button className='dias-monitoramento' onClick={closeMonitorCard}>30 dias</button>
+              <button className='dias-monitoramento' onClick={closeMonitorCard}>60 dias</button>
+              <button className='dias-monitoramento' onClick={closeMonitorCard}>90 dias</button>
+              <button className='close-button' onClick={closeMonitorCard}><IoMdCloseCircle /></button>
+
+            </div>
+        </div>
+      )}
+      {showEncaminharCard && (
+
+        <div className='card-overlay'>
+          <div className='card'>
+            <h2>Encaminhar denúnica</h2>
+            <div className="input-wrapper">
+              <input placeholder= "E-mail" type="email" id="email" value={email} onChange={handleEmailChange} />
+            </div>
+            <div className="input-wrapper">
+              <input placeholder="Instituição" type="text" id="instituicao" value={instituicao} onChange={handleInstituicaoChange} />
+            </div>
+            <div className="input-wrapper">
+              <textarea className='convite' placeholder= "Descreva o motivo do convite" id="descricao" value={descricao} onChange={handleDescricaoChange}></textarea>
+            </div>
+            <button className='close-button' onClick={closeEncaminharCard}><IoMdCloseCircle /></button>
+
+            <button className='botoes-guia' onClick={closeEncaminharCard}>Cancelar</button>
+            <button className='botoes-guia' onClick={closeEncaminharCard}><LiaPaperPlane /> Enviar</button>
+          </div>
+        </div>
+      )
+      }
     </div>
     
   );
