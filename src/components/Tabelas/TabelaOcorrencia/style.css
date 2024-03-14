@@ -168,4 +168,11 @@
   width: 7rem;
   height: 2.8rem;
   display: inline-block;
+  margin-left: 4;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.card .guias{
+  text-align: center;
+  
 }

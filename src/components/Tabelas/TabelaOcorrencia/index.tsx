@@ -162,8 +162,10 @@ const TabelaOcorrencia = ({ eventos }) => {
             </div>
             <button className='close-button' onClick={closeEncaminharCard}><IoMdCloseCircle /></button>
 
+            <div className='guias'>
             <button className='botoes-guia' onClick={closeEncaminharCard}>Cancelar</button>
             <button className='botoes-guia' onClick={closeEncaminharCard}><LiaPaperPlane /> Enviar</button>
+            </div>
           </div>
         </div>
       )
