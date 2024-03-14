@@ -38,7 +38,7 @@ const ComunicacaoEvento = () => {
         passo4: {
             condicaoAcidentado: '',
             gravidade: '',
-            statusEvento: ''
+            statusEvento: 'Aguardando Análise'
         }
     });
 

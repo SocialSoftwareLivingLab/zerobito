@@ -99,3 +99,10 @@
     margin-top: 6px;
     margin-right: 15px;
 }
+
+.sair{
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    margin-top: 1.5rem;
+}
