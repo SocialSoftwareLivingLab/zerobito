@@ -13,7 +13,7 @@ const PassoDois = ({
 
     return (
         <div>
-            <h1>Informaçõe sobre vitimas:</h1>
+            <h1>Informações sobre a vítima:</h1>
             <input
                 className='form-container-input'
                 type="text"
