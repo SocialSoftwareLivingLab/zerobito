@@ -3,7 +3,8 @@ import Menu from "../../components/Menu/index.tsx";
 import "./style.css";
 import {useHistory} from 'react-router-dom';
 import TabelaBiblioteca from '../../components/Tabelas/TabelaBiblioteca/index.tsx';
-import { ocorrencias } from '../../common/models/ocorrencias/ocorrencias_testes.ts';
+import useHomeViewModel from '../Home/view.model.ts';
+
 
 function BibliotecaCasos(){
 
@@ -13,6 +14,7 @@ function BibliotecaCasos(){
         history.push('/observatorio')
     }
 
+    const { eventos } = useHomeViewModel();
 
     return(
         <div className="Contato">
@@ -50,7 +52,7 @@ function BibliotecaCasos(){
                 </div>
             </div>
             <div className='tabela_biblioteca'>
-                <TabelaBiblioteca eventos={ocorrencias} />
+                <TabelaBiblioteca eventos={eventos} />
             </div>
         </div>
     );

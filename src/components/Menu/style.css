@@ -85,6 +85,8 @@
 }
 
 .icon-help{
+    position: relative;
+    top:3px;
     color: #134780;
     margin-right: 6px;
     font-size: 22px;
@@ -96,4 +98,11 @@
     font-size: 22px;
     margin-top: 6px;
     margin-right: 15px;
+}
+
+.sair{
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    margin-top: 1.5rem;
 }

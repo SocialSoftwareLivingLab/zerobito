@@ -1,5 +1,5 @@
 .button-acompanhar{
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(250, 249, 249);
   border: 1px solid rgb(153, 153, 153);
   color: rgb(153, 153, 153);
   font:bold;
@@ -10,6 +10,10 @@
   vertical-align: middle;
   margin-bottom: 10px;
 
+}
+
+.button-acompanhar:hover{
+  background-color: rgb(243, 241, 241);
 }
 
 .button-acompanhar svg{

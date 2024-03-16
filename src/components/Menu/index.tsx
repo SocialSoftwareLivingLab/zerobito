@@ -62,7 +62,7 @@ function Menu(): React.JSX.Element {
                                     <span>Função</span>
                                 </li>
                                 <li>
-                                    <span className='icon-button'> <MdNotifications /> </span>
+                                    <button className='sair' onClick={removeData}><span className='icon-button'> <MdNotifications /> </span></button>
                                     <span className='icon-button'> <FaListUl /> </span>
                                 </li>
                             </ul>

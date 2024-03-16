@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LuEye } from "react-icons/lu";
 import './style.css';
+import { GoInfo } from "react-icons/go";
 
 const TabelaAcompanhamento = ({ eventos }) => {
   const itemsPerPage = 6;
@@ -31,12 +32,12 @@ const TabelaAcompanhamento = ({ eventos }) => {
       <table>
         <thead>
           <tr>
-            <th>Denúncia</th>
-            <th>Data</th>
-            <th>Condição do Acidentado</th>
-            <th>Gravidade</th>
-            <th>Andamento de Caso</th>
-            <th>Ação</th>
+            <th style={{width: '15%'}}>Denúncia</th>
+            <th style={{width: '10%'}}>Data</th>
+            <th style={{width: '20%'}}>Condição do Acidentado</th>
+            <th style={{width: '15%'}}>Gravidade</th>
+            <th style={{width: '15%'}}>Andamento de Caso</th>
+            <th style={{width: '35%'}}>Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -44,9 +45,15 @@ const TabelaAcompanhamento = ({ eventos }) => {
             <tr key={evento.id}>
               <td>{evento.denuncia}</td>
               <td>{evento.data}</td>
-              <td>{evento.condicao}</td>
+              <td>{evento.condicaoAcidentado}</td>
               <td>
-              <span className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>{evento.gravidade}</span>
+              <span className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgência' ? 'amarelo-claro' : evento.gravidade === 'Urgência' ? 'amarelo' : 'vazio'}`}>{evento.gravidade}
+                {evento.gravidade && (
+                  <>
+                    <GoInfo title={`Explicação do evento: ${evento.gravidade}`} />
+                  </>
+                )}
+              </span>
               </td>
               <td>{evento.andamentoCaso}</td>
               <td>
@@ -60,6 +67,7 @@ const TabelaAcompanhamento = ({ eventos }) => {
         
         <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
         <button onClick={nextPage} disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>Próxima</button>
+        <span className="page-info">{currentPage} / {Math.ceil(eventos.length / itemsPerPage)}</span> {/* erro quando são 0 casos */}
       </div>
     </div>
   );
