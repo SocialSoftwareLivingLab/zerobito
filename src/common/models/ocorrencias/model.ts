@@ -1,5 +1,5 @@
 
-export interface OcorrenciaModel{
+export interface OcorrenciaModel {
     denuncia: string;
     data: string;
     condicaoAcidentado: string;

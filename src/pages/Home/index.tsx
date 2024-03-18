@@ -6,6 +6,7 @@ import TabelaOcorencia from '../../components/Tabelas/TabelaOcorrencia';
 import './style.css';
 import {Link} from "react-router-dom";
 import ComunicacaoEvento from '../Ocorrencia/index.tsx';
+import { TabelaOcorrenciaNovo } from '../../components/Tabelas/TabelaOcorrenciaNovo/index.tsx';
 
 const Home = () => {
   const { eventos } = useHomeViewModel();
@@ -15,17 +16,19 @@ const Home = () => {
       <Menu />
       <div className='container-header'>
         <h1>Painel de Controle</h1>
-        <div className="text">
-          Aqui o cordenador local consegue vizualizar  e gerenciar novos casos/denuncias adicionadas
+        <p className="text">
+          Aqui o cordenador local consegue visualizar  e gerenciar novos casos/denuncias adicionadas
           ao sistema e tambem os casos que ele já aceitou acompanhar
-        </div>
+        </p>
       </div>
       <div className='busca'>
 
       </div >
       <div className='container-content'>
+        {/* <TabelaOcorrencias titulo="Comunicacao de'/> */}
+        <TabelaOcorrenciaNovo ocorrencias={eventos}/>
         <TabelaOcorencia eventos={eventos} />
-        <TabelaAcompanhamento eventos={eventos} />
+        {/* <TabelaAcompanhamento eventos={eventos} /> */}
       </div>
       <div className='container-content-imprensa'>
         <h2>Noticias da Imprensa | Alerta de Caso <Link to="/ocorrencia"><button className='button-denuncia'>Fazer Denuncia a partir de noticia</button></Link></h2>
