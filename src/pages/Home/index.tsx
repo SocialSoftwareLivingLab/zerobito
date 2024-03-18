@@ -1,5 +1,6 @@
 import React from 'react';
 import Menu from '../../components/Menu';
+import Header from '../../components/Page-Header';
 import useHomeViewModel from './view.model'
 import TabelaAcompanhamento from '../../components/Tabelas/TabelaAcompanhamento';
 import TabelaOcorencia from '../../components/Tabelas/TabelaOcorrencia';
@@ -13,16 +14,9 @@ const Home = () => {
   
   return (
     <div>
-      <Menu />
-      <div className='container-header'>
-        <h1>Painel de Controle</h1>
-        <p className="text">
-          Aqui o cordenador local consegue visualizar  e gerenciar novos casos/denuncias adicionadas
-          ao sistema e tambem os casos que ele já aceitou acompanhar
-        </p>
-      </div>
+      <Header title='Painel de Controle' explicacao='Aqui o cordenador local consegue visualizar  e gerenciar novos casos/denuncias adicionadas
+          ao sistema e tambem os casos que ele já aceitou acompanhar'/>
       <div className='busca'>
-
       </div >
       <div className='container-content'>
         {/* <TabelaOcorrencias titulo="Comunicacao de'/> */}
