@@ -3,7 +3,7 @@ import { ButtonStyle } from "./styles";
 
 export interface ButtonProps {
     size?: 'small' | 'medium' | 'large',
-    type?: 'button' | 'submit' | 'cancel',
+    type?: 'button' | 'submit' | 'cancel' | 'default',
     action?: () => void,
     disabled?: boolean,
     children: React.ReactNode | React.ReactNode[]

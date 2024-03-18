@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ButtonProps } from ".";
 
 interface ButtonColorTypes {
     [key: string]: {
@@ -18,8 +17,8 @@ const buttonSizes: {[key: string]: string} = {
 const buttonColors: ButtonColorTypes = {
     'button': {
         color: '#134780',
-        hover: '#0D2C4C',
-        disabled: '#D3D3D3'
+        hover: '#0c2b4d',
+        disabled: '#90bdef'
     },
     'submit': {
         color: '#00AA00',
@@ -30,12 +29,17 @@ const buttonColors: ButtonColorTypes = {
         color: '#CC0000',
         hover: '#FF0000',
         disabled: '#D3D3D3'
+    },
+    'default': {
+        color: '#999',
+        hover: '#f3f1f1',
+        disabled: '#ddd'
     }
 }
 
 export interface ButtonStyleProps {
     size: 'small' | 'medium' | 'large',
-    type: 'button' | 'submit' | 'cancel'
+    type: 'button' | 'submit' | 'cancel' | 'default'
 }
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`

@@ -19,7 +19,8 @@ export const dataTableStyle: TableStyles = {
         style: {
             fontWeight: 'bold',
             fontSize: '16px',
-            color: '#141414'
+            color: '#141414',
+            textWrap: 'wrap'
         },
     },
     rows: {
@@ -48,13 +49,9 @@ export const PaginacaoTabela = styled.div`
     background: #fff;
     margin-top: 16px;
 
-    button {
-        margin: 0;
-        margin-right: 10px
-    }
-
-    button:disabled {
-        background: #90bdef;
+    div.botoes {
+        display: flex;
+        gap: 8px;
     }
 `;
 

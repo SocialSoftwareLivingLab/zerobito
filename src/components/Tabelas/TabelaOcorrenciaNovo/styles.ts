@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
-export const ButtonAdicionarNovoEvento = styled.button`
-    width: 200px;
-`
+export const ColunaAcao = styled.div`
+    display: flex;
+    flex: row;
+    gap: 8px;
+    padding: 8px;
+`;
