@@ -6,7 +6,7 @@ import TabelaAcompanhamento from '../../components/Tabelas/TabelaAcompanhamento'
 import TabelaOcorencia from '../../components/Tabelas/TabelaOcorrencia';
 import './style.css';
 import {Link} from "react-router-dom";
-import ComunicacaoEvento from '../Ocorrencia/index.tsx';
+import ComunicacaoEvento from '../NovaOcorrencia/index.tsx';
 import { TabelaOcorrenciaNovo } from '../../components/Tabelas/TabelaOcorrenciaNovo/index.tsx';
 
 const Home = () => {
