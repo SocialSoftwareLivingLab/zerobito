@@ -7,7 +7,7 @@ interface HeaderProps {
     explicacao: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, explicacao }) => {
+function Header({ title, explicacao }: HeaderProps): JSX.Element {
     return (
         <div>
             <Menu />
@@ -20,5 +20,6 @@ const Header: React.FC<HeaderProps> = ({ title, explicacao }) => {
         </div>
     );
 }
+
 
 export default Header;
