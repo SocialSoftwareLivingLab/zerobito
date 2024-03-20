@@ -3,6 +3,7 @@ import Header from "../../components/Page-Header";
 import FormWizard from "react-form-wizard-component";
 import 'react-form-wizard-component/dist/style.css';
 import Localidade from "../../components/Forms/Events-forms/Localidade/Index";
+import Vitima from "../../components/Forms/Events-forms/Vitima";
 
 function ComunicacaoEvento(){
     const handleComplete = () => {
@@ -16,6 +17,14 @@ function ComunicacaoEvento(){
             cidade: '',
             logradouro: '',
         },
+        Vitima: {
+            nome: '',
+            nomeEmpresa: '',
+            cnpjEmpresa: '',
+            tomadoraDeServicoCNPJ: '',
+            tomadoraDeServicoNome: '',
+            vinculoEmpresa: '',
+            },
     });
 
     const handleChange = (stepKey, field, value) => {
@@ -33,6 +42,12 @@ function ComunicacaoEvento(){
         handleChangeCidade: (value) => handleChange('Localidade', 'cidade', value),
         handleChangeEstado: (value) => handleChange('Localidade', 'estado', value),
         handleChangeLogradouro: (value) => handleChange('Localidade', 'logradouro', value),
+        handleChangeNome: (value) => handleChange('Vitima', 'nome', value),
+        handleChangeNomeEmpresa: (value) => handleChange('Vitima', 'nomeEmpresa', value),
+        handleChangCNPJEmpresa: (value) => handleChange('Vitima', 'cnpjEmpresa', value),
+        handleChangeTomadoraDeServicoNome: (value) => handleChange('Vitima', 'tomadoraDeServicoNome', value),
+        handleChangeTomadoraDeServicoCNPJ: (value) => handleChange('Vitima', 'tomadoraDeServicoCNPJ', value),
+        handleChangeVinculoEmpresa: (value) => handleChange('Vitima', 'vinculoEmpresa', value),
     };
 
 
@@ -55,8 +70,13 @@ function ComunicacaoEvento(){
                      logradouro={formData.Localidade.logradouro}/>
                 </FormWizard.TabContent>
                 <FormWizard.TabContent title="Additional Info" icon="ti-settings">
-                    <h3>Second Tab</h3>
-                    <p>Some content for the second tab</p>
+                    <h3>Preencha os dados da Vítima do acidente.</h3>
+                    <Vitima handleChangeNome={passoHandlers.handleChangeNome} handleChangeNomeEmpresa={passoHandlers.handleChangeNomeEmpresa}
+                    handleChangeCNPJEmpresa={passoHandlers.handleChangCNPJEmpresa} handleChangeTomadoraDeServicoCNPJ={passoHandlers.handleChangeTomadoraDeServicoCNPJ}
+                    handleChangeTomadoraDeServicoNome={passoHandlers.handleChangeTomadoraDeServicoNome} handleChangeVinculoEmpresa={passoHandlers.handleChangeVinculoEmpresa}
+                    nome={formData.Vitima.nome} nomeEmpresa={formData.Vitima.nomeEmpresa} cnpjEmpresa={formData.Vitima.cnpjEmpresa}
+                    tomadoraDeServicoCNPJ={formData.Vitima.tomadoraDeServicoCNPJ} tomadoraDeServicoNome={formData.Vitima.tomadoraDeServicoNome}
+                    vinculoEmpresa={formData.Vitima.vinculoEmpresa} />
                 </FormWizard.TabContent>
                 <FormWizard.TabContent title="Last step" icon="ti-check">
                     <h3>Last Tab</h3>
