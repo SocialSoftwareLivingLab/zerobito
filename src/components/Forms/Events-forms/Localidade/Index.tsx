@@ -3,16 +3,14 @@ import "./style.css";
 
 function Localidade({handleChangeEstado,
     handleChangeCidade,
-    handleChangeLocal,
-    handleChangeReferenciaLocalidade,
+    handleChangeLogradouro,
     estado,
     cidade,
-    local,
-    referenciaLocalidade,
+    logradouro,
     }){
 
     const todosCamposPreenchidos = () => {
-        return estado && cidade && local;
+        return estado && cidade && logradouro;
     };
 
     return (
@@ -37,17 +35,10 @@ function Localidade({handleChangeEstado,
             <input
                 type="text"
                 name="local"
-                value={local}
-                onChange={(e) => handleChangeLocal(e.target.value)}
-                placeholder="Onde foi o acidente?"
+                value={logradouro}
+                onChange={(e) => handleChangeLogradouro(e.target.value)}
+                placeholder="Logradouro"
                 required
-            />
-            <input
-                type="text"
-                name="referenciaLocalidade"
-                value={referenciaLocalidade}
-                onChange={(e) => handleChangeReferenciaLocalidade(e.target.value)}
-                placeholder="Referência do local"
             />
         </div>
     );

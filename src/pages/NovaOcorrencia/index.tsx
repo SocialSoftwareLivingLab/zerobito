@@ -14,8 +14,7 @@ function ComunicacaoEvento(){
         Localidade: {
             estado: '',
             cidade: '',
-            local: '',
-            referenciaLocalidade: '',
+            logradouro: '',
         },
     });
 
@@ -33,8 +32,7 @@ function ComunicacaoEvento(){
     const passoHandlers = {
         handleChangeCidade: (value) => handleChange('Localidade', 'cidade', value),
         handleChangeEstado: (value) => handleChange('Localidade', 'estado', value),
-        handleChangeLocal: (value) => handleChange('Localidade', 'local', value),
-        handleChangeReferenciaLocalidade: (value) => handleChange('Localidade', 'referenciaLocalidade', value),
+        handleChangeLogradouro: (value) => handleChange('Localidade', 'logradouro', value),
     };
 
 
@@ -51,12 +49,10 @@ function ComunicacaoEvento(){
                     <h3>Preencha os dados do local do acidente.</h3>
                     <Localidade handleChangeEstado={passoHandlers.handleChangeEstado}
                      handleChangeCidade={passoHandlers.handleChangeCidade} 
-                     handleChangeLocal={passoHandlers.handleChangeLocal} 
-                     handleChangeReferenciaLocalidade={passoHandlers.handleChangeReferenciaLocalidade} 
+                     handleChangeLogradouro={passoHandlers.handleChangeLogradouro} 
                      estado={formData.Localidade.estado} 
                      cidade={formData.Localidade.cidade} 
-                     local={formData.Localidade.local} 
-                     referenciaLocalidade={formData.Localidade.referenciaLocalidade}/>
+                     logradouro={formData.Localidade.logradouro}/>
                 </FormWizard.TabContent>
                 <FormWizard.TabContent title="Additional Info" icon="ti-settings">
                     <h3>Second Tab</h3>
