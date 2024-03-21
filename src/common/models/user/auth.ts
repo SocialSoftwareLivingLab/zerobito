@@ -37,19 +37,19 @@ export const setMockAuth = (value: boolean) => {
 };
 
 export const login = async ({ email, senha }: any) => {
-  if (true) {
-    try {
-      const mockToken = "your_mock_token_here";
-      storeData(mockToken);
-      storeName("Mock User");
-      storeEmail("mock@example.com");
-      storeRole(UserRole.USER);
-      return Promise.resolve({ data: { token: mockToken } });
-    } catch (error) {
-      // Trate qualquer erro relacionado ao mock aqui (se necessário)
-      return Promise.reject("Erro no mock de autenticação.");
-    }
-  }
+  // if (true) {
+  //   try {
+  //     const mockToken = "your_mock_token_here";
+  //     storeData(mockToken);
+  //     storeName("Mock User");
+  //     storeEmail("mock@example.com");
+  //     storeRole(UserRole.USER);
+  //     return Promise.resolve({ data: { token: mockToken } });
+  //   } catch (error) {
+  //     // Trate qualquer erro relacionado ao mock aqui (se necessário)
+  //     return Promise.reject("Erro no mock de autenticação.");
+  //   }
+  // }
   try {
     const response = await api.post(`/api/v1/auth/login`, {
       email,
