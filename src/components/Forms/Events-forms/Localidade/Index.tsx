@@ -1,5 +1,5 @@
 import React from 'react';
-import "./style.css";
+import "../style.css";
 
 function Localidade({handleChangeEstado,
     handleChangeCidade,
@@ -15,7 +15,7 @@ function Localidade({handleChangeEstado,
 
     return (
         <div className='form-container'>
-            <h1>Informação sobre o acidente:</h1>
+            <h1>Informações sobre o acidente:</h1>
             <input
                 type="text"
                 name="estado"

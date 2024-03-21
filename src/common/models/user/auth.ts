@@ -37,7 +37,7 @@ export const setMockAuth = (value: boolean) => {
 };
 
 export const login = async ({ email, senha }: any) => {
-  if (isMockAuth) {
+  if (true) {
     try {
       const mockToken = "your_mock_token_here";
       storeData(mockToken);

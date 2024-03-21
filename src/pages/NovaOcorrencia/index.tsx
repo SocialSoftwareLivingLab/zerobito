@@ -4,6 +4,10 @@ import FormWizard from "react-form-wizard-component";
 import 'react-form-wizard-component/dist/style.css';
 import Localidade from "../../components/Forms/Events-forms/Localidade/Index";
 import Vitima from "../../components/Forms/Events-forms/Vitima";
+import Denunciante from "../../components/Forms/Events-forms/Denunciante";
+import Gravidade from "../../components/Forms/Events-forms/Gravidade";
+import "./style.css"
+import { Button } from "../../components/Button";
 
 function ComunicacaoEvento(){
     const handleComplete = () => {
@@ -25,6 +29,18 @@ function ComunicacaoEvento(){
             tomadoraDeServicoNome: '',
             vinculoEmpresa: '',
             },
+        Denunciante: {
+            tipoDenuncia: "Anônimo",
+            nomeDenuncia: "",
+            emailDenuncia: "",
+            telefoneDenuncia: "",
+            enderecoDenuncia: "",
+            denunciaCustomizada: "Anônimo",
+        },
+        Gravidade:{
+            obito: "Com Óbito",
+            gravidade: "",
+        }
     });
 
     const handleChange = (stepKey, field, value) => {
@@ -43,11 +59,46 @@ function ComunicacaoEvento(){
         handleChangeEstado: (value) => handleChange('Localidade', 'estado', value),
         handleChangeLogradouro: (value) => handleChange('Localidade', 'logradouro', value),
         handleChangeNome: (value) => handleChange('Vitima', 'nome', value),
-        handleChangeNomeEmpresa: (value) => handleChange('Vitima', 'nomeEmpresa', value),
         handleChangCNPJEmpresa: (value) => handleChange('Vitima', 'cnpjEmpresa', value),
-        handleChangeTomadoraDeServicoNome: (value) => handleChange('Vitima', 'tomadoraDeServicoNome', value),
         handleChangeTomadoraDeServicoCNPJ: (value) => handleChange('Vitima', 'tomadoraDeServicoCNPJ', value),
+        handleChangeTomadoraDeServicoNome: (value) => {
+            if (value === '') {
+                handleChange('Vitima', 'tomadoraDeServicoCNPJ', '');
+            }
+            handleChange('Vitima', 'tomadoraDeServicoNome', value);
+            
+        },
+        handleChangeNomeEmpresa: (value) => {
+            if (value === '') {
+                handleChange('Vitima', 'cnpjEmpresa', '');
+            }
+            handleChange('Vitima', 'nomeEmpresa', value);
+            
+        },
         handleChangeVinculoEmpresa: (value) => handleChange('Vitima', 'vinculoEmpresa', value),
+        handleChangeNomeDenuncia: (value) => handleChange("Denunciante", "nomeDenuncia", value),
+        handleChangeEmailDenuncia: (value) => handleChange("Denunciante", "emailDenuncia", value),
+        handleChangeTelefoneDenuncia: (value) => handleChange("Denunciante", "telefoneDenuncia", value),
+        handleChangeEnderecoDenuncia: (value) => handleChange("Denunciante", "enderecoDenuncia", value),
+        handleChangeTipoDenuncia: (value) => {
+            if (value === 'Anônimo') {
+                handleChange('Denunciante', 'nomeDenuncia', '');
+                handleChange('Denunciante', 'emailDenuncia', '');
+                handleChange('Denunciante', 'telefoneDenuncia', '');
+                handleChange('Denunciante', 'enderecoDenuncia', '');
+            }
+            handleChange('Denunciante', 'tipoDenuncia', value);
+            handleChange('Denunciante', 'denunciaCustomizada', value);
+        },
+        handleChangeDenunciaCustomizada: (value) => handleChange("Denunciante", "denunciaCustomizada", value),
+        handleChangeGravidade: (value) => handleChange("Gravidade", "gravidade", value),
+        handleChangeObito: (value) => {
+            if(value === "Com Óbito"){
+                handleChange("Gravidade", "gravidade", "");
+            }
+            handleChange("Gravidade", "obito", value);
+        }
+
     };
 
 
@@ -58,6 +109,15 @@ function ComunicacaoEvento(){
                 <FormWizard
                     onComplete={handleComplete}
                     color= "#134780"
+                    style={{textAlign: 'center'}}
+                    nextButtonTemplate={(handleNext) => (
+                    <button className="wizard-button"  onClick={handleNext}>
+                        Próxima
+                    </button>
+                    )}
+                    backButtonTemplate={(handleBack) =>
+                    <button className="wizard-button" onClick={handleBack}>Anterior</button>
+                    }
                 >
                 <FormWizard.TabContent title="Local" icon="ti-map-alt">
 
@@ -69,7 +129,7 @@ function ComunicacaoEvento(){
                      cidade={formData.Localidade.cidade} 
                      logradouro={formData.Localidade.logradouro}/>
                 </FormWizard.TabContent>
-                <FormWizard.TabContent title="Additional Info" icon="ti-settings">
+                <FormWizard.TabContent title="Informações Vítima" icon="ti-user">
                     <h3>Preencha os dados da Vítima do acidente.</h3>
                     <Vitima handleChangeNome={passoHandlers.handleChangeNome} handleChangeNomeEmpresa={passoHandlers.handleChangeNomeEmpresa}
                     handleChangeCNPJEmpresa={passoHandlers.handleChangCNPJEmpresa} handleChangeTomadoraDeServicoCNPJ={passoHandlers.handleChangeTomadoraDeServicoCNPJ}
@@ -78,9 +138,19 @@ function ComunicacaoEvento(){
                     tomadoraDeServicoCNPJ={formData.Vitima.tomadoraDeServicoCNPJ} tomadoraDeServicoNome={formData.Vitima.tomadoraDeServicoNome}
                     vinculoEmpresa={formData.Vitima.vinculoEmpresa} />
                 </FormWizard.TabContent>
-                <FormWizard.TabContent title="Last step" icon="ti-check">
-                    <h3>Last Tab</h3>
-                    <p>Some content for the last tab</p>
+                <FormWizard.TabContent title="Informações Denunciante" icon="ti-clipboard">
+                    <h3>Preencha os dados do Denunciante do acidente</h3>
+                    <Denunciante handleChangeEmailDenuncia={passoHandlers.handleChangeEmailDenuncia} handleChangeTipoDenuncia={passoHandlers.handleChangeTipoDenuncia}
+                    handleChangeEnderecoDenuncia={passoHandlers.handleChangeEnderecoDenuncia} handleChangeNomeDenuncia={passoHandlers.handleChangeNomeDenuncia}
+                    handleChangeTelefoneDenuncia={passoHandlers.handleChangeTelefoneDenuncia} tipoDenuncia={formData.Denunciante.tipoDenuncia}
+                    emailDenuncia={formData.Denunciante.emailDenuncia} nomeDenuncia={formData.Denunciante.nomeDenuncia} enderecoDenuncia={formData.Denunciante.enderecoDenuncia}
+                    telefoneDenuncia={formData.Denunciante.telefoneDenuncia} handleChangeDenunciaCustomizada={passoHandlers.handleChangeDenunciaCustomizada} 
+                    denunciaCustomizada={formData.Denunciante.denunciaCustomizada}/>
+                </FormWizard.TabContent>
+                <FormWizard.TabContent title="Informações Gravidade" icon="ti-pulse">
+                    <h3>Preencha os dados da Gravidade do evento</h3>
+                    <Gravidade handleChangeGravidade={passoHandlers.handleChangeGravidade} handleChangeObito={passoHandlers.handleChangeObito}
+                    gravidade={formData.Gravidade.gravidade} obito={formData.Gravidade.obito}/>
                 </FormWizard.TabContent>
                 </FormWizard>
                 {/* add style */}

@@ -1,0 +1,18 @@
+.wizard-card-footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.wizard-button{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 7%;
+    height: 3rem;
+    margin-bottom: 8px;
+    font-size: 16px;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+
