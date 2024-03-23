@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { createContext, useContext, useState } from "react";
 
 interface LocalidadeData {
@@ -51,7 +51,7 @@ export interface CriarOcorrenciaWizardContextProviderProps {
     children: React.ReactNode;
 }
 
-export function CriarOcorrenciaWizardContextProvider({children}: CriarOcorrenciaWizardContextProviderProps) {
+export function CriarOcorrenciaWizardContextProvider({ children }: CriarOcorrenciaWizardContextProviderProps) {
     const [formData, setFormData] = useState<FormData>({
         localidade: {
             estado: '',
@@ -79,34 +79,42 @@ export function CriarOcorrenciaWizardContextProvider({children}: CriarOcorrencia
             gravidade: '',
         },
     } as FormData);
-    
-    function setLocalidadeData(data: LocalidadeData) {
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            localidade: data,
-        }));
-    }
 
-    function setVitimaData(data: VitimaData) {
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            vitima: data,
-        }));
-    }
+    const setLocalidadeData = useCallback((data: LocalidadeData) => {
+        console.log("Dados");
+        console.log(data);
+        setFormData({
+            ...formData,
+            localidade: data
+        });
+    }, [formData])
 
-    function setDenuncianteData(data: DenuncianteData) {
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            denunciante: data,
-        }));
-    }
+    const setVitimaData = useCallback((data: VitimaData) => {
+        console.log("Dados");
+        console.log(data);
+        setFormData({
+            ...formData,
+            vitima: data
+        });
+    }, [formData]);
 
-    function setGravidadeData(data: GravidadeData) {
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            gravidade: data,
-        }));
-    }
+    const setDenuncianteData = useCallback((data: DenuncianteData) => {
+        console.log("Dados");
+        console.log(data);
+        setFormData({
+            ...formData,
+            denunciante: data
+        });
+    }, [formData]);
+
+    const setGravidadeData = useCallback((data: GravidadeData) => {
+        console.log("Dados");
+        console.log(data);
+        setFormData({
+            ...formData,
+            gravidade: data
+        });
+    }, [formData]);
 
     return (
         <CriarOcorrenciaWizardContext.Provider value={{ formData, setLocalidadeData, setVitimaData, setDenuncianteData, setGravidadeData }}>
