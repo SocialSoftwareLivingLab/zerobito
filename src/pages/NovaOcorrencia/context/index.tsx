@@ -1,49 +1,6 @@
 import React, { useCallback } from "react";
 import { createContext, useContext, useState } from "react";
-
-interface LocalidadeData {
-    estado: string;
-    cidade: string;
-    logradouro: string;
-}
-
-export interface VitimaData {
-    nome: string;
-    nomeEmpresa: string;
-    cnpjEmpresa: string;
-    tomadoraDeServicoCNPJ: string;
-    tomadoraDeServicoNome: string;
-    vinculoEmpresa: string;
-}
-
-export interface DenuncianteData {
-    tipoDenuncia: string;
-    nomeDenuncia: string;
-    emailDenuncia: string;
-    telefoneDenuncia: string;
-    enderecoDenuncia: string;
-    denunciaCustomizada: string;
-}
-
-export interface GravidadeData {
-    obito: string;
-    gravidade: string;
-}
-
-export interface FormData {
-    localidade: LocalidadeData;
-    vitima: VitimaData;
-    denunciante: DenuncianteData;
-    gravidade: GravidadeData;
-}
-
-export interface CriarOcorrenciaWizardContextData {
-    formData: FormData,
-    setLocalidadeData: (data: LocalidadeData) => void,
-    setVitimaData: (data: VitimaData) => void,
-    setDenuncianteData: (data: DenuncianteData) => void,
-    setGravidadeData: (data: GravidadeData) => void,
-}
+import { CriarOcorrenciaWizardContextData, DenuncianteData, OcorrenciaFormData, GravidadeData, InformacoesBasicasData, VitimaData } from "../model";
 
 export const CriarOcorrenciaWizardContext = createContext({} as CriarOcorrenciaWizardContextData);
 
@@ -52,11 +9,15 @@ export interface CriarOcorrenciaWizardContextProviderProps {
 }
 
 export function CriarOcorrenciaWizardContextProvider({ children }: CriarOcorrenciaWizardContextProviderProps) {
-    const [formData, setFormData] = useState<FormData>({
-        localidade: {
-            estado: '',
-            cidade: '',
-            logradouro: '',
+    const [formData, setFormData] = useState<OcorrenciaFormData>({
+        informacoesBasicas: {
+            data: new Date(),
+            descricao: '',
+            local: {
+                estado: '',
+                cidade: '',
+                logradouro: '',
+            }
         },
         vitima: {
             nome: '',
@@ -78,14 +39,14 @@ export function CriarOcorrenciaWizardContextProvider({ children }: CriarOcorrenc
             obito: '',
             gravidade: '',
         },
-    } as FormData);
+    } as OcorrenciaFormData);
 
-    const setLocalidadeData = useCallback((data: LocalidadeData) => {
+    const setInformacoesBasicas = useCallback((data: InformacoesBasicasData) => {
         console.log("Dados");
         console.log(data);
         setFormData({
             ...formData,
-            localidade: data
+            informacoesBasicas: data
         });
     }, [formData])
 
@@ -117,7 +78,7 @@ export function CriarOcorrenciaWizardContextProvider({ children }: CriarOcorrenc
     }, [formData]);
 
     return (
-        <CriarOcorrenciaWizardContext.Provider value={{ formData, setLocalidadeData, setVitimaData, setDenuncianteData, setGravidadeData }}>
+        <CriarOcorrenciaWizardContext.Provider value={{ formData, setInformacoesBasicas, setVitimaData, setDenuncianteData, setGravidadeData }}>
             {children}
         </CriarOcorrenciaWizardContext.Provider>
     );

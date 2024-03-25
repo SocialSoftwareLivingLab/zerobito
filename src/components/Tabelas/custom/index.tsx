@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import { PaginationComponentProps, TableStyles } from "react-data-table-component";
 import styled from "styled-components";
-import { Button } from "../../Button";
+import { Button } from "../../ui/Button";
 
 export const dataTableStyle: TableStyles = {
     head: {

@@ -3,6 +3,9 @@ import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import "../style.css";
 import { DenuncianteFormInput } from './model';
+import { Select, SelectOption } from '../../../ui/Select';
+import { FormContainer } from '../styles';
+import Input from '../../../ui/Input';
 
 export interface DenuncianteViewProps {
     submitForm: () => void;
@@ -17,39 +20,44 @@ export default function DenuncianteView(
     return (
         <>
             <h1>Informações sobre o acidente</h1>
-            <div className="form-container">
+            <FormContainer>
                 <form onSubmit={submitForm}>
-                    <select className='form-container-select' {...register('tipo')}>
-                        <option value="ANONIMO">Denunciante Anônimo</option>
-                        <option value="VITIMA">Vítima</option>
-                        <option value="FAMILIAR">Familiar</option>
-                        <option value="COLEGA_TRABALHO">Colega de Trabalho</option>
-                        <option value="SINDICATO">Sindicato</option>
-                        <option value="IMPRENSA">Imprensa</option>
-                        <option value="SERVICO_SAUDE">Serviço de Saúde</option>
-                        <option value="OUTRO">Outro</option>
-                    </select>
+                    <Select label='Tipo da Denúncia' {...register('tipo')}>
+                        <SelectOption />
+                        <SelectOption label="Denunciante Anônimo" value="ANONIMO" />
+                        <SelectOption label="Vítima" value="VITIMA" />
+                        <SelectOption label="Familiar" value="FAMILIAR" />
+                        <SelectOption label="Colega de Trabalho" value="COLEGA_TRABALHO" />
+                        <SelectOption label="Sindicato" value="SINDICATO" />
+                        <SelectOption label="Imprensa" value="IMPRENSA" />
+                        <SelectOption label="Serviço de Saúde" value="SERVICO_SAUDE" />
+                        <SelectOption label="Outro" value="OUTRO" />
+                    </Select>
 
                     <ErrorMessage errors={errors} name='tipo' as="p" />
 
-                    {tipoDenuncianteSelecionado === 'OUTRO' && <input type='text' placeholder='Informe o tipo de denunciante' {...register("customizado", { required: true })} />}
+                    {tipoDenuncianteSelecionado === 'OUTRO' && <Input label="Tipo de Denunciante" placeholder='Informe o tipo de denunciante' {...register("customizado", { required: true })} />}
                     {tipoDenuncianteSelecionado !== "ANONIMO" &&
                         <>
-                            <input type="text" placeholder="Nome do Denunciante" {...register('nome', { required: true })} />
+                            {/* <input type="text" placeholder="Nome do Denunciante" {...register('nome', { required: true })} /> */}
+                            <Input label="Nome do Denunciante" placeholder="Nome do Denunciante" {...register('nome', { required: true })} />
                             <ErrorMessage name='nome' errors={errors} as="p" />
 
-                            <input type="text" placeholder="E-mail do Denunciante" {...register('email', { required: true })} />
+                            {/* <input type="text" placeholder="E-mail do Denunciante" {...register('email', { required: true })} /> */}
+                            <Input label="E-mail do Denunciante" placeholder="E-mail do Denunciante" {...register('email', { required: true })} />
                             <ErrorMessage name='email' errors={errors} as="p" />
 
-                            <input type="text" placeholder="Telefone para contato do Denunciante" {...register('telefone', { required: true })} />
+                            {/* <input type="text" placeholder="Telefone para contato do Denunciante" {...register('telefone', { required: true })} />*/}
+                            <Input label="Telefone para contato" placeholder="Telefone para contato" {...register('telefone', { required: true })} />
                             <ErrorMessage name='telefone' errors={errors} as="p" />
 
-                            <input type="text" placeholder="Endereço do Denunciante" {...register('endereco', { required: true })} />
+                            {/* <input type="text" placeholder="Endereço do Denunciante" {...register('endereco', { required: true })} /> */}
+                            <Input label="Endereço" placeholder="Endereço" {...register('endereco', { required: true })} />
                             <ErrorMessage name='endereco' errors={errors} as="p" />
                         </>
                     }
                 </form>
-            </div>
+            </FormContainer>
         </>
     );
 };

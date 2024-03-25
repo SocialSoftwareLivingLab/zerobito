@@ -3,6 +3,9 @@ import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import "../style.css";
 import { VitimaFormFields } from './model';
+import Input from '../../../ui/Input';
+import { FormContainer } from '../styles';
+import { Select, SelectOption } from '../../../ui/Select';
 
 export interface VitimaViewProps {
     submitForm: () => void,
@@ -22,48 +25,50 @@ export default function VitimaView(
     }: VitimaViewProps
 ) {
     return (
-        <div className='form-container'>
+        <FormContainer>
             <h1>Informações sobre o acidente:</h1>
             <form onSubmit={submitForm}>
-                <input type="text" placeholder="Nome" {...register('nome')} />
+                {/* <input type="text" placeholder="Nome" {...register('nome')} /> */}
+                <Input label="Nome da Vítima" {...register('nome')} />
                 <ErrorMessage name='nome' errors={errors} as="p" />
 
-                <input type="text" placeholder="Nome da empresa empregadora" {...register('nomeEmpresa')} />
+                {/* <input type="text" placeholder="Nome da empresa empregadora" {...register('nomeEmpresa')} /> */}
+                <Input label="Empresa Empregadora" {...register('nomeEmpresa')} />
                 <ErrorMessage name='nomeEmpresa' errors={errors} as="p" />
 
                 {!!nomeEmpresa &&
                     <>
-                        <input type="text" placeholder="CNPJ da empresa empregadora" {...register('cnpjEmpresa')} />
+                        {/* <input type="text" placeholder="CNPJ da empresa empregadora" {...register('cnpjEmpresa')} /> */}
+                        <Input label="CNPJ Empresa Empregadora" {...register('cnpjEmpresa')} />
                         <ErrorMessage name='cnpjEmpresa' errors={errors} as="p" />
                     </>
                 }
 
-                <ErrorMessage name='cnpjEmpresa' errors={errors} as="p" />
-
-                <input type="text" placeholder="Nome da tomadora de serviço" {...register('tomadoraDeServicoNome')} />
+                {/* <input type="text" placeholder="Nome da tomadora de serviço" {...register('tomadoraDeServicoNome')} /> */}
+                <Input label="Tomadora de Serviço" {...register('tomadoraDeServicoNome')} />
                 <ErrorMessage name='tomadoraDeServicoNome' errors={errors} as="p" />
 
                 {!!tomadoraDeServicoNome &&
                     <>
-                        <input type="text" placeholder="CNPJ da tomadora de serviço" {...register('tomadoraDeServicoCNPJ')} />
+                        {/* <input type="text" placeholder="CNPJ da tomadora de serviço" {...register('tomadoraDeServicoCNPJ')} /> */}
+                        <Input label="CNPJ Tomadora de Serviço" {...register('tomadoraDeServicoCNPJ')} />
                         <ErrorMessage name='tomadoraDeServicoCNPJ' errors={errors} as="p" />
                     </>
                 }
 
-                <select className='form-container-select' {...register('tipoContrato')}>
-
-                    <option>Selecione...</option>
-                    <option value="CLT">CLT</option>
-                    <option value="PJ">PJ</option>
-                    <option value="Estagiário">Estagiário</option>
-                    <option value="Aprendiz">Aprendiz</option>
-                    <option value="Temporário">Temporário</option>
-                    <option value="Terceirizado">Terceirizado</option>
-                    <option value="Outro">Outro</option>
-                    <option value="Desconhecido">Desconhecido</option>
-                </select>
+                <Select label="Tipo de contrato" {...register('tipoContrato')}>
+                    <SelectOption label="Selecione" disabled selected />
+                    <SelectOption label="CLT" value="CLT" />
+                    <SelectOption label="PJ" value="PJ" />
+                    <SelectOption label="Estagiário" value="Estagiário" />
+                    <SelectOption label="Aprendiz" value="Aprendiz" />
+                    <SelectOption label="Temporário" value="Temporário" />
+                    <SelectOption label="Terceirizado" value="Terceirizado" />
+                    <SelectOption label="Outro" value="Outro" />
+                    <SelectOption label="Desconhecido" value="Desconhecido" />
+                </Select>
                 <ErrorMessage name='tipoContrato' errors={errors} as="p" />
             </form>
-        </div>
+        </FormContainer>
     );
 }

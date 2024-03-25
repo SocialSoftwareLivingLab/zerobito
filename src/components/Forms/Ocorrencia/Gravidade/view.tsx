@@ -3,6 +3,8 @@ import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import "../style.css";
 import { GravidadeFormFields } from './model';
+import { FormContainer } from '../styles';
+import { Select } from '../../../ui/Select';
 
 export interface GravidadeViewProps {
     submitForm: () => void;
@@ -15,14 +17,14 @@ export default function GravidadeView(
     { register, submitForm, errors, obito }: GravidadeViewProps
 ) {
     return (
-        <div className='form-container'>
+        <FormContainer>
             <h1>Informações sobre o acidente:</h1>
             <form onSubmit={submitForm}>
-                <select className='form-container-select' {...register('obito', { required: true })} >
+                <Select label='Acidente com óbito?' {...register('obito', { required: true })} >
                     <option>Selecione...</option>
-                    <option value="SIM">Com Óbito</option>
-                    <option value="NAO">Sem Óbito</option>
-                </select>
+                    <option value="SIM">Sim</option>
+                    <option value="NAO">Não</option>
+                </Select>
                 <ErrorMessage name='obito' errors={errors} as="p" />
 
                 {obito === "NAO" && (
@@ -40,6 +42,6 @@ export default function GravidadeView(
 
             </form>
 
-        </div>
+        </FormContainer>
     );
 }
