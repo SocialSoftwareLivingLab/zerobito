@@ -3,7 +3,7 @@ export interface DenuncianteFormInput {
     nome: string;
     email: string;
     telefone: string;
-    endereco: string;
+    telefoneSecundario: string;
     customizado: string;
 }
 
@@ -12,6 +12,6 @@ export const defaultValue: DenuncianteFormInput = {
     nome: '',
     email: '',
     telefone: '',
-    endereco: '',
+    telefoneSecundario: '',
     customizado: null
 }

@@ -52,8 +52,8 @@ export default function DenuncianteView(
                             <ErrorMessage name='telefone' errors={errors} as="p" />
 
                             {/* <input type="text" placeholder="Endereço do Denunciante" {...register('endereco', { required: true })} /> */}
-                            <Input label="Endereço" placeholder="Endereço" {...register('endereco', { required: true })} />
-                            <ErrorMessage name='endereco' errors={errors} as="p" />
+                            <Input label="Telefone secundário" placeholder="Telefone para contato" {...register('telefoneSecundario', { required: true })} />
+                            <ErrorMessage name='telefoneSecundario' errors={errors} as="p" />
                         </>
                     }
                 </form>

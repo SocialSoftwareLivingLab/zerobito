@@ -22,7 +22,7 @@ export interface DenuncianteData {
     nomeDenuncia: string;
     emailDenuncia: string;
     telefoneDenuncia: string;
-    enderecoDenuncia: string;
+    telefoneSecundarioDenuncia: string;
     denunciaCustomizada: string;
 }
 

@@ -12,8 +12,8 @@ const InformacoesBasicas = forwardRef((props, ref) => {
 
     const onSubmit: SubmitHandler<InformacoesBasicasFormFields> = useCallback((data) => {
         setInformacoesBasicas({
-            data: new Date(),
-            descricao: '',
+            data: data.data,
+            descricao: data.descricao,
             local: {
                 estado: data.estado,
                 cidade: data.cidade,

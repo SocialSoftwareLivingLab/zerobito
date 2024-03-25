@@ -16,7 +16,7 @@ const Denunciante = forwardRef<FormStepApi, {}>((props, ref) => {
         setDenuncianteData({
             denunciaCustomizada: data.customizado || null,
             emailDenuncia: data.email,
-            enderecoDenuncia: data.endereco,
+            telefoneSecundarioDenuncia: data.telefoneSecundario,
             nomeDenuncia: data.nome,
             telefoneDenuncia: data.telefone,
             tipoDenuncia: data.tipo
@@ -28,7 +28,6 @@ const Denunciante = forwardRef<FormStepApi, {}>((props, ref) => {
             handleSubmit(submitForm)();
         },
         validate(): boolean {
-            console.log("validando...")
             trigger();
             return isValid;
         }

@@ -24,7 +24,7 @@ export default function InformacoesBasicasView(
                     <Input placeholder='Informe a data' label='Data relatada' type='date' {...register('data', { required: true })} />
                     <ErrorMessage name='data' errors={errors} as="p" />
 
-                    <Input placeholder='Descrição' label='Informe a descrição' type='text' {...register('data', { required: true })} />
+                    <Input placeholder='Descrição' label='Informe a descrição' type='text' {...register('descricao', { required: true })} />
                     <ErrorMessage name='data' errors={errors} as="p" />
                 </Fieldset>
 

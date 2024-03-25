@@ -2,7 +2,7 @@ import api from "../../api";
 
 export interface CriarOcorrenciaRequest {
     descricao: string;
-    data: string;
+    data: Date;
     local: {
       cidade: string;
       estado: string;
@@ -17,6 +17,10 @@ export interface CriarOcorrenciaRequest {
     empresa: {
       nome: string;
       cnpj: string;
+      tomadoraServico: {
+        nome: string;
+        cnpj: string;
+      }
     };
     fonte: {
       nome: string;
@@ -28,6 +32,6 @@ export interface CriarOcorrenciaRequest {
     };
 }
 
-export function criarOcorrencia(payload: CriarOcorrenciaRequest) {
+export async function criarOcorrencia(payload: CriarOcorrenciaRequest) {
     api.post("/api/v1/ocorrencias", payload);
 }

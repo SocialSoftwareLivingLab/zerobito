@@ -22,8 +22,8 @@ const buttonColors: ButtonColorTypes = {
     },
     'submit': {
         color: '#00AA00',
-        hover: '#0D2C4C',
-        disabled: '#D3D3D3'
+        hover: '#005500',
+        disabled: '#cce3cc'
     },
     'cancel': {
         color: '#CC0000',
@@ -57,6 +57,8 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     justify-content: center;
 
     transition: background-color 0.2s ease;
+
+    color: ${props => props.disabled ? '#777' : '#fff'};
 
     &:hover{
         background-color: ${props => buttonColors[props.type].hover};

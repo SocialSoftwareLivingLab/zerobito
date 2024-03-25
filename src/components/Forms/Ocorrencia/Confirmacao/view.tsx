@@ -49,9 +49,16 @@ export default function ConfirmacaoOcorrenciaView(
                         <p>Nome: {data.denunciante.nomeDenuncia}</p>
                         <p>E-mail: {data.denunciante.emailDenuncia}</p>
                         <p>Telefone: {data.denunciante.telefoneDenuncia}</p>
-                        <p>Endereço: {data.denunciante.enderecoDenuncia}</p>
+                        <p>Telefone Secundário: {data.denunciante.telefoneSecundarioDenuncia}</p>
                     </>
                 )}
+            </Section>
+
+            <Section>
+                <h3>Gravidade do acidente</h3>
+
+                <p>Houve óbito?: {data.gravidade.obito}</p>
+                {data.gravidade.obito === 'NAO' && <p>Gravidade da vítima: {data.gravidade.gravidade}</p>}
             </Section>
         </FormContainer>
     )

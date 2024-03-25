@@ -42,11 +42,8 @@ export default function RegistrarOcorrenciaView({
                     style={{ textAlign: 'center' }}
                     nextButtonTemplate={(handleNext) => (<Button action={() => handles.handleNextStep(handleNext)}>Próxima</Button>)}
                     backButtonTemplate={(handleBack) => <Button action={() => handles.handlePreviousStep(handleBack)}>Anterior</Button>}
-                    finishButtonTemplate={(handleFinish) => <Button action={handleFinish}>Enviar</Button>}
+                    finishButtonTemplate={(handleFinish) => <Button type="submit" action={handleFinish}>Enviar</Button>}
                 >
-                    <FormWizard.TabContent title="Confirmação" icon="ti-info-alt">
-                        <ConfirmacaoOcorrencia />
-                    </FormWizard.TabContent>
                     <FormWizard.TabContent title="Local" icon="ti-map-alt">
                         <InformacoesBasicas ref={refs.formLocalRef} />
                     </FormWizard.TabContent>
@@ -58,6 +55,9 @@ export default function RegistrarOcorrenciaView({
                     </FormWizard.TabContent>
                     <FormWizard.TabContent title="Informações Gravidade" icon="ti-pulse">
                         <Gravidade ref={refs.formGravidadeRef} />
+                    </FormWizard.TabContent>
+                    <FormWizard.TabContent title="Confirmação" icon="ti-info-alt">
+                        <ConfirmacaoOcorrencia />
                     </FormWizard.TabContent>
                 </FormWizard>
             </div>
