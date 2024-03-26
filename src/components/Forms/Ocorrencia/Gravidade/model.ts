@@ -1,4 +1,4 @@
 export interface GravidadeFormFields {
-    obito: string;
-    gravidade: string;
+    condicao: 'OBITO' | 'INCIDENTE_ALTO_POTENCIAL';
+    gravidade: 'EMERGENCIAL' | 'MUITO_URGENTE' | 'URGENTE' | 'POUCO_URGENTE';
 }

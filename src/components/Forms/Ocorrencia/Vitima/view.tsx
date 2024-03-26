@@ -57,7 +57,7 @@ export default function VitimaView(
                 }
 
                 <Select label="Tipo de contrato" {...register('tipoContrato')}>
-                    <SelectOption label="Selecione" disabled selected />
+                    <SelectOption label="Selecione" disabled />
                     <SelectOption label="CLT" value="CLT" />
                     <SelectOption label="PJ" value="PJ" />
                     <SelectOption label="Estagiário" value="Estagiário" />

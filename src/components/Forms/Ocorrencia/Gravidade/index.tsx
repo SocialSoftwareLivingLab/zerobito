@@ -9,13 +9,13 @@ import GravidadeView, { GravidadeViewProps } from './view';
 const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
     const { register, handleSubmit, watch, trigger, formState: { isValid, errors } } = useForm<GravidadeFormFields>();
 
-    const obito = watch('obito');
+    const condicao = watch('condicao');
 
     const { setGravidadeData } = useOcorrenciaWizardContext();
 
     const submitForm: SubmitHandler<GravidadeFormFields> = useCallback((data) => {
         setGravidadeData({
-            obito: data.obito,
+            obito: data.condicao,
             gravidade: data.gravidade
         });
     }, [setGravidadeData]);
@@ -34,7 +34,7 @@ const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
         register,
         submitForm: () => handleSubmit(submitForm)(),
         errors,
-        obito
+        condicao
     };
 
     return <GravidadeView {...vitimaViewProps} />;
