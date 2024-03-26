@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { IoBagAdd } from "react-icons/io5";
 import { useHistory } from "react-router-dom";
-import { BoxContainer } from "../../BoxContainer";
-import { Button } from "../../Button";
+import { BoxContainer } from "../../ui/BoxContainer";
+import { Button } from "../../ui/Button";
 import { OcorrenciaModel } from "../../../common/models/ocorrencias/model";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { Paginacao, dataTableStyle } from "../custom";

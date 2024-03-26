@@ -6,7 +6,7 @@ import TabelaAcompanhamento from '../../components/Tabelas/TabelaAcompanhamento'
 import TabelaOcorencia from '../../components/Tabelas/TabelaOcorrencia';
 import './style.css';
 import {Link} from "react-router-dom";
-import ComunicacaoEvento from '../Ocorrencia/index.tsx';
+import ComunicacaoEvento from '../NovaOcorrencia/index.tsx';
 import { TabelaOcorrenciaNovo } from '../../components/Tabelas/TabelaOcorrenciaNovo/index.tsx';
 
 const Home = () => {
@@ -19,10 +19,7 @@ const Home = () => {
       <div className='busca'>
       </div >
       <div className='container-content'>
-        {/* <TabelaOcorrencias titulo="Comunicacao de'/> */}
         <TabelaOcorrenciaNovo ocorrencias={eventos}/>
-        <TabelaOcorencia eventos={eventos} />
-        {/* <TabelaAcompanhamento eventos={eventos} /> */}
       </div>
       <div className='container-content-imprensa'>
         <h2>Noticias da Imprensa | Alerta de Caso <Link to="/ocorrencia"><button className='button-denuncia'>Fazer Denuncia a partir de noticia</button></Link></h2>

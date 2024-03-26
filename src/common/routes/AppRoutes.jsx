@@ -7,7 +7,7 @@ import {
 import PrivateRoute from "../../components/PrivateRoute"
 import Cadastro from "../../pages/Cadastro";
 import PainelControle from "../../pages/PainelControleUsuario";
-import Ocorrencia from "../../pages/Ocorrencia";
+import Ocorrencia from "../../pages/NovaOcorrencia";
 import BibliotecaCasos from "../../pages/BibliotecaCaso";
 import Material from "../../pages/MaterialConsulta";
 import Imprensa from "../../pages/Imprensa";
