@@ -25,9 +25,9 @@ const useRegisterViewModel = () => {
             if (response.status === 201) {
                 Swal.fire({
                     title: 'Cadastro Realizado!',
-                    text: '',
+                    text: 'Você será redirecionado em instantes.',
                     icon: 'success',
-                    confirmButtonText: 'Continuar'
+                    timer: 2000,
                   })
                   await login({ email: email, senha: senha });
                 history.replace("/home");
