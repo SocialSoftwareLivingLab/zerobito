@@ -66,5 +66,6 @@
 .error_register{
     margin-top: 3px;
     margin-bottom: 3px;
+    margin-left: 10px;
     color: red;
 }

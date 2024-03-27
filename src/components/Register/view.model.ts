@@ -34,8 +34,8 @@ const useRegisterViewModel = () => {
             }
         } catch (error: any) {
             setError(
-                String(error.response.data?.error ?? error.response.data.message)
-            );
+                String("Dados inválidos."
+            ));
         }
     };
 
