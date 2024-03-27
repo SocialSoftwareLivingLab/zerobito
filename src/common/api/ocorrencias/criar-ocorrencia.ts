@@ -2,7 +2,7 @@ import api from "../../api";
 
 export type TipoFonteDenuncia = 'ANONIMA' | 'VITIMA' | 'FAMILIAR' | 'COLEGA_TRABALHO' | 'SINDICATO' | 'IMPRENSA' | 'SERVICO_SAUDE' | 'OUTRO';
 export type CondicaoVitima = 'OBITO' | 'INCIDENTE_ALTO_POTENCIAL';
-export type GravidadeVitima = 'EMERGENCIAL' | 'MUITO_URGENTE' | 'URGENTE' | 'POUCO_URGENTE';
+export type GravidadeVitima = 'EMERGENCIAL' | 'MUITO_URGENTE' | 'URGENTE' | 'POUCO_URGENTE' | '';
 
 export interface CriarOcorrenciaRequest {
     descricao: string;

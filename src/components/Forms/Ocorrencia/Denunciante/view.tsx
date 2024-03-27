@@ -15,14 +15,14 @@ export interface DenuncianteViewProps {
 }
 
 export default function DenuncianteView(
-    { register, submitForm, tipoDenuncianteSelecionado, errors }: DenuncianteViewProps
+    { register, submitForm, tipoDenuncianteSelecionado, errors}: DenuncianteViewProps
 ) {
     return (
         <>
             <h1>Informações sobre o acidente</h1>
             <FormContainer>
                 <form onSubmit={submitForm}>
-                    <Select label='Tipo da Denúncia' {...register('tipo')}>
+                    <Select label='Tipo da Denúncia' {...register('tipo') }  >
                         <SelectOption />
                         <SelectOption label="Denunciante Anônimo" value="ANONIMO" />
                         <SelectOption label="Vítima" value="VITIMA" />

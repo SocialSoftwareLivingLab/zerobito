@@ -32,6 +32,7 @@ export function CriarOcorrenciaWizardContextProvider({ children }: CriarOcorrenc
             nomeDenuncia: '',
             emailDenuncia: '',
             telefoneDenuncia: '',
+            telefoneSecundarioDenuncia: '',
             enderecoDenuncia: '',
             denunciaCustomizada: '',
         },

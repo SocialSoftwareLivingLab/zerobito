@@ -57,8 +57,8 @@ export default function ConfirmacaoOcorrenciaView(
             <Section>
                 <h3>Gravidade do acidente</h3>
 
-                <p>Houve óbito?: {data.gravidade.obito}</p>
-                {data.gravidade.obito === 'NAO' && <p>Gravidade da vítima: {data.gravidade.gravidade}</p>}
+                <p>Houve óbito? {data.gravidade.obito === 'OBITO' ? 'Sim' : "Não"}</p>
+                {data.gravidade.obito === 'INCIDENTE_ALTO_POTENCIAL' && <p>Gravidade da vítima: {data.gravidade.gravidade}</p>}
             </Section>
         </FormContainer>
     )

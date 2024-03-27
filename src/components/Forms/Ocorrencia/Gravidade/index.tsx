@@ -3,11 +3,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useOcorrenciaWizardContext } from '../../../../pages/NovaOcorrencia/context';
 import { FormStepApi } from '../interface';
 import "../style.css";
-import { GravidadeFormFields } from './model';
+import { GravidadeFormFields, defaultValue } from './model';
 import GravidadeView, { GravidadeViewProps } from './view';
 
 const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
-    const { register, handleSubmit, watch, trigger, formState: { isValid, errors } } = useForm<GravidadeFormFields>();
+    const { register, handleSubmit, watch, resetField, trigger, formState: { isValid, errors } } = useForm<GravidadeFormFields>({ defaultValues: defaultValue });
 
     const condicao = watch('condicao');
 
@@ -19,6 +19,12 @@ const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
             gravidade: data.gravidade
         });
     }, [setGravidadeData]);
+
+    React.useEffect(() => {
+        if (condicao === "OBITO") {
+          resetField("gravidade");
+        }
+      }, [condicao, resetField]);
 
     useImperativeHandle(ref, () => ({
         submitForm: () => {

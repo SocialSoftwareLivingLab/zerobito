@@ -7,7 +7,7 @@ import { DenuncianteFormInput, defaultValue } from './model';
 import DenuncianteView, { DenuncianteViewProps } from './view';
 
 const Denunciante = forwardRef<FormStepApi, {}>((props, ref) => {
-    const { handleSubmit, watch, register, trigger, formState: { isValid, errors } } = useForm<DenuncianteFormInput>({ defaultValues: defaultValue });
+    const { handleSubmit, watch, register, trigger, formState: { isValid, errors }, resetField } = useForm<DenuncianteFormInput>({ defaultValues: defaultValue });
     const tipoDenuncianteSelecionado = watch('tipo');
 
     const { setDenuncianteData } = useOcorrenciaWizardContext();
@@ -33,11 +33,21 @@ const Denunciante = forwardRef<FormStepApi, {}>((props, ref) => {
         }
     }), [isValid, trigger, handleSubmit, submitForm]);
 
+    React.useEffect(() => {
+        if (tipoDenuncianteSelecionado === "ANONIMO") {
+          resetField("nome");
+          resetField("customizado");
+          resetField("email");
+          resetField("telefone");
+          resetField("telefoneSecundario");
+        }
+      }, [tipoDenuncianteSelecionado, resetField]);
+
     const viewProps: DenuncianteViewProps = {
         register,
         submitForm: () => handleSubmit(submitForm)(),
         tipoDenuncianteSelecionado,
-        errors
+        errors,
     };
 
     return <DenuncianteView {...viewProps} />;
