@@ -37,5 +37,5 @@ export interface CriarOcorrenciaRequest {
 }
 
 export async function criarOcorrencia(payload: CriarOcorrenciaRequest) {
-    api.post("/api/v1/ocorrencias", payload);
+    await api.post("/api/v1/ocorrencias", payload);
 }

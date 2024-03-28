@@ -34,7 +34,7 @@ const Denunciante = forwardRef<FormStepApi, {}>((props, ref) => {
     }), [isValid, trigger, handleSubmit, submitForm]);
 
     React.useEffect(() => {
-        if (tipoDenuncianteSelecionado === "ANONIMO") {
+        if (tipoDenuncianteSelecionado === "ANONIMA") {
           resetField("nome");
           resetField("customizado");
           resetField("email");

@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { FormStepApi } from "../../components/Forms/Ocorrencia/interface";
 import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from "./context";
 import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from "./view";
-import { CriarOcorrenciaRequest, criarOcorrencia } from "../../common/api/ocorrencias/criar-ocorrencia";
+import { CondicaoVitima, CriarOcorrenciaRequest, GravidadeVitima, TipoFonteDenuncia, criarOcorrencia } from "../../common/api/ocorrencias/criar-ocorrencia";
 import { useHistory } from "react-router-dom";
 
 function RegistrarOcorrenciaPage() {
@@ -73,13 +73,13 @@ function RegistrarOcorrenciaPage() {
                 outroTipo: formData.denunciante.denunciaCustomizada,
                 telefonePrincipal: formData.denunciante.telefoneDenuncia,
                 telefoneSecundario: formData.denunciante.telefoneSecundarioDenuncia,
-                tipo: formData.denunciante.tipoDenuncia
+                tipo: formData.denunciante.tipoDenuncia as TipoFonteDenuncia
             },
             vitima: {
                 nome: formData.vitima.nome,
                 vinculo: formData.vitima.vinculoEmpresa,
-                condicao: formData.gravidade.obito === "SIM" ? "COM_OBITO" : "SEM_OBITO",
-                gravidade: formData.gravidade.gravidade
+                condicao: formData.gravidade.obito as CondicaoVitima,
+                gravidade: formData.gravidade.gravidade as GravidadeVitima
             }
         };
         

@@ -8,10 +8,10 @@ export interface DenuncianteFormInput {
 }
 
 export const defaultValue: DenuncianteFormInput = {
-    tipo: 'ANONIMO',
-    nome: '',
-    email: '',
-    telefone: '',
-    telefoneSecundario: '',
+    tipo: 'ANONIMA',
+    nome: null,
+    email: null,
+    telefone: null,
+    telefoneSecundario: null,
     customizado: null
 }

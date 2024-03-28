@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { InputProps } from ".";
 
 export const InputArea = styled.div`
@@ -9,12 +9,24 @@ export const InputArea = styled.div`
     margin: 16px;
 `;
 
-export const InputLabel = styled.label`
+export type InputLabelProps = {
+    required: boolean;
+}
+
+
+export const InputLabel = styled.label<InputLabelProps>`
     color: #141414;
     font-size: 16px;
     font-weight: bold;
 
     text-align: left;
+
+    ${({ required }) => required && css`
+        &::after {
+            content: " *";
+            color: #FF0000;
+        }
+    `}
 `;
 
 export type InputStyleProps = Pick<InputProps, 'width'>;

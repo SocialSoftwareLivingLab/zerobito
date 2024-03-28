@@ -29,20 +29,15 @@ export default function VitimaView(
             <h1>Informações sobre o acidente:</h1>
             <form onSubmit={submitForm}>
                 {/* <input type="text" placeholder="Nome" {...register('nome')} /> */}
-                <Input label="Nome da Vítima" {...register('nome')} />
+                <Input label="Nome da Vítima" {...register('nome', { required: true })} />
                 <ErrorMessage name='nome' errors={errors} as="p" />
 
                 {/* <input type="text" placeholder="Nome da empresa empregadora" {...register('nomeEmpresa')} /> */}
-                <Input label="Empresa Empregadora" {...register('nomeEmpresa')} />
+                <Input label="Empresa Empregadora" {...register('nomeEmpresa', { required: true })} />
                 <ErrorMessage name='nomeEmpresa' errors={errors} as="p" />
 
-                {!!nomeEmpresa &&
-                    <>
-                        {/* <input type="text" placeholder="CNPJ da empresa empregadora" {...register('cnpjEmpresa')} /> */}
-                        <Input label="CNPJ Empresa Empregadora" {...register('cnpjEmpresa')} />
-                        <ErrorMessage name='cnpjEmpresa' errors={errors} as="p" />
-                    </>
-                }
+                <Input label="CNPJ Empresa Empregadora" {...register('cnpjEmpresa', { required: true })} />
+                <ErrorMessage name='cnpjEmpresa' errors={errors} as="p" />
 
                 {/* <input type="text" placeholder="Nome da tomadora de serviço" {...register('tomadoraDeServicoNome')} /> */}
                 <Input label="Tomadora de Serviço" {...register('tomadoraDeServicoNome')} />
@@ -51,12 +46,12 @@ export default function VitimaView(
                 {!!tomadoraDeServicoNome &&
                     <>
                         {/* <input type="text" placeholder="CNPJ da tomadora de serviço" {...register('tomadoraDeServicoCNPJ')} /> */}
-                        <Input label="CNPJ Tomadora de Serviço" {...register('tomadoraDeServicoCNPJ')} />
+                        <Input label="CNPJ Tomadora de Serviço" {...register('tomadoraDeServicoCNPJ', { required: true })} />
                         <ErrorMessage name='tomadoraDeServicoCNPJ' errors={errors} as="p" />
                     </>
                 }
 
-                <Select label="Tipo de contrato" {...register('tipoContrato')}>
+                <Select label="Tipo de contrato" {...register('tipoContrato', { required: true })}>
                     <SelectOption label="Selecione" disabled />
                     <SelectOption label="CLT" value="CLT" />
                     <SelectOption label="PJ" value="PJ" />

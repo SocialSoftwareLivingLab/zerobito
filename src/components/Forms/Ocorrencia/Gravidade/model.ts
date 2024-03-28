@@ -8,5 +8,5 @@ export interface GravidadeFormFields {
 
 export const defaultValue: GravidadeFormFields = {
    condicao: 'OBITO',
-   gravidade: '',
+   gravidade: null,
 }

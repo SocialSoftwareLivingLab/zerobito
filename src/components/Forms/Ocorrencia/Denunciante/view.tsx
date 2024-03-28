@@ -1,11 +1,11 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import "../style.css";
-import { DenuncianteFormInput } from './model';
-import { Select, SelectOption } from '../../../ui/Select';
-import { FormContainer } from '../styles';
 import Input from '../../../ui/Input';
+import { Select, SelectOption } from '../../../ui/Select';
+import "../style.css";
+import { FormContainer } from '../styles';
+import { DenuncianteFormInput } from './model';
 
 export interface DenuncianteViewProps {
     submitForm: () => void;
@@ -15,16 +15,16 @@ export interface DenuncianteViewProps {
 }
 
 export default function DenuncianteView(
-    { register, submitForm, tipoDenuncianteSelecionado, errors}: DenuncianteViewProps
+    { register, submitForm, tipoDenuncianteSelecionado, errors }: DenuncianteViewProps
 ) {
     return (
         <>
             <h1>Informações sobre o acidente</h1>
             <FormContainer>
                 <form onSubmit={submitForm}>
-                    <Select label='Tipo da Denúncia' {...register('tipo') }  >
+                    <Select label='Tipo da Denúncia' {...register('tipo')}  >
                         <SelectOption />
-                        <SelectOption label="Denunciante Anônimo" value="ANONIMO" />
+                        <SelectOption label="Denunciante Anônimo" value="ANONIMA" />
                         <SelectOption label="Vítima" value="VITIMA" />
                         <SelectOption label="Familiar" value="FAMILIAR" />
                         <SelectOption label="Colega de Trabalho" value="COLEGA_TRABALHO" />
@@ -37,7 +37,7 @@ export default function DenuncianteView(
                     <ErrorMessage errors={errors} name='tipo' as="p" />
 
                     {tipoDenuncianteSelecionado === 'OUTRO' && <Input label="Tipo de Denunciante" placeholder='Informe o tipo de denunciante' {...register("customizado", { required: true })} />}
-                    {tipoDenuncianteSelecionado !== "ANONIMO" &&
+                    {tipoDenuncianteSelecionado !== "ANONIMA" &&
                         <>
                             {/* <input type="text" placeholder="Nome do Denunciante" {...register('nome', { required: true })} /> */}
                             <Input label="Nome do Denunciante" placeholder="Nome do Denunciante" {...register('nome', { required: true })} />
