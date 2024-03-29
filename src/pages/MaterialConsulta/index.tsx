@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from '../../components/Menu/index.tsx';
+import Menu from '../../components/BarraNavegacao/index.tsx';
 import './style.css';
 
 function Material() {

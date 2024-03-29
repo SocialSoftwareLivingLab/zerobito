@@ -1,27 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../common/models/user/auth';
+import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 
 const useLoginViewModel = () => {
     const history = useHistory();
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
     const [error, setError] = useState<string>();
-    const [token, setToken] = useState(localStorage.getItem('token'));
 
-    useEffect(() => {
-        if (token) {
-            history.replace('/home');
-        }
-    }, [history, token]);
+    const { login: setData } = useUsuarioAutenticado();
+
+    const token = localStorage.getItem('token');
+    if (token) {
+        history.replace('/home');
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
             const response = await login({ email, senha });
-            setToken(response.data.token);
-            history.replace('/home');
+            setData({
+                token: response.token,
+                nome: response.usuario.nome,
+                email: response.usuario.email,
+                perfil: response.usuario.perfil
+            });
         } catch (error) {
             setError('Erro ao tentar fazer login.');
         }

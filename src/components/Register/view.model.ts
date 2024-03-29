@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { register } from '../../common/models/user/create.user';
-import { login } from '../../common/models/user/auth';
 import Swal from 'sweetalert2';
+import { register } from '../../common/models/user/create.user';
 
 const useRegisterViewModel = () => {
     const history = useHistory();
@@ -25,12 +24,11 @@ const useRegisterViewModel = () => {
             if (response.status === 201) {
                 Swal.fire({
                     title: 'Cadastro Realizado!',
-                    text: 'Você será redirecionado em instantes.',
+                    text: 'Usuário foi criado com sucesso',
                     icon: 'success',
                     timer: 2000
                 });
-                await login({ email, senha });
-                history.replace('/home');
+                history.replace('/login');
             }
         } catch (error: unknown) {
             setError(String('Dados inválidos.'));

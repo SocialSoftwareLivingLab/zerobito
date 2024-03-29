@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from '../../components/Menu/index.tsx';
+import Menu from '../../components/BarraNavegacao/index.tsx';
 import TabelaContatos from '../../components/Tabelas/TabelaContatos/index.tsx';
 import './style.css';
 

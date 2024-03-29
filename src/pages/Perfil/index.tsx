@@ -1,14 +1,13 @@
 import React from 'react';
-import Menu from '../../components/Menu';
+import Menu from '../../components/BarraNavegacao';
 
-import { removeData } from '../../common/models/user/auth';
+import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 
 const Perfil: React.FC = () => {
-    const userName = localStorage.getItem('nome');
-    const userEmail = localStorage.getItem('email');
+    const { logout, data } = useUsuarioAutenticado();
 
     const funcaoLogout = () => {
-        removeData();
+        logout();
     };
 
     return (
@@ -16,8 +15,8 @@ const Perfil: React.FC = () => {
             <Menu />
             <h1>Perfil</h1>
             <div>
-                <p>Nome: {userName}</p>
-                <p>Email: {userEmail}</p>
+                <p>Nome: {data.nome}</p>
+                <p>Email: {data.email}</p>
                 {/* Add more user information here */}
             </div>
 

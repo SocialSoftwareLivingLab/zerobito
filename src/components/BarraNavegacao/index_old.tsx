@@ -1,11 +1,10 @@
-import './style.css';
 import React from 'react';
-import { BsBookmarkFill } from 'react-icons/bs';
-import { FaUniversity, FaMicrophone, FaListUl } from 'react-icons/fa';
 import { BiSolidHelpCircle } from 'react-icons/bi';
+import { BsBookmarkFill } from 'react-icons/bs';
+import { FaListUl, FaMicrophone, FaUniversity } from 'react-icons/fa';
 import { MdNotifications } from 'react-icons/md';
-import { removeData } from '../../common/models/user/auth';
 import { Link } from 'react-router-dom';
+import './style.css';
 
 function Menu(): React.JSX.Element {
     const token = localStorage.getItem('token');
@@ -72,7 +71,7 @@ function Menu(): React.JSX.Element {
                                     <span>Função</span>
                                 </li>
                                 <li>
-                                    <button className="sair" onClick={removeData}>
+                                    <button className="sair">
                                         <span className="icon-button">
                                             {' '}
                                             <MdNotifications />{' '}

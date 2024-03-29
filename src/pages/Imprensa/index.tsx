@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from '../../components/Menu';
+import Menu from '../../components/BarraNavegacao';
 import './style.css';
 
 const Imprensa = () => {

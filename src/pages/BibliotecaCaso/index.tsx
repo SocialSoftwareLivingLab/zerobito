@@ -1,9 +1,9 @@
 import React from 'react';
-import Menu from '../../components/Menu/index.tsx';
-import './style.css';
 import { useHistory } from 'react-router-dom';
+import BarraNavegacao from '../../components/BarraNavegacao/index.tsx';
 import TabelaBiblioteca from '../../components/Tabelas/TabelaBiblioteca/index.tsx';
 import useHomeViewModel from '../Home/view.model.ts';
+import './style.css';
 
 function BibliotecaCasos() {
     const history = useHistory();
@@ -16,7 +16,7 @@ function BibliotecaCasos() {
 
     return (
         <div className="Contato">
-            <Menu />
+            <BarraNavegacao />
             <div className="container-header">
                 <h1>Biblioteca de Casos</h1>
                 <div className="container-contato">

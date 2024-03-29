@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from '../../components/Menu';
+import Menu from '../../components/BarraNavegacao';
 import TabelaUsuarios from '../../components/Tabelas/TabelaUsuarios';
 import usePainelViewModel from './view.model';
 import './style.css';

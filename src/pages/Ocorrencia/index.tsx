@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Menu from '../../components/Menu';
+import Menu from '../../components/BarraNavegacao';
 import useOcorrenciaViewModel from './view.model';
 import PassoUm from './Passo1';
 import PassoDois from './Passo2';
