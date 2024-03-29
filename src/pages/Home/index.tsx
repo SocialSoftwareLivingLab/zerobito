@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Page-Header';
-import { TabelaOcorrenciaNovo } from '../../components/Tabelas/TabelaOcorrenciaNovo/index.tsx';
+import { TabelaOcorrenciaNovo } from '../../components/Tabelas/Ocorrencias/index.tsx';
 import './style.css';
 import useHomeViewModel from './view.model';
 

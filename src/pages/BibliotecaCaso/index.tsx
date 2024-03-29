@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import BarraNavegacao from '../../components/BarraNavegacao/index.tsx';
+import BarraNavegacao from '../../components/BarraNavegacao';
 import TabelaBiblioteca from '../../components/Tabelas/TabelaBiblioteca/index.tsx';
 import useHomeViewModel from '../Home/view.model.ts';
 import './style.css';

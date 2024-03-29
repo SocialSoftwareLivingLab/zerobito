@@ -7,6 +7,7 @@ import Badge from '../../ui/Badge';
 import { BoxContainer } from '../../ui/BoxContainer';
 import { Button } from '../../ui/Button';
 import { Paginacao, dataTableStyle } from '../custom';
+import OcorrenciaItem from './OcorrenciaItem';
 import { ColunaAcao } from './styles';
 import { COLUNAS_TABELA_OCORRENCIAS, TIPOS_GRAVIDADE } from './table-columns';
 
@@ -69,23 +70,11 @@ export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
                 customStyles={dataTableStyle}
                 pointerOnHover
                 expandableRows
+                expandableRowExpanded={(row) => !!row}
                 expandOnRowClicked
-                expandableRowsComponent={({ data }) => <OcorrenciaExpandida data={data} />}
+                expandableRowsComponent={({ data }) => <OcorrenciaItem data={data} />}
                 dense
             />
         </BoxContainer>
-    );
-}
-
-interface OcorrenciaExpandidaProps {
-    data: OcorrenciaModel;
-}
-
-function OcorrenciaExpandida({ data }: OcorrenciaExpandidaProps) {
-    return (
-        <div>
-            <span>Testando expansão</span>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
     );
 }
