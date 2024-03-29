@@ -6,7 +6,9 @@ import '../style.css';
 import { GravidadeFormFields, defaultValue } from './model';
 import GravidadeView, { GravidadeViewProps } from './view';
 
-const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
+interface GravidadeProps {}
+
+const Gravidade = forwardRef<FormStepApi, GravidadeProps>((props, ref) => {
     const {
         register,
         handleSubmit,
@@ -59,5 +61,7 @@ const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
 
     return <GravidadeView {...vitimaViewProps} />;
 });
+
+Gravidade.displayName = 'Gravidade';
 
 export default Gravidade;

@@ -7,6 +7,7 @@ import { OcorrenciaModel } from '../../../common/models/ocorrencias/model';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { Paginacao, dataTableStyle } from '../custom';
 import { ColunaAcao } from './styles';
+import Badge from '../../ui/Badge';
 
 function AdicionarNovoEventoButton() {
     const history = useHistory();
@@ -55,8 +56,8 @@ const colunasOcorrencias: TableColumn<OcorrenciaModel>[] = [
     },
     {
         name: 'Gravidade',
-        width: '15%',
-        selector: (sel) => sel.vitima.gravidade,
+        width: '10%',
+        cell: (row) => <BadgeGravidade gravidade={row.vitima.gravidade} />,
         sortable: true,
         allowOverflow: true,
         wrap: true
@@ -71,30 +72,58 @@ const colunasOcorrencias: TableColumn<OcorrenciaModel>[] = [
     },
     {
         name: 'Ações',
-        width: '35%',
         sortable: true,
-        cell: (row) => (
-            <ColunaAcao>
-                <Button
-                    type="submit"
-                    size="small"
-                    action={() => {
-                        console.log(row);
-                    }}>
-                    Aceitar
-                </Button>
-                <Button
-                    type="default"
-                    size="small"
-                    action={() => {
-                        console.log(row);
-                    }}>
-                    Não incorporar
-                </Button>
-            </ColunaAcao>
-        )
+        cell: (row) => <AcoesLinha row={row} />
     }
 ];
+
+function BadgeGravidade({ gravidade }: { gravidade: string | null }) {
+    const tipos = {
+        EMERGENCIAL: {
+            label: 'Emergencial',
+            type: 'danger'
+        },
+        MUITO_URGENTE: {
+            label: 'Muito Urgente',
+            type: 'warning'
+        },
+        URGENTE: {
+            label: 'Muito Urgente',
+            type: 'info'
+        },
+        POUCO_URGENTE: {
+            label: 'Pouco Urgente',
+            type: 'dark'
+        }
+    };
+
+    const tipo = tipos[gravidade];
+
+    return gravidade && <Badge texto={tipo.label} type={tipo.type} />;
+}
+
+export function AcoesLinha({ row }: { row: OcorrenciaModel }) {
+    return (
+        <ColunaAcao>
+            <Button
+                type="submit"
+                size="small"
+                action={() => {
+                    console.log(row);
+                }}>
+                Aceitar
+            </Button>
+            <Button
+                type="default"
+                size="small"
+                action={() => {
+                    console.log(row);
+                }}>
+                Não incorporar
+            </Button>
+        </ColunaAcao>
+    );
+}
 
 export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
     return (

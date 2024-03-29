@@ -1,17 +1,16 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import '../style.css';
-import { VitimaFormFields } from './model';
 import Input from '../../../ui/Input';
-import { FormContainer } from '../styles';
 import { Select, SelectOption } from '../../../ui/Select';
+import '../style.css';
+import { FormContainer } from '../styles';
+import { VitimaFormFields } from './model';
 
 export interface VitimaViewProps {
     submitForm: () => void;
     errors: FieldErrors<VitimaFormFields>;
     register: UseFormRegister<VitimaFormFields>;
-    nomeEmpresa?: string;
     tomadoraDeServicoNome?: string;
 }
 
@@ -19,7 +18,6 @@ export default function VitimaView({
     submitForm,
     errors,
     register,
-    nomeEmpresa,
     tomadoraDeServicoNome
 }: VitimaViewProps) {
     return (

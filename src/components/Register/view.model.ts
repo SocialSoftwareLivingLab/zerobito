@@ -32,7 +32,7 @@ const useRegisterViewModel = () => {
                 await login({ email, senha });
                 history.replace('/home');
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             setError(String('Dados inválidos.'));
         }
     };

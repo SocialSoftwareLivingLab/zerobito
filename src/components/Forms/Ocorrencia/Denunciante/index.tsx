@@ -6,7 +6,9 @@ import '../style.css';
 import { DenuncianteFormInput, defaultValue } from './model';
 import DenuncianteView, { DenuncianteViewProps } from './view';
 
-const Denunciante = forwardRef<FormStepApi, {}>((props, ref) => {
+interface DenuncianteProps {}
+
+const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
     const {
         handleSubmit,
         watch,
@@ -66,5 +68,7 @@ const Denunciante = forwardRef<FormStepApi, {}>((props, ref) => {
 
     return <DenuncianteView {...viewProps} />;
 });
+
+Denunciante.displayName = 'Denunciante';
 
 export default Denunciante;

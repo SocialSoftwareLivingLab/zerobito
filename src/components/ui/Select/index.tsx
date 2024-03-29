@@ -27,10 +27,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         return (
             <SelectArea>
                 <SelectLabel>{label}</SelectLabel>
-                <SelectField ref={ref} {...rest}>
+                <SelectField ref={ref} width={width} {...rest}>
                     {children}
                 </SelectField>
             </SelectArea>
         );
     }
 );
+
+Select.displayName = 'Select';

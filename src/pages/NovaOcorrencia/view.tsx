@@ -1,20 +1,16 @@
 import React from 'react';
-import FormWizard, {
-    type FormWizardMethods,
-    type FormWizardProps
-} from 'react-form-wizard-component';
+import FormWizard from 'react-form-wizard-component';
 import 'react-form-wizard-component/dist/style.css';
-import { Button } from '../../components/ui/Button';
+import ConfirmacaoOcorrencia from '../../components/Forms/Ocorrencia/Confirmacao';
 import Denunciante from '../../components/Forms/Ocorrencia/Denunciante';
 import Gravidade from '../../components/Forms/Ocorrencia/Gravidade';
 import InformacoesBasicas from '../../components/Forms/Ocorrencia/InformacoesBasicas/Index';
 import Vitima from '../../components/Forms/Ocorrencia/Vitima';
 import { FormStepApi } from '../../components/Forms/Ocorrencia/interface';
 import Header from '../../components/Page-Header';
+import { Button } from '../../components/ui/Button';
 import { OcorrenciaFormData } from './model';
 import './style.css';
-import Input from '../../components/ui/Input';
-import ConfirmacaoOcorrencia from '../../components/Forms/Ocorrencia/Confirmacao';
 
 export interface RegistrarOcorrenciaViewProps {
     handles: {

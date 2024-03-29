@@ -6,7 +6,9 @@ import '../style.css';
 import { VitimaFormFields } from './model';
 import VitimaView, { VitimaViewProps } from './view';
 
-const Vitima = forwardRef<FormStepApi, {}>((props, ref) => {
+interface VitimaProps {}
+
+const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
     const {
         handleSubmit,
         register,
@@ -15,7 +17,6 @@ const Vitima = forwardRef<FormStepApi, {}>((props, ref) => {
         formState: { isValid, errors }
     } = useForm<VitimaFormFields>();
 
-    const nomeEmpresa = watch('nomeEmpresa');
     const tomadoraDeServicoNome = watch('tomadoraDeServicoNome');
 
     const { setVitimaData } = useOcorrenciaWizardContext();
@@ -52,11 +53,11 @@ const Vitima = forwardRef<FormStepApi, {}>((props, ref) => {
         submitForm: handleSubmit(onSubmit),
         errors,
         register,
-        nomeEmpresa,
         tomadoraDeServicoNome
     };
 
     return <VitimaView {...vitimaViewProps} />;
 });
+Vitima.displayName = 'Vitima';
 
 export default Vitima;

@@ -53,4 +53,6 @@ const InformacoesBasicas = forwardRef((props, ref) => {
     return <InformacoesBasicasView {...informacoesBasicasViewProps} />;
 });
 
+InformacoesBasicas.displayName = 'InformacoesBasicas';
+
 export default InformacoesBasicas;

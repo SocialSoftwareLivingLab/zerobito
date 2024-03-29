@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { carregarUsuarios } from '../../common/models/user/get.user';
 
 const usePainelViewModel = () => {
-    const [usuarios, setUsuarios] = useState<any[]>([]);
+    const [usuarios, setUsuarios] = useState<unknown[]>([]);
 
     useEffect(() => {
         carregarUsuarios().then((response) => {

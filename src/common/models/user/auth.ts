@@ -1,5 +1,4 @@
 import api from '../../api';
-import { UserModel } from './user.model';
 
 api.interceptors.request.use(
     (config) => {
@@ -7,7 +6,7 @@ api.interceptors.request.use(
         config.headers.authorization = `Bearer ${token}`;
         return config;
     },
-    (error: any) => {
+    (error: unknown) => {
         return Promise.reject(error);
     }
 );
@@ -30,25 +29,25 @@ enum UserRole {
     USER = 2
 }
 
-let isMockAuth = false;
+// let isMockAuth = false;
 
-export const setMockAuth = (value: boolean) => {
-    isMockAuth = value;
-};
+// export const setMockAuth = (value: boolean) => {
+//     isMockAuth = value;
+// };
 
-export const login = async ({ email, senha }: any) => {
-    // if (true) {
-    //   try {
-    //     const mockToken = "your_mock_token_here";
-    //     storeData(mockToken);
-    //     storeName("Mock User");
-    //     storeEmail("mock@example.com");
-    //     storeRole(UserRole.USER);
-    //     return Promise.resolve({ data: { token: mockToken } });
-    //   } catch (error) {
-    //     // Trate qualquer erro relacionado ao mock aqui (se necessário)
-    //     return Promise.reject("Erro no mock de autenticação.");
-    //   }
+export const login = async ({ email, senha }: { email: string; senha: string }) => {
+    // if (isMockAuth) {
+    //     try {
+    //         const mockToken = 'your_mock_token_here';
+    //         storeData(mockToken);
+    //         storeName('Mock User');
+    //         storeEmail('mock@example.com');
+    //         storeRole(UserRole.USER);
+    //         return Promise.resolve({ data: { token: mockToken } });
+    //     } catch (error) {
+    //         // Trate qualquer erro relacionado ao mock aqui (se necessário)
+    //         return Promise.reject('Erro no mock de autenticação.');
+    //     }
     // }
     try {
         const response = await api.post(`/api/v1/auth/login`, {
@@ -65,6 +64,7 @@ export const login = async ({ email, senha }: any) => {
         storeEmail(emailUser);
         storeRole(role);
         return response;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         return Promise.reject(error.response.data.error);
     }

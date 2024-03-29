@@ -24,8 +24,8 @@ const badgeColorMapping: Record<string, BadgeColorMapping> = {
         backgroundColor: '#dc3545'
     },
     warning: {
-        color: '#212529',
-        backgroundColor: '#ffc107'
+        color: '#fff',
+        backgroundColor: '#fba52b'
     },
     info: {
         color: '#fff',

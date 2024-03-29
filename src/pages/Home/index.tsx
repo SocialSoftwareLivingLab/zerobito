@@ -1,13 +1,9 @@
 import React from 'react';
-import Menu from '../../components/Menu';
-import Header from '../../components/Page-Header';
-import useHomeViewModel from './view.model';
-import TabelaAcompanhamento from '../../components/Tabelas/TabelaAcompanhamento';
-import TabelaOcorencia from '../../components/Tabelas/TabelaOcorrencia';
-import './style.css';
 import { Link } from 'react-router-dom';
-import ComunicacaoEvento from '../NovaOcorrencia/index.tsx';
+import Header from '../../components/Page-Header';
 import { TabelaOcorrenciaNovo } from '../../components/Tabelas/TabelaOcorrenciaNovo/index.tsx';
+import './style.css';
+import useHomeViewModel from './view.model';
 
 const Home = () => {
     const { eventos } = useHomeViewModel();

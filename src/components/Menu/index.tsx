@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 
 function Menu(): React.JSX.Element {
     const token = localStorage.getItem('token');
-    const nome = localStorage.getItem('nome');
+    // const nome = localStorage.getItem('nome');
     const role = localStorage.getItem('role');
-    const userProfilePic = localStorage.getItem('userProfilePic');
+    // const userProfilePic = localStorage.getItem('userProfilePic');
 
     return (
         <div className="Menu">
