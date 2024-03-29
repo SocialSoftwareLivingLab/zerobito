@@ -14,8 +14,7 @@ const PassoQuatro = ({
                     id="condicaoAcidentado"
                     value={condicaoAcidentado}
                     name="condicaoAcidentado"
-                    onChange={(e) => handleChangeCondicaoAcidentado(e.target.value)}
-                >
+                    onChange={(e) => handleChangeCondicaoAcidentado(e.target.value)}>
                     <option value="Óbito">Com Óbito</option>
                     <option value="Sem Óbito">Sem Óbito</option>
                 </select>
@@ -27,8 +26,7 @@ const PassoQuatro = ({
                         id="gravidade"
                         value={gravidade}
                         name="gravidade"
-                        onChange={(e) => handleChangeGravidade(e.target.value)}
-                    >
+                        onChange={(e) => handleChangeGravidade(e.target.value)}>
                         <option value="Emergencial">Emergencial</option>
                         <option value="Muito Urgente">Muito Grave</option>
                         <option value="Urgência">Urgência</option>

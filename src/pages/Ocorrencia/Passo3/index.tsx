@@ -19,8 +19,7 @@ const PassoTres = ({
                 id="tipoOcorrencia"
                 value={tipoOcorrencia}
                 name="tipoOcorrencia"
-                onChange={(e) => handleChangeTipoOcorrencia(e.target.value)}
-            >
+                onChange={(e) => handleChangeTipoOcorrencia(e.target.value)}>
                 <option value="Anônimo">Anônimo</option>
                 <option value="Vítima">Vítima</option>
                 <option value="Familiar">Familiar</option>

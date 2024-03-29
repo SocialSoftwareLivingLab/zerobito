@@ -48,8 +48,7 @@ const TabelaAcompanhamento = ({ eventos }) => {
                             <td>{evento.condicaoAcidentado}</td>
                             <td>
                                 <span
-                                    className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgência' ? 'amarelo-claro' : evento.gravidade === 'Urgência' ? 'amarelo' : 'vazio'}`}
-                                >
+                                    className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgência' ? 'amarelo-claro' : evento.gravidade === 'Urgência' ? 'amarelo' : 'vazio'}`}>
                                     {evento.gravidade}
                                     {evento.gravidade && (
                                         <>
@@ -77,8 +76,7 @@ const TabelaAcompanhamento = ({ eventos }) => {
                 </button>
                 <button
                     onClick={nextPage}
-                    disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}
-                >
+                    disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>
                     Próxima
                 </button>
                 <span className="page-info">

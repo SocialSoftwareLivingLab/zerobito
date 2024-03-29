@@ -29,8 +29,7 @@ function ObservatorioZeroObito() {
                 <button
                     className="search-container-biblioteca"
                     type="submit"
-                    onClick={handleBibliotecaClick}
-                >
+                    onClick={handleBibliotecaClick}>
                     Biblioteca de Casos
                 </button>
             </div>

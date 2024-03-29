@@ -37,8 +37,7 @@ export default function GravidadeView({
                     <>
                         <Select
                             label="Gravidade do acidente"
-                            {...register('gravidade', { required: condicao !== 'OBITO' })}
-                        >
+                            {...register('gravidade', { required: condicao !== 'OBITO' })}>
                             <SelectOption
                                 label="Selecione a gravidade do acidente"
                                 value=""

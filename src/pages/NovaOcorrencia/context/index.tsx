@@ -106,8 +106,7 @@ export function CriarOcorrenciaWizardContextProvider({
                 setVitimaData,
                 setDenuncianteData,
                 setGravidadeData
-            }}
-        >
+            }}>
             {children}
         </CriarOcorrenciaWizardContext.Provider>
     );

@@ -80,8 +80,7 @@ const colunasOcorrencias: TableColumn<OcorrenciaModel>[] = [
                     size="small"
                     action={() => {
                         console.log(row);
-                    }}
-                >
+                    }}>
                     Aceitar
                 </Button>
                 <Button
@@ -89,8 +88,7 @@ const colunasOcorrencias: TableColumn<OcorrenciaModel>[] = [
                     size="small"
                     action={() => {
                         console.log(row);
-                    }}
-                >
+                    }}>
                     Não incorporar
                 </Button>
             </ColunaAcao>

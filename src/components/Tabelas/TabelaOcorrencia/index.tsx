@@ -109,8 +109,7 @@ const TabelaOcorrencia = ({ eventos }) => {
                             <td>{evento.condicaoAcidentado}</td>
                             <td>
                                 <span
-                                    className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgência' ? 'amarelo-claro' : evento.gravidade === 'Urgência' ? 'amarelo' : 'vazio'}`}
-                                >
+                                    className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgência' ? 'amarelo-claro' : evento.gravidade === 'Urgência' ? 'amarelo' : 'vazio'}`}>
                                     {evento.gravidade}
                                     {evento.gravidade && (
                                         <>
@@ -131,8 +130,7 @@ const TabelaOcorrencia = ({ eventos }) => {
                                     className="button-nao-incorporar"
                                     onClick={() => {
                                         openCard();
-                                    }}
-                                >
+                                    }}>
                                     <LiaPaperPlane /> Não Incorporar
                                 </button>
                             </td>
@@ -146,8 +144,7 @@ const TabelaOcorrencia = ({ eventos }) => {
                 </button>
                 <button
                     onClick={nextPage}
-                    disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}
-                >
+                    disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>
                     Próxima
                 </button>
                 <span className="page-info">
@@ -161,16 +158,14 @@ const TabelaOcorrencia = ({ eventos }) => {
                             onClick={() => {
                                 closeCard();
                                 openMonitorCard();
-                            }}
-                        >
+                            }}>
                             Monitorar Denúncia
                         </button>
                         <button
                             onClick={() => {
                                 closeCard();
                                 openEncaminharCard();
-                            }}
-                        >
+                            }}>
                             Encaminhar Denúncia
                         </button>
                         <button className="close-button" onClick={closeCard}>
@@ -229,8 +224,7 @@ const TabelaOcorrencia = ({ eventos }) => {
                                 placeholder="Descreva o motivo do convite"
                                 id="descricao"
                                 value={descricao}
-                                onChange={handleDescricaoChange}
-                            ></textarea>
+                                onChange={handleDescricaoChange}></textarea>
                         </div>
                         <button className="close-button" onClick={closeEncaminharCard}>
                             <IoMdCloseCircle />

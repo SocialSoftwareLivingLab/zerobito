@@ -33,8 +33,7 @@ function BibliotecaCasos() {
                 <button
                     className="search-container-observatorio"
                     type="submit"
-                    onClick={handleObservatorioClick}
-                >
+                    onClick={handleObservatorioClick}>
                     Observatório ZerÓbito
                 </button>
             </div>

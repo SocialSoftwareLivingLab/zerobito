@@ -54,8 +54,7 @@ export default function RegistrarOcorrenciaView({ handles, refs }: RegistrarOcor
                         <Button type="submit" action={handleFinish}>
                             Enviar
                         </Button>
-                    )}
-                >
+                    )}>
                     <FormWizard.TabContent title="Local" icon="ti-map-alt">
                         <InformacoesBasicas ref={refs.formLocalRef} />
                     </FormWizard.TabContent>

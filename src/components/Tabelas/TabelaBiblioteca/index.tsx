@@ -58,8 +58,7 @@ const TabelaBiblioteca = ({ eventos }) => {
                             <td>{evento.causa}</td>
                             <td>
                                 <span
-                                    className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}
-                                >
+                                    className={`quadrado ${evento.gravidade === 'Investigado' ? 'verde' : 'laranja'}`}>
                                     {evento.gravidade}
                                 </span>
                             </td>
@@ -76,8 +75,7 @@ const TabelaBiblioteca = ({ eventos }) => {
                 </button>
                 <button
                     onClick={nextPage}
-                    disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}
-                >
+                    disabled={currentPage === Math.ceil(eventos.length / itemsPerPage)}>
                     Próxima
                 </button>
             </div>

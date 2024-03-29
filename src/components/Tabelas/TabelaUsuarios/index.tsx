@@ -22,8 +22,7 @@ const TabelaAcompanhamento = ({ usuarios }) => {
                                 <button
                                     onClick={() => {
                                         /* função para agrupar */
-                                    }}
-                                >
+                                    }}>
                                     Inativar
                                 </button>
                             </td>
