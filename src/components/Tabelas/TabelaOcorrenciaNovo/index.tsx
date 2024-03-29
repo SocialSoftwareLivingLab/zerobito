@@ -30,7 +30,7 @@ interface TabelaOcorrenciaNovoProps {
 const colunasOcorrencias: TableColumn<OcorrenciaModel>[] = [
     {
         name: 'Denúncia',
-        selector: sel => sel.denuncia,
+        selector: sel => sel.descricao,
         sortable: true,
         width: '15%',
         allowOverflow: true,
@@ -39,16 +39,16 @@ const colunasOcorrencias: TableColumn<OcorrenciaModel>[] = [
     {
         name: 'Data',
         width: '15%',
-        selector: sel => sel.data,
+        selector: sel => String(sel.data),
         sortable: true,
         allowOverflow: true,
-        format: (row) => new Date(row.data).toLocaleDateString(new Intl.Locale('pt-BR')),
+        format: (row) => Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(row.data)),
         wrap: true
     },
     {
-        name: 'Condição do Acidentado',
+        name: 'Tipo',
         width: '15%',
-        selector: sel => sel.condicaoAcidentado,
+        selector: sel => sel.vitima.condicao,
         sortable: true,
         allowOverflow: true,
         wrap: true
@@ -56,15 +56,15 @@ const colunasOcorrencias: TableColumn<OcorrenciaModel>[] = [
     {
         name: 'Gravidade',
         width: '15%',
-        selector: sel => sel.gravidade,
+        selector: sel => sel.vitima.gravidade,
         sortable: true,
         allowOverflow: true,
         wrap: true
     },
     {
-        name: 'Andamento do caso',
+        name: 'Status',
         width: '15%',
-        selector: sel => sel.andamentoCaso,
+        selector: sel => sel.status,
         sortable: true,
         allowOverflow: true,
         wrap: true
@@ -87,6 +87,7 @@ export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
             <DataTable
                 data={props.ocorrencias}
                 columns={colunasOcorrencias}
+                responsive
                 pagination
                 paginationComponent={Paginacao}
                 customStyles={dataTableStyle}
