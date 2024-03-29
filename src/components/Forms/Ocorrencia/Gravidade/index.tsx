@@ -24,7 +24,6 @@ const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
             condicao: formData.gravidade.obito,
             gravidade: formData.gravidade.gravidade
           };
-          console.log("tipo: ", condicao);
         if (condicao === "OBITO") {
           resetField("gravidade", {defaultValue: ""});
         }
@@ -32,7 +31,7 @@ const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
             reset(data)
         }
         console.log(data);
-        console.log("tipo: ", condicao);
+        
       }, [condicao, formData, resetField, reset]);
 
     useImperativeHandle(ref, () => ({
