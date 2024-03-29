@@ -28,7 +28,7 @@ export function CriarOcorrenciaWizardContextProvider({ children }: CriarOcorrenc
             vinculoEmpresa: '',
         },
         denunciante: {
-            tipoDenuncia: '',
+            tipoDenuncia: 'ANONIMA',
             nomeDenuncia: '',
             emailDenuncia: '',
             telefoneDenuncia: '',
@@ -37,7 +37,7 @@ export function CriarOcorrenciaWizardContextProvider({ children }: CriarOcorrenc
             denunciaCustomizada: '',
         },
         gravidade: {
-            obito: '',
+            obito: 'OBITO',
             gravidade: '',
         },
     } as OcorrenciaFormData);

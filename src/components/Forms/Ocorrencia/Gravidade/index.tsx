@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useImperativeHandle } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useOcorrenciaWizardContext } from '../../../../pages/NovaOcorrencia/context';
 import { FormStepApi } from '../interface';
@@ -7,11 +7,10 @@ import { GravidadeFormFields, defaultValue } from './model';
 import GravidadeView, { GravidadeViewProps } from './view';
 
 const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
-    const { register, handleSubmit, watch, resetField, trigger, formState: { isValid, errors } } = useForm<GravidadeFormFields>({ defaultValues: defaultValue });
-
+    const { register,reset, handleSubmit, watch, resetField, trigger, formState: { isValid, errors } } = useForm<GravidadeFormFields>();
     const condicao = watch('condicao');
 
-    const { setGravidadeData } = useOcorrenciaWizardContext();
+    const { setGravidadeData, formData } = useOcorrenciaWizardContext();
 
     const submitForm: SubmitHandler<GravidadeFormFields> = useCallback((data) => {
         setGravidadeData({
@@ -20,11 +19,21 @@ const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
         });
     }, [setGravidadeData]);
 
-    React.useEffect(() => {
+    useEffect(() => {
+        const data:GravidadeFormFields = {
+            condicao: formData.gravidade.obito,
+            gravidade: formData.gravidade.gravidade
+          };
+          console.log("tipo: ", condicao);
         if (condicao === "OBITO") {
-          resetField("gravidade");
+          resetField("gravidade", {defaultValue: ""});
         }
-      }, [condicao, resetField]);
+        else if(formData.gravidade.obito !== "OBITO"){
+            reset(data)
+        }
+        console.log(data);
+        console.log("tipo: ", condicao);
+      }, [condicao, formData, resetField, reset]);
 
     useImperativeHandle(ref, () => ({
         submitForm: () => {

@@ -23,8 +23,7 @@ export default function DenuncianteView(
             <FormContainer>
                 <form onSubmit={submitForm}>
                     <Select label='Tipo da Denúncia' {...register('tipo')}  >
-                        <SelectOption />
-                        <SelectOption label="Denunciante Anônimo" value="ANONIMA" />
+                        <SelectOption label="Denunciante Anônimo" value="ANONIMA"/>
                         <SelectOption label="Vítima" value="VITIMA" />
                         <SelectOption label="Familiar" value="FAMILIAR" />
                         <SelectOption label="Colega de Trabalho" value="COLEGA_TRABALHO" />
