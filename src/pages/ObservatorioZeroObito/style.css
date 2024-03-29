@@ -1,11 +1,10 @@
-
-.search-container-biblioteca{
+.search-container-biblioteca {
     margin-left: 55rem;
     border-radius: 0.1rem;
     width: 12rem;
     height: 2.3rem;
-    background-color: rgba(19,71,128,1);
+    background-color: rgba(19, 71, 128, 1);
     border: none;
     color: aliceblue;
-    font:bold;
+    font: bold;
 }

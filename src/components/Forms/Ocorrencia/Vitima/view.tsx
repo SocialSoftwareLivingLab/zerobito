@@ -1,55 +1,62 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import "../style.css";
+import '../style.css';
 import { VitimaFormFields } from './model';
 import Input from '../../../ui/Input';
 import { FormContainer } from '../styles';
 import { Select, SelectOption } from '../../../ui/Select';
 
 export interface VitimaViewProps {
-    submitForm: () => void,
-    errors: FieldErrors<VitimaFormFields>,
-    register: UseFormRegister<VitimaFormFields>,
-    nomeEmpresa?: string,
-    tomadoraDeServicoNome?: string,
+    submitForm: () => void;
+    errors: FieldErrors<VitimaFormFields>;
+    register: UseFormRegister<VitimaFormFields>;
+    nomeEmpresa?: string;
+    tomadoraDeServicoNome?: string;
 }
 
-export default function VitimaView(
-    {
-        submitForm,
-        errors,
-        register,
-        nomeEmpresa,
-        tomadoraDeServicoNome
-    }: VitimaViewProps
-) {
+export default function VitimaView({
+    submitForm,
+    errors,
+    register,
+    nomeEmpresa,
+    tomadoraDeServicoNome
+}: VitimaViewProps) {
     return (
         <FormContainer>
             <h1>Informações sobre o acidente:</h1>
             <form onSubmit={submitForm}>
                 {/* <input type="text" placeholder="Nome" {...register('nome')} /> */}
                 <Input label="Nome da Vítima" {...register('nome', { required: true })} />
-                <ErrorMessage name='nome' errors={errors} as="p" />
+                <ErrorMessage name="nome" errors={errors} as="p" />
 
                 {/* <input type="text" placeholder="Nome da empresa empregadora" {...register('nomeEmpresa')} /> */}
-                <Input label="Empresa Empregadora" {...register('nomeEmpresa', { required: true })} />
-                <ErrorMessage name='nomeEmpresa' errors={errors} as="p" />
+                <Input
+                    label="Empresa Empregadora"
+                    {...register('nomeEmpresa', { required: true })}
+                />
+                <ErrorMessage name="nomeEmpresa" errors={errors} as="p" />
 
-                <Input label="CNPJ Empresa Empregadora" {...register('cnpjEmpresa', { required: true })} />
-                <ErrorMessage name='cnpjEmpresa' errors={errors} as="p" />
+                <Input
+                    label="CNPJ Empresa Empregadora"
+                    {...register('cnpjEmpresa', { required: true })}
+                />
+                <ErrorMessage name="cnpjEmpresa" errors={errors} as="p" />
 
                 {/* <input type="text" placeholder="Nome da tomadora de serviço" {...register('tomadoraDeServicoNome')} /> */}
                 <Input label="Tomadora de Serviço" {...register('tomadoraDeServicoNome')} />
-                <ErrorMessage name='tomadoraDeServicoNome' errors={errors} as="p" />
+                <ErrorMessage name="tomadoraDeServicoNome" errors={errors} as="p" />
 
-                {!!tomadoraDeServicoNome &&
+                {!!tomadoraDeServicoNome && (
                     <>
                         {/* <input type="text" placeholder="CNPJ da tomadora de serviço" {...register('tomadoraDeServicoCNPJ')} /> */}
-                        <Input label="CNPJ Tomadora de Serviço" {...register('tomadoraDeServicoCNPJ', { required: true })} />
-                        <ErrorMessage name='tomadoraDeServicoCNPJ' errors={errors} as="p" />
+                        <Input
+                            label="CNPJ Tomadora de Serviço"
+                            {...register('tomadoraDeServicoCNPJ', { required: true })}
+                        />
+                        <ErrorMessage name="tomadoraDeServicoCNPJ" errors={errors} as="p" />
                     </>
-                }
+                )}
 
                 <Select label="Tipo de contrato" {...register('tipoContrato', { required: true })}>
                     <SelectOption label="Selecione" disabled />
@@ -62,7 +69,7 @@ export default function VitimaView(
                     <SelectOption label="Outro" value="Outro" />
                     <SelectOption label="Desconhecido" value="Desconhecido" />
                 </Select>
-                <ErrorMessage name='tipoContrato' errors={errors} as="p" />
+                <ErrorMessage name="tipoContrato" errors={errors} as="p" />
             </form>
         </FormContainer>
     );

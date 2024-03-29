@@ -3,25 +3,20 @@ import './style.css';
 import useLoginViewModel from './view.model';
 
 const LoginCard = () => {
-
-    const { email, senha, error, handleSubmit, handleChangeEmail, handleChangeSenha } = useLoginViewModel();
+    const { email, senha, error, handleSubmit, handleChangeEmail, handleChangeSenha } =
+        useLoginViewModel();
 
     return (
         <div className="LoginCard">
-            <body className='container-body'>
+            <body className="container-body">
                 <div className="container">
+                    <h1 className="header-card">ENTRAR</h1>
 
-                    <h1 className='header-card'>
-                        ENTRAR
-                    </h1>
-
-
-                    <div className='content'>
-                        <form className='form' onSubmit={handleSubmit}>
-                            
+                    <div className="content">
+                        <form className="form" onSubmit={handleSubmit}>
                             <div>
-                                <label htmlFor='email'>Email:</label>
-                                <input 
+                                <label htmlFor="email">Email:</label>
+                                <input
                                     type="email"
                                     name="email"
                                     value={email}
@@ -43,14 +38,13 @@ const LoginCard = () => {
 
                             {!!error && <p className="error_login">{error}</p>}
 
-                            <button type="submit" >Entrar</button>
+                            <button type="submit">Entrar</button>
                         </form>
                     </div>
-
                 </div>
             </body>
         </div>
     );
-}
+};
 
 export default LoginCard;

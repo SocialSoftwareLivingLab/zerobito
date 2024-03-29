@@ -10,36 +10,27 @@ export interface SelectOptionProps {
 
 export function SelectOption({ value, label, disabled, selected }: SelectOptionProps) {
     return (
-        <option
-            value={value}
-            disabled={disabled}
-            selected={selected}
-        >
+        <option value={value} disabled={disabled} selected={selected}>
             {label}
         </option>
-    )
+    );
 }
 
 export interface SelectProps {
     label: string;
     width?: 'auto' | 'full';
-    children: React.ReactElement<SelectOptionProps>[]
+    children: React.ReactElement<SelectOptionProps>[];
 }
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>((
-    {
-        label,
-        width = 'auto',
-        children,
-        ...rest
-    }: SelectProps, ref
-) => {
-    return (
-        <SelectArea>
-            <SelectLabel>{label}</SelectLabel>
-            <SelectField ref={ref} {...rest}>
-                {children}
-            </SelectField>
-        </SelectArea>
-    );
-});
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+    ({ label, width = 'auto', children, ...rest }: SelectProps, ref) => {
+        return (
+            <SelectArea>
+                <SelectLabel>{label}</SelectLabel>
+                <SelectField ref={ref} {...rest}>
+                    {children}
+                </SelectField>
+            </SelectArea>
+        );
+    }
+);

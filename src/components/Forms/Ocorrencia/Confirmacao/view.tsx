@@ -1,15 +1,13 @@
-import React from "react";
-import { OcorrenciaFormData } from "../../../../pages/NovaOcorrencia/model";
-import { FormContainer } from "../styles";
-import { Section } from "./styles";
+import React from 'react';
+import { OcorrenciaFormData } from '../../../../pages/NovaOcorrencia/model';
+import { FormContainer } from '../styles';
+import { Section } from './styles';
 
 export interface ConfirmacaoOcorrenciaViewProps {
     data: OcorrenciaFormData;
 }
 
-export default function ConfirmacaoOcorrenciaView(
-    { data }: ConfirmacaoOcorrenciaViewProps
-) {
+export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenciaViewProps) {
     return (
         <FormContainer>
             <h2>Confirme os dados</h2>
@@ -33,16 +31,21 @@ export default function ConfirmacaoOcorrenciaView(
                 {data.vitima.nomeEmpresa && <p>Empresa: {data.vitima.nomeEmpresa}</p>}
                 {data.vitima.cnpjEmpresa && <p>CNPJ Empresa: {data.vitima.cnpjEmpresa}</p>}
 
-                {data.vitima.tomadoraDeServicoNome && <p>Tomadora de Serviço: {data.vitima.tomadoraDeServicoNome}</p>}
-                {data.vitima.tomadoraDeServicoCNPJ && <p>CNPJ Tomadora de Serviço: {data.vitima.tomadoraDeServicoCNPJ}</p>}
+                {data.vitima.tomadoraDeServicoNome && (
+                    <p>Tomadora de Serviço: {data.vitima.tomadoraDeServicoNome}</p>
+                )}
+                {data.vitima.tomadoraDeServicoCNPJ && (
+                    <p>CNPJ Tomadora de Serviço: {data.vitima.tomadoraDeServicoCNPJ}</p>
+                )}
             </Section>
 
             <Section>
                 <h3>Informações do Denunciante</h3>
 
                 <p>Tipo: {data.denunciante.tipoDenuncia}</p>
-                {data.denunciante.tipoDenuncia === 'OUTRO' && <p>Tipo informado: {data.denunciante.tipoDenuncia}</p>}
-                
+                {data.denunciante.tipoDenuncia === 'OUTRO' && (
+                    <p>Tipo informado: {data.denunciante.tipoDenuncia}</p>
+                )}
 
                 {data.denunciante.tipoDenuncia !== 'ANONIMO' && (
                     <>
@@ -57,9 +60,11 @@ export default function ConfirmacaoOcorrenciaView(
             <Section>
                 <h3>Gravidade do acidente</h3>
 
-                <p>Houve óbito? {data.gravidade.obito === 'OBITO' ? 'Sim' : "Não"}</p>
-                {data.gravidade.obito === 'INCIDENTE_ALTO_POTENCIAL' && <p>Gravidade da vítima: {data.gravidade.gravidade}</p>}
+                <p>Houve óbito? {data.gravidade.obito === 'OBITO' ? 'Sim' : 'Não'}</p>
+                {data.gravidade.obito === 'INCIDENTE_ALTO_POTENCIAL' && (
+                    <p>Gravidade da vítima: {data.gravidade.gravidade}</p>
+                )}
             </Section>
         </FormContainer>
-    )
+    );
 }

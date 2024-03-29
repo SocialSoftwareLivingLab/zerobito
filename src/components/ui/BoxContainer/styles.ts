@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const BoxContainerStyle = styled.div`
     width: calc(100% - 48px);
@@ -10,7 +10,7 @@ export const BoxContainerStyle = styled.div`
     border: 1px solid #f0f0f0;
     border-radius: 0.3em 0.3em 0 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    
+
     header {
         display: flex;
         flex-direction: row;

@@ -1,10 +1,10 @@
 import React from 'react';
-import Menu from "../../components/Menu/index.tsx";
+import Menu from '../../components/Menu/index.tsx';
 import TabelaContatos from '../../components/Tabelas/TabelaContatos/index.tsx';
-import "./style.css";
+import './style.css';
 
-function Contato(){
-    return(
+function Contato() {
+    return (
         <div className="Contato">
             <Menu />
             <div className="container-body-contato">
@@ -16,6 +16,6 @@ function Contato(){
             </div>
         </div>
     );
-};
+}
 
 export default Contato;

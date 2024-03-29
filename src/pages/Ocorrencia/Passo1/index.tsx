@@ -12,7 +12,6 @@ const PassoUm = ({
     referenciaLocalidade,
     data
 }) => {
-
     const todosCamposPreenchidos = () => {
         return estado && cidade && local;
     };
@@ -54,18 +53,17 @@ const PassoUm = ({
             {todosCamposPreenchidos() && (
                 <input
                     type="text"
-                    onFocus={(e) => (e.target.type = "date")}
-                    onBlur={(e) => (e.target.type = "text")}
-                    name='data'
+                    onFocus={(e) => (e.target.type = 'date')}
+                    onBlur={(e) => (e.target.type = 'text')}
+                    name="data"
                     value={data}
                     onChange={(e) => handleChangeData(e.target.value)}
-                    placeholder='Data do acidente'
+                    placeholder="Data do acidente"
                     required
                 />
             )}
         </div>
     );
 };
-
 
 export default PassoUm;

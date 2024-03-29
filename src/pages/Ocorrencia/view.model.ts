@@ -1,42 +1,45 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { createOcorrencia } from "../../common/models/ocorrencias/create.ocorrencia";
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { createOcorrencia } from '../../common/models/ocorrencias/create.ocorrencia';
 
 const useOcorrenciaViewModel = () => {
     const history = useHistory();
-    const [error, setError] = useState<string>("");
-    const [denuncia, setDenuncia] = useState<string>("");
+    const [error, setError] = useState<string>('');
+    const [denuncia, setDenuncia] = useState<string>('');
     const [data, setData] = useState('');
-    const [estado, setEstado] = useState<string>("");
-    const [cidade, setCidade] = useState<string>("");
-    const [referenciaLocalidade, setReferenciaLocalidade] = useState<string>("");
-    const [local, setLocal] = useState<string>("");
-    const [nomeVitima, setNomeVitima] = useState<string>("");
-    const [condicaoAcidentado, setCondicaoAcidentado] = useState<string>("");
-    const [gravidade, setGravidade] = useState<string>("");
-    const [status, setStatus] = useState<string>("");
-    const [vinculo, setVinculo] = useState<string>("");
-    const [empresaEmpregadora, setEmpresaEmpregadora] = useState<string>("");
-    const [empresaTomadora, setEmpresaTomadora] = useState<string>("");
-    const [tipoOcorrencia, setTipoOcorrencia] = useState<string>("");
-    const [nomeContato, setNomeContato] = useState<string>("");
-    const [emailContato, setEmailContato] = useState<string>("");
-    const [telefoneContato, setTelefoneContato] = useState<string>("");
-    const [descricao, setDescricao] = useState<string>("");
+    const [estado, setEstado] = useState<string>('');
+    const [cidade, setCidade] = useState<string>('');
+    const [referenciaLocalidade, setReferenciaLocalidade] = useState<string>('');
+    const [local, setLocal] = useState<string>('');
+    const [nomeVitima, setNomeVitima] = useState<string>('');
+    const [condicaoAcidentado, setCondicaoAcidentado] = useState<string>('');
+    const [gravidade, setGravidade] = useState<string>('');
+    const [status, setStatus] = useState<string>('');
+    const [vinculo, setVinculo] = useState<string>('');
+    const [empresaEmpregadora, setEmpresaEmpregadora] = useState<string>('');
+    const [empresaTomadora, setEmpresaTomadora] = useState<string>('');
+    const [tipoOcorrencia, setTipoOcorrencia] = useState<string>('');
+    const [nomeContato, setNomeContato] = useState<string>('');
+    const [emailContato, setEmailContato] = useState<string>('');
+    const [telefoneContato, setTelefoneContato] = useState<string>('');
+    const [descricao, setDescricao] = useState<string>('');
 
     const handleSubmit = async (formData) => {
-
         const ocorrencia = {
-            local: (formData.passo1.estado + formData.passo1.local + formData.passo1.referenciaLocalidade + formData.passo1.cidade),
+            local:
+                formData.passo1.estado +
+                formData.passo1.local +
+                formData.passo1.referenciaLocalidade +
+                formData.passo1.cidade,
             data: formData.passo1.data,
             nomeVitima: formData.passo2.nomeVitima,
             empresaEmpregadora: formData.passo2.empresaEmpregadora,
-            vinculo:formData.passo2.vinculo,
+            vinculo: formData.passo2.vinculo,
             denuncia: formData.passo2.descricao,
-            tipoOcorrencia:formData.passo3.tipoOcorrencia,
-            nomeContato:formData.passo3.nomeContato,
-            emailContato:formData.passo3.emailContato,
-            telefoneContato:formData.passo3.telefoneContato,
+            tipoOcorrencia: formData.passo3.tipoOcorrencia,
+            nomeContato: formData.passo3.nomeContato,
+            emailContato: formData.passo3.emailContato,
+            telefoneContato: formData.passo3.telefoneContato,
             condicaoAcidentado: formData.passo4.condicaoAcidentado,
             gravidade: formData.passo4.gravidade,
             status: formData.passo3.status,
@@ -56,16 +59,13 @@ const useOcorrenciaViewModel = () => {
                 ocorrencia.condicaoAcidentado,
                 ocorrencia.empresaEmpregadora,
                 ocorrencia.gravidade,
-                ocorrencia.statusEvento,
-
+                ocorrencia.statusEvento
             );
             if (response.status === 200) {
-                history.replace("/");
+                history.replace('/');
             }
         } catch (error: any) {
-            setError(
-                String(error.response.data?.error ?? error.response.data.message)
-            );
+            setError(String(error.response.data?.error ?? error.response.data.message));
         }
     };
 
@@ -108,18 +108,17 @@ const useOcorrenciaViewModel = () => {
     const handleChangeCondicaoAcidentado = (value) => {
         // Atualiza a condição do acidentado
         setCondicaoAcidentado(value);
-      
+
         // Se a condição do acidentado é "Com Óbito", define a gravidade para "Óbito"
-        if (value === "Óbito") {
-          setGravidade("Óbito");
+        if (value === 'Óbito') {
+            setGravidade('Óbito');
         }
-      };
+    };
 
     const handleChangeGravidade = (event) => {
         const value = event.target.value;
 
         setGravidade(value);
-        
     };
 
     const handleChangeStatus = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -156,19 +155,19 @@ const useOcorrenciaViewModel = () => {
         const value = event.target.value;
 
         setNomeContato(value);
-    }
+    };
 
     const handleChangeEmailContato = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
         setEmailContato(value);
-    }
+    };
 
     const handleChangeTelefoneContato = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
         setTelefoneContato(value);
-    }
+    };
 
     const handleChangeDescricao = (event) => {
         const value = event.target.value;
@@ -213,7 +212,7 @@ const useOcorrenciaViewModel = () => {
         handleChangeNomeContato,
         handleChangeEmailContato,
         handleChangeTelefoneContato,
-        handleChangeDescricao,
+        handleChangeDescricao
     };
 };
 

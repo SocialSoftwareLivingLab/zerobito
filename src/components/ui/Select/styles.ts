@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { SelectProps } from ".";
+import styled from 'styled-components';
+import { SelectProps } from '.';
 
 export const SelectArea = styled.div`
     display: flex;
@@ -22,12 +22,12 @@ export type SelectFieldProps = Pick<SelectProps, 'width'>;
 export const SelectField = styled.select<SelectFieldProps>`
     width: 30%;
     border-radius: 0.5rem;
-    border: 1px solid #ACB8C4;
+    border: 1px solid #acb8c4;
     padding: 10px;
     font-size: 16px;
     margin-top: 8px;
 
-    width: ${({ width }) => width === 'auto' ? 'auto' : '100%'};
+    width: ${({ width }) => (width === 'auto' ? 'auto' : '100%')};
 
     &:focus {
         outline: none;
@@ -36,7 +36,6 @@ export const SelectField = styled.select<SelectFieldProps>`
     }
 
     &::placeholder {
-        color: #ACB8C4;
+        color: #acb8c4;
     }
 `;
-

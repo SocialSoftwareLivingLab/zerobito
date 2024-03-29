@@ -1,22 +1,20 @@
-.button-acompanhar{
-  background-color: rgb(250, 249, 249);
-  border: 1px solid rgb(153, 153, 153);
-  color: rgb(153, 153, 153);
-  font:bold;
-  width: 10rem;
-  margin-right: 6rem;
-  margin-left: -1rem;
-  font-size: 16px;
-  vertical-align: middle;
-  margin-bottom: 10px;
-
+.button-acompanhar {
+    background-color: rgb(250, 249, 249);
+    border: 1px solid rgb(153, 153, 153);
+    color: rgb(153, 153, 153);
+    font: bold;
+    width: 10rem;
+    margin-right: 6rem;
+    margin-left: -1rem;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-bottom: 10px;
 }
 
-.button-acompanhar:hover{
-  background-color: #f3f1f1;
+.button-acompanhar:hover {
+    background-color: #f3f1f1;
 }
 
-.button-acompanhar svg{
-  margin-right: 8px;
+.button-acompanhar svg {
+    margin-right: 8px;
 }
-

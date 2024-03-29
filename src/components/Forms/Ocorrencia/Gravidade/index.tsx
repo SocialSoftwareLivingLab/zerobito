@@ -2,39 +2,53 @@ import React, { forwardRef, useCallback, useImperativeHandle } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useOcorrenciaWizardContext } from '../../../../pages/NovaOcorrencia/context';
 import { FormStepApi } from '../interface';
-import "../style.css";
+import '../style.css';
 import { GravidadeFormFields, defaultValue } from './model';
 import GravidadeView, { GravidadeViewProps } from './view';
 
 const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
-    const { register, handleSubmit, watch, resetField, trigger, formState: { isValid, errors } } = useForm<GravidadeFormFields>({ defaultValues: defaultValue });
+    const {
+        register,
+        handleSubmit,
+        watch,
+        resetField,
+        trigger,
+        formState: { isValid, errors }
+    } = useForm<GravidadeFormFields>({ defaultValues: defaultValue });
 
     const condicao = watch('condicao');
 
     const { setGravidadeData } = useOcorrenciaWizardContext();
 
-    const submitForm: SubmitHandler<GravidadeFormFields> = useCallback((data) => {
-        setGravidadeData({
-            obito: data.condicao,
-            gravidade: data.gravidade
-        });
-    }, [setGravidadeData]);
+    const submitForm: SubmitHandler<GravidadeFormFields> = useCallback(
+        (data) => {
+            setGravidadeData({
+                obito: data.condicao,
+                gravidade: data.gravidade
+            });
+        },
+        [setGravidadeData]
+    );
 
     React.useEffect(() => {
-        if (condicao === "OBITO") {
-          resetField("gravidade");
+        if (condicao === 'OBITO') {
+            resetField('gravidade');
         }
-      }, [condicao, resetField]);
+    }, [condicao, resetField]);
 
-    useImperativeHandle(ref, () => ({
-        submitForm: () => {
-            handleSubmit(submitForm)();
-        },
-        validate(): boolean {
-            trigger();
-            return isValid;
-        }
-    }), [isValid, trigger, handleSubmit, submitForm]);
+    useImperativeHandle(
+        ref,
+        () => ({
+            submitForm: () => {
+                handleSubmit(submitForm)();
+            },
+            validate(): boolean {
+                trigger();
+                return isValid;
+            }
+        }),
+        [isValid, trigger, handleSubmit, submitForm]
+    );
 
     const vitimaViewProps: GravidadeViewProps = {
         register,

@@ -39,9 +39,9 @@ export interface OcorrenciaFormData {
 }
 
 export interface CriarOcorrenciaWizardContextData {
-    formData: OcorrenciaFormData,
-    setInformacoesBasicas: (data: InformacoesBasicasData) => void,
-    setVitimaData: (data: VitimaData) => void,
-    setDenuncianteData: (data: DenuncianteData) => void,
-    setGravidadeData: (data: GravidadeData) => void,
+    formData: OcorrenciaFormData;
+    setInformacoesBasicas: (data: InformacoesBasicasData) => void;
+    setVitimaData: (data: VitimaData) => void;
+    setDenuncianteData: (data: DenuncianteData) => void;
+    setGravidadeData: (data: GravidadeData) => void;
 }

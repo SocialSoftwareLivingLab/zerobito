@@ -1,6 +1,4 @@
-
-  
-  .form-container-textarea{
+.form-container-textarea {
     width: 90%;
     height: 10rem;
     border-radius: 0.5rem;
@@ -8,10 +6,9 @@
     padding: 10px;
     font-size: 16px;
     margin-top: 1rem;
-  }
+}
 
-  
-  .form-container select{
+.form-container select {
     display: block;
     margin: 0 auto;
     width: 30%;
@@ -20,5 +17,4 @@
     padding: 10px;
     font-size: 16px;
     margin-top: 1rem;
-  }
-
+}

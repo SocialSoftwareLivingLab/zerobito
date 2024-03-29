@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { useHistory } from "react-router";
-import { register } from "../../common/models/user/create.user";
-import {login} from "../../common/models/user/auth";
+import { useState } from 'react';
+import { useHistory } from 'react-router';
+import { register } from '../../common/models/user/create.user';
+import { login } from '../../common/models/user/auth';
 import Swal from 'sweetalert2';
 
 const useRegisterViewModel = () => {
     const history = useHistory();
     const [error, setError] = useState<string>();
-    const [nome, setNome] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [senha, setSenha] = useState<string>("");
-    const [senhaValidation, setSenhaValidation] = useState<string>("");
+    const [nome, setNome] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
+    const [senhaValidation, setSenhaValidation] = useState<string>('');
 
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (senha !== senhaValidation) {
-            setError(String("Senha diverge da confirmação"));
+            setError(String('Senha diverge da confirmação'));
             return;
         }
 
@@ -27,15 +27,13 @@ const useRegisterViewModel = () => {
                     title: 'Cadastro Realizado!',
                     text: 'Você será redirecionado em instantes.',
                     icon: 'success',
-                    timer: 2000,
-                  })
-                  await login({ email: email, senha: senha });
-                history.replace("/home");
+                    timer: 2000
+                });
+                await login({ email, senha });
+                history.replace('/home');
             }
         } catch (error: any) {
-            setError(
-                String("Dados inválidos."
-            ));
+            setError(String('Dados inválidos.'));
         }
     };
 
@@ -57,14 +55,11 @@ const useRegisterViewModel = () => {
         setSenha(value);
     };
 
-    const handleChangeSenhaValidation = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleChangeSenhaValidation = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
         setSenhaValidation(value);
     };
-
 
     return {
         nome,

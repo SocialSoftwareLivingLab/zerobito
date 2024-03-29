@@ -1,14 +1,14 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-.header{
+.header {
     position: fixed;
     top: 0;
 }
 
-.container-header{
+.container-header {
     display: static;
     align-items: center;
     background-color: #134780;
@@ -17,13 +17,13 @@
     color: #fff;
 }
 
-.container-header h1{
+.container-header h1 {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
-.container-header .text{
+.container-header .text {
     text-wrap: wrap;
     font-size: 1.2rem;
     font-weight: 400;
@@ -31,36 +31,34 @@
     color: aliceblue;
 }
 
-.container-content{
+.container-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
     padding: 5% 10% 0% 10%;
-    background-color:#F1F0F5;;
+    background-color: #f1f0f5;
 }
 
-
-.button-denuncia:hover{
-    background-color: #0D2C4C;
+.button-denuncia:hover {
+    background-color: #0d2c4c;
 }
 
-
-.container-content-imprensa{
+.container-content-imprensa {
     flex-direction: column;
     align-items: center;
     height: 100%;
     padding: 5% 10% 0% 10%;
-    background-color:#F1F0F5;;
+    background-color: #f1f0f5;
 }
 
-.container-content-imprensa h2{
+.container-content-imprensa h2 {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
-.button-denuncia{
+.button-denuncia {
     font-size: 1rem;
     border-radius: 0.3rem;
     border: none;
@@ -70,7 +68,7 @@
     color: #fff;
 }
 
-.grid{
+.grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;

@@ -1,9 +1,15 @@
-import React, { useCallback, useRef, useState } from "react";
-import { FormStepApi } from "../../components/Forms/Ocorrencia/interface";
-import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from "./context";
-import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from "./view";
-import { CondicaoVitima, CriarOcorrenciaRequest, GravidadeVitima, TipoFonteDenuncia, criarOcorrencia } from "../../common/api/ocorrencias/criar-ocorrencia";
-import { useHistory } from "react-router-dom";
+import React, { useCallback, useRef, useState } from 'react';
+import { FormStepApi } from '../../components/Forms/Ocorrencia/interface';
+import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from './context';
+import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
+import {
+    CondicaoVitima,
+    CriarOcorrenciaRequest,
+    GravidadeVitima,
+    TipoFonteDenuncia,
+    criarOcorrencia
+} from '../../common/api/ocorrencias/criar-ocorrencia';
+import { useHistory } from 'react-router-dom';
 
 function RegistrarOcorrenciaPage() {
     const formLocalRef = useRef<FormStepApi>(null);
@@ -35,7 +41,7 @@ function RegistrarOcorrenciaPage() {
                 handleNextFormWizard();
                 setCurrentStep((prev) => prev + 1);
             } else {
-                alert("Preencha todos os campos para continuar");
+                alert('Preencha todos os campos para continuar');
             }
         },
         [currentStep, formLocalRef, formVitimaRef, formDenuncianteRef, formGravidadeRef]
@@ -45,8 +51,9 @@ function RegistrarOcorrenciaPage() {
         (handlePreviousFormWizard: () => void) => {
             setCurrentStep((prev) => prev - 1);
             handlePreviousFormWizard();
-        }
-        , [setCurrentStep]);
+        },
+        [setCurrentStep]
+    );
 
     const handleCompleteWizard = useCallback(async () => {
         console.log(formData);
@@ -82,15 +89,13 @@ function RegistrarOcorrenciaPage() {
                 gravidade: formData.gravidade.gravidade as GravidadeVitima
             }
         };
-        
+
         await criarOcorrencia(payload);
 
-        alert("Ocorrência registrada com sucesso")
+        alert('Ocorrência registrada com sucesso');
 
-        history.push("/home");
-
+        history.push('/home');
     }, [formData, history]);
-
 
     const registrarOcorrenciaViewProps: RegistrarOcorrenciaViewProps = {
         handles: {
@@ -108,7 +113,6 @@ function RegistrarOcorrenciaPage() {
 
     return <RegistrarOcorrenciaView {...registrarOcorrenciaViewProps} />;
 }
-
 
 export default function RegistrarOcorrencia() {
     return (

@@ -1,27 +1,26 @@
-
-.search-container input{
+.search-container input {
     background-color: white;
     border-radius: 0.2rem;
     border: 1px solid rgb(189, 188, 188);
     width: 15rem;
-    height: 1.80rem;
+    height: 1.8rem;
     margin-top: 2px;
     padding-left: 4px;
-    color:rgb(155, 153, 153);
+    color: rgb(155, 153, 153);
 }
 
-.cartilhas{
+.cartilhas {
     display: flex;
     margin: 0 auto;
     margin-top: 1rem;
     width: 80%;
     height: 21rem;
-    border-radius:.2rem;
+    border-radius: 0.2rem;
     flex-direction: column;
 }
 
-.cartilhas-header{
-    color: rgba(19,71,128,1);
+.cartilhas-header {
+    color: rgba(19, 71, 128, 1);
     font-size: 0.9rem;
     text-align: left;
     width: 100%;
@@ -29,22 +28,22 @@
     padding: 0.5rem 1.5rem;
 }
 
-.cartilhas-header h1{
+.cartilhas-header h1 {
     width: 100%;
 }
 
-.videos{
+.videos {
     display: flex;
     margin: 0 auto;
     margin-top: 1rem;
     width: 80%;
     height: 21rem;
-    border-radius:.2rem;
+    border-radius: 0.2rem;
     flex-direction: column;
 }
 
-.videos-header{
-    color: rgba(19,71,128,1);
+.videos-header {
+    color: rgba(19, 71, 128, 1);
     font-size: 0.9rem;
     text-align: left;
     width: 100%;
@@ -53,35 +52,35 @@
     border-bottom: 1px solid rgba(19, 72, 128, 0.288);
 }
 
-.videos-header h1{
+.videos-header h1 {
     width: 100%;
 }
 
-.cursos{
+.cursos {
     display: flex;
     margin: 0 auto;
     margin-top: 1rem;
     width: 80%;
     height: 21rem;
-    border-radius:.2rem;
+    border-radius: 0.2rem;
     flex-direction: column;
 }
 
-.cursos-header{
-    color: rgba(19,71,128,1);
+.cursos-header {
+    color: rgba(19, 71, 128, 1);
     font-size: 0.9rem;
     text-align: left;
     width: 100%;
     height: 2.5rem;
     padding: 0.5rem 1.5rem;
-    border-bottom: 1px solid rgba(19,71,128,1);
+    border-bottom: 1px solid rgba(19, 71, 128, 1);
 }
 
-.cursos-header h1{
+.cursos-header h1 {
     width: 100%;
 }
 
-.indices-cursos{
+.indices-cursos {
     display: flex;
     color: black;
     font-size: 0.9rem;
@@ -95,26 +94,26 @@
     margin-top: 1rem;
 }
 
-.indices-cursos input{
-    margin-right: 2.0rem;
+.indices-cursos input {
+    margin-right: 2rem;
     width: 1.1rem;
     height: 1.1rem;
 }
 
-.indices-cursos label{
+.indices-cursos label {
     font-weight: 700;
     width: 25%;
 }
 
-.indices-cursos button{
+.indices-cursos button {
     margin-left: 30rem;
     border-radius: 0.2rem;
     width: 6.5rem;
     height: 1.9rem;
-    border: 2px solid rgb(216, 215,215);
+    border: 2px solid rgb(216, 215, 215);
     background-color: rgb(255, 255, 255);
     color: rgb(194, 194, 194);
     font-size: 0.9rem;
     font-weight: bold;
-    font:bold;
+    font: bold;
 }

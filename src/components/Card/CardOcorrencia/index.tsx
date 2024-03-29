@@ -14,16 +14,16 @@ const Card: React.FC<CardProps> = ({ title, children }) => {
                     <h2>Encaminhar Denuncia</h2>
                     <b>x</b>
                 </div>
-               <form>
+                <form>
                     <input type="text" placeholder="Email" />
                     <input type="text" placeholder="Institução" />
                     <input type="text" placeholder="Descreva o motivo do convite" />
                     <button>Cancelar</button>
                     <button type="submit">Enviar</button>
-               </form>
+                </form>
             </div>
         </div>
     );
-}
+};
 
 export default Card;

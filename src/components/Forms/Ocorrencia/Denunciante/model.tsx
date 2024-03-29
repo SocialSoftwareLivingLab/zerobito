@@ -14,4 +14,4 @@ export const defaultValue: DenuncianteFormInput = {
     telefone: null,
     telefoneSecundario: null,
     customizado: null
-}
+};

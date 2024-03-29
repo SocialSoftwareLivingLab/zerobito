@@ -8,35 +8,36 @@ const PassoDois = ({
     nomeVitima,
     empresaEmpregadora,
     vinculo,
-    descricao 
+    descricao
 }) => {
-
     return (
         <div>
             <h1>Informações sobre a vítima:</h1>
             <input
-                className='form-container-input'
+                className="form-container-input"
                 type="text"
-                name='nomeVitima'
+                name="nomeVitima"
                 value={nomeVitima}
                 onChange={(e) => handleChangeNomeVitima(e.target.value)}
-                placeholder='Nome da vítima'
+                placeholder="Nome da vítima"
             />
             <input
-                className='form-container-input'
+                className="form-container-input"
                 type="text"
-                name='empresaEmpregadora'
+                name="empresaEmpregadora"
                 value={empresaEmpregadora}
                 onChange={(e) => handleChangeEmpresaEmpregadora(e.target.value)}
-                placeholder='Empresa empregadora'
+                placeholder="Empresa empregadora"
             />
             <select
-                name='vinculo'
+                name="vinculo"
                 value={vinculo} // Defina o valor para o estado atual
-                onChange={(e)=> handleChangeVinculo(e.target.value)} // Adicione o manipulador de evento onChange
-                className='form-container-select' // Supondo que você tenha estilos para isto
+                onChange={(e) => handleChangeVinculo(e.target.value)} // Adicione o manipulador de evento onChange
+                className="form-container-select" // Supondo que você tenha estilos para isto
             >
-                <option value="" disabled>Vínculo</option>
+                <option value="" disabled>
+                    Vínculo
+                </option>
                 <option value="CLT">CLT</option>
                 <option value="PJ">PJ</option>
                 <option value="Estagiário">Estagiário</option>
@@ -46,11 +47,11 @@ const PassoDois = ({
                 <option value="Outro">Outro</option>
             </select>
             <textarea
-                name='descricao'
-                className='form-container-textarea'
+                name="descricao"
+                className="form-container-textarea"
                 value={descricao}
                 onChange={(e) => handleChangeDescricao(e.target.value)}
-                placeholder='Descrição'
+                placeholder="Descrição"
             />
         </div>
     );

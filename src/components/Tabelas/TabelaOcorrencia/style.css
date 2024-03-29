@@ -1,178 +1,173 @@
-
-  
-.button-tabela-aceitar{
-  background-color: #03A803 ;
-  color: #FFFFFF;
-  margin-left: -1rem;
-  width: 8rem;
-  font-size: 16px;
-  margin-bottom: 10px;
+.button-tabela-aceitar {
+    background-color: #03a803;
+    color: #ffffff;
+    margin-left: -1rem;
+    width: 8rem;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-.button-tabela-aceitar:hover{
-  background-color: #028102 ;
+.button-tabela-aceitar:hover {
+    background-color: #028102;
 }
 
-.button-tabela-aceitar svg{
-  margin-right: 6px;
+.button-tabela-aceitar svg {
+    margin-right: 6px;
 }
 
-.button-nao-incorporar{
-  background-color: rgb(250, 249, 249);
-  border: 1px solid rgb(153, 153, 153);
-  color: rgb(153, 153, 153);
-  font:bold;
-  margin-bottom: 10px;
-  width: 10rem;
-  margin-right: -4rem;
-  font-size: 16px;
+.button-nao-incorporar {
+    background-color: rgb(250, 249, 249);
+    border: 1px solid rgb(153, 153, 153);
+    color: rgb(153, 153, 153);
+    font: bold;
+    margin-bottom: 10px;
+    width: 10rem;
+    margin-right: -4rem;
+    font-size: 16px;
 }
 
-.button-nao-incorporar:hover{
-  background-color: rgb(243, 241, 241);
+.button-nao-incorporar:hover {
+    background-color: rgb(243, 241, 241);
 }
-.button-nao-incorporar svg{
-  margin-right: 6px;
-}
-
-.button-novo-evento{
-  color: #FFFFFF;
-  margin: 0;
-  width: auto;
-  padding: 0 40px;
-  font-size: 16px;
-  margin-bottom: 10px;
-  border-radius: .9em;
-  position: relative;
-  left: 60%;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+.button-nao-incorporar svg {
+    margin-right: 6px;
 }
 
-.button-novo-evento svg{
-  margin-right: 4px;
-  position: relative;
-  top: 2px;
-  stroke-width: 3;
-  width: 25;
-  font-size: large;
+.button-novo-evento {
+    color: #ffffff;
+    margin: 0;
+    width: auto;
+    padding: 0 40px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 0.9em;
+    position: relative;
+    left: 60%;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.button-novo-evento svg {
+    margin-right: 4px;
+    position: relative;
+    top: 2px;
+    stroke-width: 3;
+    width: 25;
+    font-size: large;
 }
 
 .card-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 999; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
-  display: inline-block;
-  background-color: white;
-  padding: 10px 40px;
-  padding-top: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  width: auto;
-  height: auto; 
-  position: relative; /* Adicionando position: relative; */
+    display: inline-block;
+    background-color: white;
+    padding: 10px 40px;
+    padding-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: auto;
+    height: auto;
+    position: relative; /* Adicionando position: relative; */
 }
 
 .card button {
-  margin: 0;
-  width: 20rem;
-  height: 4rem;
-  margin-bottom: 20px;
-  display: block;
-  font-size: larger;
-  border-radius: 0.5em;
-  
+    margin: 0;
+    width: 20rem;
+    height: 4rem;
+    margin-bottom: 20px;
+    display: block;
+    font-size: larger;
+    border-radius: 0.5em;
 }
 
 .card .close-button {
-  position: absolute;
-  width: 25px; /* Aumentando a largura do botão */
-  height: 23px; /* Mantendo a altura do botão */
-  text-align: center;
-  vertical-align: middle; /* Ajustando a alinhamento vertical */
-  background-color: transparent;
-  color: black;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 24px; 
-  color: rgba(255, 0, 0, 0.705);/* Aumentando o tamanho da fonte */
+    position: absolute;
+    width: 25px; /* Aumentando a largura do botão */
+    height: 23px; /* Mantendo a altura do botão */
+    text-align: center;
+    vertical-align: middle; /* Ajustando a alinhamento vertical */
+    background-color: transparent;
+    color: black;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: rgba(255, 0, 0, 0.705); /* Aumentando o tamanho da fonte */
 }
 
 .card .close-button svg {
-  width: 100%; /* Certificando-se de que o ícone ocupa todo o espaço dentro do botão */
-  height: 100%; /* Certificando-se de que o ícone ocupa todo o espaço dentro do botão */
+    width: 100%; /* Certificando-se de que o ícone ocupa todo o espaço dentro do botão */
+    height: 100%; /* Certificando-se de que o ícone ocupa todo o espaço dentro do botão */
 }
 
-.card h2{
-  margin-top: -15px;
-  font-size: 23px;
-  color: #134780;
-  margin-left: -20px;
-  text-align: left;
+.card h2 {
+    margin-top: -15px;
+    font-size: 23px;
+    color: #134780;
+    margin-left: -20px;
+    text-align: left;
 }
 
-.card .dias-monitoramento{
-  height: 2rem;
-  margin-top: 20px;
-  font-size: 18px;
+.card .dias-monitoramento {
+    height: 2rem;
+    margin-top: 20px;
+    font-size: 18px;
 }
 
-.card .input-wrapper{
-  margin: 0;
-  width: 27rem;
-  height: auto;
-  margin-right: -10px;
-  margin-left: -10px;
-  margin-bottom: 0px;
-  display: block;
-  font-size: medium;
-  border-radius: 0.5em;
+.card .input-wrapper {
+    margin: 0;
+    width: 27rem;
+    height: auto;
+    margin-right: -10px;
+    margin-left: -10px;
+    margin-bottom: 0px;
+    display: block;
+    font-size: medium;
+    border-radius: 0.5em;
 }
 
-.card .input-wrapper input{
-  margin-top: 15px;
-  width: 100%;
-  height: 2.2rem;
-  padding: 0 5px;
-  font-size: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+.card .input-wrapper input {
+    margin-top: 15px;
+    width: 100%;
+    height: 2.2rem;
+    padding: 0 5px;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.card .input-wrapper .convite{
-  font-size: 15px;
-  margin-top: 15px;
-  padding: 0 5px;
-  width: 100%;
-  height: 6rem;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  overflow-x: auto;
-  resize: vertical;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-
+.card .input-wrapper .convite {
+    font-size: 15px;
+    margin-top: 15px;
+    padding: 0 5px;
+    width: 100%;
+    height: 6rem;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    resize: vertical;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
-.card .botoes-guia{
-  width: 7rem;
-  height: 2.8rem;
-  display: inline-block;
-  margin-left: 4;
-  margin-left: 20px;
-  margin-right: 20px;
+.card .botoes-guia {
+    width: 7rem;
+    height: 2.8rem;
+    display: inline-block;
+    margin-left: 4;
+    margin-left: 20px;
+    margin-right: 20px;
 }
-.card .guias{
-  text-align: center;
-  
+.card .guias {
+    text-align: center;
 }

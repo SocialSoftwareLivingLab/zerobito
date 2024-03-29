@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
 
-.menu{
+.menu {
     height: 4rem;
     padding: 0 10%;
-    background-color: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) ;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: space-between; /* Change justify-content to space-between */
     align-items: center; /* Add this line */
@@ -13,14 +13,14 @@
     left: 0;
 }
 
-.menu ul{
+.menu ul {
     margin-left: -15px;
     list-style: none;
     display: flex;
     align-items: center;
 }
 
-.menu ul li{
+.menu ul li {
     margin: 0 1.5rem;
     width: auto;
     white-space: nowrap;
@@ -28,7 +28,7 @@
     align-items: center;
 }
 
-.menu ul li a{
+.menu ul li a {
     text-decoration: none;
     color: #134780;
     font-size: 1.2rem;
@@ -39,38 +39,38 @@
 .menu .button {
     width: 10rem;
     height: 3rem;
-    background-color: rgba(2,39,79,1);
+    background-color: rgba(2, 39, 79, 1);
     border-radius: 0.5rem;
     border: none;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 1.2rem;
     font-family: Lato;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.menu .button a{
+.menu .button a {
     text-decoration: none;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
-.menu .Zer{
-    font-family: 'Nunito', sans-serif;
-    font-size: 2.25rem; 
-    color: rgba(172,184,196,1);
-}
-
-.menu .Obito{
+.menu .Zer {
     font-family: 'Nunito', sans-serif;
     font-size: 2.25rem;
-    color: rgba(2,39,79,1);
+    color: rgba(172, 184, 196, 1);
+}
+
+.menu .Obito {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.25rem;
+    color: rgba(2, 39, 79, 1);
     margin-right: 15rem;
 }
 
-.button-exit{
+.button-exit {
     width: 20%;
     height: 2rem;
-    background-color: #FF0000;
+    background-color: #ff0000;
     border-radius: 2rem;
     border: none;
     color: white;
@@ -79,20 +79,20 @@
     align-items: center;
 }
 
-.icon{
+.icon {
     color: #134780;
     margin-right: 6px;
 }
 
-.icon-help{
+.icon-help {
     position: relative;
-    top:3px;
+    top: 3px;
     color: #134780;
     margin-right: 6px;
     font-size: 22px;
 }
 
-.icon-button{
+.icon-button {
     color: #9c9c9c;
     margin-right: 6px;
     font-size: 22px;
@@ -100,7 +100,7 @@
     margin-right: 15px;
 }
 
-.sair{
+.sair {
     background-color: transparent;
     width: auto;
     height: auto;

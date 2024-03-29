@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FormContainer = styled.div`
     margin: 0 auto;
@@ -8,8 +8,7 @@ export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
 
-
     span {
         text-align: left;
     }
-`
+`;

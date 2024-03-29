@@ -8,18 +8,17 @@ const PassoTres = ({
     tipoOcorrencia,
     nomeContato,
     emailContato,
-    telefoneContato,
+    telefoneContato
 }) => {
-
     const isDisabled = tipoOcorrencia === 'Anônimo';
 
     return (
         <div>
             <h1>Informação do Denunciante:</h1>
             <select
-                id='tipoOcorrencia'
+                id="tipoOcorrencia"
                 value={tipoOcorrencia}
-                name='tipoOcorrencia'
+                name="tipoOcorrencia"
                 onChange={(e) => handleChangeTipoOcorrencia(e.target.value)}
             >
                 <option value="Anônimo">Anônimo</option>
@@ -31,26 +30,26 @@ const PassoTres = ({
             </select>
             <input
                 type="text"
-                name='nomeContato'
+                name="nomeContato"
                 value={nomeContato}
                 onChange={(e) => handleChangeNomeContato(e.target.value)}
-                placeholder='Nome'
+                placeholder="Nome"
                 disabled={isDisabled}
             />
             <input
                 type="email"
-                name='emailContato'
+                name="emailContato"
                 value={emailContato}
                 onChange={(e) => handleChangeEmailContato(e.target.value)}
-                placeholder='E-mail'
+                placeholder="E-mail"
                 disabled={isDisabled}
             />
             <input
                 type="text"
-                name='telefoneContato'
+                name="telefoneContato"
                 value={telefoneContato}
                 onChange={(e) => handleChangeTelefoneContato(e.target.value)}
-                placeholder='Telefone / Celular'
+                placeholder="Telefone / Celular"
                 disabled={isDisabled}
             />
         </div>

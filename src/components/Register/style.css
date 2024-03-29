@@ -7,7 +7,7 @@
 .container-register {
     width: 30rem;
     height: 31rem;
-    border-radius: .3em;
+    border-radius: 0.3em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
     text-align: center;
@@ -22,21 +22,20 @@
     width: 100%;
     height: 5rem;
     padding-top: 2.5rem;
-    border-radius: .3em .3em 0 0;
-    ;
+    border-radius: 0.3em 0.3em 0 0;
 }
 
 .body-card {
     padding: 1rem 0rem;
 }
 
-.body-card label{
+.body-card label {
     display: inline-block;
     width: 125px;
     margin-left: 4px;
 }
 
-.body-card input{
+.body-card input {
     display: inline-block;
     background-color: rgb(226, 227, 228);
     border-radius: 0.2rem;
@@ -63,7 +62,7 @@
     background-color: rgba(12, 43, 77, 0.8);
 }
 
-.error_register{
+.error_register {
     margin-top: 3px;
     margin-bottom: 3px;
     margin-left: 10px;

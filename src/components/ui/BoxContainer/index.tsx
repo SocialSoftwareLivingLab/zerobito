@@ -1,13 +1,17 @@
-import React from "react";
-import { BoxContainerStyle } from "./styles";
+import React from 'react';
+import { BoxContainerStyle } from './styles';
 
 interface BoxContainerProps {
-    titulo: string,
-    acoesContainer?: React.ComponentType,
-    children: React.ReactNode | React.ReactNode[]
+    titulo: string;
+    acoesContainer?: React.ComponentType;
+    children: React.ReactNode | React.ReactNode[];
 }
 
-export function BoxContainer({ titulo, acoesContainer: AcoesContainer, children }: BoxContainerProps) {
+export function BoxContainer({
+    titulo,
+    acoesContainer: AcoesContainer,
+    children
+}: BoxContainerProps) {
     return (
         <BoxContainerStyle>
             <header>
@@ -16,5 +20,5 @@ export function BoxContainer({ titulo, acoesContainer: AcoesContainer, children 
             </header>
             {children}
         </BoxContainerStyle>
-    )
+    );
 }

@@ -4,17 +4,17 @@
     margin: 0 auto;
 }
 
-.container{
+.container {
     width: 30rem;
     height: 22rem;
-    border-radius:.2rem;
+    border-radius: 0.2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
     text-align: center;
 }
 
-.header-card{
-    color:aliceblue;
+.header-card {
+    color: aliceblue;
     font-size: 2rem;
     background-color: rgba(19, 71, 128, 1);
     text-align: center;
@@ -22,20 +22,19 @@
     width: 100%;
     height: 5rem;
     padding-top: 2.5rem;
-    border-radius: .2em .2em 0 0;
+    border-radius: 0.2em 0.2em 0 0;
 }
 
-.content{
+.content {
     padding: 1rem 1rem;
 }
 
-
-.content label{
+.content label {
     display: inline-block;
     width: 60px;
 }
 
-.content input{
+.content input {
     display: inline-block;
     background-color: rgb(226, 227, 228);
     border-radius: 0.2rem;
@@ -47,24 +46,23 @@
     padding-right: 8px;
 }
 
-.content button{
+.content button {
     width: 6rem;
     height: 2.5rem;
-    background-color: rgba(19,71,128,1);
+    background-color: rgba(19, 71, 128, 1);
     border-radius: 0.5rem;
     border: none;
     color: aliceblue;
-    font:bold;
+    font: bold;
     margin-top: 15px;
 }
 
-.content button:hover{
+.content button:hover {
     background-color: rgba(12, 43, 77, 0.8);
 }
 
-.error_login{
+.error_login {
     margin-top: 3px;
     margin-bottom: 3px;
     color: red;
 }
-

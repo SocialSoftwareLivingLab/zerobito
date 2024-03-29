@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { InputProps } from ".";
+import styled, { css } from 'styled-components';
+import { InputProps } from '.';
 
 export const InputArea = styled.div`
     display: flex;
@@ -11,8 +11,7 @@ export const InputArea = styled.div`
 
 export type InputLabelProps = {
     required: boolean;
-}
-
+};
 
 export const InputLabel = styled.label<InputLabelProps>`
     color: #141414;
@@ -21,12 +20,14 @@ export const InputLabel = styled.label<InputLabelProps>`
 
     text-align: left;
 
-    ${({ required }) => required && css`
-        &::after {
-            content: " *";
-            color: #FF0000;
-        }
-    `}
+    ${({ required }) =>
+        required &&
+        css`
+            &::after {
+                content: ' *';
+                color: #ff0000;
+            }
+        `}
 `;
 
 export type InputStyleProps = Pick<InputProps, 'width'>;
@@ -37,12 +38,12 @@ export const InputStyle = styled.input<InputStyleProps>`
     display: block;
 
     border-radius: 0.5rem;
-    border: 1px solid #ACB8C4;
+    border: 1px solid #acb8c4;
     padding: 10px;
     font-size: 16px;
     height: 2.5em;
 
-    width: ${({ width }) => width === 'auto' ? 'auto' : '100%'};
+    width: ${({ width }) => (width === 'auto' ? 'auto' : '100%')};
 
     &:focus {
         outline: none;
@@ -51,6 +52,6 @@ export const InputStyle = styled.input<InputStyleProps>`
     }
 
     &::placeholder {
-        color: #ACB8C4;
-    }    
+        color: #acb8c4;
+    }
 `;

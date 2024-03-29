@@ -1,4 +1,3 @@
-
 export interface OcorrenciaModel {
     id: number;
     data: Date;
@@ -12,7 +11,7 @@ export interface OcorrenciaModel {
         tomadoraServico: {
             nome: string;
             cnpj?: string;
-        }
+        };
     };
     fonte: {
         nome?: string;
@@ -28,12 +27,11 @@ export interface OcorrenciaModel {
         cidade: string;
         estado: string;
         logradouro: string;
-    };    
+    };
     vitima: {
         nome: string;
         vinculo: string;
         condicao: string;
         gravidade?: string;
     };
-    
 }

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { carregarUsuarios } from "../../common/models/user/get.user";
+import { useState, useEffect } from 'react';
+import { carregarUsuarios } from '../../common/models/user/get.user';
 
 const usePainelViewModel = () => {
     const [usuarios, setUsuarios] = useState<any[]>([]);

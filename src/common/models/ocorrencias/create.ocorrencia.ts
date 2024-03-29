@@ -1,36 +1,33 @@
-import api from "../../api";
+import api from '../../api';
 
 export const createOcorrencia = async (
-    
-    denuncia: String,
+    denuncia: string,
     data: Date,
-    local: String,
-    nomeVitima: String,
-    tipoOcorrencia: String,
-    nomeContato: String,
-    emailContato: String,
-    telefoneContato: String,
+    local: string,
+    nomeVitima: string,
+    tipoOcorrencia: string,
+    nomeContato: string,
+    emailContato: string,
+    telefoneContato: string,
     condicaoAcidentado: Enumerator,
-    nomeEmpresaEmpregadora: String,
+    nomeEmpresaEmpregadora: string,
     gravidade: Enumerator,
-    statusEvento: Enumerator,
-   
+    statusEvento: Enumerator
 ) => {
-    const response = await api.post("/ocorrencias", {
+    const response = await api.post('/ocorrencias', {
         denuncia,
         local,
         data,
         nomeVitima,
         tipoOcorrencia,
-	    nomeContato,
-		emailContato,
-		telefoneContato,
+        nomeContato,
+        emailContato,
+        telefoneContato,
         condicaoAcidentado,
         nomeEmpresaEmpregadora,
         gravidade,
-        status: statusEvento,
+        status: statusEvento
     });
 
     return response;
 };
-

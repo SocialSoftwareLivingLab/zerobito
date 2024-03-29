@@ -4,23 +4,21 @@ const PassoQuatro = ({
     condicaoAcidentado,
     gravidade,
     handleChangeCondicaoAcidentado,
-    handleChangeGravidade,
+    handleChangeGravidade
 }) => {
-
     return (
         <div>
             <div>
                 <h1>Qual a condição do Acidentado:</h1>
                 <select
-                    id='condicaoAcidentado'
+                    id="condicaoAcidentado"
                     value={condicaoAcidentado}
-                    name='condicaoAcidentado'
+                    name="condicaoAcidentado"
                     onChange={(e) => handleChangeCondicaoAcidentado(e.target.value)}
                 >
                     <option value="Óbito">Com Óbito</option>
                     <option value="Sem Óbito">Sem Óbito</option>
                 </select>
-
             </div>
             {condicaoAcidentado === 'Sem Óbito' && (
                 <div>
@@ -28,7 +26,7 @@ const PassoQuatro = ({
                     <select
                         id="gravidade"
                         value={gravidade}
-                        name='gravidade'
+                        name="gravidade"
                         onChange={(e) => handleChangeGravidade(e.target.value)}
                     >
                         <option value="Emergencial">Emergencial</option>
@@ -37,8 +35,7 @@ const PassoQuatro = ({
                         <option value="Pouca Urgência">Pouca Urgência</option>
                     </select>
                 </div>
-            )
-            }
+            )}
         </div>
     );
 };

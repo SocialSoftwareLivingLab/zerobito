@@ -5,5 +5,5 @@
         "allowImportingTsExtensions": true,
         "allowSyntheticDefaultImports": true,
         "jsx": "react"
-      }
+    }
 }
