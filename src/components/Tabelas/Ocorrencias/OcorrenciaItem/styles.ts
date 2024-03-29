@@ -12,3 +12,7 @@ export const OcorrenciaItemContainer = styled.div`
         }
     }
 `;
+
+export const TabPanelContainer = styled.div`
+    padding: 8px 16px;
+`;
