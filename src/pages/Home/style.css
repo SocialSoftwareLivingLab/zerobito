@@ -8,29 +8,6 @@
     top: 0;
 }
 
-.container-header {
-    display: static;
-    align-items: center;
-    background-color: #134780;
-    height: 10rem;
-    padding: 1% 10% 0% 10%;
-    color: #fff;
-}
-
-.container-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.container-header .text {
-    text-wrap: wrap;
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin-bottom: 1rem;
-    color: aliceblue;
-}
-
 .container-content {
     display: flex;
     flex-direction: column;

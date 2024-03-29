@@ -15,7 +15,6 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
     },
     {
         name: 'Data',
-        // width: '10%',
         selector: (sel) => String(sel.data),
         sortable: true,
         allowOverflow: true,
@@ -25,7 +24,6 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
     },
     {
         name: 'Tipo',
-        // width: '10%',
         selector: (sel) => LABELS_TIPO_OCORRENCIA[sel.vitima.condicao] ?? '',
         sortable: true,
         allowOverflow: true,
@@ -33,7 +31,6 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
     },
     {
         name: 'Gravidade',
-        // width: '10%',
         cell: (row) => <BadgeGravidade gravidade={row.vitima.gravidade} />,
         sortable: true,
         allowOverflow: true,
@@ -41,7 +38,6 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
     },
     {
         name: 'Status',
-        // width: '15%',
         selector: (sel) => sel.status.descricao,
         sortable: true,
         allowOverflow: true,
@@ -50,7 +46,7 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
     {
         name: 'Ações',
         sortable: true,
-        grow: 1.5,
+        grow: 2,
         cell: (row) => <AcoesLinha row={row} />
     }
 ];

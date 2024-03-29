@@ -69,8 +69,23 @@ export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
                 customStyles={dataTableStyle}
                 pointerOnHover
                 expandableRows
+                expandOnRowClicked
+                expandableRowsComponent={({ data }) => <OcorrenciaExpandida data={data} />}
                 dense
             />
         </BoxContainer>
+    );
+}
+
+interface OcorrenciaExpandidaProps {
+    data: OcorrenciaModel;
+}
+
+function OcorrenciaExpandida({ data }: OcorrenciaExpandidaProps) {
+    return (
+        <div>
+            <span>Testando expansão</span>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
     );
 }
