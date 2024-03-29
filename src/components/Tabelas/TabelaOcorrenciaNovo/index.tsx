@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
+import DataTable from 'react-data-table-component';
 import { IoBagAdd } from 'react-icons/io5';
 import { useHistory } from 'react-router-dom';
+import { OcorrenciaModel } from '../../../common/models/ocorrencias/model';
+import Badge from '../../ui/Badge';
 import { BoxContainer } from '../../ui/BoxContainer';
 import { Button } from '../../ui/Button';
-import { OcorrenciaModel } from '../../../common/models/ocorrencias/model';
-import DataTable, { TableColumn } from 'react-data-table-component';
 import { Paginacao, dataTableStyle } from '../custom';
 import { ColunaAcao } from './styles';
-import Badge from '../../ui/Badge';
+import { COLUNAS_TABELA_OCORRENCIAS, TIPOS_GRAVIDADE } from './table-columns';
 
 function AdicionarNovoEventoButton() {
     const history = useHistory();
@@ -23,81 +24,8 @@ function AdicionarNovoEventoButton() {
     );
 }
 
-interface TabelaOcorrenciaNovoProps {
-    ocorrencias: OcorrenciaModel[]; // TO-DO: Tipar esses retornos.
-}
-
-const colunasOcorrencias: TableColumn<OcorrenciaModel>[] = [
-    {
-        name: 'Denúncia',
-        selector: (sel) => sel.descricao,
-        sortable: true,
-        width: '15%',
-        allowOverflow: true,
-        wrap: true
-    },
-    {
-        name: 'Data',
-        width: '15%',
-        selector: (sel) => String(sel.data),
-        sortable: true,
-        allowOverflow: true,
-        format: (row) =>
-            Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(row.data)),
-        wrap: true
-    },
-    {
-        name: 'Tipo',
-        width: '15%',
-        selector: (sel) => sel.vitima.condicao,
-        sortable: true,
-        allowOverflow: true,
-        wrap: true
-    },
-    {
-        name: 'Gravidade',
-        width: '10%',
-        cell: (row) => <BadgeGravidade gravidade={row.vitima.gravidade} />,
-        sortable: true,
-        allowOverflow: true,
-        wrap: true
-    },
-    {
-        name: 'Status',
-        width: '15%',
-        selector: (sel) => sel.status,
-        sortable: true,
-        allowOverflow: true,
-        wrap: true
-    },
-    {
-        name: 'Ações',
-        sortable: true,
-        cell: (row) => <AcoesLinha row={row} />
-    }
-];
-
-function BadgeGravidade({ gravidade }: { gravidade: string | null }) {
-    const tipos = {
-        EMERGENCIAL: {
-            label: 'Emergencial',
-            type: 'danger'
-        },
-        MUITO_URGENTE: {
-            label: 'Muito Urgente',
-            type: 'warning'
-        },
-        URGENTE: {
-            label: 'Muito Urgente',
-            type: 'info'
-        },
-        POUCO_URGENTE: {
-            label: 'Pouco Urgente',
-            type: 'dark'
-        }
-    };
-
-    const tipo = tipos[gravidade];
+export function BadgeGravidade({ gravidade }: { gravidade: string | null }) {
+    const tipo = TIPOS_GRAVIDADE[gravidade];
 
     return gravidade && <Badge texto={tipo.label} type={tipo.type} />;
 }
@@ -125,12 +53,16 @@ export function AcoesLinha({ row }: { row: OcorrenciaModel }) {
     );
 }
 
+interface TabelaOcorrenciaNovoProps {
+    ocorrencias: OcorrenciaModel[];
+}
+
 export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
     return (
         <BoxContainer titulo="Comunicação de Evento" acoesContainer={AdicionarNovoEventoButton}>
             <DataTable
                 data={props.ocorrencias}
-                columns={colunasOcorrencias}
+                columns={COLUNAS_TABELA_OCORRENCIAS}
                 responsive
                 pagination
                 paginationComponent={Paginacao}

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ButtonColorTypes {
     [key: string]: {
@@ -58,13 +58,15 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
     transition: background-color 0.2s ease;
 
-    color: ${(props) => (props.disabled ? '#777' : '#fff')};
+    color: #fff;
 
     &:hover {
         background-color: ${(props) => buttonColors[props.type].hover};
     }
 
-    &:disabled {
-        background-color: ${(props) => buttonColors[props.type].disabled};
-    }
+    ${(props) =>
+        props.disabled &&
+        css`
+            opacity: 0.4;
+        `}
 `;

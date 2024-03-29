@@ -2,7 +2,10 @@ export interface OcorrenciaModel {
     id: number;
     data: Date;
     descricao: string;
-    status: string;
+    status: {
+        descricao: string;
+        sigla: string;
+    };
     dataAlteracao: string;
     dataCriacao: string;
     empresa: {
