@@ -24,15 +24,14 @@ const Gravidade = forwardRef<FormStepApi, {}>((props, ref) => {
             condicao: formData.gravidade.obito,
             gravidade: formData.gravidade.gravidade
           };
+        reset(data);
+        }, [formData]);
+
+    useEffect(() => {
         if (condicao === "OBITO") {
           resetField("gravidade", {defaultValue: ""});
         }
-        else if(formData.gravidade.obito !== "OBITO"){
-            reset(data)
-        }
-        console.log(data);
-        
-      }, [condicao, formData, resetField, reset]);
+      }, [condicao, resetField]);
 
     useImperativeHandle(ref, () => ({
         submitForm: () => {
