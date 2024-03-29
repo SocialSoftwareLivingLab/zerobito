@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 
 interface ButtonColorTypes {
     [key: string]: {
-        color: string;
+        background: string;
         hover: string;
-        disabled: string;
+        text: string;
     };
 }
 
@@ -16,24 +16,24 @@ const buttonSizes: { [key: string]: string } = {
 
 const buttonColors: ButtonColorTypes = {
     button: {
-        color: '#134780',
+        background: '#134780',
         hover: '#0c2b4d',
-        disabled: '#90bdef'
+        text: '#fff'
     },
     submit: {
-        color: '#00AA00',
-        hover: '#005500',
-        disabled: '#cce3cc'
+        background: '#00AA00',
+        hover: '#009000',
+        text: '#fff'
     },
     cancel: {
-        color: '#CC0000',
+        background: '#CC0000',
         hover: '#FF0000',
-        disabled: '#D3D3D3'
+        text: '#fff'
     },
     default: {
-        color: '#999',
-        hover: '#f3f1f1',
-        disabled: '#ddd'
+        background: '#fff',
+        hover: '#eee',
+        text: '#acb8c4'
     }
 };
 
@@ -44,10 +44,11 @@ export interface ButtonStyleProps {
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
     border-radius: 0.2rem;
+    border: none;
     width: auto;
     font-size: ${(props) => buttonSizes[props.size]};
     height: 2.3rem;
-    background-color: ${(props) => buttonColors[props.type].color};
+    background-color: ${(props) => buttonColors[props.type].background};
     margin: 0;
 
     padding: 16px;
@@ -58,7 +59,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
     transition: background-color 0.2s ease;
 
-    color: #fff;
+    color: ${(props) => buttonColors[props.type].text};
 
     &:hover {
         background-color: ${(props) => buttonColors[props.type].hover};
@@ -68,5 +69,11 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
         props.disabled &&
         css`
             opacity: 0.4;
+        `}
+
+    ${(props) =>
+        props.type === 'default' &&
+        css`
+            border: 2px solid #acb8c4;
         `}
 `;

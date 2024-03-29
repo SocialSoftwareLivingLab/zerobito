@@ -1,4 +1,4 @@
-button {
+/* button {
     margin-right: 5px;
     margin-left: 20px;
     margin-top: 10px;
@@ -15,7 +15,7 @@ button {
 
 button:hover {
     background-color: #0d2c4c;
-}
+} */
 
 .table-header h2 {
     color: #134780;
@@ -145,9 +145,9 @@ button:hover {
     align-items: center;
 }
 
-.pagination button {
+/* .pagination button {
     margin-right: -5px;
-}
+} */
 
 .page-info {
     text-align: right;

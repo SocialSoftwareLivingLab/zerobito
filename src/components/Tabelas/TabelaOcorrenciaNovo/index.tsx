@@ -68,6 +68,7 @@ export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
                 paginationComponent={Paginacao}
                 customStyles={dataTableStyle}
                 pointerOnHover
+                expandableRows
                 dense
             />
         </BoxContainer>
