@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const NavbarContainer = styled.div`
@@ -12,11 +13,13 @@ export const NavbarContainer = styled.div`
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-export const NavbarHomeContainer = styled.div`
+export const NavbarHomeContainer = styled(Link)`
+    text-decoration: none;
     span {
-        font-weight: bold;
-        font-family: 'Nunito', sans-serif;
+        font-weight: 800;
+        font-family: Nunito, sans-serif;
         font-size: 2.25rem;
+        white-space: nowrap;
     }
 
     span.Zer {

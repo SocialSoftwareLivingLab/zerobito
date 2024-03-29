@@ -8,7 +8,7 @@ import { Links, NavbarAcoesContainer, NavbarContainer, NavbarHomeContainer } fro
 export default function BarraNavegacao() {
     return (
         <NavbarContainer>
-            <NavbarHomeContainer>
+            <NavbarHomeContainer to="/">
                 <span className="Zer">Zer</span>
                 <span className="Obito">Óbito</span>
             </NavbarHomeContainer>
