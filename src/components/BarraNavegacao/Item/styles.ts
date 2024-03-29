@@ -13,11 +13,12 @@ export const ItemNavegacaoContainer = styled(Link)`
         align-items: flex-start;
         justify-content: center;
         svg {
-            margin-right: 4px;
+            font-weight: 600;
+            margin-right: 8px;
         }
     }
 
     &:not(:last-of-type) {
-        margin-right: 24px;
+        margin-right: 28px;
     }
 `;
