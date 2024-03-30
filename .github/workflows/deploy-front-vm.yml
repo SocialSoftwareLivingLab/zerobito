@@ -39,10 +39,10 @@ jobs:
         node-version: '18'
 
     - name: Instalar Dependências
-      run: npm install
+      run: yarn
 
     - name: Construir webapp React final
-      run: npm run build
+      run: yarn build
 
     - name: Verificar output do webapp
       run: ls
