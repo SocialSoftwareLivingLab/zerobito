@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useImperativeHandle } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useOcorrenciaWizardContext } from '../../../../pages/NovaOcorrencia/context';
 import { FormStepApi } from '../interface';
@@ -19,7 +19,7 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
     } = useForm<DenuncianteFormInput>({ defaultValues: defaultValue });
     const tipoDenuncianteSelecionado = watch('tipo');
 
-    const { setDenuncianteData } = useOcorrenciaWizardContext();
+    const { setDenuncianteData, formData } = useOcorrenciaWizardContext();
 
     const submitForm: SubmitHandler<DenuncianteFormInput> = useCallback(
         (data) => {
@@ -58,6 +58,28 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
             resetField('telefoneSecundario');
         }
     }, [tipoDenuncianteSelecionado, resetField]);
+
+      useEffect(() => {
+        if (tipoDenuncianteSelecionado !== "OUTRO") {
+          
+          resetField("customizado", { defaultValue: "" });
+        }
+      }, [tipoDenuncianteSelecionado, resetField]);
+
+
+
+    useEffect(() => {
+        const data: DenuncianteFormInput = {
+          tipo: formData.denunciante.tipoDenuncia,
+          telefone: formData.denunciante.telefoneDenuncia,
+          nome: formData.denunciante.nomeDenuncia,
+          telefoneSecundario: formData.denunciante.telefoneSecundarioDenuncia,
+          email: formData.denunciante.emailDenuncia,
+          customizado: formData.denunciante.denunciaCustomizada
+        };
+      
+        reset(data); // Isso recarrega o contexto do formulário
+      }, [formData]); // Este efeito é acionado sempre que o formData mudar
 
     const viewProps: DenuncianteViewProps = {
         register,

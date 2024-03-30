@@ -36,7 +36,7 @@ export function CriarOcorrenciaWizardContextProvider({
             vinculoEmpresa: ''
         },
         denunciante: {
-            tipoDenuncia: '',
+            tipoDenuncia: 'ANONIMA',
             nomeDenuncia: '',
             emailDenuncia: '',
             telefoneDenuncia: '',

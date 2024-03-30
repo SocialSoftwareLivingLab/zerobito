@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useImperativeHandle } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useOcorrenciaWizardContext } from '../../../../pages/NovaOcorrencia/context';
 import { FormStepApi } from '../interface';
@@ -19,7 +19,20 @@ const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
 
     const tomadoraDeServicoNome = watch('tomadoraDeServicoNome');
 
-    const { setVitimaData } = useOcorrenciaWizardContext();
+    const { setVitimaData, formData } = useOcorrenciaWizardContext();
+
+    useEffect(() => {
+        const data: VitimaFormFields = {
+            nome: formData.vitima.nome,
+            nomeEmpresa: formData.vitima.nomeEmpresa,
+            cnpjEmpresa: formData.vitima.cnpjEmpresa,
+            tomadoraDeServicoNome: formData.vitima.tomadoraDeServicoNome,
+            tomadoraDeServicoCNPJ: formData.vitima.tomadoraDeServicoCNPJ,
+            tipoContrato: formData.vitima.vinculoEmpresa,
+        }; 
+        reset(data);
+        console.log(data);
+    }, [formData, reset]);
 
     const onSubmit: SubmitHandler<VitimaFormFields> = useCallback(
         (data) => {
