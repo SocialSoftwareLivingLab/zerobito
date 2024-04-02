@@ -19,7 +19,6 @@ export default function DenuncianteView(
 ) {
     return (
         <>
-            <h1>Informações sobre o acidente</h1>
             <FormContainer>
                 <form onSubmit={submitForm}>
                     <Select label='Tipo da Denúncia' {...register('tipo')}  >
@@ -51,7 +50,7 @@ export default function DenuncianteView(
                             <ErrorMessage name='telefone' errors={errors} as="p" />
 
                             {/* <input type="text" placeholder="Endereço do Denunciante" {...register('endereco', { required: true })} /> */}
-                            <Input label="Telefone secundário" placeholder="Telefone para contato" {...register('telefoneSecundario', { required: true })} />
+                            <Input label="Telefone secundário (opcional)" placeholder="Telefone para contato" {...register('telefoneSecundario', { required: false })} />
                             <ErrorMessage name='telefoneSecundario' errors={errors} as="p" />
                         </>
                     }

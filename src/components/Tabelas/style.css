@@ -3,7 +3,7 @@ button {
     margin-left: 20px;
     margin-top: 10px;
     border-radius: 0.2rem;
-    width: 6rem;
+    width: auto;
     height: 2.3rem;
     background-color: #134780;
     border: none;

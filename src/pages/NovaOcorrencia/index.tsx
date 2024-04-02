@@ -2,8 +2,11 @@ import React, { useCallback, useRef, useState } from "react";
 import { FormStepApi } from "../../components/Forms/Ocorrencia/interface";
 import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from "./context";
 import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from "./view";
-import { CondicaoVitima, CriarOcorrenciaRequest, GravidadeVitima, TipoFonteDenuncia, criarOcorrencia } from "../../common/api/ocorrencias/criar-ocorrencia";
+import { CriarOcorrenciaRequest, criarOcorrencia } from "../../common/api/ocorrencias/criar-ocorrencia";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
+import "./style.css"
+
 
 function RegistrarOcorrenciaPage() {
     const formLocalRef = useRef<FormStepApi>(null);
@@ -73,19 +76,25 @@ function RegistrarOcorrenciaPage() {
                 outroTipo: formData.denunciante.denunciaCustomizada,
                 telefonePrincipal: formData.denunciante.telefoneDenuncia,
                 telefoneSecundario: formData.denunciante.telefoneSecundarioDenuncia,
-                tipo: formData.denunciante.tipoDenuncia as TipoFonteDenuncia
+                tipo: formData.denunciante.tipoDenuncia
             },
             vitima: {
                 nome: formData.vitima.nome,
                 vinculo: formData.vitima.vinculoEmpresa,
-                condicao: formData.gravidade.obito as CondicaoVitima,
-                gravidade: formData.gravidade.gravidade as GravidadeVitima
+                condicao: formData.gravidade.obito === "OBITO" ? "COM_OBITO" : "SEM_OBITO",
+                gravidade: formData.gravidade.gravidade
             }
         };
         
         await criarOcorrencia(payload);
-
-        alert("Ocorrência registrada com sucesso")
+        
+        Swal.fire({
+            title: 'Ocorrência registrada com sucesso!',
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: '#134780',
+            icon: 'success',
+            buttonsStyling: true,
+        })
 
         history.push("/home");
 

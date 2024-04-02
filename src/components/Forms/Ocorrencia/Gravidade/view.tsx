@@ -18,7 +18,6 @@ export default function GravidadeView(
 ) {
     return (
         <FormContainer>
-            <h1>Informações sobre o acidente:</h1>
             <form onSubmit={submitForm}>
                 <Select label='Condição do acidente' {...register('condicao', { required: true })} >
                     <SelectOption label='Selecione...' disabled />

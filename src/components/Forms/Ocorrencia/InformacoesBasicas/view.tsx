@@ -18,7 +18,6 @@ export default function InformacoesBasicasView(
 ) {
     return (
         <FormContainer>
-            <h1>Informações sobre o acidente:</h1>
             <form onSubmit={submitForm}>
                 <Fieldset legend='Identificação'>
                     <Input placeholder='Informe a data' label='Data relatada' type='date' {...register('data', { required: true })} />
