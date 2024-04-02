@@ -4,11 +4,22 @@ export const OcorrenciaItemContainer = styled.div`
     display: flex;
     flex-direction: column;
 
-    span {
-        display: block;
+    padding: 16px 24px 0;
 
-        &:not(:last-child) {
-            margin-bottom: 8px;
+    div.linha {
+        display: flex;
+        flex-direction: row;
+
+        div * {
+            display: block;
+        }
+
+        div + div {
+            margin-left: 32px;
+        }
+
+        & + div.linha {
+            margin-top: 16px;
         }
     }
 `;

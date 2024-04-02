@@ -1,76 +1,74 @@
 import React from 'react';
 import { OcorrenciaModel } from '../../../../common/models/ocorrencias/model';
-import { OcorrenciaItemContainer, TabPanelContainer } from './styles';
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { OcorrenciaItemContainer } from './styles';
 
 interface OcorrenciaExpandidaProps {
     data: OcorrenciaModel;
 }
 
 const tipoFonte = {
-    ANONIMA: 'Anônima'
+    ANONIMA: 'Anônima',
+    VITIMA: 'Vítima',
+    FAMILIAR: 'Familiar',
+    COLEGA_TRABALHO: 'Colega de Trabalho',
+    SINDICATO: 'Sindicato',
+    IMPRENSA: 'Imprensa',
+    SERVICO_SAUDE: 'Serviço de Saúde',
+    OUTRO: 'Outro'
 };
 
 export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
     const dateFormat = Intl.DateTimeFormat('pt-br');
+
     return (
         <OcorrenciaItemContainer>
-            <Tabs>
-                <TabList>
-                    <Tab>Identificação</Tab>
-                    <Tab>Fonte</Tab>
-                    <Tab>Empresa</Tab>
-                    <Tab>Vítima</Tab>
-                </TabList>
+            <div className="linha">
+                <div>
+                    <strong>ID</strong>
+                    <span>{data.id}</span>
+                </div>
+                <div>
+                    <strong>Data da Ocorrência</strong>
+                    <span>{dateFormat.format(new Date(data.data))}</span>
+                </div>
+                <div>
+                    <strong>Data do registro</strong>
+                    <span>{dateFormat.format(new Date(data.dataCriacao))}</span>
+                </div>
+                <div>
+                    <strong>Status</strong>
+                    <span>{data.status.descricao}</span>
+                </div>
+                <div>
+                    <strong>Última atualização</strong>
+                    <span>{dateFormat.format(new Date(data.dataAlteracao))}</span>
+                </div>
+            </div>
+            <div className="linha">
+                <div>
+                    <strong>Fonte</strong>
+                    <span>
+                        {data.fonte.tipo !== 'OUTRO'
+                            ? tipoFonte[data.fonte.tipo]
+                            : data.fonte.outroTipo}
+                    </span>
+                </div>
 
-                <TabPanel>
-                    <TabPanelContainer>
-                        <h4>Identificação Básica</h4>
-                        <span>Identificador: {data.id}</span>
-                        <span>Data: {dateFormat.format(new Date(data.data))}</span>
-                        <span>
-                            Data de registro: {dateFormat.format(new Date(data.dataCriacao))}
-                        </span>
-                        <span>Descrição: {data.descricao}</span>
-                        <span>Situação: {data.status.descricao}</span>
-                    </TabPanelContainer>
-                </TabPanel>
-
-                <TabPanel>
-                    <TabPanelContainer>
-                        <h4>Informações sobre a fonte</h4>
-
-                        {data.fonte.tipo !== 'OUTRO' && (
-                            <span>Tipo: {tipoFonte[data.fonte.tipo]}</span>
-                        )}
-                        {data.fonte.tipo === 'OUTRO' && <span>Tipo: {data.fonte.outroTipo}</span>}
-                        {data.fonte.tipo !== 'ANONIMA' && (
-                            <>
-                                <span>Nome: {data.fonte.nome}</span>
-                                <span>Email: {data.fonte.email}</span>
-                                <span>Telefone principal: {data.fonte.telefonePrincipal}</span>
-                                <span>Telefone secundário: {data.fonte.telefoneSecundario}</span>
-                            </>
-                        )}
-                    </TabPanelContainer>
-                </TabPanel>
-
-                <TabPanel>
-                    <TabPanelContainer>
-                        <h4>Empresa</h4>
-                        <span>Nome: {data.empresa.nome}</span>
-                        <span>CNPJ: {data.empresa.cnpj || 'Não informado'}</span>
-                        <span>
-                            Tomadora de serviço:{' '}
-                            {data.empresa.tomadoraServico?.nome || 'Não informado'}
-                        </span>
-                        <span>
-                            CNPJ tomadora de serviço:{' '}
-                            {data.empresa.tomadoraServico?.cnpj || 'Não informado'}
-                        </span>
-                    </TabPanelContainer>
-                </TabPanel>
-            </Tabs>
+                {data.fonte.tipo !== 'ANONIMA' && (
+                    <>
+                        <div>
+                            <strong>Nome</strong>
+                            <span>{data.fonte.nome}</span>
+                        </div>
+                    </>
+                )}
+            </div>
+            <div className="linha">
+                <div>
+                    <strong>Descrição</strong>
+                    <span>{data.descricao}</span>
+                </div>
+            </div>
         </OcorrenciaItemContainer>
     );
 }
