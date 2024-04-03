@@ -33,16 +33,16 @@ const Gravidade = forwardRef<FormStepApi, GravidadeProps>((props, ref) => {
     );
 
     React.useEffect(() => {
-        const data:GravidadeFormFields = {
+        const data: GravidadeFormFields = {
             condicao: formData.gravidade.obito,
             gravidade: formData.gravidade.gravidade
-          };
+        };
         reset(data);
-        }, [formData]);
+    }, [formData]);
 
     React.useEffect(() => {
-        if (condicao === "OBITO") {
-          resetField("gravidade", {defaultValue: ""});
+        if (condicao === 'OBITO') {
+            resetField('gravidade', { defaultValue: '' });
         }
     }, [condicao, resetField]);
 

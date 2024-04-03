@@ -28,8 +28,8 @@ const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
             cnpjEmpresa: formData.vitima.cnpjEmpresa,
             tomadoraDeServicoNome: formData.vitima.tomadoraDeServicoNome,
             tomadoraDeServicoCNPJ: formData.vitima.tomadoraDeServicoCNPJ,
-            tipoContrato: formData.vitima.vinculoEmpresa,
-        }; 
+            tipoContrato: formData.vitima.vinculoEmpresa
+        };
         reset(data);
         console.log(data);
     }, [formData, reset]);

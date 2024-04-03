@@ -59,27 +59,24 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
         }
     }, [tipoDenuncianteSelecionado, resetField]);
 
-      useEffect(() => {
-        if (tipoDenuncianteSelecionado !== "OUTRO") {
-          
-          resetField("customizado", { defaultValue: "" });
+    useEffect(() => {
+        if (tipoDenuncianteSelecionado !== 'OUTRO') {
+            resetField('customizado', { defaultValue: '' });
         }
-      }, [tipoDenuncianteSelecionado, resetField]);
-
-
+    }, [tipoDenuncianteSelecionado, resetField]);
 
     useEffect(() => {
         const data: DenuncianteFormInput = {
-          tipo: formData.denunciante.tipoDenuncia,
-          telefone: formData.denunciante.telefoneDenuncia,
-          nome: formData.denunciante.nomeDenuncia,
-          telefoneSecundario: formData.denunciante.telefoneSecundarioDenuncia,
-          email: formData.denunciante.emailDenuncia,
-          customizado: formData.denunciante.denunciaCustomizada
+            tipo: formData.denunciante.tipoDenuncia,
+            telefone: formData.denunciante.telefoneDenuncia,
+            nome: formData.denunciante.nomeDenuncia,
+            telefoneSecundario: formData.denunciante.telefoneSecundarioDenuncia,
+            email: formData.denunciante.emailDenuncia,
+            customizado: formData.denunciante.denunciaCustomizada
         };
-      
+
         reset(data); // Isso recarrega o contexto do formulário
-      }, [formData]); // Este efeito é acionado sempre que o formData mudar
+    }, [formData]); // Este efeito é acionado sempre que o formData mudar
 
     const viewProps: DenuncianteViewProps = {
         register,

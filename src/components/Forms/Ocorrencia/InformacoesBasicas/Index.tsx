@@ -22,7 +22,7 @@ const InformacoesBasicas = forwardRef((props, ref) => {
             estado: formData.informacoesBasicas.local.estado,
             cidade: formData.informacoesBasicas.local.cidade,
             logradouro: formData.informacoesBasicas.local.logradouro
-        }; 
+        };
         reset(data);
     }, [formData, reset]);
 
