@@ -20,7 +20,6 @@ export default function InformacoesBasicasView({
 }: InformacoesBasicasViewProps) {
     return (
         <FormContainer>
-            <h1>Informações sobre o acidente:</h1>
             <form onSubmit={submitForm}>
                 <Fieldset legend="Identificação">
                     <Input

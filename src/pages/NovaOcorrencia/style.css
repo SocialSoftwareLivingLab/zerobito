@@ -4,3 +4,8 @@
     margin-top: 50px;
     gap: 10px;
 }
+
+.swal-button{
+    width: auto;
+}
+

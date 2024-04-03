@@ -10,6 +10,8 @@ import {
     criarOcorrencia
 } from '../../common/api/ocorrencias/criar-ocorrencia';
 import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import './style.css';
 
 function RegistrarOcorrenciaPage() {
     const formLocalRef = useRef<FormStepApi>(null);
@@ -92,7 +94,15 @@ function RegistrarOcorrenciaPage() {
 
         await criarOcorrencia(payload);
 
-        alert('Ocorrência registrada com sucesso');
+        Swal.fire({
+            title: 'Ocorrência registrada com sucesso!',
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: '#134780',
+            icon: 'success',
+            buttonsStyling: true
+        });
+
+        history.push('/home');
 
         history.push('/home');
     }, [formData, history]);

@@ -22,22 +22,21 @@ export default function VitimaView({
 }: VitimaViewProps) {
     return (
         <FormContainer>
-            <h1>Informações sobre o acidente:</h1>
             <form onSubmit={submitForm}>
                 {/* <input type="text" placeholder="Nome" {...register('nome')} /> */}
-                <Input label="Nome da Vítima" {...register('nome', { required: true })} />
+                <Input label="Nome da Vítima" {...register('nome', { required: false })} />
                 <ErrorMessage name="nome" errors={errors} as="p" />
 
                 {/* <input type="text" placeholder="Nome da empresa empregadora" {...register('nomeEmpresa')} /> */}
                 <Input
                     label="Empresa Empregadora"
-                    {...register('nomeEmpresa', { required: true })}
+                    {...register('nomeEmpresa', { required: false })}
                 />
                 <ErrorMessage name="nomeEmpresa" errors={errors} as="p" />
 
                 <Input
                     label="CNPJ Empresa Empregadora"
-                    {...register('cnpjEmpresa', { required: true })}
+                    {...register('cnpjEmpresa', { required: false })}
                 />
                 <ErrorMessage name="cnpjEmpresa" errors={errors} as="p" />
 
@@ -50,14 +49,14 @@ export default function VitimaView({
                         {/* <input type="text" placeholder="CNPJ da tomadora de serviço" {...register('tomadoraDeServicoCNPJ')} /> */}
                         <Input
                             label="CNPJ Tomadora de Serviço"
-                            {...register('tomadoraDeServicoCNPJ', { required: true })}
+                            {...register('tomadoraDeServicoCNPJ', { required: false })}
                         />
                         <ErrorMessage name="tomadoraDeServicoCNPJ" errors={errors} as="p" />
                     </>
                 )}
 
-                <Select label="Tipo de contrato" {...register('tipoContrato', { required: true })}>
-                    <SelectOption label="Selecione" disabled />
+                <Select label="Tipo de contrato" {...register('tipoContrato', { required: false })}>
+                    <SelectOption label="Selecione um tipo de contrato" value="" disabled />
                     <SelectOption label="CLT" value="CLT" />
                     <SelectOption label="PJ" value="PJ" />
                     <SelectOption label="Estagiário" value="Estagiário" />
