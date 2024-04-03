@@ -10,7 +10,7 @@ interface HeaderProps {
 function Header({ title, explicacao }: HeaderProps): JSX.Element {
     return (
         <div>
-            <Menu />
+            <Menu token={true} />
             <div className="container-header">
                 <h1>{title}</h1>
                 <div className="text">{explicacao}</div>

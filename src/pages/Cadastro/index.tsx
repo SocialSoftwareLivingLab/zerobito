@@ -7,7 +7,7 @@ import SignupCard from '../../components/Register/index.tsx';
 function Cadastro() {
     return (
         <div>
-            <Menu />
+            <Menu token={false} />
             <div className="container-principal-register">
                 <SignupCard />
                 <div className="text-login">
