@@ -4,19 +4,19 @@ import { BsBookmarkFill } from 'react-icons/bs';
 import { FaMicrophone, FaUniversity } from 'react-icons/fa';
 import ItemAbaNavegacao from './Item';
 import { Links, NavbarAcoesContainer, NavbarContainer, NavbarHomeContainer } from './styles';
+import { FiLogOut } from 'react-icons/fi';
+import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 
-interface BarProps {
-    token: boolean;
-}
+export default function BarraNavegacao(): JSX.Element {
+    const { data, logout } = useUsuarioAutenticado();
 
-export default function BarraNavegacao({ token = true }: BarProps): JSX.Element {
     return (
         <NavbarContainer>
             <NavbarHomeContainer to="/">
                 <span className="Zer">Zer</span>
                 <span className="Obito">Óbito</span>
             </NavbarHomeContainer>
-            {token && (
+            {data.token && (
                 <NavbarAcoesContainer>
                     <Links>
                         <ItemAbaNavegacao
@@ -43,6 +43,13 @@ export default function BarraNavegacao({ token = true }: BarProps): JSX.Element 
                             titulo="Biblioteca de Casos"
                             icone={<BsBookmarkFill />}
                             url="#/#/#"
+                        />
+
+                        <ItemAbaNavegacao
+                            titulo="Sair"
+                            icone={<FiLogOut />}
+                            url="#"
+                            action={() => logout()}
                         />
                     </Links>
                 </NavbarAcoesContainer>

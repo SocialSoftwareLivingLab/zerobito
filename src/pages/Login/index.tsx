@@ -7,7 +7,7 @@ import LoginCard from '../../components/Login';
 const LoginView: React.FC = () => {
     return (
         <div>
-            <Menu token={false} />
+            <Menu />
             <div className="container-principal">
                 <LoginCard />
                 <div className="text-login">
