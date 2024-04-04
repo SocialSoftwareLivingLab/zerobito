@@ -70,7 +70,7 @@ export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
                 customStyles={dataTableStyle}
                 pointerOnHover
                 expandableRows
-                expandableRowExpanded={(row) => !!row}
+                // expandableRowExpanded={(row) => !!row}
                 expandOnRowClicked
                 expandableRowsComponent={({ data }) => <OcorrenciaItem data={data} />}
                 dense
