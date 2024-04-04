@@ -10,6 +10,7 @@ const InformacoesBasicas = forwardRef((props, ref) => {
         register,
         handleSubmit,
         trigger,
+        reset,
         formState: { isValid, errors }
     } = useForm<InformacoesBasicasFormFields>();
 

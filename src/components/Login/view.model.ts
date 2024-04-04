@@ -27,6 +27,7 @@ const useLoginViewModel = () => {
                 email: response.usuario.email,
                 perfil: response.usuario.perfil
             });
+            history.replace('/login');
         } catch (error) {
             setError('Erro ao tentar fazer login.');
         }
