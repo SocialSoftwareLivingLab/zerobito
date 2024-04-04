@@ -14,6 +14,7 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
         watch,
         register,
         trigger,
+        reset,
         formState: { isValid, errors },
         resetField
     } = useForm<DenuncianteFormInput>({ defaultValues: defaultValue });
@@ -49,22 +50,6 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
         [isValid, trigger, handleSubmit, submitForm]
     );
 
-    React.useEffect(() => {
-        if (tipoDenuncianteSelecionado === 'ANONIMA') {
-            resetField('nome');
-            resetField('customizado');
-            resetField('email');
-            resetField('telefone');
-            resetField('telefoneSecundario');
-        }
-    }, [tipoDenuncianteSelecionado, resetField]);
-
-    useEffect(() => {
-        if (tipoDenuncianteSelecionado !== 'OUTRO') {
-            resetField('customizado', { defaultValue: '' });
-        }
-    }, [tipoDenuncianteSelecionado, resetField]);
-
     useEffect(() => {
         const data: DenuncianteFormInput = {
             tipo: formData.denunciante.tipoDenuncia,
@@ -76,7 +61,23 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
         };
 
         reset(data); // Isso recarrega o contexto do formulário
-    }, [formData]); // Este efeito é acionado sempre que o formData mudar
+    }, [formData, reset]); // Este efeito é acionado sempre que o formData mudar
+
+    React.useEffect(() => {
+        if (tipoDenuncianteSelecionado === 'ANONIMA') {
+            resetField('nome', { defaultValue: '' });
+            resetField('customizado', { defaultValue: '' });
+            resetField('email', { defaultValue: '' });
+            resetField('telefone', { defaultValue: '' });
+            resetField('telefoneSecundario', { defaultValue: '' });
+        }
+    }, [tipoDenuncianteSelecionado, resetField]);
+
+    useEffect(() => {
+        if (tipoDenuncianteSelecionado !== 'OUTRO') {
+            resetField('customizado', { defaultValue: '' });
+        }
+    }, [tipoDenuncianteSelecionado, resetField]);
 
     const viewProps: DenuncianteViewProps = {
         register,

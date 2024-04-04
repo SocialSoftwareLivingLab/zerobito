@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useOcorrenciaWizardContext } from '../../../../pages/NovaOcorrencia/context';
 import { FormStepApi } from '../interface';
@@ -15,6 +15,7 @@ const Gravidade = forwardRef<FormStepApi, GravidadeProps>((props, ref) => {
         watch,
         resetField,
         trigger,
+        reset,
         formState: { isValid, errors }
     } = useForm<GravidadeFormFields>({ defaultValues: defaultValue });
 
@@ -38,7 +39,7 @@ const Gravidade = forwardRef<FormStepApi, GravidadeProps>((props, ref) => {
             gravidade: formData.gravidade.gravidade
         };
         reset(data);
-    }, [formData]);
+    }, [formData, reset]);
 
     React.useEffect(() => {
         if (condicao === 'OBITO') {

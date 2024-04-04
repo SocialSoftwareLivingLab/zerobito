@@ -14,6 +14,7 @@ const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
         register,
         watch,
         trigger,
+        reset,
         formState: { isValid, errors }
     } = useForm<VitimaFormFields>();
 
