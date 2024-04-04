@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
 import { register } from '../../common/models/user/create.user';
+import axios from 'axios';
+import { ValidateError } from '../../common/Errors/ValidateError';
 
 const useRegisterViewModel = () => {
     const history = useHistory();
@@ -14,11 +16,6 @@ const useRegisterViewModel = () => {
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (senha !== senhaValidation) {
-            setError(String('Senha diverge da confirmação'));
-            return;
-        }
-
         try {
             const response = await register(nome, email, senha);
             if (response.status === 201) {
@@ -30,8 +27,10 @@ const useRegisterViewModel = () => {
                 });
                 history.replace('/login');
             }
-        } catch (error: unknown) {
-            setError(String('Dados inválidos.'));
+        } catch (error) {
+            if (axios.isAxiosError<ValidateError, Record<string, unknown>>(error)) {
+                setError(String(error.response.data.message));
+            }
         }
     };
 

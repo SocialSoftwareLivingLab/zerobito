@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../common/models/user/auth';
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
+import axios from 'axios';
+import { ValidateError } from '../../common/Errors/ValidateError';
 
 const useLoginViewModel = () => {
     const history = useHistory();
@@ -29,7 +31,9 @@ const useLoginViewModel = () => {
             });
             history.replace('/login');
         } catch (error) {
-            setError('Erro ao tentar fazer login.');
+            if (axios.isAxiosError<ValidateError, Record<string, unknown>>(error)) {
+                setError(String(error.response.data.message));
+            }
         }
     };
 
