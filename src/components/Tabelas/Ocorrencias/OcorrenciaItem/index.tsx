@@ -17,6 +17,18 @@ const tipoFonte = {
     OUTRO: 'Outro'
 };
 
+const tipoCondicao = {
+    OBITO: 'Óbito',
+    INCIDENTE_ALTO_POTENCIAL: 'Incidente com alto potencial de óbito'
+};
+
+const tipoGravidade = {
+    EMERGENCIAL: 'Emergencial',
+    URGENTE: 'Urgente',
+    MUITO_URGENTE: 'Muito Urgente',
+    POUCO_URGENTE: 'Pouco Urgente'
+};
+
 export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
     const dateFormat = Intl.DateTimeFormat('pt-br');
 
@@ -54,6 +66,22 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                         <div className="coluna">
                             <strong>Descrição</strong>
                             <span>{data.descricao || 'Não informado'}</span>
+                        </div>
+                    </div>
+                    <div className="linha">
+                        <div className="coluna">
+                            <strong>Estado</strong>
+                            <span>{data.local.estado}</span>
+                        </div>
+                        <div className="coluna">
+                            <strong>Cidade</strong>
+                            <span>{data.local.cidade}</span>
+                        </div>
+                    </div>
+                    <div className="linha">
+                        <div className="coluna">
+                            <strong>Endereço</strong>
+                            <span>{data.local.logradouro || 'Não informado'}</span>
                         </div>
                     </div>
                 </div>
@@ -99,24 +127,59 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                 </div>
             </SecaoItemOcorrencia>
             <SecaoItemOcorrencia>
-                <h4>Localização</h4>
+                <h4>Vítima</h4>
                 <div className="info">
                     <div className="linha">
                         <div className="coluna">
-                            <strong>Estado</strong>
-                            <span>{data.local.estado}</span>
+                            <strong>Nome</strong>
+                            <span>{data.vitima.nome || 'Não informado'}</span>
                         </div>
                         <div className="coluna">
-                            <strong>Cidade</strong>
-                            <span>{data.local.cidade}</span>
+                            <strong>Vínculo</strong>
+                            <span>{data.vitima.vinculo || 'Não informado'}</span>
                         </div>
                     </div>
                     <div className="linha">
                         <div className="coluna">
-                            <strong>Endereço</strong>
-                            <span>{data.local.logradouro || 'Não informado'}</span>
+                            <strong>Condição</strong>
+                            <span>{tipoCondicao[data.vitima.condicao] || 'Não informado'}</span>
+                        </div>
+                        {data.vitima.condicao !== 'OBITO' && (
+                            <div className="coluna">
+                                <strong>Gravidade</strong>
+                                <span>
+                                    {tipoGravidade[data.vitima.gravidade] || 'Não informado'}
+                                </span>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="linha">
+                        <div className="coluna">
+                            <strong>Empresa</strong>
+                            <span>{data.empresa.nome || 'Não informado'}</span>
+                        </div>
+                        <div className="coluna">
+                            <strong>CNPJ Empresa</strong>
+                            <span>{data.empresa.cnpj || 'Não informado'}</span>
                         </div>
                     </div>
+                    {data.empresa.tomadoraServico && (
+                        <div className="linha">
+                            <div className="coluna">
+                                <strong>Tomadora de Serviço</strong>
+                                <span>
+                                    {data.empresa?.tomadoraServico?.nome || 'Não informado'}
+                                </span>
+                            </div>
+                            <div className="coluna">
+                                <strong>CNPJ Tomadora de Serviço</strong>
+                                <span>
+                                    {data.empresa?.tomadoraServico?.cnpj || 'Não informado'}
+                                </span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </SecaoItemOcorrencia>
         </OcorrenciaItemContainer>
