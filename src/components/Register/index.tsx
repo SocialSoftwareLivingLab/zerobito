@@ -1,6 +1,7 @@
 import './style.css';
 import React from 'react';
 import useRegisterViewModel from './view.model';
+import { PulseLoader } from 'react-spinners';
 
 function SignupCard() {
     const {
@@ -9,6 +10,8 @@ function SignupCard() {
         senha,
         senhaValidation,
         error,
+        loading,
+        override,
         handleSubmit,
         handleChangeNome,
         handleChangeEmail,
@@ -18,6 +21,15 @@ function SignupCard() {
 
     return (
         <div className="SingupCard">
+            <PulseLoader
+                color={'#134780'}
+                loading={loading}
+                cssOverride={override}
+                size={10}
+                speedMultiplier={0.6}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
             <div className="container-body-register">
                 <div className="container-register">
                     <h1 className="header-card-register">CADASTRO</h1>
