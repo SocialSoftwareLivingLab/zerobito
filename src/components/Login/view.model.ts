@@ -47,9 +47,7 @@ const useLoginViewModel = () => {
             history.replace('/login');
         } catch (error) {
             setLoading(false);
-            if (axios.isAxiosError<ValidateError, Record<string, unknown>>(error)) {
-                setError(String(error.response.data.message));
-            }
+            setError('E-mail e/ou senha incorretos');
         }
     };
 

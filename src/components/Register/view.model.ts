@@ -2,7 +2,7 @@ import { CSSProperties, useState } from 'react';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
 import { register } from '../../common/models/user/create.user';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { ValidateError } from '../../common/Errors/ValidateError';
 
 const useRegisterViewModel = () => {
@@ -32,6 +32,10 @@ const useRegisterViewModel = () => {
         try {
             setError('');
             setLoading(true);
+            if (senha !== senhaValidation) {
+                setError('Senhas não coincidem');
+                throw new Error('Senhas não coincidem');
+            }
             const response = await register(nome, email, senha);
             setLoading(false);
             if (response.status === 201) {

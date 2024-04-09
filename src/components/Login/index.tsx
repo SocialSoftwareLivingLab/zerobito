@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import useLoginViewModel from './view.model';
-import { ClipLoader, PulseLoader } from 'react-spinners';
+import { PulseLoader } from 'react-spinners';
 
 const LoginCard = () => {
     const {
