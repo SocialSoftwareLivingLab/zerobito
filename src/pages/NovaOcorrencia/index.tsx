@@ -77,12 +77,9 @@ function RegistrarOcorrenciaPage() {
                 }
             },
             fonte: {
-                email: formData.denunciante.emailDenuncia,
-                nome: formData.denunciante.nomeDenuncia,
-                outroTipo: formData.denunciante.denunciaCustomizada,
-                telefonePrincipal: formData.denunciante.telefoneDenuncia,
-                telefoneSecundario: formData.denunciante.telefoneSecundarioDenuncia,
-                tipo: formData.denunciante.tipoDenuncia as TipoFonteDenuncia
+                outroTipo: formData.denunciante.outro,
+                tipo: formData.denunciante.tipo as TipoFonteDenuncia,
+                detalhe: formData.denunciante.adicionais
             },
             vitima: {
                 nome: formData.vitima.nome,

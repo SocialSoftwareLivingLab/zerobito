@@ -12,22 +12,17 @@ const Gravidade = forwardRef<FormStepApi, GravidadeProps>((props, ref) => {
     const {
         register,
         handleSubmit,
-        watch,
-        resetField,
         trigger,
         reset,
         formState: { isValid, errors }
     } = useForm<GravidadeFormFields>({ defaultValues: defaultValue });
-
-    const condicao = watch('condicao');
 
     const { setGravidadeData, formData } = useOcorrenciaWizardContext();
 
     const submitForm: SubmitHandler<GravidadeFormFields> = useCallback(
         (data) => {
             setGravidadeData({
-                obito: data.condicao,
-                gravidade: data.gravidade
+                obito: data.condicao
             });
         },
         [setGravidadeData]
@@ -35,17 +30,10 @@ const Gravidade = forwardRef<FormStepApi, GravidadeProps>((props, ref) => {
 
     React.useEffect(() => {
         const data: GravidadeFormFields = {
-            condicao: formData.gravidade.obito,
-            gravidade: formData.gravidade.gravidade
+            condicao: formData.gravidade.obito as GravidadeFormFields['condicao']
         };
         reset(data);
     }, [formData, reset]);
-
-    React.useEffect(() => {
-        if (condicao === 'OBITO') {
-            resetField('gravidade', { defaultValue: '' });
-        }
-    }, [condicao, resetField]);
 
     useImperativeHandle(
         ref,
@@ -64,8 +52,7 @@ const Gravidade = forwardRef<FormStepApi, GravidadeProps>((props, ref) => {
     const vitimaViewProps: GravidadeViewProps = {
         register,
         submitForm: () => handleSubmit(submitForm)(),
-        errors,
-        condicao
+        errors
     };
 
     return <GravidadeView {...vitimaViewProps} />;

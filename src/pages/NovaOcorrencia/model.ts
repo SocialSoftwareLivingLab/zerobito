@@ -18,17 +18,13 @@ export interface VitimaData {
 }
 
 export interface DenuncianteData {
-    tipoDenuncia: string;
-    nomeDenuncia: string;
-    emailDenuncia: string;
-    telefoneDenuncia: string;
-    telefoneSecundarioDenuncia: string;
-    denunciaCustomizada: string;
+    tipo: string;
+    outro: string;
+    adicionais: string;
 }
 
 export interface GravidadeData {
     obito: string;
-    gravidade: string;
 }
 
 export interface OcorrenciaFormData {

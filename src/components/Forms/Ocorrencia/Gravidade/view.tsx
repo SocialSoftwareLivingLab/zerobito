@@ -10,15 +10,9 @@ export interface GravidadeViewProps {
     submitForm: () => void;
     errors: FieldErrors<GravidadeFormFields>;
     register: UseFormRegister<GravidadeFormFields>;
-    condicao: string;
 }
 
-export default function GravidadeView({
-    register,
-    submitForm,
-    errors,
-    condicao
-}: GravidadeViewProps) {
+export default function GravidadeView({ register, submitForm, errors }: GravidadeViewProps) {
     return (
         <FormContainer>
             <form onSubmit={submitForm}>
@@ -29,27 +23,9 @@ export default function GravidadeView({
                         label="Incidente de Alto Potencial"
                         value="INCIDENTE_ALTO_POTENCIAL"
                     />
+                    <SelectOption label="Atendimento Hospitalar" value="ATENDIMENTO_HOSPITALAR" />
                 </Select>
                 <ErrorMessage name="condicao" errors={errors} as="p" />
-
-                {condicao !== 'OBITO' && (
-                    <>
-                        <Select
-                            label="Gravidade do acidente"
-                            {...register('gravidade', { required: condicao !== 'OBITO' })}>
-                            <SelectOption
-                                label="Selecione a gravidade do acidente"
-                                value=""
-                                disabled
-                            />
-                            <SelectOption label="Emergencial" value="EMERGENCIAL" />
-                            <SelectOption label="Muito Grave" value="MUITO_URGENTE" />
-                            <SelectOption label="Urgência" value="URGENTE" />
-                            <SelectOption label="Pouca Urgência" value="POUCO_URGENTE" />
-                        </Select>
-                        <ErrorMessage errors={errors} name="gravidade" as="p" />
-                    </>
-                )}
             </form>
         </FormContainer>
     );

@@ -25,12 +25,9 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
     const submitForm: SubmitHandler<DenuncianteFormInput> = useCallback(
         (data) => {
             setDenuncianteData({
-                denunciaCustomizada: data.customizado || null,
-                emailDenuncia: data.email,
-                telefoneSecundarioDenuncia: data.telefoneSecundario,
-                nomeDenuncia: data.nome,
-                telefoneDenuncia: data.telefone,
-                tipoDenuncia: data.tipo
+                tipo: data.tipo,
+                outro: data.outro,
+                adicionais: data.adicionais
             });
         },
         [setDenuncianteData]
@@ -52,12 +49,9 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
 
     useEffect(() => {
         const data: DenuncianteFormInput = {
-            tipo: formData.denunciante.tipoDenuncia,
-            telefone: formData.denunciante.telefoneDenuncia,
-            nome: formData.denunciante.nomeDenuncia,
-            telefoneSecundario: formData.denunciante.telefoneSecundarioDenuncia,
-            email: formData.denunciante.emailDenuncia,
-            customizado: formData.denunciante.denunciaCustomizada
+            tipo: formData.denunciante.tipo,
+            outro: formData.denunciante.outro,
+            adicionais: formData.denunciante.adicionais
         };
 
         reset(data); // Isso recarrega o contexto do formulário
@@ -65,17 +59,13 @@ const Denunciante = forwardRef<FormStepApi, DenuncianteProps>((props, ref) => {
 
     React.useEffect(() => {
         if (tipoDenuncianteSelecionado === 'ANONIMA') {
-            resetField('nome', { defaultValue: '' });
-            resetField('customizado', { defaultValue: '' });
-            resetField('email', { defaultValue: '' });
-            resetField('telefone', { defaultValue: '' });
-            resetField('telefoneSecundario', { defaultValue: '' });
+            resetField('adicionais', { defaultValue: '' });
         }
     }, [tipoDenuncianteSelecionado, resetField]);
 
     useEffect(() => {
         if (tipoDenuncianteSelecionado !== 'OUTRO') {
-            resetField('customizado', { defaultValue: '' });
+            resetField('outro', { defaultValue: '' });
         }
     }, [tipoDenuncianteSelecionado, resetField]);
 
