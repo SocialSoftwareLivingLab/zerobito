@@ -42,17 +42,14 @@ export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenci
             <Section>
                 <h3>Informações do Denunciante</h3>
 
-                <p>Tipo: {data.denunciante.tipoDenuncia}</p>
-                {data.denunciante.tipoDenuncia === 'OUTRO' && (
-                    <p>Tipo informado: {data.denunciante.tipoDenuncia}</p>
+                <p>Tipo: {data.denunciante.tipo}</p>
+                {data.denunciante.tipo === 'OUTRO' && (
+                    <p>Tipo informado: {data.denunciante.outro}</p>
                 )}
 
-                {data.denunciante.tipoDenuncia !== 'ANONIMO' && (
+                {data.denunciante.tipo !== 'ANONIMO' && (
                     <>
-                        <p>Nome: {data.denunciante.nomeDenuncia}</p>
-                        <p>E-mail: {data.denunciante.emailDenuncia}</p>
-                        <p>Telefone: {data.denunciante.telefoneDenuncia}</p>
-                        <p>Telefone Secundário: {data.denunciante.telefoneSecundarioDenuncia}</p>
+                        <p>Informações Adicionais: {data.denunciante.adicionais}</p>
                     </>
                 )}
             </Section>
@@ -60,10 +57,7 @@ export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenci
             <Section>
                 <h3>Gravidade do acidente</h3>
 
-                <p>Houve óbito? {data.gravidade.obito === 'OBITO' ? 'Sim' : 'Não'}</p>
-                {data.gravidade.obito === 'INCIDENTE_ALTO_POTENCIAL' && (
-                    <p>Gravidade da vítima: {data.gravidade.gravidade}</p>
-                )}
+                <p>Condição: Resolver </p>
             </Section>
         </FormContainer>
     );

@@ -35,10 +35,7 @@ export interface CriarOcorrenciaRequest {
         };
     };
     fonte: {
-        nome: string;
-        email: string;
-        telefonePrincipal: string;
-        telefoneSecundario: string;
+        detalhe: string;
         tipo: TipoFonteDenuncia;
         outroTipo: string;
     };

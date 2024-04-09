@@ -42,42 +42,17 @@ export default function DenuncianteView({
                         <Input
                             label="Tipo de Denunciante"
                             placeholder="Informe o tipo de denunciante"
-                            {...register('customizado', { required: true })}
+                            {...register('outro', { required: true })}
                         />
                     )}
                     {tipoDenuncianteSelecionado !== 'ANONIMA' && (
                         <>
-                            {/* <input type="text" placeholder="Nome do Denunciante" {...register('nome', { required: true })} /> */}
                             <Input
-                                label="Nome do Denunciante"
-                                placeholder="Nome do Denunciante"
-                                {...register('nome', { required: true })}
+                                label="Informações Adicionais"
+                                placeholder="Adicione mais informações aqui"
+                                {...register('adicionais', { required: false })}
                             />
-                            <ErrorMessage name="nome" errors={errors} as="p" />
-
-                            {/* <input type="text" placeholder="E-mail do Denunciante" {...register('email', { required: true })} /> */}
-                            <Input
-                                label="E-mail do Denunciante"
-                                placeholder="E-mail do Denunciante"
-                                {...register('email', { required: true })}
-                            />
-                            <ErrorMessage name="email" errors={errors} as="p" />
-
-                            {/* <input type="text" placeholder="Telefone para contato do Denunciante" {...register('telefone', { required: true })} /> */}
-                            <Input
-                                label="Telefone para contato"
-                                placeholder="Telefone para contato"
-                                {...register('telefone', { required: true })}
-                            />
-                            <ErrorMessage name="telefone" errors={errors} as="p" />
-
-                            {/* <input type="text" placeholder="Endereço do Denunciante" {...register('endereco', { required: true })} /> */}
-                            <Input
-                                label="Telefone secundário (opcional)"
-                                placeholder="Telefone para contato"
-                                {...register('telefoneSecundario', { required: false })}
-                            />
-                            <ErrorMessage name="telefoneSecundario" errors={errors} as="p" />
+                            <ErrorMessage name="adicionais" errors={errors} as="p" />
                         </>
                     )}
                 </form>

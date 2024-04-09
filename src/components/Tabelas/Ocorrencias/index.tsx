@@ -9,7 +9,7 @@ import { Button } from '../../ui/Button';
 import { Paginacao, dataTableStyle } from '../custom';
 import OcorrenciaItem from './OcorrenciaItem';
 import { ColunaAcao } from './styles';
-import { COLUNAS_TABELA_OCORRENCIAS, TIPOS_GRAVIDADE } from './table-columns';
+import { COLUNAS_TABELA_OCORRENCIAS, TIPOS_STATUS } from './table-columns';
 
 function AdicionarNovoEventoButton() {
     const history = useHistory();
@@ -25,10 +25,10 @@ function AdicionarNovoEventoButton() {
     );
 }
 
-export function BadgeGravidade({ gravidade }: { gravidade: string | null }) {
-    const tipo = TIPOS_GRAVIDADE[gravidade];
+export function BadgeStatus({ status }: { status: string | null }) {
+    const tipo = TIPOS_STATUS[status];
 
-    return gravidade && <Badge texto={tipo.label} type={tipo.type} />;
+    return status && <Badge texto={tipo.label} type={tipo.type} />;
 }
 
 export function AcoesLinha({ row }: { row: OcorrenciaModel }) {

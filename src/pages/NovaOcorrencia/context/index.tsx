@@ -36,13 +36,9 @@ export function CriarOcorrenciaWizardContextProvider({
             vinculoEmpresa: 'Desconhecido'
         },
         denunciante: {
-            tipoDenuncia: 'ANONIMA',
-            nomeDenuncia: '',
-            emailDenuncia: '',
-            telefoneDenuncia: '',
-            telefoneSecundarioDenuncia: '',
-            enderecoDenuncia: '',
-            denunciaCustomizada: ''
+            tipo: 'ANONIMA',
+            outro: null,
+            adicionais: null
         },
         gravidade: {
             obito: '',
@@ -52,8 +48,6 @@ export function CriarOcorrenciaWizardContextProvider({
 
     const setInformacoesBasicas = useCallback(
         (data: InformacoesBasicasData) => {
-            console.log('Dados');
-            console.log(data);
             setFormData({
                 ...formData,
                 informacoesBasicas: data
@@ -64,8 +58,6 @@ export function CriarOcorrenciaWizardContextProvider({
 
     const setVitimaData = useCallback(
         (data: VitimaData) => {
-            console.log('Dados');
-            console.log(data);
             setFormData({
                 ...formData,
                 vitima: data

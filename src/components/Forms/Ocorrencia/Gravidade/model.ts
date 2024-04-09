@@ -1,9 +1,7 @@
 export interface GravidadeFormFields {
-    condicao: 'OBITO' | 'INCIDENTE_ALTO_POTENCIAL';
-    gravidade: 'EMERGENCIAL' | 'MUITO_URGENTE' | 'URGENTE' | 'POUCO_URGENTE' | '';
+    condicao: 'OBITO' | 'INCIDENTE_ALTO_POTENCIAL' | 'ATENDIMENTO_HOSPITALAR';
 }
 
 export const defaultValue: GravidadeFormFields = {
-    condicao: 'OBITO',
-    gravidade: null
+    condicao: 'OBITO'
 };
