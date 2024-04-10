@@ -9,7 +9,7 @@ import {
     TipoFonteDenuncia,
     criarOcorrencia
 } from '../../../common/api/ocorrencias/criar-ocorrencia';
-import { useHistory } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './style.css';
 
@@ -22,8 +22,6 @@ function RegistrarOcorrenciaPage() {
     const [currentStep, setCurrentStep] = useState(1);
 
     const { formData } = useOcorrenciaWizardContext();
-
-    const history = useHistory();
 
     const handleNextStep = useCallback(
         (handleNextFormWizard: () => void) => {
@@ -84,8 +82,7 @@ function RegistrarOcorrenciaPage() {
             vitima: {
                 nome: formData.vitima.nome,
                 vinculo: formData.vitima.vinculoEmpresa,
-                condicao: formData.gravidade.obito as CondicaoVitima,
-                gravidade: formData.gravidade.gravidade as GravidadeVitima
+                condicao: formData.gravidade.obito as CondicaoVitima
             }
         };
 
@@ -99,10 +96,8 @@ function RegistrarOcorrenciaPage() {
             buttonsStyling: true
         });
 
-        history.push('/home');
-
-        history.push('/home');
-    }, [formData, history]);
+        redirect('/home');
+    }, [formData]);
 
     const registrarOcorrenciaViewProps: RegistrarOcorrenciaViewProps = {
         handles: {

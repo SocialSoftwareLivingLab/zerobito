@@ -1,12 +1,11 @@
+import axios from 'axios';
 import { CSSProperties, useState } from 'react';
-import { useHistory } from 'react-router';
+import { redirect } from 'react-router';
 import Swal from 'sweetalert2';
-import { register } from '../../common/models/user/create.user';
-import axios, { AxiosError } from 'axios';
 import { ValidateError } from '../../common/Errors/ValidateError';
+import { register } from '../../common/models/user/create.user';
 
 const useRegisterViewModel = () => {
-    const history = useHistory();
     const [error, setError] = useState<string>();
     const [nome, setNome] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -46,7 +45,7 @@ const useRegisterViewModel = () => {
                     timer: 4000,
                     confirmButtonText: 'Continuar'
                 });
-                history.replace('/login');
+                redirect('/login');
             }
         } catch (error) {
             setLoading(false);

@@ -1,15 +1,13 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import BarraNavegacao from '../../components/BarraNavegacao';
 import TabelaBiblioteca from '../../components/Tabelas/TabelaBiblioteca/index.tsx';
 import useHomeViewModel from '../Home/view.model.ts';
 import './style.css';
 
 function BibliotecaCasos() {
-    const history = useHistory();
-
     const handleObservatorioClick = () => {
-        history.push('/observatorio');
+        redirect('/observatorio');
     };
 
     const { eventos } = useHomeViewModel();

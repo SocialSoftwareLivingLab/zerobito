@@ -1,12 +1,9 @@
-import { useState, CSSProperties } from 'react';
-import { useHistory } from 'react-router-dom';
+import { CSSProperties, useState } from 'react';
+import { redirect } from 'react-router-dom';
 import { login } from '../../common/models/user/auth';
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
-import axios from 'axios';
-import { ValidateError } from '../../common/Errors/ValidateError';
 
 const useLoginViewModel = () => {
-    const history = useHistory();
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
     const [error, setError] = useState<string>();
@@ -16,7 +13,7 @@ const useLoginViewModel = () => {
 
     const token = localStorage.getItem('token');
     if (token) {
-        history.replace('/home');
+        redirect('/home');
     }
 
     const override: CSSProperties = {
@@ -44,7 +41,7 @@ const useLoginViewModel = () => {
                 perfil: response.usuario.perfil
             });
             setLoading(false);
-            history.replace('/login');
+            redirect('/home');
         } catch (error) {
             setLoading(false);
             setError('E-mail e/ou senha incorretos');

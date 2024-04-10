@@ -16,7 +16,7 @@ export default function BarraNavegacao(): JSX.Element {
                 <span className="Zer">Zer</span>
                 <span className="Obito">Óbito</span>
             </NavbarHomeContainer>
-            {data.token && (
+            {data?.token && (
                 <NavbarAcoesContainer>
                     <Links>
                         <ItemAbaNavegacao

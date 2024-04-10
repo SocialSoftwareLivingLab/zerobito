@@ -17,7 +17,7 @@ const LoginCard = () => {
 
     return (
         <div className="LoginCard">
-            <body className="container-body">
+            <div className="container-body">
                 <PulseLoader
                     color={'#134780'}
                     loading={loading}
@@ -60,7 +60,7 @@ const LoginCard = () => {
                         </form>
                     </div>
                 </div>
-            </body>
+            </div>
         </div>
     );
 };

@@ -1,43 +1,65 @@
 import React from 'react';
 
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PrivateRoute from '../../components/PrivateRoute';
-import Cadastro from '../../pages/Cadastro';
-import PainelControle from '../../pages/PainelControleUsuario';
-import Ocorrencia from '../../pages/Ocorrencia/Cadastro';
 import BibliotecaCasos from '../../pages/BibliotecaCaso';
-import Material from '../../pages/MaterialConsulta';
-import Imprensa from '../../pages/Imprensa';
-import SobreNos from '../../pages/SobreNos';
+import Cadastro from '../../pages/Cadastro';
 import Contato from '../../pages/Contato';
-import Login from '../../pages/Login';
 import Home from '../../pages/Home';
-import Perfil from '../../pages/Perfil';
+import Imprensa from '../../pages/Imprensa';
+import Login from '../../pages/Login';
+import Material from '../../pages/MaterialConsulta';
 import ObservatorioZeroObito from '../../pages/ObservatorioZeroObito';
 import AceitarOcorrenciaPage from '../../pages/Ocorrencia/Aceite';
+import RegistrarOcorrencia from '../../pages/Ocorrencia/Cadastro';
+import PainelControle from '../../pages/PainelControleUsuario';
+import Perfil from '../../pages/Perfil';
+import SobreNos from '../../pages/SobreNos';
+
+interface PrivateRouteConfig {
+    path: string;
+    Component: React.ComponentType;
+}
+
+const privateRoutes: PrivateRouteConfig[] = [
+    { path: '/', Component: Home },
+    { path: '/home', Component: Home },
+    { path: '/ocorrencia', Component: RegistrarOcorrencia },
+    { path: '/ocorrencia/:id/aceitar', Component: AceitarOcorrenciaPage },
+    { path: '/biblioteca', Component: BibliotecaCasos },
+    { path: '/material', Component: Material },
+    { path: '/painel', Component: PainelControle },
+    { path: '/imprensa', Component: Imprensa },
+    { path: '/perfil', Component: Perfil },
+    { path: '/observatorio', Component: ObservatorioZeroObito }
+];
+
+const publicRoutes: PrivateRouteConfig[] = [
+    { path: '/login', Component: Login },
+    { path: '/cadastro', Component: Cadastro },
+    { path: '/sobre', Component: SobreNos },
+    { path: '/contato', Component: Contato }
+];
 
 const AppRoutes = () => {
     return (
         <BrowserRouter>
-            <Switch>
-                <Route exact path="/" render={() => <Redirect to="/login" />} />
-                <Route exact path="/login" component={Login} />
-                <Redirect exact path="/" to="/profile" />
-                <PrivateRoute path="/home" component={Home} />
-                <PrivateRoute path="/ocorrencia" component={Ocorrencia} />
-                <PrivateRoute path="/ocorrencia/:id" component={Ocorrencia} />
-                <PrivateRoute path="/ocorrencia/:id/aceitar" component={AceitarOcorrenciaPage} />
-                <PrivateRoute path="/biblioteca" component={BibliotecaCasos} />
-                <PrivateRoute path="/material" component={Material} />
-                <PrivateRoute path="/painel" component={PainelControle} />
-                <PrivateRoute path="/imprensa" component={Imprensa} />
-                <PrivateRoute path="/perfil" component={Perfil} />
-                <PrivateRoute path="/observatorio" component={ObservatorioZeroObito} />
-                <Route exact path="/cadastro" component={Cadastro} />
-                <Route exact path="/sobre" component={SobreNos} />
-                <Route exact path="/contato" component={Contato} />
-            </Switch>
+            <Routes>
+                {privateRoutes.map(({ path, Component }) => (
+                    <Route
+                        key={path}
+                        path={path}
+                        element={
+                            <PrivateRoute>
+                                <Component />
+                            </PrivateRoute>
+                        }
+                    />
+                ))}
+                {publicRoutes.map(({ path, Component }) => (
+                    <Route key={path} path={path} element={<Component />} />
+                ))}
+            </Routes>
         </BrowserRouter>
     );
 };

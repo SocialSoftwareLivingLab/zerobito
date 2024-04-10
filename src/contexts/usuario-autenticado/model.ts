@@ -7,6 +7,7 @@ export interface UsuarioAutenticado {
 
 export interface UsuarioAutenticadoContextData {
     data: UsuarioAutenticado;
+    isAutenticado: boolean;
     logout: () => void;
     login: (data: UsuarioAutenticado) => void;
 }
