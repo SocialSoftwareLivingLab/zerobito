@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import DataTable from 'react-data-table-component';
 import { IoBagAdd } from 'react-icons/io5';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { OcorrenciaModel } from '../../../common/models/ocorrencias/model';
 import Badge from '../../ui/Badge';
 import { BoxContainer } from '../../ui/BoxContainer';
@@ -12,9 +12,11 @@ import { ColunaAcao } from './styles';
 import { COLUNAS_TABELA_OCORRENCIAS, TIPOS_STATUS } from './table-columns';
 
 function AdicionarNovoEventoButton() {
+    const navigate = useNavigate();
+
     const handleClick = useCallback(() => {
-        redirect('/ocorrencia');
-    }, []);
+        navigate('/ocorrencia');
+    }, [navigate]);
 
     return (
         <Button type="button" action={handleClick}>
