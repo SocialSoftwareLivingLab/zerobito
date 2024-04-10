@@ -1,11 +1,9 @@
 import React from 'react';
-import Menu from '../../components/BarraNavegacao/index.tsx';
 import './style.css';
 
 function Material() {
     return (
         <div className="Contato">
-            <Menu />
             <div className="container-header">
                 <h1>Materiais para Consulta</h1>
                 <div className="container-contato">

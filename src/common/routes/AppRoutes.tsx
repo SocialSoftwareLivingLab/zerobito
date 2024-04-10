@@ -15,6 +15,7 @@ import RegistrarOcorrencia from '../../pages/Ocorrencia/Cadastro';
 import PainelControle from '../../pages/PainelControleUsuario';
 import Perfil from '../../pages/Perfil';
 import SobreNos from '../../pages/SobreNos';
+import BarraNavegacao from '../../components/BarraNavegacao';
 
 interface PrivateRouteConfig {
     path: string;
@@ -44,6 +45,7 @@ const publicRoutes: PrivateRouteConfig[] = [
 const AppRoutes = () => {
     return (
         <BrowserRouter>
+            <BarraNavegacao />
             <Routes>
                 {privateRoutes.map(({ path, Component }) => (
                     <Route

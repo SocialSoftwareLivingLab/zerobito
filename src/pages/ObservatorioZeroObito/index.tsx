@@ -1,5 +1,4 @@
 import React from 'react';
-import Menu from '../../components/BarraNavegacao/index.tsx';
 import './style.css';
 import { redirect } from 'react-router-dom';
 
@@ -10,7 +9,6 @@ function ObservatorioZeroObito() {
 
     return (
         <div className="Contato">
-            <Menu />
             <div className="container-header">
                 <h1>Observatório ZerÓbito</h1>
                 <div className="container-contato">

@@ -1,6 +1,5 @@
 import React from 'react';
 import { redirect } from 'react-router-dom';
-import BarraNavegacao from '../../components/BarraNavegacao';
 import TabelaBiblioteca from '../../components/Tabelas/TabelaBiblioteca/index.tsx';
 import useHomeViewModel from '../Home/view.model.ts';
 import './style.css';
@@ -14,7 +13,6 @@ function BibliotecaCasos() {
 
     return (
         <div className="Contato">
-            <BarraNavegacao />
             <div className="container-header">
                 <h1>Biblioteca de Casos</h1>
                 <div className="container-contato">

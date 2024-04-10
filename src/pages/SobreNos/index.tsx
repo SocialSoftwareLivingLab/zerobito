@@ -1,11 +1,9 @@
 import React from 'react';
-import Menu from '../../components/BarraNavegacao';
 import './style.css';
 
 function SobreNos() {
     return (
         <div className="SobreNos">
-            <Menu />
             Sobre Nós
             <p>
                 O ZerÓbito é um site que tem como objetivo informar a população sobre o número de

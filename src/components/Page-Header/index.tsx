@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.css';
-import Menu from '../BarraNavegacao';
 
 interface HeaderProps {
     title: string;
@@ -10,7 +9,6 @@ interface HeaderProps {
 function Header({ title, explicacao }: HeaderProps): JSX.Element {
     return (
         <div>
-            <Menu />
             <div className="container-header">
                 <h1>{title}</h1>
                 <div className="text">{explicacao}</div>

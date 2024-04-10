@@ -1,5 +1,4 @@
 import React from 'react';
-import Menu from '../../components/BarraNavegacao';
 
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 
@@ -12,7 +11,6 @@ const Perfil: React.FC = () => {
 
     return (
         <div>
-            <Menu />
             <h1>Perfil</h1>
             <div>
                 <p>Nome: {data.nome}</p>
