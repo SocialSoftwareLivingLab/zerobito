@@ -1,5 +1,5 @@
-import { CSSProperties, useState } from 'react';
-import { redirect } from 'react-router-dom';
+import { CSSProperties, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../common/models/user/auth';
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 
@@ -8,13 +8,18 @@ const useLoginViewModel = () => {
     const [senha, setSenha] = useState<string>('');
     const [error, setError] = useState<string>();
 
-    const { login: setData } = useUsuarioAutenticado();
+    const { login: setData, isAutenticado } = useUsuarioAutenticado();
     const [loading, setLoading] = useState(false);
 
-    const token = localStorage.getItem('token');
-    if (token) {
-        redirect('/home');
-    }
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log('...');
+        console.log(isAutenticado);
+        if (isAutenticado) {
+            navigate('/');
+        }
+    }, [isAutenticado, navigate]);
 
     const override: CSSProperties = {
         display: 'block',
@@ -41,7 +46,6 @@ const useLoginViewModel = () => {
                 perfil: response.usuario.perfil
             });
             setLoading(false);
-            redirect('/home');
         } catch (error) {
             setLoading(false);
             setError('E-mail e/ou senha incorretos');
