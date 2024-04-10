@@ -5,7 +5,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import PrivateRoute from '../../components/PrivateRoute';
 import Cadastro from '../../pages/Cadastro';
 import PainelControle from '../../pages/PainelControleUsuario';
-import Ocorrencia from '../../pages/NovaOcorrencia';
+import Ocorrencia from '../../pages/Ocorrencia/Cadastro';
 import BibliotecaCasos from '../../pages/BibliotecaCaso';
 import Material from '../../pages/MaterialConsulta';
 import Imprensa from '../../pages/Imprensa';
@@ -15,6 +15,7 @@ import Login from '../../pages/Login';
 import Home from '../../pages/Home';
 import Perfil from '../../pages/Perfil';
 import ObservatorioZeroObito from '../../pages/ObservatorioZeroObito';
+import AceitarOcorrenciaPage from '../../pages/Ocorrencia/Aceite';
 
 const AppRoutes = () => {
     return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
                 <PrivateRoute path="/home" component={Home} />
                 <PrivateRoute path="/ocorrencia" component={Ocorrencia} />
                 <PrivateRoute path="/ocorrencia/:id" component={Ocorrencia} />
+                <PrivateRoute path="/ocorrencia/:id/aceitar" component={AceitarOcorrenciaPage} />
                 <PrivateRoute path="/biblioteca" component={BibliotecaCasos} />
                 <PrivateRoute path="/material" component={Material} />
                 <PrivateRoute path="/painel" component={PainelControle} />

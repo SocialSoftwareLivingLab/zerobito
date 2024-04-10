@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { FormStepApi } from '../../components/Forms/Ocorrencia/interface';
+import { FormStepApi } from '../../../components/Forms/Ocorrencia/interface';
 import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from './context';
 import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
 import {
@@ -8,7 +8,7 @@ import {
     GravidadeVitima,
     TipoFonteDenuncia,
     criarOcorrencia
-} from '../../common/api/ocorrencias/criar-ocorrencia';
+} from '../../../common/api/ocorrencias/criar-ocorrencia';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './style.css';
