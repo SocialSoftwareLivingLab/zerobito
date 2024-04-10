@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import Container from '../Container';
 
 interface HeaderProps {
     title: string;
@@ -9,10 +10,10 @@ interface HeaderProps {
 function Header({ title, explicacao }: HeaderProps): JSX.Element {
     return (
         <div>
-            <div className="container-header">
+            <Container className="container-header">
                 <h1>{title}</h1>
                 <div className="text">{explicacao}</div>
-            </div>
+            </Container>
         </div>
     );
 }
