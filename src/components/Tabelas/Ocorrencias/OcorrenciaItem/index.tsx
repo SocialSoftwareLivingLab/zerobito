@@ -48,7 +48,7 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                         </div>
                         <div className="coluna">
                             <strong>Data do registro</strong>
-                            <span>{dateFormat.format(new Date(data.dataCriacao))}</span>
+                            <span>{dateFormat.format(new Date(data.data))}</span>
                         </div>
                     </div>
                     <div className="linha">
@@ -103,7 +103,7 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                                 <>
                                     <div>
                                         <strong>Nome</strong>
-                                        <span>{data.fonte.nome}</span>
+                                        <span>{data?.fonte?.nome || 'Não informado'}</span>
                                     </div>
                                 </>
                             )}
