@@ -39,11 +39,6 @@ export default function BarraNavegacao(): JSX.Element {
                             icone={<BiSolidHelpCircle />}
                             url="#/#/#"
                         />
-                        <ItemAbaNavegacao
-                            titulo="Biblioteca de Casos"
-                            icone={<BsBookmarkFill />}
-                            url="#/#/#"
-                        />
 
                         <ItemAbaNavegacao
                             titulo="Sair"
