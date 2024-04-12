@@ -65,7 +65,8 @@ function SignupCard() {
                                             style={{
                                                 verticalAlign: 'middle',
                                                 marginRight: '5px',
-                                                marginBottom: '2px'
+                                                marginBottom: '2px',
+                                                cursor: 'pointer'
                                             }}
                                             title={
                                                 'Mínimo de 8 dígitos, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial'
