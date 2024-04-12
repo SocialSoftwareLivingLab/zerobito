@@ -10,7 +10,6 @@ export type TipoFonteDenuncia =
     | 'SERVICO_SAUDE'
     | 'OUTRO';
 export type CondicaoVitima = 'OBITO' | 'INCIDENTE_ALTO_POTENCIAL';
-export type GravidadeVitima = 'EMERGENCIAL' | 'MUITO_URGENTE' | 'URGENTE' | 'POUCO_URGENTE' | '';
 
 export interface CriarOcorrenciaRequest {
     descricao: string;
@@ -24,7 +23,6 @@ export interface CriarOcorrenciaRequest {
         nome: string;
         vinculo: string;
         condicao: CondicaoVitima;
-        gravidade: GravidadeVitima;
     };
     empresa: {
         nome: string;

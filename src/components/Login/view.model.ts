@@ -1,23 +1,25 @@
-import { useState, CSSProperties } from 'react';
-import { useHistory } from 'react-router-dom';
+import { CSSProperties, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../common/models/user/auth';
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
-import axios from 'axios';
-import { ValidateError } from '../../common/Errors/ValidateError';
 
 const useLoginViewModel = () => {
-    const history = useHistory();
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
     const [error, setError] = useState<string>();
 
-    const { login: setData } = useUsuarioAutenticado();
+    const { login: setData, isAutenticado } = useUsuarioAutenticado();
     const [loading, setLoading] = useState(false);
 
-    const token = localStorage.getItem('token');
-    if (token) {
-        history.replace('/home');
-    }
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log('...');
+        console.log(isAutenticado);
+        if (isAutenticado) {
+            navigate('/');
+        }
+    }, [isAutenticado, navigate]);
 
     const override: CSSProperties = {
         display: 'block',
@@ -44,7 +46,6 @@ const useLoginViewModel = () => {
                 perfil: response.usuario.perfil
             });
             setLoading(false);
-            history.replace('/login');
         } catch (error) {
             setLoading(false);
             setError('E-mail e/ou senha incorretos');

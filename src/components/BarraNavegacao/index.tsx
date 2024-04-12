@@ -8,7 +8,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 
 export default function BarraNavegacao(): JSX.Element {
-    const { data, logout } = useUsuarioAutenticado();
+    const { isAutenticado, logout } = useUsuarioAutenticado();
 
     return (
         <NavbarContainer>
@@ -16,7 +16,7 @@ export default function BarraNavegacao(): JSX.Element {
                 <span className="Zer">Zer</span>
                 <span className="Obito">Óbito</span>
             </NavbarHomeContainer>
-            {data.token && (
+            {isAutenticado && (
                 <NavbarAcoesContainer>
                     <Links>
                         <ItemAbaNavegacao

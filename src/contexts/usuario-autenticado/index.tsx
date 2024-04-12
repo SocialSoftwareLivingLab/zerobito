@@ -1,6 +1,6 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { UsuarioAutenticado, UsuarioAutenticadoContextData } from './model';
-import { useHistory } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
 export const UsuarioAutenticadoContext = createContext({} as UsuarioAutenticadoContextData);
 
@@ -25,8 +25,6 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
         'token'
     >;
 
-    const history = useHistory();
-
     const [usuarioLogado, setUsuarioLogado] = useState<UsuarioAutenticado>({
         token: tokenStorage,
         nome: usuarioStorage?.nome || null,
@@ -47,22 +45,27 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
         [setUsuarioLogado]
     );
 
+    const isAutenticado = useMemo(() => {
+        return !!usuarioLogado?.token;
+    }, [usuarioLogado?.token]);
+
     useEffect(() => {
         if (history) {
             if (usuarioLogado?.token) {
-                history.replace('/home');
+                redirect('/home');
             } else {
-                history.replace('/login');
+                redirect('/login');
             }
         }
-    }, [usuarioLogado, history]);
+    }, [usuarioLogado]);
 
     return (
         <UsuarioAutenticadoContext.Provider
             value={{
                 data: usuarioLogado,
                 login,
-                logout
+                logout,
+                isAutenticado
             }}>
             {props.children}
         </UsuarioAutenticadoContext.Provider>

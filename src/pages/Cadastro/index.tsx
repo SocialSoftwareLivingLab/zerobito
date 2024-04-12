@@ -1,13 +1,11 @@
 import React from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
-import Menu from '../../components/BarraNavegacao/index.tsx';
 import SignupCard from '../../components/Register/index.tsx';
 
 function Cadastro() {
     return (
         <div>
-            <Menu />
             <div className="container-principal-register">
                 <SignupCard />
                 <div className="text-login">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useOcorrenciaWizardContext } from '../../../../pages/NovaOcorrencia/context';
+import { useOcorrenciaWizardContext } from '../../../../pages/Ocorrencia/Cadastro/context';
 import ConfirmacaoOcorrenciaView from './view';
 
 export default function ConfirmacaoOcorrencia() {

@@ -1,18 +1,14 @@
 import React from 'react';
-import Menu from '../../components/BarraNavegacao/index.tsx';
 import './style.css';
-import { useHistory } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
 function ObservatorioZeroObito() {
-    const history = useHistory();
-
     const handleBibliotecaClick = () => {
-        history.push('/biblioteca');
+        redirect('/biblioteca');
     };
 
     return (
         <div className="Contato">
-            <Menu />
             <div className="container-header">
                 <h1>Observatório ZerÓbito</h1>
                 <div className="container-contato">

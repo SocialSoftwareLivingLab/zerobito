@@ -1,14 +1,13 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
+import { Navigate } from 'react-router-dom';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const PrivateRoute = ({ component: Component, ...rest }: any) => (
-    <Route
-        {...rest}
-        render={(props) =>
-            localStorage.getItem('token') ? <Component {...props} /> : <Redirect to="/login" />
-        }
-    />
-);
+export interface PrivateRoutePros {
+    children: React.ReactElement;
+}
 
-export default PrivateRoute;
+export default function PrivateRoute({ children }: PrivateRoutePros) {
+    const { isAutenticado } = useUsuarioAutenticado();
+
+    return isAutenticado ? children : <Navigate to="/login" replace />;
+}

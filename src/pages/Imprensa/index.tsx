@@ -1,5 +1,4 @@
 import React from 'react';
-import Menu from '../../components/BarraNavegacao';
 import './style.css';
 
 const Imprensa = () => {
@@ -26,7 +25,6 @@ const Imprensa = () => {
 
     return (
         <div>
-            <Menu />
             <h1>Esta é a página da imprensa</h1>
             <h2>Notícias recentes</h2>
             {noticias.map((noticia, index) => (

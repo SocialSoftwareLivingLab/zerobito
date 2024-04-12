@@ -14,7 +14,7 @@
         "react-form-wizard-component": "^0.1.7",
         "react-hook-form": "^7.51.1",
         "react-icons": "^5.0.1",
-        "react-router-dom": "^5.2.0",
+        "react-router-dom": "^6.22.3",
         "react-scripts": "5.0.1",
         "react-spinners": "^0.13.8",
         "react-tabs": "^6.0.2",
