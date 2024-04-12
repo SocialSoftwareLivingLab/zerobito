@@ -7,15 +7,33 @@ export interface ConfirmacaoOcorrenciaViewProps {
     data: OcorrenciaFormData;
 }
 
+const labelCondicao = {
+    OBITO: 'Óbito',
+    INCIDENTE_ALTO_POTENCIAL: 'Incidente de Alto Potencial',
+    ATENDIMENTO_HOSPITALAR: 'Atendimento Hospitalar'
+};
+
+const labelTipoDenunciante = {
+    ANONIMA: 'Denunciante Anônimo',
+    VITIMA: 'Vítima',
+    FAMILIAR: 'Familiar',
+    COLEGA_TRABALHO: 'Colega de Trabalho',
+    SINDICATO: 'Sindicato',
+    IMPRENSA: 'Imprensa',
+    SERVICO_SAUDE: 'Serviço de Saúde',
+    OUTRO: 'Outro'
+};
+
 export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenciaViewProps) {
+    const dateFormat = Intl.DateTimeFormat('pt-br');
     return (
         <FormContainer>
-            <h2>Confirme os dados</h2>
+            <h2>Confirme os dados abaixo para prosseguir</h2>
 
             <Section>
                 <h3>Identificação do acidente</h3>
 
-                <p>Data: 12/12/2021</p>
+                <p>Data: {dateFormat.format(new Date(data.informacoesBasicas.data))}</p>
                 <p>Descrição: {data.informacoesBasicas.descricao}</p>
                 <p>Estado: {data.informacoesBasicas.local.estado}</p>
                 <p>Cidade: {data.informacoesBasicas.local.cidade}</p>
@@ -42,14 +60,16 @@ export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenci
             <Section>
                 <h3>Informações do Denunciante</h3>
 
-                <p>Tipo: {data.denunciante.tipo}</p>
+                <p>Tipo: {labelTipoDenunciante[data.denunciante.tipo]}</p>
                 {data.denunciante.tipo === 'OUTRO' && (
                     <p>Tipo informado: {data.denunciante.outro}</p>
                 )}
 
                 {data.denunciante.tipo !== 'ANONIMO' && (
                     <>
-                        <p>Informações Adicionais: {data.denunciante.adicionais}</p>
+                        <p className="justificado">
+                            Informações Adicionais: {data.denunciante.adicionais}
+                        </p>
                     </>
                 )}
             </Section>
@@ -57,7 +77,7 @@ export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenci
             <Section>
                 <h3>Gravidade do acidente</h3>
 
-                <p>Condição: Resolver </p>
+                <p>Condição: {labelCondicao[data.gravidade.obito]} </p>
             </Section>
         </FormContainer>
     );

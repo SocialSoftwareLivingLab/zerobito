@@ -2,6 +2,7 @@ import './style.css';
 import React from 'react';
 import useRegisterViewModel from './view.model';
 import { PulseLoader } from 'react-spinners';
+import { FiAlertCircle } from 'react-icons/fi';
 
 function SignupCard() {
     const {
@@ -58,7 +59,22 @@ function SignupCard() {
                             </div>
 
                             <div>
-                                <label htmlFor="password">Senha:</label>
+                                <label htmlFor="password">
+                                    <span style={{ marginLeft: '-1em' }}>
+                                        <FiAlertCircle
+                                            style={{
+                                                verticalAlign: 'middle',
+                                                marginRight: '5px',
+                                                marginBottom: '2px',
+                                                cursor: 'pointer'
+                                            }}
+                                            title={
+                                                'Mínimo de 8 dígitos, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial'
+                                            }
+                                        />
+                                    </span>
+                                    Senha:
+                                </label>
                                 <input
                                     type="password"
                                     name="senha"

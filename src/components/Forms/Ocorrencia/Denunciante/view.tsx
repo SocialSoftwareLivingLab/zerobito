@@ -6,6 +6,7 @@ import { Select, SelectOption } from '../../../ui/Select';
 import '../style.css';
 import { FormContainer } from '../styles';
 import { DenuncianteFormInput } from './model';
+import TextArea from '../../../ui/TextArea';
 
 export interface DenuncianteViewProps {
     submitForm: () => void;
@@ -47,7 +48,7 @@ export default function DenuncianteView({
                     )}
                     {tipoDenuncianteSelecionado !== 'ANONIMA' && (
                         <>
-                            <Input
+                            <TextArea
                                 label="Informações Adicionais"
                                 placeholder="Adicione mais informações aqui"
                                 {...register('adicionais', { required: false })}
