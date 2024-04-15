@@ -16,11 +16,7 @@ export function DossieBarContainer() {
             <header>
                 <DossieItemAbaNavegacao titulo="Dossiê" icone={<TfiMenuAlt />} url="#/#/#" />
                 <DossieItemAbaNavegacao titulo="Notificações" icone={<FaBell />} url="#" />
-                <DossieItemAbaNavegacao
-                    titulo="Preparação"
-                    icone={<BsFillGearFill />}
-                    url="/imprensa"
-                />
+                <DossieItemAbaNavegacao titulo="Preparação" icone={<BsFillGearFill />} url="#" />
                 <DossieItemAbaNavegacao
                     titulo="Planejamento"
                     icone={<BiSolidHelpCircle />}
