@@ -4,7 +4,12 @@ import Header from '../../components/Page-Header';
 import { BoxContainer } from '../../components/ui/BoxContainer';
 import { Button } from '../../components/ui/Button';
 import { DossieNavContainer } from '../../components/ui/DossieNavBar';
-import { DossieBarContainer } from '../../components/ui/DossieItemBar';
+import { DossieBarContainer, OcorrenciaStep } from '../../components/ui/DossieItemBar';
+import { DossieContainer } from '../../components/ui/DossieContainer';
+
+const step: OcorrenciaStep = {
+    step: 'Dossiê'
+};
 
 const Imprensa = () => {
     return (
@@ -18,7 +23,10 @@ const Imprensa = () => {
                 id="12"
                 status="Aguardando Analise"
                 data="17/03/2003"></DossieNavContainer>
-            <DossieBarContainer></DossieBarContainer>
+            <DossieBarContainer step={step}></DossieBarContainer>
+            <DossieContainer>
+                <span>Texto qualquer</span>
+            </DossieContainer>
         </div>
     );
 };

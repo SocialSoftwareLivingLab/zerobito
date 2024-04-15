@@ -10,22 +10,66 @@ import { TfiMenuAlt } from 'react-icons/tfi';
 import { IoMdDownload, IoMdMap } from 'react-icons/io';
 import { RiShieldCheckFill } from 'react-icons/ri';
 
-export function DossieBarContainer() {
+export interface OcorrenciaStep {
+    step:
+        | 'Dossiê'
+        | 'Notificações'
+        | 'Preparação'
+        | 'Planejamento'
+        | 'Investigação'
+        | 'Intervenção'
+        | 'Finalização'
+        | 'Avaliação Externa';
+}
+
+export function DossieBarContainer({ step }) {
     return (
         <DossieBarContainerStyle>
             <header>
-                <DossieItemAbaNavegacao titulo="Dossiê" icone={<TfiMenuAlt />} url="#/#/#" />
-                <DossieItemAbaNavegacao titulo="Notificações" icone={<FaBell />} url="#" />
-                <DossieItemAbaNavegacao titulo="Preparação" icone={<BsFillGearFill />} url="#" />
                 <DossieItemAbaNavegacao
+                    step={step}
+                    titulo="Dossiê"
+                    icone={<TfiMenuAlt />}
+                    url="#/#/#"
+                />
+                <DossieItemAbaNavegacao
+                    step={step}
+                    titulo="Notificações"
+                    icone={<FaBell />}
+                    url="#"
+                />
+                <DossieItemAbaNavegacao
+                    step={step}
+                    titulo="Preparação"
+                    icone={<BsFillGearFill />}
+                    url="#"
+                />
+                <DossieItemAbaNavegacao
+                    step={step}
                     titulo="Planejamento"
                     icone={<BiSolidHelpCircle />}
                     url="#/#/#"
                 />
-                <DossieItemAbaNavegacao titulo="Investigação" icone={<IoMdMap />} url="#" />
-                <DossieItemAbaNavegacao titulo="Intervenção" icone={<IoMdDownload />} url="#" />
-                <DossieItemAbaNavegacao titulo="Finalização" icone={<BiCheckDouble />} url="#" />
                 <DossieItemAbaNavegacao
+                    step={step}
+                    titulo="Investigação"
+                    icone={<IoMdMap />}
+                    url="#"
+                />
+                <DossieItemAbaNavegacao
+                    step={step}
+                    titulo="Intervenção"
+                    icone={<IoMdDownload />}
+                    url="#"
+                />
+                <DossieItemAbaNavegacao
+                    step={step}
+                    titulo="Finalização"
+                    icone={<BiCheckDouble />}
+                    url="#"
+                />
+                <DossieItemAbaNavegacao
+                    step={step}
                     titulo="Avaliação Externa"
                     icone={<RiShieldCheckFill />}
                     url="#"
