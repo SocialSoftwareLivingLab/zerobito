@@ -14,7 +14,7 @@ export function DossieNavContainer({ id, data, status }: DossieNavContainerProps
         <DossieNavContainerStyle>
             <header>
                 <label>
-                    <FaFileAlt /> Código de acesso:
+                    <FaFileAlt /> Código do caso:
                 </label>
                 <span>{id}</span>
                 <label>

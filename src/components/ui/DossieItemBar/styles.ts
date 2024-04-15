@@ -7,13 +7,14 @@ export const DossieBarContainerStyle = styled.div`
 
     margin: 0 auto; /* Added to horizontally center the container */
     margin-top: 2rem;
-    height: 5rem;
+    height: 6rem;
 
     header {
         height: 100%;
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        font-size: 1.1rem;
+        font-size: 3rem;
     }
 `;
