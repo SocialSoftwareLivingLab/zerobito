@@ -1,12 +1,12 @@
 import React from 'react';
 import FormWizard from 'react-form-wizard-component';
 import 'react-form-wizard-component/dist/style.css';
-import ConfirmacaoOcorrencia from '../../../components/Forms/Ocorrencia/Confirmacao';
-import Denunciante from '../../../components/Forms/Ocorrencia/Denunciante';
-import Gravidade from '../../../components/Forms/Ocorrencia/Gravidade';
-import InformacoesBasicas from '../../../components/Forms/Ocorrencia/InformacoesBasicas/Index';
-import Vitima from '../../../components/Forms/Ocorrencia/Vitima';
-import { FormStepApi } from '../../../components/Forms/Ocorrencia/interface';
+import ConfirmacaoOcorrencia from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/Confirmacao';
+import Denunciante from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/Denunciante';
+import Gravidade from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/Gravidade';
+import InformacoesBasicas from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/InformacoesBasicas/Index';
+import Vitima from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/Vitima';
+import { FormStepApi } from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/interface';
 import Header from '../../../components/Page-Header';
 import { Button } from '../../../components/ui/Button';
 import { OcorrenciaFormData } from './model';

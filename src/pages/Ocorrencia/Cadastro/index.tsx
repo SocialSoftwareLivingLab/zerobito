@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { FormStepApi } from '../../../components/Forms/Ocorrencia/interface';
+import { FormStepApi } from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/interface';
 import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from './context';
 import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
 import {

@@ -1,8 +1,8 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import Input from '../../../ui/Input';
-import { Select, SelectOption } from '../../../ui/Select';
+import Input from '../../../../ui/Input';
+import { Select, SelectOption } from '../../../../ui/Select';
 import '../style.css';
 import { FormContainer } from '../styles';
 import { VitimaFormFields } from './model';

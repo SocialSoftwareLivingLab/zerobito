@@ -3,9 +3,9 @@ import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 // import "../style.css";
 import { InformacoesBasicasFormFields } from './model';
-import Input from '../../../ui/Input';
+import Input from '../../../../ui/Input';
 import { FormContainer } from '../styles';
-import Fieldset from '../../../ui/Fieldset';
+import Fieldset from '../../../../ui/Fieldset';
 
 export interface InformacoesBasicasViewProps {
     submitForm: () => void;

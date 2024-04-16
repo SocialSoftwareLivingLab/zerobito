@@ -41,7 +41,6 @@ export const InputStyle = styled.input<InputStyleProps>`
     border: 1px solid #acb8c4;
     padding: 10px;
     font-size: 16px;
-    height: 2.5em;
 
     width: ${({ width }) => (width === 'auto' ? 'auto' : '100%')};
 

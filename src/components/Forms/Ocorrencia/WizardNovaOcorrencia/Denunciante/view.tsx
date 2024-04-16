@@ -1,12 +1,12 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import Input from '../../../ui/Input';
-import { Select, SelectOption } from '../../../ui/Select';
+import Input from '../../../../ui/Input';
+import { Select, SelectOption } from '../../../../ui/Select';
 import '../style.css';
 import { FormContainer } from '../styles';
 import { DenuncianteFormInput } from './model';
-import TextArea from '../../../ui/TextArea';
+import TextArea from '../../../../ui/TextArea';
 
 export interface DenuncianteViewProps {
     submitForm: () => void;
