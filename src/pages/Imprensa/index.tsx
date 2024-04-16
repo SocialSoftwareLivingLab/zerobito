@@ -25,7 +25,15 @@ const Imprensa = () => {
                 data="17/03/2003"></DossieNavContainer>
             <DossieBarContainer step={step}></DossieBarContainer>
             <DossieContainer>
-                <span>Texto qualquer</span>
+                <BoxContainer titulo={'Digite infos'}>
+                    <span>Infos</span>
+                </BoxContainer>
+                <BoxContainer titulo={'Digite infos'}>
+                    <span>Infos</span>
+                </BoxContainer>
+                <BoxContainer titulo={'Digite infos'}>
+                    <span>Infos</span>
+                </BoxContainer>
             </DossieContainer>
         </div>
     );
