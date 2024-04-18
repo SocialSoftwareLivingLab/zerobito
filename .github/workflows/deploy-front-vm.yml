@@ -26,9 +26,28 @@ jobs:
             sudo cp -r /opt/apps/frontend/ /opt/backup/frontend/${CURRENT_DATE_FRONT}
             echo "Backup finalizado!"
 
+            # Script para remover backups antigos
+            echo "Buscando backups antigo para remover..."
+            cd /opt/backup/frontend/
+            
+            sudo ls -dt */ | tail -n +11 | xargs sudo rm -rf
+            # ls -dt */ -> Lista todos os diretorios ordenados por data
+            # tail -n +11 -> Pula os 10 primeiro resultados, ou seja, pega a partir do 11º diretório
+            # xargs sudo rm -rf -> Remove os diretórios passados como argumento
+
+            echo "Backups antigos foram removidos com sucesso."
+
   build-and-deploy:
     runs-on: ubuntu-latest
     needs: backup-versao-atual
+    strategy:
+      matrix:
+        include:
+          - branch: main
+            target: ${{ secrets.VM_OUTPUT_APP_FOLDER_PROD }}
+          - branch: develop
+            target: ${{ secrets.VM_OUTPUT_APP_FOLDER_DEV }}
+    if: github.ref == 'refs/heads/${{ matrix.branch }}'
     steps:
     - name: Baixar repositório na branch atual
       uses: actions/checkout@v2
@@ -56,4 +75,4 @@ jobs:
         port: ${{ secrets.VM_PORT }}
         timeout: 240s
         source: "build/*"
-        target: ${{ secrets.VM_OUTPUT_APP_FOLDER }}
+        target: ${{ matrix.target }}
