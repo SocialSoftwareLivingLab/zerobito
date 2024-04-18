@@ -1,11 +1,12 @@
 import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import Input from '../../ui/Input';
-import { useForm } from 'react-hook-form';
 
-import AsyncSelect from 'react-select/async';
 import { buscarCoordenador } from '../../../common/api/usuarios/coordenador/buscar-coordenador';
 
-import { useDebouncedCallback } from 'use-debounce';
+import SelectAsync from '../../ui/SelectAsync';
+import { Button } from '../../ui/Button';
+import { FormContainer } from './styles';
 
 interface CriarCasoFormData {
     nome: string;
@@ -13,7 +14,7 @@ interface CriarCasoFormData {
 }
 
 export default function CriarCasoForm() {
-    const { register } = useForm<CriarCasoFormData>({
+    const { register, control, handleSubmit } = useForm<CriarCasoFormData>({
         defaultValues: { nome: null, coordenador: null }
     });
 
@@ -26,20 +27,32 @@ export default function CriarCasoForm() {
         }));
     };
 
-    const loadOptionsDebounced = useDebouncedCallback(loadOptions, 500);
+    const submit = (data: CriarCasoFormData) => {
+        console.log(data);
+    };
 
     return (
         <>
-            <form>
-                <Input
-                    width="full"
-                    label="Nome do caso"
-                    type="text"
-                    {...register('nome', { required: true })}
+            <FormContainer onSubmit={handleSubmit(submit)}>
+                <Input label="Nome do caso" type="text" {...register('nome', { required: true })} />
+
+                <Controller
+                    name="coordenador"
+                    control={control}
+                    // rules={{ required: true }}
+                    render={({ field }) => (
+                        <SelectAsync
+                            {...field}
+                            label="Selecione um coordenador"
+                            loadOptions={loadOptions}
+                        />
+                    )}
                 />
 
-                <AsyncSelect cacheOptions defaultOptions loadOptions={loadOptionsDebounced} />
-            </form>
+                <div className="submit">
+                    <Button type="button">Criar caso</Button>
+                </div>
+            </FormContainer>
         </>
     );
 }

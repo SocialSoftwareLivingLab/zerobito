@@ -1,7 +1,6 @@
 import React from 'react';
-import { Secao } from '../styles';
-import Input from '../../../../components/ui/Input';
 import CriarCasoForm from '../../../../components/Forms/Caso';
+import { Secao } from '../styles';
 
 export default function NovoCasoPage() {
     return (
