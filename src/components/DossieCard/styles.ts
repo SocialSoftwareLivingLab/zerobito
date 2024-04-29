@@ -31,6 +31,11 @@ export const DossieCardStyle = styled.div`
                 margin-top: 5px;
             }
         }
+
+        button {
+            width: 150px;
+            margin-top: 35px;
+        }
     }
 
     .blue-line {
@@ -47,5 +52,9 @@ export const DossieCardStyle = styled.div`
 
     .column {
         width: 400px;
+    }
+
+    .Select {
+        width: 250px;
     }
 `;

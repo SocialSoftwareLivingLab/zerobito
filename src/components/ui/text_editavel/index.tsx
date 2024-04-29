@@ -13,13 +13,13 @@ export default function TextEditavel({ options, label }: TextEditavelProps) {
     const [state, setState] = useState<boolean>(false);
     return (
         <TextEditavelContainer>
-            {state && (
+            {!state && (
                 <div>
                     <span>Nada selecionado</span>
                     <FaEdit onClick={() => setState(!state)} />
                 </div>
             )}
-            {!state && (
+            {state && (
                 <div className="row">
                     <div className="column">
                         <Select label={label}>

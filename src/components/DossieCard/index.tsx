@@ -4,6 +4,7 @@ import { FaFileAlt, FaInfoCircle } from 'react-icons/fa';
 import { BsPaperclip } from 'react-icons/bs';
 import { FaLocationDot } from 'react-icons/fa6';
 import TextEditavel from '../ui/text_editavel';
+import PalavraChave from '../ui/PalavraChave';
 
 interface DossieCardProps {
     data: string[];
@@ -56,6 +57,9 @@ export function DossieCard({ data }: DossieCardProps) {
                     {' '}
                     <FaInfoCircle /> Palavras-chave
                 </h3>
+            </div>
+            <div>
+                <PalavraChave label="trabalho" />
             </div>
             <div className="blue-line">
                 <h3>
