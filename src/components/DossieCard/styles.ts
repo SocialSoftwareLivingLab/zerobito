@@ -34,7 +34,7 @@ export const DossieCardStyle = styled.div`
 
         button {
             width: 150px;
-            margin-top: 25px;
+            margin-top: 35px;
         }
     }
 
@@ -76,13 +76,17 @@ export const DossieCardStyle = styled.div`
     }
 
     .Select {
-        width: 250px;
+        width: auto;
     }
     .chave {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
+
+        button {
+            margin-top: 25px;
+        }
     }
     .add {
         width: fit-content;
