@@ -14,10 +14,12 @@ export const PalavraChaveContainer = styled.fieldset`
     color: #134780;
     font-size: 17px;
     font-weight: 550;
+    margin-left: 20px;
 
     svg {
         margin-left: 10px;
         margin-top: 2px;
         font-size: 20px;
+        cursor: pointer;
     }
 `;
