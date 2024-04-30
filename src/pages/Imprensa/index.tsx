@@ -28,7 +28,16 @@ const Imprensa = () => {
             <DossieBarContainer step={step}></DossieBarContainer>
             <DossieContainer>
                 <ColumnContainer>
-                    <DossieCard data={data}></DossieCard>
+                    <DossieCard
+                        data={data}
+                        palavras={[
+                            'trabalho',
+                            'acidente',
+                            'exercicio',
+                            'unicamp',
+                            'nome',
+                            'beneficio'
+                        ]}></DossieCard>
                 </ColumnContainer>
                 <ColumnContainer>
                     <BoxContainer titulo={'Digite infos'}>
