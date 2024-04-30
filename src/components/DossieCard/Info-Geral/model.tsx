@@ -1,11 +1,11 @@
-export interface DossieForm {
+export interface InfoGeralFormData {
     CausaPrimaria: string;
     CausaSecundaria: string;
     Diagnostico: string;
     Comentario: string;
 }
 
-export const defaultValue: DossieForm = {
+export const defaultValue: InfoGeralFormData = {
     CausaPrimaria: '',
     CausaSecundaria: '',
     Diagnostico: '',

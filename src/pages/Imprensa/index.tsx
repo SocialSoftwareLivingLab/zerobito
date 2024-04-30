@@ -1,13 +1,12 @@
 import React from 'react';
-import './style.css';
+import { DossieCard } from '../../components/DossieCard';
 import Header from '../../components/Page-Header';
 import { BoxContainer } from '../../components/ui/BoxContainer';
-import { Button } from '../../components/ui/Button';
-import { DossieNavContainer } from '../../components/ui/DossieNavBar';
-import { DossieBarContainer, OcorrenciaStep } from '../../components/ui/DossieItemBar';
-import { DossieContainer } from '../../components/ui/DossieContainer';
 import { ColumnContainer } from '../../components/ui/ColumnContainer';
-import { DossieCard } from '../../components/DossieCard';
+import { DossieContainer } from '../../components/ui/DossieContainer';
+import { DossieBarContainer, OcorrenciaStep } from '../../components/ui/DossieItemBar';
+import { DossieNavContainer } from '../../components/ui/DossieNavBar';
+import './style.css';
 
 const step: OcorrenciaStep = {
     step: 'Dossiê'

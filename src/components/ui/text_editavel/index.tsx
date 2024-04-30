@@ -1,47 +1,48 @@
-import React, { useState } from 'react';
-import { TextEditavelContainer } from './styles';
-import { Select, SelectOption } from '../Select';
-import { Button } from '../Button';
+import React, { forwardRef, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
+import { Button } from '../Button';
+import { Select, SelectOption } from '../Select';
+import { TextEditavelContainer } from './styles';
 
 export interface TextEditavelProps {
     options: string[];
     label: string;
 }
 
-export default function TextEditavel({ options, label }: TextEditavelProps) {
-    const [state, setState] = useState<boolean>(false);
-    return (
-        <TextEditavelContainer>
-            {state && (
-                <div>
-                    <span>Nada selecionado</span>
-                    <FaEdit onClick={() => setState(!state)} />
-                </div>
-            )}
-            {!state && (
-                <div className="row">
-                    <div className="column">
-                        <Select label={label}>
-                            {options.map((option) => (
-                                // eslint-disable-next-line react/jsx-key
-                                <SelectOption label={option} value={option}></SelectOption>
-                            ))}
-                        </Select>
+export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
+    ({ label, options }, ref) => {
+        const [state, setState] = useState<boolean>(false);
+        return (
+            <TextEditavelContainer>
+                {state && (
+                    <div>
+                        <span>Nada selecionado</span>
+                        <FaEdit onClick={() => setState(!state)} />
                     </div>
-                    <div className="column">
-                        <Button
-                            type="submit"
-                            size="small"
-                            action={() => {
-                                console.log('cliquei');
-                                setState(!state);
-                            }}>
-                            Salvar
-                        </Button>
+                )}
+                {!state && (
+                    <div className="row">
+                        <div className="column">
+                            <Select ref={ref} label={label}>
+                                {options.map((option) => (
+                                    <SelectOption key={option} label={option} value={option} />
+                                ))}
+                            </Select>
+                        </div>
+                        <div className="column">
+                            <Button
+                                type="submit"
+                                size="small"
+                                action={() => {
+                                    console.log('cliquei');
+                                    setState(!state);
+                                }}>
+                                Salvar
+                            </Button>
+                        </div>
                     </div>
-                </div>
-            )}
-        </TextEditavelContainer>
-    );
-}
+                )}
+            </TextEditavelContainer>
+        );
+    }
+);

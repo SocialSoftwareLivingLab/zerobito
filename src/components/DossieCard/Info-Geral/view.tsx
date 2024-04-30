@@ -1,13 +1,17 @@
 import React from 'react';
-import TextEditavel from '../../ui/text_editavel';
-import { register } from '../../../common/models/user/create.user';
-import { InfoGeralViewProps } from '..';
+import { TextEditavel } from '../../ui/text_editavel';
 
-// eslint-disable-next-line no-empty-pattern
-export default function DossieView({ register, handleCompleteEdit, errors }: InfoGeralViewProps) {
-    const dateFormat = Intl.DateTimeFormat('pt-br');
+import { UseFormRegister } from 'react-hook-form';
+import { InfoGeralFormData } from './model';
+
+export interface InfoGeralDossieViewProps {
+    register: UseFormRegister<InfoGeralFormData>;
+    handleCompleteEdit: () => void;
+}
+
+export function InfoGeralDossieView({ register, handleCompleteEdit }: InfoGeralDossieViewProps) {
     return (
-        <div>
+        <form onSubmit={handleCompleteEdit}>
             <h3>Causa Primária</h3>
             <TextEditavel
                 options={['acidente', 'doença', 'alergia']}
@@ -24,6 +28,6 @@ export default function DossieView({ register, handleCompleteEdit, errors }: Inf
                 label={''}
                 {...register('Diagnostico')}></TextEditavel>
             <h3>Comentários</h3>
-        </div>
+        </form>
     );
 }

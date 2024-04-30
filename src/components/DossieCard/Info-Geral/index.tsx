@@ -1,36 +1,18 @@
-import { FieldErrors, UseFormRegister, useForm } from 'react-hook-form';
-import { DossieForm, defaultValue } from './model';
-import React, { forwardRef, useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 import {
     EditInfoGeralRequest,
     editInfoGeral
 } from '../../../common/api/DossieInfoGeral/edit-info-geral';
-import { FormStepApi } from '../interface';
-import DossieView from './view';
+import { InfoGeralFormData, defaultValue } from './model';
+import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
 
-export interface InfoGeralViewProps {
-    handleCompleteEdit: () => void;
-    errors: FieldErrors<DossieForm>;
-    register: UseFormRegister<DossieForm>;
-}
+export function InfoGeralDossieCard() {
+    const { register, handleSubmit, reset } = useForm<InfoGeralFormData>({
+        defaultValues: defaultValue
+    });
 
-export const DossieViewProps = forwardRef<FormStepApi, InfoGeralViewProps>((props, ref) => {
-    const {
-        watch,
-        register,
-        reset,
-        formState: { errors }
-    } = useForm<DossieForm>({ defaultValues: defaultValue });
-    const tipoCausaPrimaria = watch('CausaPrimaria');
-
-    const [formData] = useState<DossieForm>({
-        CausaPrimaria: '',
-        CausaSecundaria: '',
-        Diagnostico: '',
-        Comentario: ''
-    } as DossieForm);
-
-    const handleCompleteEdit = useCallback(async () => {
+    const handleCompleteEdit = useCallback(async (formData: InfoGeralFormData) => {
         console.log(formData);
 
         const payload: EditInfoGeralRequest = {
@@ -41,24 +23,24 @@ export const DossieViewProps = forwardRef<FormStepApi, InfoGeralViewProps>((prop
         };
 
         await editInfoGeral(payload);
-    }, [formData]);
+    }, []);
 
-    useEffect(() => {
-        const data: DossieForm = {
-            CausaPrimaria: formData.CausaPrimaria,
-            CausaSecundaria: formData.CausaSecundaria,
-            Diagnostico: formData.Diagnostico,
-            Comentario: formData.Comentario
-        };
+    // TODO: Verificar a necessidade desse trecho
+    // useEffect(() => {
+    //     const data: DossieForm = {
+    //         CausaPrimaria: formData.CausaPrimaria,
+    //         CausaSecundaria: formData.CausaSecundaria,
+    //         Diagnostico: formData.Diagnostico,
+    //         Comentario: formData.Comentario
+    //     };
 
-        reset(data); // Isso recarrega o contexto do formulário
-    }, [formData, reset]); // Este efeito é acionado sempre que o formData mudar
+    //     reset(data);
+    // }, [formData, reset]);
 
-    const viewProps: InfoGeralViewProps = {
-        handleCompleteEdit,
-        errors,
-        register
+    const viewProps: InfoGeralDossieViewProps = {
+        register,
+        handleCompleteEdit: handleSubmit(handleCompleteEdit)
     };
 
-    return <DossieView {...viewProps} />;
-});
+    return <InfoGeralDossieView {...viewProps} />;
+}

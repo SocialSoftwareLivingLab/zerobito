@@ -1,60 +1,34 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
-import { DossieCardStyle } from './styles';
-import { FaFileAlt, FaInfoCircle } from 'react-icons/fa';
+import React from 'react';
 import { BsPaperclip } from 'react-icons/bs';
+import { FaFileAlt, FaInfoCircle } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
-import { DenuncianteFormInput } from '../Forms/Ocorrencia/Denunciante/model';
-import { DossieView, InfoGeralViewProps } from './Info-Geral';
-import { DossieForm } from './Info-Geral/model';
-import { FormStepApi } from './interface';
+import { DossieCardStyle } from './styles';
+import { InfoGeralDossieCard } from './Info-Geral';
 
 interface DossieCardProps {
-    data: {
-        CausaPrimaria: string;
-        CausaSecundaria: string;
-        Diagnostico: string;
-        Comentario: string;
-    };
-    dota: string[];
+    data: string[];
 }
 
-export interface RegistrarOcorrenciaViewProps {
-    handles: {
-        handleCompleteWizard: (data: DossieForm) => void;
-        handleNextStep: (handleNext: () => void) => void;
-        handlePreviousStep: (handleBack: () => void) => void;
-    };
-    refs: {
-        formLocalRef: React.RefObject<FormStepApi>;
-        formVitimaRef: React.RefObject<FormStepApi>;
-        formDenuncianteRef: React.RefObject<FormStepApi>;
-        formGravidadeRef: React.RefObject<FormStepApi>;
-    };
-}
-
-export function DossieCard(
-    { data, dota }: DossieCardProps,
-    { register, errors, handleCompleteEdit }: InfoGeralViewProps
-) {
+export function DossieCard({ data }: DossieCardProps) {
     return (
         <DossieCardStyle>
             <header>
-                <h2>Caso N {dota[0]}</h2>
+                <h2>Caso N {data[0]}</h2>
             </header>
             <div className="row">
                 <div className="column">
                     <h3>Data de Denúncia</h3>
-                    <span>{dota[1]}</span>
+                    <span>{data[1]}</span>
                 </div>
                 <div className="column">
                     <h3>Status de notificação obrigatória</h3>
-                    <span>{dota[2]}</span>
+                    <span>{data[2]}</span>
                 </div>
             </div>
             <div className="row">
                 <div className="column">
                     <h3>Atores Convidados</h3>
-                    <span>{dota[3]} Atores</span>
+                    <span>{data[3]} Atores</span>
                 </div>
 
                 <div className="column">
@@ -69,7 +43,7 @@ export function DossieCard(
                 </h3>
             </div>
             <div>
-                <DossieView />
+                <InfoGeralDossieCard />
             </div>
             <div className="blue-line">
                 <h3>
@@ -98,4 +72,3 @@ export function DossieCard(
         </DossieCardStyle>
     );
 }
-export { InfoGeralViewProps };
