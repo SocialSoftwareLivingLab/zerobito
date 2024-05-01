@@ -27,9 +27,7 @@ const useLoginViewModel = () => {
         textAlign: 'center',
         justifyContent: 'center',
         overflow: 'auto',
-        position: 'absolute',
-        top: '51%',
-        left: '48%',
+        position: 'relative',
         transform: 'transalate(-50%, -50%)'
     };
 

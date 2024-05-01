@@ -19,9 +19,7 @@ const useRegisterViewModel = () => {
         textAlign: 'center',
         justifyContent: 'center',
         overflow: 'auto',
-        position: 'absolute',
-        top: '63.5%',
-        left: '48%',
+        position: 'relative',
         transform: 'transalate(-50%, -50%)'
     };
 

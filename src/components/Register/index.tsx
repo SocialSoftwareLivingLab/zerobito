@@ -22,15 +22,6 @@ function SignupCard() {
 
     return (
         <div className="SingupCard">
-            <PulseLoader
-                color={'#134780'}
-                loading={loading}
-                cssOverride={override}
-                size={10}
-                speedMultiplier={0.6}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-            />
             <div className="container-body-register">
                 <div className="container-register">
                     <h1 className="header-card-register">CADASTRO</h1>
@@ -94,6 +85,16 @@ function SignupCard() {
                                     required
                                 />
                             </div>
+
+                            <PulseLoader
+                                color={'#134780'}
+                                loading={loading}
+                                cssOverride={override}
+                                size={10}
+                                speedMultiplier={0.6}
+                                aria-label="Loading Spinner"
+                                data-testid="loader"
+                            />
 
                             {!!error && <p className="error_register">{error}</p>}
 

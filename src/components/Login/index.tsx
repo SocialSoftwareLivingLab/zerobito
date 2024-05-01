@@ -18,15 +18,6 @@ const LoginCard = () => {
     return (
         <div className="LoginCard">
             <div className="container-body">
-                <PulseLoader
-                    color={'#134780'}
-                    loading={loading}
-                    cssOverride={override}
-                    size={10}
-                    speedMultiplier={0.6}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                />
                 <div className="container">
                     <h1 className="header-card">ENTRAR</h1>
 
@@ -53,6 +44,16 @@ const LoginCard = () => {
                                     required
                                 />
                             </div>
+
+                            <PulseLoader
+                                color={'#134780'}
+                                loading={loading}
+                                cssOverride={override}
+                                size={10}
+                                speedMultiplier={0.6}
+                                aria-label="Loading Spinner"
+                                data-testid="loader"
+                            />
 
                             {!!error && <p className="error_login">{error}</p>}
 

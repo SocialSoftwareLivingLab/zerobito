@@ -32,7 +32,7 @@ export default function BarraNavegacao(): JSX.Element {
                         <ItemAbaNavegacao
                             titulo="Imprensa"
                             icone={<FaMicrophone />}
-                            url="#/#/#/#/#/#/#/#"
+                            url="/imprensa"
                         />
                         <ItemAbaNavegacao
                             titulo="Ajuda"

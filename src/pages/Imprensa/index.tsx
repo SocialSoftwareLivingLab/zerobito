@@ -1,39 +1,75 @@
 import React from 'react';
 import './style.css';
+import Header from '../../components/Page-Header';
+import { BoxContainer } from '../../components/ui/BoxContainer';
+import { Button } from '../../components/ui/Button';
+import { DossieNavContainer } from '../../components/ui/DossieNavBar';
+import { DossieBarContainer, OcorrenciaStep } from '../../components/ui/DossieItemBar';
+import { DossieContainer } from '../../components/ui/DossieContainer';
+import { ColumnContainer } from '../../components/ui/ColumnContainer';
+import { DossieCard } from '../../components/DossieCard';
+
+const step: OcorrenciaStep = {
+    step: 'Dossiê'
+};
+const data: string[] = ['0020', '17/03/2003', 'Aguardando', '8', 'meio dia'];
 
 const Imprensa = () => {
-    const noticias = [
-        {
-            titulo: 'ZerObito lança nova versão do software',
-            data: '10 de agosto de 2021',
-            descricao:
-                'A ZerObito anunciou hoje o lançamento da versão 2.0 do seu software de segurança cibernética.'
-        },
-        {
-            titulo: 'ZerObito é destaque em conferência de segurança',
-            data: '5 de agosto de 2021',
-            descricao:
-                'O CEO da ZerObito, João Silva, apresentou a palestra de abertura da conferência anual de segurança cibernética.'
-        },
-        {
-            titulo: 'ZerObito recebe investimento de R$ 10 milhões',
-            data: '1 de agosto de 2021',
-            descricao:
-                'A ZerObito anunciou hoje que recebeu um investimento de R$ 10 milhões da empresa de capital de risco XYZ.'
-        }
-    ];
-
     return (
         <div>
-            <h1>Esta é a página da imprensa</h1>
-            <h2>Notícias recentes</h2>
-            {noticias.map((noticia, index) => (
-                <div key={index}>
-                    <h3>{noticia.titulo}</h3>
-                    <p>{noticia.data}</p>
-                    <p>{noticia.descricao}</p>
-                </div>
-            ))}
+            <Header
+                title="Dossiê"
+                explicacao="Aqui o cordenador local tem uma visão global do caso. Pode dar inicio à Preparação/Reunião de Trabalho
+                e Qualificar a documentação"
+            />
+            <DossieNavContainer
+                id="12"
+                status="Aguardando Analise"
+                data="17/03/2003"></DossieNavContainer>
+            <DossieBarContainer step={step}></DossieBarContainer>
+            <DossieContainer>
+                <ColumnContainer>
+                    <DossieCard
+                        data={data}
+                        palavras={[
+                            'trabalho',
+                            'acidente',
+                            'exercicio',
+                            'unicamp',
+                            'nome',
+                            'beneficio'
+                        ]}></DossieCard>
+                </ColumnContainer>
+                <ColumnContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                    <BoxContainer titulo={'Digite infos'}>
+                        <span>Infos</span>
+                    </BoxContainer>
+                </ColumnContainer>
+            </DossieContainer>
         </div>
     );
 };
