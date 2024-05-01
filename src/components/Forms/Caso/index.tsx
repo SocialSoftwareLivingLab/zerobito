@@ -1,19 +1,15 @@
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import Input from '../../ui/Input';
+import { useForm } from 'react-hook-form';
 
 import { buscarCoordenador } from '../../../common/api/usuarios/coordenador/buscar-coordenador';
+import CriarCasoFormView, { CriarCasoFormViewProps } from './view';
+import { CriarCasoFormData } from './models';
 
-import SelectAsync from '../../ui/SelectAsync';
-import { Button } from '../../ui/Button';
-import { FormContainer } from './styles';
-
-interface CriarCasoFormData {
-    nome: string;
-    coordenador: number;
+export interface CriarCasoFormProps {
+    submit: (data: CriarCasoFormData) => Promise<void>;
 }
 
-export default function CriarCasoForm() {
+export default function CriarCasoForm({ submit }: CriarCasoFormProps) {
     const { register, control, handleSubmit } = useForm<CriarCasoFormData>({
         defaultValues: { nome: null, coordenador: null }
     });
@@ -27,32 +23,12 @@ export default function CriarCasoForm() {
         }));
     };
 
-    const submit = (data: CriarCasoFormData) => {
-        console.log(data);
+    const props: CriarCasoFormViewProps = {
+        register,
+        control,
+        submit: handleSubmit(submit),
+        loadSelectOptions: loadOptions
     };
 
-    return (
-        <>
-            <FormContainer onSubmit={handleSubmit(submit)}>
-                <Input label="Nome do caso" type="text" {...register('nome', { required: true })} />
-
-                <Controller
-                    name="coordenador"
-                    control={control}
-                    // rules={{ required: true }}
-                    render={({ field }) => (
-                        <SelectAsync
-                            {...field}
-                            label="Selecione um coordenador"
-                            loadOptions={loadOptions}
-                        />
-                    )}
-                />
-
-                <div className="submit">
-                    <Button type="button">Criar caso</Button>
-                </div>
-            </FormContainer>
-        </>
-    );
+    return <CriarCasoFormView {...props} />;
 }

@@ -69,9 +69,11 @@ export default function AceitarOcorrenciaPageView({
                             </ToggleButtonGroup>
                         </Secao>
 
-                        {opcaoAceiteSelecionada === 'criar' && <NovoCasoPage></NovoCasoPage>}
+                        {opcaoAceiteSelecionada === 'criar' && (
+                            <NovoCasoPage ocorrencia={ocorrencia.data} />
+                        )}
                         {opcaoAceiteSelecionada === 'vincular' && (
-                            <VincularOcorrenciaAoCasoPage></VincularOcorrenciaAoCasoPage>
+                            <VincularOcorrenciaAoCasoPage ocorrencia={ocorrencia.data} />
                         )}
                     </>
                 )}
