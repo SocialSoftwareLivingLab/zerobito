@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { UsuarioAutenticado, UsuarioAutenticadoContextData } from './model';
 import { redirect } from 'react-router-dom';
+import { UsuarioAutenticado, UsuarioAutenticadoContextData } from './model';
 
 export const UsuarioAutenticadoContext = createContext({} as UsuarioAutenticadoContextData);
 

@@ -46,7 +46,7 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
 
     {
         name: 'Ações',
-        sortable: true,
+        sortable: false,
         grow: 2,
         cell: (row) => <AcoesLinha row={row} />
     }

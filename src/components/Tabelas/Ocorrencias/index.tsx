@@ -72,6 +72,7 @@ export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
                 customStyles={dataTableStyle}
                 pointerOnHover
                 expandableRows
+                noDataComponent="Nenhum registro encontrado"
                 // expandableRowExpanded={(row) => !!row}
                 expandOnRowClicked
                 expandableRowsComponent={({ data }) => <OcorrenciaItem data={data} />}
