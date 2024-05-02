@@ -38,7 +38,7 @@ const useRegisterViewModel = () => {
             const response = await register(nome, email, senha);
             setLoading(false);
             if (response.status === 201) {
-                Swal.fire({
+                await Swal.fire({
                     title: 'Cadastro Realizado!',
                     text: 'Usuário foi criado com sucesso',
                     icon: 'success',

@@ -28,8 +28,8 @@ export default function AceitarOcorrenciaPageView({
     return (
         <>
             <Header
-                title="Aceitar ocorrência"
-                explicacao="Aceitar ocorrência para que a mesma seja resolvida. Ela se tornará um novo caso ou será vinculada a um caso existente. *** PS: Breno, por favor, opine sobre esse texto. ***"
+                title="Aceitar evento"
+                explicacao="Aqui você pode criar um novo caso para o evento encontrado ou vinculá-lo a um caso já existente"
             />
             <Container>
                 {ocorrencia.loading && <span>Carregando...</span>}
@@ -38,7 +38,7 @@ export default function AceitarOcorrenciaPageView({
                     <>
                         <Secao>
                             <div>
-                                <h3>Dados da ocorrência</h3>
+                                <h3>Dados do evento</h3>
                                 <a href="#" onClick={() => toggleMostrarDadosOcorrencia()}>
                                     {mostrarDadosOcorrencia ? 'Ocultar dados' : 'Exibir dados'}
                                 </a>
@@ -64,7 +64,7 @@ export default function AceitarOcorrenciaPageView({
                                     type="button"
                                     onClick={() => setOpcaoAceiteSelecionada('vincular')}
                                     selected={opcaoAceiteSelecionada === 'vincular'}>
-                                    Vincular com caso existente
+                                    Vincular a um caso existente
                                 </ToggleButton>
                             </ToggleButtonGroup>
                         </Secao>
