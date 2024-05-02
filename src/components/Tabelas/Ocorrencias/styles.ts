@@ -4,5 +4,5 @@ export const ColunaAcao = styled.div`
     display: flex;
     flex: row;
     gap: 8px;
-    padding: 8px;
+    padding: 8px 0;
 `;

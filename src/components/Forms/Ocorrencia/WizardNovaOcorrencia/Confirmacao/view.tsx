@@ -1,5 +1,5 @@
 import React from 'react';
-import { OcorrenciaFormData } from '../../../../pages/Ocorrencia/Cadastro/model';
+import { OcorrenciaFormData } from '../../../../../pages/Ocorrencia/Cadastro/model';
 import { FormContainer } from '../styles';
 import { Section } from './styles';
 

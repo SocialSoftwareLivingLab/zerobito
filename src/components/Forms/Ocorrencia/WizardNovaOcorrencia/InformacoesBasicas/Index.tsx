@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useOcorrenciaWizardContext } from '../../../../pages/Ocorrencia/Cadastro/context';
+import { useOcorrenciaWizardContext } from '../../../../../pages/Ocorrencia/Cadastro/context';
 import '../style.css';
 import InformacoesBasicasView, { InformacoesBasicasViewProps } from './view';
 import { InformacoesBasicasFormFields } from './model';

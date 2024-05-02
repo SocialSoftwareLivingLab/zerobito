@@ -14,7 +14,7 @@ const buttonSizes: { [key: string]: string } = {
     large: '18px'
 };
 
-const buttonColors: ButtonColorTypes = {
+export const buttonColors: ButtonColorTypes = {
     button: {
         background: '#134780',
         hover: '#0c2b4d',
@@ -52,6 +52,8 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     margin: 0;
 
     padding: 16px;
+
+    cursor: pointer;
 
     display: flex;
     align-items: center;
