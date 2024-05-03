@@ -5,7 +5,6 @@ export const DossieCardStyle = styled.div`
 
     header {
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
         align-items: center;
 
@@ -34,16 +33,14 @@ export const DossieCardStyle = styled.div`
 
         button {
             width: 150px;
-            margin-top: 35px;
+            margin-top: 27px;
         }
     }
 
     input {
         display: flex;
-
         border-radius: 0.5rem;
         border: 1px solid #acb8c4;
-        padding: 10px;
         font-size: 16px;
         height: 1rem;
         margin-top: 25px;
@@ -79,6 +76,9 @@ export const DossieCardStyle = styled.div`
         width: auto;
     }
     .chave {
+        span {
+            margin-top: 0px;
+        }
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -88,7 +88,11 @@ export const DossieCardStyle = styled.div`
             margin-top: 25px;
         }
     }
+    span {
+        margin-top: 10px;
+    }
     .add {
+        margin-top: 0px;
         width: fit-content;
         height: 2.5rem;
         display: flex;

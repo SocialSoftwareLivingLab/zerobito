@@ -36,6 +36,14 @@ export function DossieCard({ data, palavras }: DossieCardProps) {
         }
     };
 
+    const onEnterPress = (e) => {
+        if (e.keyCode === 13 && e.shiftKey === false) {
+            e.preventDefault();
+            setAddPalavra(false);
+            handleSubmitInput();
+        }
+    };
+
     return (
         <DossieCardStyle>
             <header>
@@ -87,15 +95,11 @@ export function DossieCard({ data, palavras }: DossieCardProps) {
                 </div>
                 {addPalavra && (
                     <form className="row">
-                        <input value={inputValue} onChange={handleInputChange} />
-                        <Button
-                            size="small"
-                            action={() => {
-                                setAddPalavra(false);
-                                handleSubmitInput();
-                            }}>
-                            Adicionar
-                        </Button>
+                        <input
+                            value={inputValue}
+                            onChange={handleInputChange}
+                            onKeyDown={onEnterPress}
+                        />
                     </form>
                 )}
             </div>

@@ -6,13 +6,11 @@ export const TextEditavelContainer = styled.fieldset`
         display: flex;
         width: 50%;
         flex-direction: column;
-        padding: 0px;
+        padding-top: 10px;
     }
     div {
         display: flex;
-        flex-direction: row;
         font-size: 20px;
-        padding: 10px;
         svg {
             margin-left: 10px;
             margin-top: 7px;
@@ -20,6 +18,6 @@ export const TextEditavelContainer = styled.fieldset`
         }
     }
     .Select {
-        width: auto;
+        width: 100%;
     }
 `;
