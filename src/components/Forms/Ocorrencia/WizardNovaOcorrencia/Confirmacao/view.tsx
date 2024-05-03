@@ -66,7 +66,7 @@ export default function ConfirmacaoOcorrenciaView({
             </Section>
 
             <Section>
-                <h3>Informações do Denunciante</h3>
+                <h3>Fonte de Informação</h3>
 
                 <p>Tipo: {labelTipoDenunciante[data.denunciante.tipo]}</p>
                 {data.denunciante.tipo === 'OUTRO' && (
