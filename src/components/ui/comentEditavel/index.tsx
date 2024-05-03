@@ -1,21 +1,21 @@
 import React, { forwardRef, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { Button } from '../Button';
-import { Select, SelectOption } from '../Select';
-import { TextEditavelContainer } from './styles';
+import TextArea from '../TextArea';
+import { CommentEditavelContainer } from './styles';
+import Input from '../Input';
 
-export interface TextEditavelProps {
-    options: string[];
+export interface CommentEditavelProps {
     label: string;
     title: string;
     handleCompleteEdit: () => void;
 }
 
-export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
-    ({ label, options, title, handleCompleteEdit }, ref) => {
+export const CommentEditavel = forwardRef<HTMLSelectElement, CommentEditavelProps>(
+    ({ label, title, handleCompleteEdit }, ref) => {
         const [state, setState] = useState<boolean>(true);
         return (
-            <TextEditavelContainer>
+            <CommentEditavelContainer>
                 {state && (
                     <div>
                         <span>{title}</span>
@@ -25,11 +25,7 @@ export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
                 {!state && (
                     <div className="row">
                         <div className="column">
-                            <Select ref={ref} label={label}>
-                                {options.map((option) => (
-                                    <SelectOption key={option} label={option} value={option} />
-                                ))}
-                            </Select>
+                            <TextArea placeholder="Comentario" label={label} />
                         </div>
                         <div className="column">
                             <Button
@@ -45,7 +41,7 @@ export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
                         </div>
                     </div>
                 )}
-            </TextEditavelContainer>
+            </CommentEditavelContainer>
         );
     }
 );

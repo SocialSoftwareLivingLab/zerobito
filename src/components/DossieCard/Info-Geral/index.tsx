@@ -8,9 +8,13 @@ import { InfoGeralFormData, defaultValue } from './model';
 import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
 
 export function InfoGeralDossieCard() {
-    const { register, handleSubmit, reset } = useForm<InfoGeralFormData>({
+    const { register, handleSubmit, reset, watch } = useForm<InfoGeralFormData>({
         defaultValues: defaultValue
     });
+    const causaPrimariaSelecionada = watch('CausaPrimaria');
+    const causaSecundariaSelecionada = watch('CausaSecundaria');
+    const diagnosticoSelecionado = watch('Diagnostico');
+    const comentarioSelecionado = watch('Comentario');
 
     const handleCompleteEdit = useCallback(async (formData: InfoGeralFormData) => {
         console.log(formData);
@@ -34,12 +38,16 @@ export function InfoGeralDossieCard() {
     //         Comentario: formData.Comentario
     //     };
 
-    //     reset(data);
+    //     reset(data);A
     // }, [formData, reset]);
 
     const viewProps: InfoGeralDossieViewProps = {
         register,
-        handleCompleteEdit: handleSubmit(handleCompleteEdit)
+        handleCompleteEdit: handleSubmit(handleCompleteEdit),
+        causaPrimariaSelecionada,
+        causaSecundariaSelecionada,
+        diagnosticoSelecionado,
+        comentarioSelecionado
     };
 
     return <InfoGeralDossieView {...viewProps} />;

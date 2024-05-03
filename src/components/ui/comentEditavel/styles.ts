@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TextEditavelContainer = styled.fieldset`
+export const CommentEditavelContainer = styled.fieldset`
     border: none;
     .column {
         display: flex;
