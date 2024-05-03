@@ -1,5 +1,4 @@
-import { CSSProperties, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { CSSProperties, useState } from 'react';
 import { login } from '../../common/models/user/auth';
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 
@@ -10,16 +9,6 @@ const useLoginViewModel = () => {
 
     const { login: setData, isAutenticado } = useUsuarioAutenticado();
     const [loading, setLoading] = useState(false);
-
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        console.log('...');
-        console.log(isAutenticado);
-        if (isAutenticado) {
-            navigate('/');
-        }
-    }, [isAutenticado, navigate]);
 
     const override: CSSProperties = {
         display: 'block',

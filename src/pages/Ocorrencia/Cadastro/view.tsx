@@ -57,7 +57,7 @@ export default function RegistrarOcorrenciaView({ handles, refs }: RegistrarOcor
                     <FormWizard.TabContent title="Informações Vítima" icon="ti-user">
                         <Vitima ref={refs.formVitimaRef} />
                     </FormWizard.TabContent>
-                    <FormWizard.TabContent title="Informações Denunciante" icon="ti-clipboard">
+                    <FormWizard.TabContent title="Fonte de Informação" icon="ti-clipboard">
                         <Denunciante ref={refs.formDenuncianteRef} />
                     </FormWizard.TabContent>
                     <FormWizard.TabContent title="Informações Gravidade" icon="ti-pulse">

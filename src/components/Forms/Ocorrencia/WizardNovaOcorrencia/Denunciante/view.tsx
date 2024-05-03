@@ -25,7 +25,7 @@ export default function DenuncianteView({
         <>
             <FormContainer>
                 <form onSubmit={submitForm}>
-                    <Select label="Tipo da Denúncia" {...register('tipo')}>
+                    <Select label="Tipo de Fonte" {...register('tipo')}>
                         <SelectOption />
                         <SelectOption label="Denunciante Anônimo" value="ANONIMA" />
                         <SelectOption label="Vítima" value="VITIMA" />
@@ -41,8 +41,8 @@ export default function DenuncianteView({
 
                     {tipoDenuncianteSelecionado === 'OUTRO' && (
                         <Input
-                            label="Tipo de Denunciante"
-                            placeholder="Informe o tipo de denunciante"
+                            label="Tipo de Fonte (Outro)"
+                            placeholder="Informe o tipo de fonte "
                             {...register('outro', { required: true })}
                         />
                     )}

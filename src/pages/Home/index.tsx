@@ -12,7 +12,7 @@ const Home = () => {
     const { eventos } = useHomeViewModel();
 
     return (
-        <div>
+        <div className="home-container">
             <Header
                 title="Painel de Controle"
                 explicacao="Aqui o cordenador local consegue visualizar  e gerenciar novos casos/denuncias adicionadas

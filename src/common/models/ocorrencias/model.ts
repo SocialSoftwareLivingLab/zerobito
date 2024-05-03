@@ -16,13 +16,15 @@ export interface OcorrenciaModel {
             cnpj?: string;
         };
     };
+    relator: {
+        id: number;
+        nome: string;
+        email: string;
+    };
     fonte: {
-        nome?: string;
-        email?: string;
         tipo: string;
         outroTipo?: string;
-        telefonePrincipal?: string;
-        telefoneSecundario?: string;
+        detalhe?: string;
     };
     local: {
         latitude?: number;

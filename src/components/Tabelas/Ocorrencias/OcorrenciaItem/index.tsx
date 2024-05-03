@@ -61,6 +61,13 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                             <strong>Última atualização</strong>
                             <span>{dateFormat.format(new Date(data.dataAlteracao))}</span>
                         </div>
+
+                        <div className="coluna">
+                            <strong>Relator</strong>
+                            <span>
+                                {data.relator.nome} ({data.relator.email})
+                            </span>
+                        </div>
                     </div>
                     <div className="linha">
                         <div className="coluna">
@@ -98,30 +105,11 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                                     : data.fonte.outroTipo}
                             </span>
                         </div>
-                        <div className="coluna">
-                            {data.fonte.tipo !== 'ANONIMA' && (
-                                <>
-                                    <div>
-                                        <strong>Nome</strong>
-                                        <span>{data?.fonte?.nome || 'Não informado'}</span>
-                                    </div>
-                                </>
-                            )}
-                        </div>
                     </div>
                     <div className="linha">
                         <div className="coluna">
-                            <strong>E-mail</strong>
-                            <span>{data.fonte.email || 'Não informado'}</span>
-                        </div>
-                        <div className="coluna">
-                            <strong>Telefone Principal</strong>
-                            <span>{data.fonte.telefonePrincipal || 'Não informado'}</span>
-                        </div>
-
-                        <div className="coluna">
-                            <strong>Telefone Secundário</strong>
-                            <span>{data.fonte.telefoneSecundario || 'Não informado'}</span>
+                            <strong>Informações adicionais</strong>
+                            <span>{data.fonte.detalhe || 'Não informado'}</span>
                         </div>
                     </div>
                 </div>
