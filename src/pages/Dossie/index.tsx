@@ -7,7 +7,7 @@ import { DossieContainer } from '../../components/ui/DossieContainer';
 import { DossieBarContainer, OcorrenciaStep } from '../../components/ui/DossieItemBar';
 import { DossieNavContainer } from '../../components/ui/DossieNavBar';
 import './style.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const step: OcorrenciaStep = {
     step: 'Dossiê'
@@ -15,6 +15,7 @@ const step: OcorrenciaStep = {
 const data: string[] = ['0020', '17/03/2003', 'Aguardando', '8', 'meio dia'];
 
 const Dossie = () => {
+    const { id } = useParams<{ id: string }>();
     return (
         <div>
             <Header
@@ -23,7 +24,7 @@ const Dossie = () => {
                 e Qualificar a documentação"
             />
             <DossieNavContainer
-                id="12"
+                id={id}
                 status="Aguardando Analise"
                 data="17/03/2003"></DossieNavContainer>
             <DossieBarContainer step={step}></DossieBarContainer>

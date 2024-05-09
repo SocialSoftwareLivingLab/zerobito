@@ -5,5 +5,5 @@ export interface EditPalavrasRequest {
 }
 
 export async function editPalavras(payload: EditPalavrasRequest) {
-    await api.put('/api/v1/dossie', payload);
+    await api.put('/api/v1/casos/:id/dossie', payload);
 }
