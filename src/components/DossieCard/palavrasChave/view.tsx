@@ -24,7 +24,7 @@ export function PalavrasDossieView({
     onEnterPress
 }: PalavrasDossieViewProps) {
     return (
-        <div>
+        <div className="chave">
             {palavrasChave.map((palavra) => (
                 // eslint-disable-next-line react/jsx-key
                 <PalavraChave label={palavra} removeHandle={() => removePalavra(palavra)} />

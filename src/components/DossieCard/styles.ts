@@ -87,6 +87,25 @@ export const DossieCardStyle = styled.div`
         button {
             margin-top: 25px;
         }
+        input {
+            display: flex;
+            border-radius: 0.5rem;
+            border: 1px solid #acb8c4;
+            font-size: 16px;
+            height: 1rem;
+            margin-top: 25px;
+            margin-left: 4px;
+            margin-right: 20px;
+            height: 30px;
+
+            width: auto;
+
+            &:focus {
+                outline: none;
+                box-shadow: 0px 0px 2px #6b8096;
+                border-color: #6b8096;
+            }
+        }
     }
     span {
         margin-top: 10px;

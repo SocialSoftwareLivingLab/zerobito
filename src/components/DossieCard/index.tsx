@@ -7,43 +7,13 @@ import { DossieCardStyle } from './styles';
 import { InfoGeralDossieCard } from './Info-Geral';
 import PalavraChave from '../ui/PalavraChave';
 import { Button } from '../ui/Button';
+import { PalavrasDossieCard } from './palavrasChave';
 
 interface DossieCardProps {
     data: string[];
     palavras: string[];
 }
-
-interface InputValue {
-    inputValue: string;
-}
-
-export function DossieCard({ data, palavras }: DossieCardProps) {
-    const [dados, setDados] = useState(palavras);
-    const [inputValue, setInputValue] = useState('');
-    function removePalavra(palavra: string) {
-        setDados(dados.filter((e) => e !== palavra)); // Filtra e atualiza a lista de palavras
-    }
-    const [addPalavra, setAddPalavra] = useState(false);
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value);
-    };
-
-    const handleSubmitInput = () => {
-        if (inputValue.trim() !== '') {
-            setDados([...dados, inputValue.trim()]); // Add input value to the 'dados' list
-            setInputValue(''); // Clear input value after submission
-        }
-    };
-
-    const onEnterPress = (e) => {
-        if (e.keyCode === 13 && e.shiftKey === false) {
-            e.preventDefault();
-            setAddPalavra(false);
-            handleSubmitInput();
-        }
-    };
-
+export function DossieCard({ data }: DossieCardProps) {
     return (
         <DossieCardStyle>
             <header>
@@ -85,23 +55,8 @@ export function DossieCard({ data, palavras }: DossieCardProps) {
                     <FaInfoCircle /> Palavras-chave
                 </h3>
             </div>
-            <div className="chave">
-                {dados.map((palavra) => (
-                    // eslint-disable-next-line react/jsx-key
-                    <PalavraChave label={palavra} removeHandle={() => removePalavra(palavra)} />
-                ))}
-                <div className="add">
-                    <IoMdAddCircle onClick={() => setAddPalavra(true)} />
-                </div>
-                {addPalavra && (
-                    <form className="row">
-                        <input
-                            value={inputValue}
-                            onChange={handleInputChange}
-                            onKeyDown={onEnterPress}
-                        />
-                    </form>
-                )}
+            <div>
+                <PalavrasDossieCard />
             </div>
             <div className="blue-line">
                 <h3>

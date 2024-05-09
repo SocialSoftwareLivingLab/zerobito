@@ -14,18 +14,9 @@ const step: OcorrenciaStep = {
 };
 const data: string[] = ['0020', '17/03/2003', 'Aguardando', '8', 'meio dia'];
 
-const Imprensa = () => {
-    const casos = [
-        { data: '17/03/2003', id: 1 },
-        { data: '16/03/2003', id: 1 }
-    ];
+const Dossie = () => {
     return (
         <div>
-            {casos.map((caso) => (
-                <Link key={caso.id} to={`/${caso.id}`}>
-                    {caso.data}
-                </Link>
-            ))}
             <Header
                 title="Dossiê"
                 explicacao="Aqui o cordenador local tem uma visão global do caso. Pode dar inicio à Preparação/Reunião de Trabalho
@@ -83,4 +74,4 @@ const Imprensa = () => {
     );
 };
 
-export default Imprensa;
+export default Dossie;
