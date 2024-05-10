@@ -10,14 +10,13 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
         selector: (sel) => sel.descricao,
         sortable: true,
         grow: 2,
-        allowOverflow: true,
+
         wrap: true
     },
     {
         name: 'Data',
         selector: (sel) => String(sel.data),
         sortable: true,
-        allowOverflow: true,
         format: (row) =>
             Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(row.data)),
         wrap: true
@@ -26,27 +25,25 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
         name: 'Tipo',
         selector: (sel) => LABELS_TIPO_OCORRENCIA[sel.vitima.condicao] ?? '',
         sortable: true,
-        allowOverflow: true,
         wrap: true
     },
     // {
     //     name: 'Status',
     //     selector: (sel) => sel.status.descricao,
     //     sortable: true,
-    //     allowOverflow: true,
+
     //     wrap: true
     // },
     {
         name: 'Status',
         cell: (row) => <BadgeStatus status={row.status.sigla} />,
         sortable: true,
-        allowOverflow: true,
         wrap: true
     },
 
     {
         name: 'Ações',
-        sortable: true,
+        sortable: false,
         grow: 2,
         cell: (row) => <AcoesLinha row={row} />
     }

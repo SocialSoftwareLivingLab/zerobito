@@ -32,13 +32,15 @@ export function BadgeStatus({ status }: { status: string | null }) {
 }
 
 export function AcoesLinha({ row }: { row: OcorrenciaModel }) {
+    const navigate = useNavigate();
+
     return (
         <ColunaAcao>
             <Button
                 type="submit"
                 size="small"
                 action={() => {
-                    console.log(row);
+                    navigate(`/ocorrencia/${row.id}/aceitar`);
                 }}>
                 Aceitar
             </Button>
@@ -70,6 +72,7 @@ export function TabelaOcorrenciaNovo(props: TabelaOcorrenciaNovoProps) {
                 customStyles={dataTableStyle}
                 pointerOnHover
                 expandableRows
+                noDataComponent="Nenhum registro encontrado"
                 // expandableRowExpanded={(row) => !!row}
                 expandOnRowClicked
                 expandableRowsComponent={({ data }) => <OcorrenciaItem data={data} />}

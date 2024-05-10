@@ -4,8 +4,10 @@ import { redirect } from 'react-router';
 import Swal from 'sweetalert2';
 import { ValidateError } from '../../common/Errors/ValidateError';
 import { register } from '../../common/models/user/create.user';
+import { useNavigate } from 'react-router-dom';
 
 const useRegisterViewModel = () => {
+    const navigate = useNavigate();
     const [error, setError] = useState<string>();
     const [nome, setNome] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -36,14 +38,14 @@ const useRegisterViewModel = () => {
             const response = await register(nome, email, senha);
             setLoading(false);
             if (response.status === 201) {
-                Swal.fire({
+                await Swal.fire({
                     title: 'Cadastro Realizado!',
                     text: 'Usuário foi criado com sucesso',
                     icon: 'success',
                     timer: 4000,
                     confirmButtonText: 'Continuar'
                 });
-                redirect('/login');
+                navigate('/login');
             }
         } catch (error) {
             setLoading(false);

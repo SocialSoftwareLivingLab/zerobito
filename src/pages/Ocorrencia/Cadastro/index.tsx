@@ -1,17 +1,16 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { FormStepApi } from '../../../components/Forms/Ocorrencia/interface';
-import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from './context';
-import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
+import { redirect, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import {
     CondicaoVitima,
     CriarOcorrenciaRequest,
-    GravidadeVitima,
     TipoFonteDenuncia,
     criarOcorrencia
 } from '../../../common/api/ocorrencias/criar-ocorrencia';
-import { redirect } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { FormStepApi } from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/interface';
+import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from './context';
 import './style.css';
+import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
 
 function RegistrarOcorrenciaPage() {
     const formLocalRef = useRef<FormStepApi>(null);
@@ -22,6 +21,8 @@ function RegistrarOcorrenciaPage() {
     const [currentStep, setCurrentStep] = useState(1);
 
     const { formData } = useOcorrenciaWizardContext();
+
+    const navigate = useNavigate();
 
     const handleNextStep = useCallback(
         (handleNextFormWizard: () => void) => {
@@ -88,7 +89,7 @@ function RegistrarOcorrenciaPage() {
 
         await criarOcorrencia(payload);
 
-        Swal.fire({
+        await Swal.fire({
             title: 'Ocorrência registrada com sucesso!',
             confirmButtonText: 'Continuar',
             confirmButtonColor: '#134780',
@@ -96,8 +97,8 @@ function RegistrarOcorrenciaPage() {
             buttonsStyling: true
         });
 
-        redirect('/home');
-    }, [formData]);
+        navigate('/home');
+    }, [formData, navigate]);
 
     const registrarOcorrenciaViewProps: RegistrarOcorrenciaViewProps = {
         handles: {

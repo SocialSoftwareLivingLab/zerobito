@@ -4,7 +4,7 @@ import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import '../style.css';
 import { GravidadeFormFields } from './model';
 import { FormContainer } from '../styles';
-import { Select, SelectOption } from '../../../ui/Select';
+import { Select, SelectOption } from '../../../../ui/Select';
 
 export interface GravidadeViewProps {
     submitForm: () => void;

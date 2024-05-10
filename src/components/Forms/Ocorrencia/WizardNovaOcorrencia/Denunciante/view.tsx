@@ -1,12 +1,12 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import Input from '../../../ui/Input';
-import { Select, SelectOption } from '../../../ui/Select';
+import Input from '../../../../ui/Input';
+import { Select, SelectOption } from '../../../../ui/Select';
 import '../style.css';
 import { FormContainer } from '../styles';
 import { DenuncianteFormInput } from './model';
-import TextArea from '../../../ui/TextArea';
+import TextArea from '../../../../ui/TextArea';
 
 export interface DenuncianteViewProps {
     submitForm: () => void;
@@ -25,7 +25,7 @@ export default function DenuncianteView({
         <>
             <FormContainer>
                 <form onSubmit={submitForm}>
-                    <Select label="Tipo da Denúncia" {...register('tipo')}>
+                    <Select label="Tipo de Fonte" {...register('tipo')}>
                         <SelectOption />
                         <SelectOption label="Denunciante Anônimo" value="ANONIMA" />
                         <SelectOption label="Vítima" value="VITIMA" />
@@ -41,8 +41,8 @@ export default function DenuncianteView({
 
                     {tipoDenuncianteSelecionado === 'OUTRO' && (
                         <Input
-                            label="Tipo de Denunciante"
-                            placeholder="Informe o tipo de denunciante"
+                            label="Tipo de Fonte (Outro)"
+                            placeholder="Informe o tipo de fonte "
                             {...register('outro', { required: true })}
                         />
                     )}

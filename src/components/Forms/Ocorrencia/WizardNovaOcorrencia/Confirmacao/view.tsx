@@ -1,10 +1,12 @@
 import React from 'react';
-import { OcorrenciaFormData } from '../../../../pages/Ocorrencia/Cadastro/model';
+import { OcorrenciaFormData } from '../../../../../pages/Ocorrencia/Cadastro/model';
 import { FormContainer } from '../styles';
 import { Section } from './styles';
+import { UsuarioAutenticado } from '../../../../../contexts/usuario-autenticado/model';
 
 export interface ConfirmacaoOcorrenciaViewProps {
     data: OcorrenciaFormData;
+    usuario: UsuarioAutenticado;
 }
 
 const labelCondicao = {
@@ -24,7 +26,10 @@ const labelTipoDenunciante = {
     OUTRO: 'Outro'
 };
 
-export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenciaViewProps) {
+export default function ConfirmacaoOcorrenciaView({
+    data,
+    usuario
+}: ConfirmacaoOcorrenciaViewProps) {
     const dateFormat = Intl.DateTimeFormat('pt-br');
     return (
         <FormContainer>
@@ -38,6 +43,9 @@ export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenci
                 <p>Estado: {data.informacoesBasicas.local.estado}</p>
                 <p>Cidade: {data.informacoesBasicas.local.cidade}</p>
                 <p>Logradouro: {data.informacoesBasicas.local.logradouro}</p>
+                <p>
+                    Relator: {usuario.nome} ({usuario.email})
+                </p>
             </Section>
 
             <Section>
@@ -58,7 +66,7 @@ export default function ConfirmacaoOcorrenciaView({ data }: ConfirmacaoOcorrenci
             </Section>
 
             <Section>
-                <h3>Informações do Denunciante</h3>
+                <h3>Fonte de Informação</h3>
 
                 <p>Tipo: {labelTipoDenunciante[data.denunciante.tipo]}</p>
                 {data.denunciante.tipo === 'OUTRO' && (

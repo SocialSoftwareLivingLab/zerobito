@@ -1,7 +1,10 @@
 import React from 'react';
+import { PulseLoader } from 'react-spinners';
+import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
+import useQuerySearch from '../../hooks/use-query-search.hook';
 import './style.css';
 import useLoginViewModel from './view.model';
-import { PulseLoader } from 'react-spinners';
+import { Navigate } from 'react-router-dom';
 
 const LoginCard = () => {
     const {
@@ -14,6 +17,15 @@ const LoginCard = () => {
         handleChangeEmail,
         handleChangeSenha
     } = useLoginViewModel();
+
+    const { isAutenticado } = useUsuarioAutenticado();
+
+    const redirectTo = useQuerySearch({ queryName: 'redirectTo', defaultValue: '/' });
+
+    if (isAutenticado) {
+        console.log(redirectTo);
+        return <Navigate to={redirectTo} />;
+    }
 
     return (
         <div className="LoginCard">

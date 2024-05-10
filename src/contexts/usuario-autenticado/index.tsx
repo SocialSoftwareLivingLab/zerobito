@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { UsuarioAutenticado, UsuarioAutenticadoContextData } from './model';
 import { redirect } from 'react-router-dom';
+import { UsuarioAutenticado, UsuarioAutenticadoContextData } from './model';
 
 export const UsuarioAutenticadoContext = createContext({} as UsuarioAutenticadoContextData);
 
@@ -19,17 +19,11 @@ export function salvarDados(data: UsuarioAutenticado) {
 }
 
 export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoContextProviderProps) {
-    const tokenStorage = localStorage.getItem('token');
-    const usuarioStorage = JSON.parse(localStorage.getItem('usuario') && '{}') as Exclude<
-        UsuarioAutenticado,
-        'token'
-    >;
-
     const [usuarioLogado, setUsuarioLogado] = useState<UsuarioAutenticado>({
-        token: tokenStorage,
-        nome: usuarioStorage?.nome || null,
-        email: usuarioStorage?.email || null,
-        perfil: usuarioStorage?.perfil || null
+        token: null,
+        nome: null,
+        email: null,
+        perfil: null
     });
 
     const logout = useCallback(() => {
@@ -50,14 +44,26 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
     }, [usuarioLogado?.token]);
 
     useEffect(() => {
-        if (history) {
-            if (usuarioLogado?.token) {
-                redirect('/home');
-            } else {
-                redirect('/login');
-            }
+        console.log('effect');
+        if (!history) return;
+
+        const token = localStorage.getItem('token');
+        const usuarioSalvo = JSON.parse(localStorage.getItem('usuario') || '{}') as Exclude<
+            UsuarioAutenticado,
+            'token'
+        >;
+        console.log(token);
+        if (!token) {
+            console.log('indo pro login...');
+            redirect(`/login?redirectTo=${window.location.pathname ?? '/'}`);
+            return;
         }
-    }, [usuarioLogado]);
+
+        setUsuarioLogado({
+            ...usuarioSalvo,
+            token
+        });
+    }, []);
 
     return (
         <UsuarioAutenticadoContext.Provider

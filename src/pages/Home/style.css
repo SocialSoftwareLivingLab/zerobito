@@ -1,24 +1,7 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-.header {
-    position: fixed;
-    top: 0;
-}
-
-.container-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    padding: 5% 10% 0% 10%;
-    background-color: #f1f0f5;
-}
-
-.button-denuncia:hover {
-    background-color: #0d2c4c;
+div.home-container {
+    background: #f1f0f5;
+    /* border: 1px solid red; */
+    min-height: 100vh;
 }
 
 .container-content-imprensa {
