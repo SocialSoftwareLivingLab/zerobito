@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { TableColumn } from 'react-data-table-component';
 import { Caso } from '../../../../common/models/caso/caso';
 import { Button } from '../../../ui/Button';
 import { FaEye } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+
+interface BotaoAcompanharProps {
+    casoAtual: Caso;
+}
+
+function BotaoAcompanhar({ casoAtual }: BotaoAcompanharProps) {
+    const navigate = useNavigate();
+
+    const redirectPaginaCaso = useCallback(() => {
+        navigate(`/casos/${casoAtual.id}`);
+    }, [casoAtual, navigate]);
+
+    return (
+        <Button action={redirectPaginaCaso} type="default">
+            <FaEye /> Acompanhar
+        </Button>
+    );
+}
 
 export const ColunasTabelaListarCasos: TableColumn<Caso>[] = [
     {
@@ -30,10 +49,6 @@ export const ColunasTabelaListarCasos: TableColumn<Caso>[] = [
     {
         name: 'Ação',
         sortable: false,
-        cell: (row) => (
-            <Button type="default">
-                <FaEye /> Acompanhar
-            </Button>
-        )
+        cell: (row) => <BotaoAcompanhar casoAtual={row} />
     }
 ];
