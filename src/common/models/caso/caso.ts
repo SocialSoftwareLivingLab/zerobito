@@ -3,10 +3,7 @@ export interface Caso {
     nome: string;
     dataCriacao: Date;
     informacoesBasicas: {
-        comentario: {
-            id: number;
-            nome: string;
-        };
+        comentario: string;
         causaPrimaria: {
             id: number;
             nome: string;

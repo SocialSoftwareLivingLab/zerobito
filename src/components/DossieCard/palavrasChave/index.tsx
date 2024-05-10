@@ -1,78 +1,76 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Caso } from '../../../common/models/caso/caso';
 import { PalavrasFormData, defaultValue } from './model';
-import {
-    EditPalavrasRequest,
-    editPalavras
-} from '../../../common/api/DossiePalavrasChave/edit-palavras-chave';
 import { PalavrasDossieView, PalavrasDossieViewProps } from './view';
 
-export function PalavrasDossieCard() {
-    const { register, handleSubmit, reset, watch, setValue } = useForm<PalavrasFormData>({
+import { useQuery } from '@tanstack/react-query';
+import { adicionarPalavraChave } from '../../../common/api/casos/palavras-chave/adicionar-palavra-chave';
+import { buscarPalavrasChave } from '../../../common/api/casos/palavras-chave/buscar-palavras-chave';
+import { removerPalavraChave } from '../../../common/api/casos/palavras-chave/remover-palavra-chave';
+import { PalavraChaveCaso } from '../../../common/models/caso/palavra-chave';
+
+export interface PalavrasDossieCardProps {
+    caso: Caso;
+}
+
+export function PalavrasDossieCard({ caso }: PalavrasDossieCardProps) {
+    const { data, isLoading } = useQuery({
+        queryKey: ['casos', 'palavras-chave', caso.id],
+        queryFn: () => buscarPalavrasChave(caso.id)
+    });
+
+    const [palavras, setPalavras] = useState<PalavraChaveCaso[]>([]);
+    const [isModoAdicionar, setIsModoAdicionar] = useState(false);
+
+    const { register, handleSubmit, reset } = useForm<PalavrasFormData>({
         defaultValues: defaultValue
     });
-    const palavrasChave = watch('palavrasChave');
 
-    const handleCompleteEdit = useCallback(async (formData: PalavrasFormData) => {
-        console.log(formData);
+    const onSalvarPalavra = useCallback(
+        async (formData: PalavrasFormData) => {
+            if (formData.palavra.trim() !== '') {
+                const response = await adicionarPalavraChave(caso.id, formData.palavra);
+                setPalavras((current) => [...current, response]);
+                setIsModoAdicionar(false);
+                reset({ palavra: '' });
+            }
+        },
+        [caso, reset]
+    );
 
-        const payload: EditPalavrasRequest = {
-            palavrasChave: formData.palavrasChave
-        };
+    const handleRemoverPalavra = useCallback(
+        async (idPalavra: number) => {
+            await removerPalavraChave(caso.id, idPalavra);
+            setPalavras((current) => current.filter((palavra) => palavra.id !== idPalavra));
+        },
+        [caso]
+    );
 
-        await editPalavras(payload);
-    }, []);
-
-    // TODO: Verificar a necessidade desse trecho
-    // useEffect(() => {
-    //     const data: DossieForm = {
-    //         CausaPrimaria: formData.CausaPrimaria,
-    //         CausaSecundaria: formData.CausaSecundaria,
-    //         Diagnostico: formData.Diagnostico,
-    //         Comentario: formData.Comentario
-    //     };
-
-    //     reset(data);A
-    // }, [formData, reset]);
-
-    const [dados, setDados] = useState(palavrasChave);
-    const [inputValue, setInputValue] = useState('');
-    function removePalavra(palavra: string) {
-        setDados(dados.filter((e) => e !== palavra));
-        setValue('palavrasChave', dados); // Filtra e atualiza a lista de palavras
-        handleSubmit(handleCompleteEdit);
-    }
-    const [addPalavra, setAddPalavra] = useState(false);
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value);
-    };
-
-    const handleSubmitInput = () => {
-        if (inputValue.trim() !== '') {
-            setDados([...dados, inputValue.trim()]); // Add input value to the 'dados' list
-            setValue('palavrasChave', dados);
-            setInputValue(''); // Clear input value after submission
-            handleSubmit(handleCompleteEdit);
+    useEffect(() => {
+        if (!isLoading) {
+            setPalavras(data);
         }
-    };
+    }, [isLoading, data]);
 
-    const onEnterPress = (e) => {
-        if (e.keyCode === 13 && e.shiftKey === false) {
-            e.preventDefault();
-            setAddPalavra(false);
-            handleSubmitInput();
-        }
-    };
+    const onEnterPress = useCallback(
+        (e: React.KeyboardEvent) => {
+            if (e.key === 'Enter' && e.shiftKey === false) {
+                e.preventDefault();
+                handleSubmit(onSalvarPalavra)();
+            }
+        },
+        [handleSubmit, onSalvarPalavra]
+    );
 
     const viewProps: PalavrasDossieViewProps = {
-        palavrasChave,
-        removePalavra,
-        addPalavra,
-        setAddPalavra,
-        inputValue,
-        handleInputChange,
-        onEnterPress
+        palavras,
+        isModoAdicionarPalavra: isModoAdicionar,
+        setModoAdicionarPalavra: setIsModoAdicionar,
+        excluirPalavra: handleRemoverPalavra,
+        handleSubmit: handleSubmit(onSalvarPalavra),
+        onEnterPress,
+        register
     };
 
     return <PalavrasDossieView {...viewProps} />;

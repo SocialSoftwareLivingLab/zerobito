@@ -1,7 +1,7 @@
 export interface PalavrasFormData {
-    palavrasChave: string[];
+    palavra: string;
 }
 
 export const defaultValue: PalavrasFormData = {
-    palavrasChave: []
+    palavra: ''
 };

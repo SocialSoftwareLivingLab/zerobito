@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BsPaperclip } from 'react-icons/bs';
-import { IoMdAddCircle } from 'react-icons/io';
 import { FaFileAlt, FaInfoCircle } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
-import { DossieCardStyle } from './styles';
+import { Caso } from '../../common/models/caso/caso';
 import { InfoGeralDossieCard } from './Info-Geral';
-import PalavraChave from '../ui/PalavraChave';
-import { Button } from '../ui/Button';
 import { PalavrasDossieCard } from './palavrasChave';
+import { DossieCardStyle } from './styles';
 
 interface DossieCardProps {
-    data: string[];
-    palavras: string[];
+    data: Caso;
 }
 export function DossieCard({ data }: DossieCardProps) {
     return (
         <DossieCardStyle>
             <header>
-                <h2>Caso N {data[0]} </h2>
+                <h2>Caso N&#xba; {String(data.id).padStart(5, '0')} </h2>
             </header>
             <div className="row">
                 <div className="column">
@@ -56,7 +53,7 @@ export function DossieCard({ data }: DossieCardProps) {
                 </h3>
             </div>
             <div>
-                <PalavrasDossieCard />
+                <PalavrasDossieCard caso={data} />
             </div>
             <div className="blue-line">
                 <h3>

@@ -1,44 +1,44 @@
-import React, { useState } from 'react';
-import { UseFormRegister } from 'react-hook-form';
-import { PalavrasFormData } from './model';
-import PalavraChave from '../../ui/PalavraChave';
+import React, { KeyboardEventHandler } from 'react';
 import { IoMdAddCircle } from 'react-icons/io';
+import { PalavraChaveCaso } from '../../../common/models/caso/palavra-chave';
+import PalavraChave from '../../ui/PalavraChave';
+import { PalavrasFormData } from './model';
+import { UseFormRegister } from 'react-hook-form';
 
 export interface PalavrasDossieViewProps {
-    palavrasChave: string[];
-    removePalavra: (palavra) => void;
-    addPalavra: boolean;
-    setAddPalavra: (boolean) => void;
-    inputValue: string;
-    handleInputChange: (string) => void;
-    onEnterPress: (e) => void;
+    palavras: PalavraChaveCaso[];
+    isModoAdicionarPalavra: boolean;
+    setModoAdicionarPalavra: (value: boolean) => void;
+    excluirPalavra: (id: number) => void;
+    handleSubmit: (e: React.FormEvent) => void;
+    register: UseFormRegister<PalavrasFormData>;
+    onEnterPress: KeyboardEventHandler<HTMLInputElement>;
 }
 
 export function PalavrasDossieView({
-    palavrasChave,
-    removePalavra,
-    addPalavra,
-    setAddPalavra,
-    inputValue,
-    handleInputChange,
+    palavras,
+    isModoAdicionarPalavra,
+    setModoAdicionarPalavra,
+    excluirPalavra,
+    handleSubmit,
+    register,
     onEnterPress
 }: PalavrasDossieViewProps) {
     return (
         <div className="chave">
-            {palavrasChave.map((palavra) => (
-                // eslint-disable-next-line react/jsx-key
-                <PalavraChave label={palavra} removeHandle={() => removePalavra(palavra)} />
+            {palavras.map((palavra) => (
+                <PalavraChave
+                    key={palavra.id}
+                    label={palavra.valor}
+                    removeHandle={() => excluirPalavra(palavra.id)}
+                />
             ))}
             <div className="add">
-                <IoMdAddCircle onClick={() => setAddPalavra(true)} />
+                <IoMdAddCircle onClick={() => setModoAdicionarPalavra(true)} />
             </div>
-            {addPalavra && (
-                <form className="row">
-                    <input
-                        value={inputValue}
-                        onChange={handleInputChange}
-                        onKeyDown={onEnterPress}
-                    />
+            {isModoAdicionarPalavra && (
+                <form onSubmit={handleSubmit}>
+                    <input {...register('palavra')} onKeyDown={onEnterPress} />
                 </form>
             )}
         </div>
