@@ -7,6 +7,8 @@ export interface EditInfoGeralRequest {
     Comentario: string;
 }
 
-export async function editInfoGeral(payload: EditInfoGeralRequest) {
-    await api.put('/api/v1/dossie', payload);
+export async function editInfoGeral(payload: EditInfoGeralRequest, idCaso: number) {
+    const response = await api.put(`/api/v1/casos/${idCaso}/palavras-chave`, payload);
+
+    return response.data;
 }

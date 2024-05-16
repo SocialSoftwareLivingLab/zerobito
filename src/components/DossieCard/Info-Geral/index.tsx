@@ -6,8 +6,13 @@ import {
 } from '../../../common/api/DossieInfoGeral/edit-info-geral';
 import { InfoGeralFormData, defaultValue } from './model';
 import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
+import { Caso } from '../../../common/models/caso/caso';
 
-export function InfoGeralDossieCard() {
+export interface InfoGeralDossieCardProps {
+    caso: Caso;
+}
+
+export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
     const { register, handleSubmit, reset, watch } = useForm<InfoGeralFormData>({
         defaultValues: defaultValue
     });
@@ -26,7 +31,7 @@ export function InfoGeralDossieCard() {
             Comentario: formData.Comentario
         };
 
-        await editInfoGeral(payload);
+        await editInfoGeral(payload, caso.id);
     }, []);
 
     // TODO: Verificar a necessidade desse trecho

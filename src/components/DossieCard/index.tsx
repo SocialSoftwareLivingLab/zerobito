@@ -19,7 +19,7 @@ export function DossieCard({ data }: DossieCardProps) {
             <div className="row">
                 <div className="column">
                     <h3>Data de Denúncia</h3>
-                    <span>{data[1]}</span>
+                    <span>{String(data.dataCriacao)}</span>
                 </div>
                 <div className="column">
                     <h3>Status de notificação obrigatória</h3>
@@ -44,7 +44,7 @@ export function DossieCard({ data }: DossieCardProps) {
                 </h3>
             </div>
             <div>
-                <InfoGeralDossieCard />
+                <InfoGeralDossieCard caso={data} />
             </div>
             <div className="blue-line">
                 <h3>
