@@ -21,18 +21,21 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
     const diagnosticoSelecionado = watch('Diagnostico');
     const comentarioSelecionado = watch('Comentario');
 
-    const handleCompleteEdit = useCallback(async (formData: InfoGeralFormData) => {
-        console.log(formData);
+    const handleCompleteEdit = useCallback(
+        async (formData: InfoGeralFormData) => {
+            console.log(formData);
 
-        const payload: EditInfoGeralRequest = {
-            CausaPrimaria: formData.CausaPrimaria,
-            CausaSecundaria: formData.CausaSecundaria,
-            Diagnostico: formData.Diagnostico,
-            Comentario: formData.Comentario
-        };
+            const payload: EditInfoGeralRequest = {
+                CausaPrimaria: formData.CausaPrimaria,
+                CausaSecundaria: formData.CausaSecundaria,
+                Diagnostico: formData.Diagnostico,
+                Comentario: formData.Comentario
+            };
 
-        await editInfoGeral(payload, caso.id);
-    }, []);
+            await editInfoGeral(payload, caso.id);
+        },
+        [caso.id]
+    );
 
     // TODO: Verificar a necessidade desse trecho
     // useEffect(() => {
