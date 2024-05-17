@@ -26,10 +26,10 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
             console.log(formData);
 
             const payload: EditInfoGeralRequest = {
-                CausaPrimaria: formData.CausaPrimaria,
-                CausaSecundaria: formData.CausaSecundaria,
-                Diagnostico: formData.Diagnostico,
-                Comentario: formData.Comentario
+                causaPrimaria: formData.CausaPrimaria,
+                causaSecundaria: formData.CausaSecundaria,
+                diagnostico: formData.Diagnostico,
+                comentarios: formData.Comentario
             };
 
             await editInfoGeral(payload, caso.id);

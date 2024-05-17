@@ -1,14 +1,14 @@
 import api from '../../api';
 
 export interface EditInfoGeralRequest {
-    CausaPrimaria: string;
-    CausaSecundaria: string;
-    Diagnostico: string;
-    Comentario: string;
+    causaPrimaria: string;
+    causaSecundaria: string;
+    diagnostico: string;
+    comentarios: string;
 }
 
 export async function editInfoGeral(payload: EditInfoGeralRequest, idCaso: number) {
-    const response = await api.put(`/api/v1/casos/${idCaso}/palavras-chave`, payload);
+    const response = await api.put(`/api/v1/casos/${idCaso}/informacoes-basicas`, payload);
 
     return response.data;
 }

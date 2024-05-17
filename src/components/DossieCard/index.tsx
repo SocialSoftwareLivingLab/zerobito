@@ -19,7 +19,11 @@ export function DossieCard({ data }: DossieCardProps) {
             <div className="row">
                 <div className="column">
                     <h3>Data de Denúncia</h3>
-                    <span>{String(data.dataCriacao)}</span>
+                    <span>
+                        {Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(
+                            new Date(data.dataCriacao)
+                        )}
+                    </span>
                 </div>
                 <div className="column">
                     <h3>Status de notificação obrigatória</h3>
