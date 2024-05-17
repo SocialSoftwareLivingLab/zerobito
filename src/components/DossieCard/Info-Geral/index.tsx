@@ -24,7 +24,7 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
     const handleCompleteEdit = useCallback(
         async (formData: InfoGeralFormData) => {
             console.log(formData);
-
+            console.log(caso.id);
             const payload: EditInfoGeralRequest = {
                 causaPrimaria: formData.CausaPrimaria,
                 causaSecundaria: formData.CausaSecundaria,

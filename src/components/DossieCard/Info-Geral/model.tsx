@@ -6,8 +6,8 @@ export interface InfoGeralFormData {
 }
 
 export const defaultValue: InfoGeralFormData = {
-    CausaPrimaria: 'Indefinido',
-    CausaSecundaria: 'Indefinido',
-    Diagnostico: 'Indefinido',
+    CausaPrimaria: 'INDEFINIDO',
+    CausaSecundaria: 'INDEFINIDO',
+    Diagnostico: 'INDEFINIDO',
     Comentario: ''
 };
