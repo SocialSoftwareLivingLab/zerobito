@@ -6,11 +6,13 @@ import { Caso } from '../../common/models/caso/caso';
 import { InfoGeralDossieCard } from './Info-Geral';
 import { PalavrasDossieCard } from './palavrasChave';
 import { DossieCardStyle } from './styles';
+import { listarCausas } from '../../common/api/casos/listarCausas';
 
 interface DossieCardProps {
     data: Caso;
 }
 export function DossieCard({ data }: DossieCardProps) {
+    const loadCausas = listarCausas();
     return (
         <DossieCardStyle>
             <header>

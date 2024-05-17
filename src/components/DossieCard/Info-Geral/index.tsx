@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
     EditInfoGeralRequest,
@@ -7,10 +7,28 @@ import {
 import { InfoGeralFormData, defaultValue } from './model';
 import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
 import { Caso } from '../../../common/models/caso/caso';
+import { listarCausas } from '../../../common/api/casos/listarCausas';
+import { listarDiagnosticos } from '../../../common/api/casos/listarDiagnosticos';
 
 export interface InfoGeralDossieCardProps {
     caso: Caso;
 }
+
+const loadCausaOptions = async () => {
+    const response = await listarCausas();
+
+    const result = response.map((item) => item.nome);
+
+    return result;
+};
+
+const loadDiagnosticoOptions = async () => {
+    const response = await listarDiagnosticos();
+
+    const result = response.map((item) => item.nome);
+
+    return result;
+};
 
 export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
     const { register, handleSubmit, reset, watch } = useForm<InfoGeralFormData>({
@@ -20,6 +38,8 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
     const causaSecundariaSelecionada = watch('CausaSecundaria');
     const diagnosticoSelecionado = watch('Diagnostico');
     const comentarioSelecionado = watch('Comentario');
+    const [causas, setCausas] = useState<string[]>([]);
+    const [diagnosticos, setDiagnosticos] = useState<string[]>([]);
 
     const handleCompleteEdit = useCallback(
         async (formData: InfoGeralFormData) => {
@@ -55,8 +75,22 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
         causaPrimariaSelecionada,
         causaSecundariaSelecionada,
         diagnosticoSelecionado,
-        comentarioSelecionado
+        comentarioSelecionado,
+        causas,
+        diagnosticos
     };
 
+    useEffect(() => {
+        const fetchCausas = async () => {
+            const causasData = await loadCausaOptions();
+            setCausas(causasData);
+        };
+        const fetchDiagnosticos = async () => {
+            const diagnosticosData = await loadDiagnosticoOptions();
+            setDiagnosticos(diagnosticosData);
+        };
+        fetchDiagnosticos();
+        fetchCausas();
+    }, []);
     return <InfoGeralDossieView {...viewProps} />;
 }

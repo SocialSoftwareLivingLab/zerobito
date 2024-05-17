@@ -4,6 +4,7 @@ import { TextEditavel } from '../../ui/text_editavel';
 import { UseFormRegister } from 'react-hook-form';
 import { InfoGeralFormData } from './model';
 import { CommentEditavel } from '../../ui/comentEditavel';
+import { listarCausas } from '../../../common/api/casos/listarCausas';
 
 export interface InfoGeralDossieViewProps {
     register: UseFormRegister<InfoGeralFormData>;
@@ -12,6 +13,8 @@ export interface InfoGeralDossieViewProps {
     causaSecundariaSelecionada: string;
     diagnosticoSelecionado: string;
     comentarioSelecionado: string;
+    causas: string[];
+    diagnosticos: string[];
 }
 
 export function InfoGeralDossieView({
@@ -20,51 +23,10 @@ export function InfoGeralDossieView({
     causaPrimariaSelecionada,
     causaSecundariaSelecionada,
     diagnosticoSelecionado,
-    comentarioSelecionado
+    comentarioSelecionado,
+    causas,
+    diagnosticos
 }: InfoGeralDossieViewProps) {
-    const causas = [
-        'AG FÍSICOS (CALOR, RUÍDO, RAD)',
-        'AGENTES BIOLÓGICOS',
-        'AGENTES QUIMICOS',
-        'ANIMAIS/PLANTAS VENENOSOS',
-        'CORPO ESTRANHO',
-        'CORRENTE ELÉTRICA',
-        'ESFORÇOS/PESO',
-        'EXPLOSÃO/INCÊNDIO/FOGO',
-        'MÁQUINAS/EQUIPAMENTOS',
-        'MOTOCICLETA',
-        'MOVIMENTAÇÃO DE CARGA',
-        'QUEDA DE ALTURA',
-        'QUEDA DE OBJETOS',
-        'QUEDA DO MESMO NIVEL',
-        'SUBSTÂNCIAS QUENTES',
-        'SOTERRAMENTO',
-        'VEÍCULO DE TRANSPORTE',
-        'OUTROS',
-        'INDEFINIDO'
-    ];
-    const diagnosticos = [
-        'ALERGIAS',
-        'AMPUTAÇÃO',
-        'CONTUSÃO',
-        'CORPO ESTRANHO',
-        'DIST RESPIRATÓRIO',
-        'ENTORSE',
-        'ESCORIAÇÕES',
-        'ESMAGAMENTO',
-        'FCC',
-        'FRATURA',
-        'INFECÇÃO',
-        'INTOX/ENVENENAM',
-        'LESÃO MEDULAR',
-        'PERFURAÇÃO',
-        'POLITRAUMATISMO',
-        'QUEIMADURA',
-        'TCE',
-        'TRAUMA VISCERAL',
-        'OUTROS',
-        'INDEFINIDO'
-    ];
     return (
         <form onSubmit={handleCompleteEdit}>
             <h3>Causa Primária</h3>
