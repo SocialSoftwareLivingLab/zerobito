@@ -4,15 +4,17 @@ import { Button } from '../Button';
 import TextArea from '../TextArea';
 import { CommentEditavelContainer } from './styles';
 import Input from '../Input';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 export interface CommentEditavelProps {
     label: string;
     title: string;
     handleCompleteEdit: () => void;
+    register: UseFormRegisterReturn;
 }
 
 export const CommentEditavel = forwardRef<HTMLSelectElement, CommentEditavelProps>(
-    ({ label, title, handleCompleteEdit }, ref) => {
+    ({ label, title, handleCompleteEdit, register }) => {
         const [state, setState] = useState<boolean>(true);
         return (
             <CommentEditavelContainer>
@@ -25,7 +27,7 @@ export const CommentEditavel = forwardRef<HTMLSelectElement, CommentEditavelProp
                 {!state && (
                     <div className="row">
                         <div className="column">
-                            <TextArea placeholder="Comentario" label={label} />
+                            <TextArea placeholder="Comentario" label={label} {...register} />
                         </div>
                         <div className="column">
                             <Button

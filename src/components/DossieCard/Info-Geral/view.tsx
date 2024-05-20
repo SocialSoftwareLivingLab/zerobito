@@ -35,27 +35,27 @@ export function InfoGeralDossieView({
                 label={''}
                 title={causaPrimariaSelecionada}
                 handleCompleteEdit={handleCompleteEdit}
-                {...register('CausaPrimaria')}></TextEditavel>
+                register={register('CausaPrimaria')}></TextEditavel>
             <h3>Causa Secundária</h3>
             <TextEditavel
                 options={causas}
                 label={''}
                 title={causaSecundariaSelecionada}
                 handleCompleteEdit={handleCompleteEdit}
-                {...register('CausaSecundaria')}></TextEditavel>
+                register={register('CausaSecundaria')}></TextEditavel>
             <h3>Diagnóstico</h3>
             <TextEditavel
                 options={diagnosticos}
                 label={''}
                 title={diagnosticoSelecionado}
                 handleCompleteEdit={handleCompleteEdit}
-                {...register('Diagnostico')}></TextEditavel>
+                register={register('Diagnostico')}></TextEditavel>
             <h3>Comentários</h3>
             <CommentEditavel
                 label={''}
                 title={comentarioSelecionado}
                 handleCompleteEdit={handleCompleteEdit}
-                {...register('Diagnostico')}></CommentEditavel>
+                register={register('Comentario')}></CommentEditavel>
         </form>
     );
 }

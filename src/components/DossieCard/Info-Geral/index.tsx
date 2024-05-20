@@ -17,7 +17,7 @@ export interface InfoGeralDossieCardProps {
 const loadCausaOptions = async () => {
     const response = await listarCausas();
 
-    const result = response.map((item) => item.nome);
+    const result = response.map((item) => item.codigo);
 
     return result;
 };
@@ -25,13 +25,13 @@ const loadCausaOptions = async () => {
 const loadDiagnosticoOptions = async () => {
     const response = await listarDiagnosticos();
 
-    const result = response.map((item) => item.nome);
+    const result = response.map((item) => item.codigo);
 
     return result;
 };
 
 export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
-    const { register, handleSubmit, reset, watch } = useForm<InfoGeralFormData>({
+    const { register, handleSubmit, reset, watch, resetField } = useForm<InfoGeralFormData>({
         defaultValues: defaultValue
     });
     const causaPrimariaSelecionada = watch('CausaPrimaria');
@@ -52,10 +52,21 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
                 comentarios: formData.Comentario
             };
 
-            await editInfoGeral(payload, caso.id);
+            const response = await editInfoGeral(payload, caso.id);
+            console.log(response);
         },
         [caso.id]
     );
+
+    React.useEffect(() => {
+        if (
+            causaPrimariaSelecionada === causaSecundariaSelecionada &&
+            causaPrimariaSelecionada !== 'INDEFINIDO' &&
+            causaPrimariaSelecionada !== 'OUTROS'
+        ) {
+            resetField('CausaSecundaria', { defaultValue: 'INDEFINIDO' });
+        }
+    }, [causaPrimariaSelecionada, causaSecundariaSelecionada, resetField]);
 
     // TODO: Verificar a necessidade desse trecho
     // useEffect(() => {

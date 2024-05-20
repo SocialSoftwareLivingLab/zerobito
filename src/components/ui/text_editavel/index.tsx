@@ -3,16 +3,18 @@ import { FaEdit } from 'react-icons/fa';
 import { Button } from '../Button';
 import { Select, SelectOption } from '../Select';
 import { TextEditavelContainer } from './styles';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 export interface TextEditavelProps {
     options: string[];
     label: string;
     title: string;
     handleCompleteEdit: () => void;
+    register: UseFormRegisterReturn;
 }
 
 export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
-    ({ label, options, title, handleCompleteEdit }, ref) => {
+    ({ label, options, title, handleCompleteEdit, register }) => {
         const [state, setState] = useState<boolean>(true);
         return (
             <TextEditavelContainer>
@@ -25,7 +27,7 @@ export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
                 {!state && (
                     <div className="row">
                         <div className="column">
-                            <Select ref={ref} label={label}>
+                            <Select label={label} {...register}>
                                 {options.map((option) => (
                                     <SelectOption key={option} label={option} value={option} />
                                 ))}
@@ -36,7 +38,6 @@ export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
                                 type="submit"
                                 size="small"
                                 action={() => {
-                                    console.log('cliquei');
                                     setState(!state);
                                     handleCompleteEdit();
                                 }}>
