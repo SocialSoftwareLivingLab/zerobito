@@ -9,6 +9,7 @@ import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
 import { Caso } from '../../../common/models/caso/caso';
 import { listarCausas } from '../../../common/api/casos/listarCausas';
 import { listarDiagnosticos } from '../../../common/api/casos/listarDiagnosticos';
+import { useQuery } from '@tanstack/react-query';
 
 export interface InfoGeralDossieCardProps {
     caso: Caso;
@@ -30,9 +31,20 @@ const loadDiagnosticoOptions = async () => {
     return result;
 };
 
+const formatData = (infoData: Caso) => {
+    console.log(infoData);
+    const defaultValue: InfoGeralFormData = {
+        CausaPrimaria: infoData.informacoesBasicas.causaPrimaria ?? 'INDEFINIDO',
+        CausaSecundaria: infoData.informacoesBasicas.causaSecundaria ?? 'INDEFINIDO',
+        Diagnostico: infoData.informacoesBasicas.diagnostico ?? 'INDEFINIDO',
+        Comentario: infoData.informacoesBasicas.comentario
+    };
+    return defaultValue;
+};
+
 export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
     const { register, handleSubmit, reset, watch, resetField } = useForm<InfoGeralFormData>({
-        defaultValues: defaultValue
+        defaultValues: formatData(caso)
     });
     const causaPrimariaSelecionada = watch('CausaPrimaria');
     const causaSecundariaSelecionada = watch('CausaSecundaria');

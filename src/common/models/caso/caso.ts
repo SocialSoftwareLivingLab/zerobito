@@ -4,18 +4,9 @@ export interface Caso {
     dataCriacao: Date;
     informacoesBasicas: {
         comentario: string;
-        causaPrimaria: {
-            id: number;
-            nome: string;
-        };
-        causaSecundaria: {
-            id: number;
-            nome: string;
-        };
-        diagnostico: {
-            id: number;
-            nome: string;
-        };
+        causaPrimaria: string;
+        causaSecundaria: string;
+        diagnostico: string;
     };
     coordenador: {
         id: number;
