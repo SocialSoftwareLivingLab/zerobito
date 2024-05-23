@@ -10,6 +10,7 @@ import { Caso } from '../../../common/models/caso/caso';
 import { listarCausas } from '../../../common/api/casos/listarCausas';
 import { listarDiagnosticos } from '../../../common/api/casos/listarDiagnosticos';
 import { useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
 
 export interface InfoGeralDossieCardProps {
     caso: Caso;
@@ -94,6 +95,7 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
 
     const viewProps: InfoGeralDossieViewProps = {
         register,
+        reset,
         handleCompleteEdit: handleSubmit(handleCompleteEdit),
         causaPrimariaSelecionada,
         causaSecundariaSelecionada,

@@ -3,7 +3,8 @@ import { IoMdAddCircle } from 'react-icons/io';
 import { PalavraChaveCaso } from '../../../common/models/caso/palavra-chave';
 import PalavraChave from '../../ui/PalavraChave';
 import { PalavrasFormData } from './model';
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, UseFormReset } from 'react-hook-form';
+import { Button } from '../../ui/Button';
 
 export interface PalavrasDossieViewProps {
     palavras: PalavraChaveCaso[];
@@ -13,6 +14,7 @@ export interface PalavrasDossieViewProps {
     handleSubmit: (e: React.FormEvent) => void;
     register: UseFormRegister<PalavrasFormData>;
     onEnterPress: KeyboardEventHandler<HTMLInputElement>;
+    reset: UseFormReset<PalavrasFormData>;
 }
 
 export function PalavrasDossieView({
@@ -22,7 +24,8 @@ export function PalavrasDossieView({
     excluirPalavra,
     handleSubmit,
     register,
-    onEnterPress
+    onEnterPress,
+    reset
 }: PalavrasDossieViewProps) {
     return (
         <div className="chave">
@@ -39,6 +42,15 @@ export function PalavrasDossieView({
             {isModoAdicionarPalavra && (
                 <form onSubmit={handleSubmit}>
                     <input {...register('palavra')} onKeyDown={onEnterPress} />
+                    <Button
+                        type="cancel"
+                        size="small"
+                        action={() => {
+                            setModoAdicionarPalavra(!isModoAdicionarPalavra);
+                            reset();
+                        }}>
+                        Cancelar
+                    </Button>
                 </form>
             )}
         </div>

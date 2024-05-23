@@ -70,7 +70,8 @@ export function PalavrasDossieCard({ caso }: PalavrasDossieCardProps) {
         excluirPalavra: handleRemoverPalavra,
         handleSubmit: handleSubmit(onSalvarPalavra),
         onEnterPress,
-        register
+        register,
+        reset
     };
 
     return <PalavrasDossieView {...viewProps} />;

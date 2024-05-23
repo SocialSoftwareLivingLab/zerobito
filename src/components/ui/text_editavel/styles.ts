@@ -20,4 +20,7 @@ export const TextEditavelContainer = styled.fieldset`
     .Select {
         width: 100%;
     }
+    .row {
+        justify-content: space-around;
+    }
 `;

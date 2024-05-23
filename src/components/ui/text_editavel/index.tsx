@@ -11,10 +11,11 @@ export interface TextEditavelProps {
     title: string;
     handleCompleteEdit: () => void;
     register: UseFormRegisterReturn;
+    cancel: () => void;
 }
 
 export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
-    ({ label, options, title, handleCompleteEdit, register }) => {
+    ({ label, options, title, handleCompleteEdit, register, cancel }) => {
         const [state, setState] = useState<boolean>(true);
         return (
             <TextEditavelContainer>
@@ -34,15 +35,26 @@ export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
                             </Select>
                         </div>
                         <div className="column">
-                            <Button
-                                type="submit"
-                                size="small"
-                                action={() => {
-                                    setState(!state);
-                                    handleCompleteEdit();
-                                }}>
-                                Salvar
-                            </Button>
+                            <div className="row">
+                                <Button
+                                    type="submit"
+                                    size="small"
+                                    action={() => {
+                                        setState(!state);
+                                        handleCompleteEdit();
+                                    }}>
+                                    Salvar
+                                </Button>
+                                <Button
+                                    type="cancel"
+                                    size="small"
+                                    action={() => {
+                                        setState(!state);
+                                        cancel();
+                                    }}>
+                                    Cancelar
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 )}

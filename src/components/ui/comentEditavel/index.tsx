@@ -11,10 +11,11 @@ export interface CommentEditavelProps {
     title: string;
     handleCompleteEdit: () => void;
     register: UseFormRegisterReturn;
+    cancel: () => void;
 }
 
 export const CommentEditavel = forwardRef<HTMLSelectElement, CommentEditavelProps>(
-    ({ label, title, handleCompleteEdit, register }) => {
+    ({ label, title, handleCompleteEdit, register, cancel }) => {
         const [state, setState] = useState<boolean>(true);
         return (
             <CommentEditavelContainer>
@@ -30,16 +31,26 @@ export const CommentEditavel = forwardRef<HTMLSelectElement, CommentEditavelProp
                             <TextArea placeholder="Comentario" label={label} {...register} />
                         </div>
                         <div className="column">
-                            <Button
-                                type="submit"
-                                size="small"
-                                action={() => {
-                                    console.log('cliquei');
-                                    setState(!state);
-                                    handleCompleteEdit();
-                                }}>
-                                Salvar
-                            </Button>
+                            <div className="row">
+                                <Button
+                                    type="submit"
+                                    size="small"
+                                    action={() => {
+                                        setState(!state);
+                                        handleCompleteEdit();
+                                    }}>
+                                    Salvar
+                                </Button>
+                                <Button
+                                    type="cancel"
+                                    size="small"
+                                    action={() => {
+                                        setState(!state);
+                                        cancel();
+                                    }}>
+                                    Cancelar
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 )}

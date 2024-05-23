@@ -1,10 +1,11 @@
 import React from 'react';
 import { TextEditavel } from '../../ui/text_editavel';
 
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, UseFormReset } from 'react-hook-form';
 import { InfoGeralFormData } from './model';
 import { CommentEditavel } from '../../ui/comentEditavel';
 import { listarCausas } from '../../../common/api/casos/listarCausas';
+import { Caso } from '../../../common/models/caso/caso';
 
 export interface InfoGeralDossieViewProps {
     register: UseFormRegister<InfoGeralFormData>;
@@ -15,6 +16,7 @@ export interface InfoGeralDossieViewProps {
     comentarioSelecionado: string;
     causas: string[];
     diagnosticos: string[];
+    reset: UseFormReset<InfoGeralFormData>;
 }
 
 export function InfoGeralDossieView({
@@ -25,7 +27,8 @@ export function InfoGeralDossieView({
     diagnosticoSelecionado,
     comentarioSelecionado,
     causas,
-    diagnosticos
+    diagnosticos,
+    reset
 }: InfoGeralDossieViewProps) {
     return (
         <form onSubmit={handleCompleteEdit}>
@@ -35,27 +38,31 @@ export function InfoGeralDossieView({
                 label={''}
                 title={causaPrimariaSelecionada}
                 handleCompleteEdit={handleCompleteEdit}
-                register={register('CausaPrimaria')}></TextEditavel>
+                register={register('CausaPrimaria')}
+                cancel={reset}></TextEditavel>
             <h3>Causa Secundária</h3>
             <TextEditavel
                 options={causas}
                 label={''}
                 title={causaSecundariaSelecionada}
                 handleCompleteEdit={handleCompleteEdit}
-                register={register('CausaSecundaria')}></TextEditavel>
+                register={register('CausaSecundaria')}
+                cancel={reset}></TextEditavel>
             <h3>Diagnóstico</h3>
             <TextEditavel
                 options={diagnosticos}
                 label={''}
                 title={diagnosticoSelecionado}
                 handleCompleteEdit={handleCompleteEdit}
-                register={register('Diagnostico')}></TextEditavel>
+                register={register('Diagnostico')}
+                cancel={reset}></TextEditavel>
             <h3>Comentários</h3>
             <CommentEditavel
                 label={''}
                 title={comentarioSelecionado}
                 handleCompleteEdit={handleCompleteEdit}
-                register={register('Comentario')}></CommentEditavel>
+                register={register('Comentario')}
+                cancel={reset}></CommentEditavel>
         </form>
     );
 }
