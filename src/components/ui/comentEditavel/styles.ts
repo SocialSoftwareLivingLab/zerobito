@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TextEditavelContainer = styled.fieldset`
+export const CommentEditavelContainer = styled.fieldset`
     border: none;
     .column {
         display: flex;
@@ -18,7 +18,7 @@ export const TextEditavelContainer = styled.fieldset`
         }
     }
     .Select {
-        width: 100%;
+        width: auto;
     }
     .row {
         justify-content: space-around;

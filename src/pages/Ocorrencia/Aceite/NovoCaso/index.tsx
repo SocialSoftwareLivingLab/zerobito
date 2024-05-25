@@ -1,11 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { aceitarOcorrenciaComoCaso } from '../../../../common/api/ocorrencias/aceitar-ocorrencia';
 import { OcorrenciaModel } from '../../../../common/models/ocorrencias/model';
 import CriarCasoForm from '../../../../components/Forms/Caso';
 import { CriarCasoFormData } from '../../../../components/Forms/Caso/models';
 import { Secao } from '../styles';
-import { aceitarOcorrenciaComoCaso } from '../../../../common/api/ocorrencias/aceitar-ocorrencia';
-import Swal from 'sweetalert2';
-import { redirect, useNavigate } from 'react-router-dom';
 
 export interface NovoCasoPageProps {
     ocorrencia: OcorrenciaModel;

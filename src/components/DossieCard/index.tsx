@@ -1,54 +1,31 @@
-import React, { useState } from 'react';
-import { DossieCardStyle } from './styles';
-import { FaFileAlt, FaInfoCircle } from 'react-icons/fa';
+import React from 'react';
 import { BsPaperclip } from 'react-icons/bs';
+import { FaFileAlt, FaInfoCircle } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
-import TextEditavel from '../ui/text_editavel';
-import PalavraChave from '../ui/PalavraChave';
-import { IoMdAddCircle } from 'react-icons/io';
-import Input from '../ui/Input';
-import { Button } from '../ui/Button';
-import { useForm } from 'react-hook-form';
+import { Caso } from '../../common/models/caso/caso';
+import { InfoGeralDossieCard } from './Info-Geral';
+import { PalavrasDossieCard } from './palavrasChave';
+import { DossieCardStyle } from './styles';
+import { listarCausas } from '../../common/api/casos/listarCausas';
 
 interface DossieCardProps {
-    data: string[];
-    palavras: string[];
+    data: Caso;
 }
-
-interface InputValue {
-    inputValue: string;
-}
-
-const register = useForm<InputValue>;
-
-export function DossieCard({ data, palavras }: DossieCardProps) {
-    const [dados, setDados] = useState(palavras);
-    const [inputValue, setInputValue] = useState('');
-    function removePalavra(palavra: string) {
-        setDados(dados.filter((e) => e !== palavra)); // Filtra e atualiza a lista de palavras
-    }
-    const [addPalavra, setAddPalavra] = useState(false);
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value);
-    };
-
-    const handleSubmitInput = () => {
-        if (inputValue.trim() !== '') {
-            setDados([...dados, inputValue.trim()]); // Add input value to the 'dados' list
-            setInputValue(''); // Clear input value after submission
-        }
-    };
-
+export function DossieCard({ data }: DossieCardProps) {
+    const loadCausas = listarCausas();
     return (
         <DossieCardStyle>
             <header>
-                <h2>Caso N {data[0]} </h2>
+                <h2>Caso N&#xba; {String(data.id).padStart(5, '0')} </h2>
             </header>
             <div className="row">
                 <div className="column">
                     <h3>Data de Denúncia</h3>
-                    <span>{data[1]}</span>
+                    <span>
+                        {Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(
+                            new Date(data.dataCriacao)
+                        )}
+                    </span>
                 </div>
                 <div className="column">
                     <h3>Status de notificação obrigatória</h3>
@@ -73,13 +50,7 @@ export function DossieCard({ data, palavras }: DossieCardProps) {
                 </h3>
             </div>
             <div>
-                <h3>Causa Primária</h3>
-                <TextEditavel options={['acidente', 'doença', 'alergia']} label={''}></TextEditavel>
-                <h3>Causa Secundária</h3>
-                <TextEditavel options={['acidente', 'doença', 'alergia']} label={''}></TextEditavel>
-                <h3>Diagnóstico</h3>
-                <TextEditavel options={['acidente', 'doença', 'alergia']} label={''}></TextEditavel>
-                <h3>Comentários</h3>
+                <InfoGeralDossieCard caso={data} />
             </div>
             <div className="blue-line">
                 <h3>
@@ -87,27 +58,8 @@ export function DossieCard({ data, palavras }: DossieCardProps) {
                     <FaInfoCircle /> Palavras-chave
                 </h3>
             </div>
-            <div className="chave">
-                {dados.map((palavra) => (
-                    // eslint-disable-next-line react/jsx-key
-                    <PalavraChave label={palavra} removeHandle={() => removePalavra(palavra)} />
-                ))}
-                <div className="add">
-                    <IoMdAddCircle onClick={() => setAddPalavra(true)} />
-                </div>
-                {addPalavra && (
-                    <form className="row">
-                        <input value={inputValue} onChange={handleInputChange} />
-                        <Button
-                            size="small"
-                            action={() => {
-                                setAddPalavra(false);
-                                handleSubmitInput();
-                            }}>
-                            Adicionar
-                        </Button>
-                    </form>
-                )}
+            <div>
+                <PalavrasDossieCard caso={data} />
             </div>
             <div className="blue-line">
                 <h3>

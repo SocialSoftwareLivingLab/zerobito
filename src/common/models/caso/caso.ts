@@ -3,22 +3,10 @@ export interface Caso {
     nome: string;
     dataCriacao: Date;
     informacoesBasicas: {
-        comentario: {
-            id: number;
-            nome: string;
-        };
-        causaPrimaria: {
-            id: number;
-            nome: string;
-        };
-        causaSecundaria: {
-            id: number;
-            nome: string;
-        };
-        diagnostico: {
-            id: number;
-            nome: string;
-        };
+        comentario: string;
+        causaPrimaria: string;
+        causaSecundaria: string;
+        diagnostico: string;
     };
     coordenador: {
         id: number;
