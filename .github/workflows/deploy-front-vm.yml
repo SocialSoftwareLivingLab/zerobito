@@ -10,6 +10,7 @@ on:
 jobs:
   backup-versao-atual:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Executar backup da última versão do front
         uses: appleboy/ssh-action@v1.0.3
@@ -76,3 +77,6 @@ jobs:
         timeout: 240s
         source: "build/*"
         target: ${{ matrix.target }}
+
+    - name: Log URL de acesso ao website
+      run: echo "Acesse o website em http://${{ secrets.VM_HOST }}:${{ secrets.VM_PORT }}"
