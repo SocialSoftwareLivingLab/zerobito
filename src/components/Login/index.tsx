@@ -5,6 +5,7 @@ import useQuerySearch from '../../hooks/use-query-search.hook';
 import './style.css';
 import useLoginViewModel from './view.model';
 import { Navigate } from 'react-router-dom';
+import { AiOutlineEye } from 'react-icons/ai';
 
 const LoginCard = () => {
     const {
@@ -13,9 +14,11 @@ const LoginCard = () => {
         error,
         loading,
         override,
+        showPassword,
         handleSubmit,
         handleChangeEmail,
-        handleChangeSenha
+        handleChangeSenha,
+        toggleShowPassword
     } = useLoginViewModel();
 
     const { isAutenticado } = useUsuarioAutenticado();
@@ -49,12 +52,21 @@ const LoginCard = () => {
                             <div>
                                 <label htmlFor="password">Senha:</label>
                                 <input
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     name="senha"
                                     value={senha}
                                     onChange={handleChangeSenha}
                                     required
                                 />
+                                <span
+                                    onClick={toggleShowPassword}
+                                    style={{
+                                        overflow: 'visible',
+                                        marginLeft: '-3em',
+                                        marginRight: '2em'
+                                    }}>
+                                    <AiOutlineEye style={{ verticalAlign: 'middle' }} />
+                                </span>
                             </div>
 
                             <PulseLoader

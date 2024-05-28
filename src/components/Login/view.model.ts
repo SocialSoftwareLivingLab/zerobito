@@ -9,6 +9,10 @@ const useLoginViewModel = () => {
 
     const { login: setData, isAutenticado } = useUsuarioAutenticado();
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
     const override: CSSProperties = {
         display: 'block',
@@ -57,9 +61,11 @@ const useLoginViewModel = () => {
         error,
         loading,
         override,
+        showPassword,
         handleSubmit,
         handleChangeEmail,
-        handleChangeSenha
+        handleChangeSenha,
+        toggleShowPassword
     };
 };
 
