@@ -14,6 +14,14 @@ const useRegisterViewModel = () => {
     const [senha, setSenha] = useState<string>('');
     const [senhaValidation, setSenhaValidation] = useState<string>('');
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const toggleShowConfirmPassword = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
 
     const override: CSSProperties = {
         display: 'block',
@@ -87,6 +95,8 @@ const useRegisterViewModel = () => {
         error,
         loading,
         override,
+        showPassword,
+        showConfirmPassword,
         setNome,
         setEmail,
         setSenha,
@@ -95,7 +105,9 @@ const useRegisterViewModel = () => {
         handleChangeNome,
         handleChangeEmail,
         handleChangeSenha,
-        handleChangeSenhaValidation
+        handleChangeSenhaValidation,
+        toggleShowPassword,
+        toggleShowConfirmPassword
     };
 };
 

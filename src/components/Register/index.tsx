@@ -3,6 +3,7 @@ import React from 'react';
 import useRegisterViewModel from './view.model';
 import { PulseLoader } from 'react-spinners';
 import { FiAlertCircle } from 'react-icons/fi';
+import { AiOutlineEye } from 'react-icons/ai';
 
 function SignupCard() {
     const {
@@ -13,11 +14,15 @@ function SignupCard() {
         error,
         loading,
         override,
+        showPassword,
+        showConfirmPassword,
         handleSubmit,
         handleChangeNome,
         handleChangeEmail,
         handleChangeSenha,
-        handleChangeSenhaValidation
+        handleChangeSenhaValidation,
+        toggleShowPassword,
+        toggleShowConfirmPassword
     } = useRegisterViewModel();
 
     return (
@@ -67,23 +72,41 @@ function SignupCard() {
                                     Senha:
                                 </label>
                                 <input
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     name="senha"
                                     value={senha}
                                     onChange={handleChangeSenha}
                                     required
                                 />
+                                <span
+                                    onClick={toggleShowPassword}
+                                    style={{
+                                        overflow: 'visible',
+                                        marginLeft: '-3em',
+                                        marginRight: '2em'
+                                    }}>
+                                    <AiOutlineEye style={{ verticalAlign: 'middle' }} />
+                                </span>
                             </div>
 
                             <div>
                                 <label htmlFor="password">Confirmar Senha:</label>
                                 <input
-                                    type="password"
+                                    type={showConfirmPassword ? 'text' : 'password'}
                                     name="senhaValidation"
                                     value={senhaValidation}
                                     onChange={handleChangeSenhaValidation}
                                     required
                                 />
+                                <span
+                                    onClick={toggleShowConfirmPassword}
+                                    style={{
+                                        overflow: 'visible',
+                                        marginLeft: '-3em',
+                                        marginRight: '2em'
+                                    }}>
+                                    <AiOutlineEye style={{ verticalAlign: 'middle' }} />
+                                </span>
                             </div>
 
                             <PulseLoader
