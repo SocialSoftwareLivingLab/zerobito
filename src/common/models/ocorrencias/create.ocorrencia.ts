@@ -2,6 +2,7 @@ import api from '../../api';
 
 export const createOcorrencia = async (
     denuncia: string,
+    titulo: string,
     data: Date,
     local: string,
     nomeVitima: string,
@@ -16,6 +17,7 @@ export const createOcorrencia = async (
 ) => {
     const response = await api.post('/ocorrencias', {
         denuncia,
+        titulo,
         local,
         data,
         nomeVitima,

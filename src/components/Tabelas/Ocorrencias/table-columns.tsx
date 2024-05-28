@@ -7,7 +7,7 @@ import { AcoesLinha, BadgeStatus } from '.';
 export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
     {
         name: 'Denúncia',
-        selector: (sel) => sel.descricao,
+        selector: (sel) => sel.titulo,
         sortable: true,
         grow: 2,
 

@@ -37,6 +37,13 @@ export default function InformacoesBasicasView({
                         {...register('descricao', { required: true })}
                     />
                     <ErrorMessage name="data" errors={errors} as="p" />
+                    <Input
+                        placeholder="Título"
+                        label="Informe um título"
+                        type="text"
+                        {...register('titulo', { required: true })}
+                    />
+                    <ErrorMessage name="data" errors={errors} as="p" />
                 </Fieldset>
 
                 <Fieldset legend="Localização">

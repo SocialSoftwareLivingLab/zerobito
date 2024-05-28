@@ -71,6 +71,12 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                     </div>
                     <div className="linha">
                         <div className="coluna">
+                            <strong>Título</strong>
+                            <span>{data.titulo || 'Não informado'}</span>
+                        </div>
+                    </div>
+                    <div className="linha">
+                        <div className="coluna">
                             <strong>Descrição</strong>
                             <span>{data.descricao || 'Não informado'}</span>
                         </div>

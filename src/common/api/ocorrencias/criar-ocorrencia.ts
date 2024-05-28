@@ -13,6 +13,7 @@ export type CondicaoVitima = 'OBITO' | 'INCIDENTE_ALTO_POTENCIAL';
 
 export interface CriarOcorrenciaRequest {
     descricao: string;
+    titulo: string;
     data: Date;
     local: {
         cidade: string;
