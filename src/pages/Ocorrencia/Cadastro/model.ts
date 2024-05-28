@@ -1,6 +1,7 @@
 export interface InformacoesBasicasData {
     data: Date;
     descricao: string;
+    titulo: string;
     local: {
         estado: string;
         cidade: string;

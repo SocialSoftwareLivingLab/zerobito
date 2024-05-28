@@ -39,6 +39,7 @@ export default function ConfirmacaoOcorrenciaView({
                 <h3>Identificação do acidente</h3>
 
                 <p>Data: {dateFormat.format(new Date(data.informacoesBasicas.data))}</p>
+                <p>Título: {data.informacoesBasicas.titulo}</p>
                 <p>Descrição: {data.informacoesBasicas.descricao}</p>
                 <p>Estado: {data.informacoesBasicas.local.estado}</p>
                 <p>Cidade: {data.informacoesBasicas.local.cidade}</p>

@@ -21,6 +21,7 @@ export function CriarOcorrenciaWizardContextProvider({
         informacoesBasicas: {
             data: new Date(),
             descricao: '',
+            titulo: '',
             local: {
                 estado: '',
                 cidade: '',

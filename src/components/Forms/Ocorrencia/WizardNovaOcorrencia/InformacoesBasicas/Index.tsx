@@ -20,6 +20,7 @@ const InformacoesBasicas = forwardRef((props, ref) => {
         const data: InformacoesBasicasFormFields = {
             data: formData.informacoesBasicas.data,
             descricao: formData.informacoesBasicas.descricao,
+            titulo: formData.informacoesBasicas.titulo,
             estado: formData.informacoesBasicas.local.estado,
             cidade: formData.informacoesBasicas.local.cidade,
             logradouro: formData.informacoesBasicas.local.logradouro
@@ -32,6 +33,7 @@ const InformacoesBasicas = forwardRef((props, ref) => {
             setInformacoesBasicas({
                 data: data.data,
                 descricao: data.descricao,
+                titulo: data.titulo,
                 local: {
                     estado: data.estado,
                     cidade: data.cidade,

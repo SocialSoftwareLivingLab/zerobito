@@ -62,6 +62,7 @@ function RegistrarOcorrenciaPage() {
         const payload: CriarOcorrenciaRequest = {
             data: formData.informacoesBasicas.data,
             descricao: formData.informacoesBasicas.descricao,
+            titulo: formData.informacoesBasicas.titulo,
             local: {
                 estado: formData.informacoesBasicas.local.estado,
                 cidade: formData.informacoesBasicas.local.cidade,
