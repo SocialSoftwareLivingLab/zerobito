@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 
 export const DossieContainerStyle = styled.div`
+    padding-top: 24px;
     width: 80%;
-    max-width: calc(100% - 48px);
-    background: #fff;
 
-    margin: 0 auto; /* Added to horizontally center the container */
-    margin-top: 3.5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

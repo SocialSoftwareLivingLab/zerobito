@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CasoHeader = styled.section`
     position: relative;
-    padding: 0 10% 1rem;
+    padding: 0 10% 24px;
     top: -25px;
     margin: 0 auto;
 
@@ -16,4 +16,13 @@ export const CasoHeader = styled.section`
         background-color: #dadfea;
         z-index: -1;
     }
+`;
+
+export const CasoContent = styled.main`
+    margin: 0 auto;
+    margin-top: -25px;
+    background-color: #f0f0f5;
+    padding-top: 1px;
+    padding: 0 10% 1rem;
+    width: 100%;
 `;

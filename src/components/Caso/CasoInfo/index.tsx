@@ -3,14 +3,11 @@ import { FaBell, FaFileAlt } from 'react-icons/fa';
 import { MdOutlineDateRange } from 'react-icons/md';
 import { CasoInfoContainer } from './styles';
 import CasoInfoItem from './CasoInfoItem';
+import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 
 export function CasoInfo() {
     const dateFormat = Intl.DateTimeFormat('pt-br');
-
-    const caso = {
-        id: 1,
-        dataCriacao: new Date()
-    };
+    const { caso } = useCasoSelecionado();
 
     return (
         <CasoInfoContainer>

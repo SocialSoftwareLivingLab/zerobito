@@ -36,7 +36,7 @@ const privateRoutes: PrivateRouteConfig[] = [
     { path: '/perfil', Component: Perfil },
     { path: '/observatorio', Component: ObservatorioZeroObito },
     { path: '/casos/:id', Component: Dossie },
-    { path: '/casoss/', Component: Caso }
+    { path: '/casoss/:id', Component: Caso }
 ];
 
 const publicRoutes: PrivateRouteConfig[] = [
