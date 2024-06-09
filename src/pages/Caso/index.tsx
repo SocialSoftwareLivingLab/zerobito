@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React from 'react';
 import { Outlet, matchRoutes, useLocation, useParams } from 'react-router-dom';
 import { buscarCaso } from '../../common/api/casos/consultar-caso';
 import { CasoInfo } from '../../components/Caso/CasoInfo';
