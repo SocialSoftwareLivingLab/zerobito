@@ -28,7 +28,7 @@ export default function AceitarOcorrenciaPageView({
     return (
         <>
             <Header
-                title="Aceitar evento"
+                titulo="Aceitar evento"
                 explicacao="Aqui você pode criar um novo caso para o evento encontrado ou vinculá-lo a um caso já existente"
             />
             <Container>

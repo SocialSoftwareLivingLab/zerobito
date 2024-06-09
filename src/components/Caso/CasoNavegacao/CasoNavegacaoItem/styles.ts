@@ -1,19 +1,22 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const DossieItemNavegacaoContainer = styled(Link)<{ isstep: boolean }>`
-    color: ${(props) => (props.isstep ? '#fff' : '#134780')};
-    background-color: ${(props) => (props.isstep ? '#134780' : 'transparent')};
-    font-size: 1.4rem;
+export const CasoNavegacaoItemContainer = styled(Link)<{ ativo: boolean }>`
+    color: ${(props) => (props.ativo ? '#fff' : '#134780')};
+    background-color: ${(props) => (props.ativo ? '#134780' : '#fff')};
+
+    font-size: 16px;
     font-weight: 600;
-    font-family: Lato;
-    border: none;
-    border-radius: 0.3em 0.3em 0 0;
+    border-radius: 0.3em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     height: 100%;
-    width: 12rem;
 
     text-decoration: none;
+    flex: 1 1 0;
+
+    transition:
+        background-color 0.1s,
+        color 0.1s;
 
     div {
         display: flex;
@@ -30,5 +33,10 @@ export const DossieItemNavegacaoContainer = styled(Link)<{ isstep: boolean }>`
 
     &:not(:last-of-type) {
         margin-right: 28px;
+    }
+
+    &:hover {
+        color: #fff;
+        background-color: #134780;
     }
 `;

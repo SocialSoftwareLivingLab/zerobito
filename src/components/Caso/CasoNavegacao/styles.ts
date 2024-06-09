@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
-export const DossieBarContainerStyle = styled.div`
-    width: 80%;
-    max-width: calc(100% - 48px);
-    background: #fff;
-
-    margin: 0 auto; /* Added to horizontally center the container */
+export const CasoNavegacaoContainer = styled.div`
+    margin: 0 auto;
     margin-top: 2rem;
     height: 6rem;
 

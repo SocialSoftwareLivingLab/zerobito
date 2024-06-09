@@ -14,7 +14,7 @@ const Home = () => {
     return (
         <div className="home-container">
             <Header
-                title="Painel de Controle"
+                titulo="Painel de Controle"
                 explicacao="Aqui o cordenador local consegue visualizar  e gerenciar novos casos/denuncias adicionadas
           ao sistema e tambem os casos que ele já aceitou acompanhar"
             />
