@@ -33,7 +33,6 @@ const loadDiagnosticoOptions = async () => {
 };
 
 const formatData = (infoData: Caso) => {
-    console.log(infoData);
     const defaultValue: InfoGeralFormData = {
         CausaPrimaria: infoData.informacoesBasicas.causaPrimaria ?? 'INDEFINIDO',
         CausaSecundaria: infoData.informacoesBasicas.causaSecundaria ?? 'INDEFINIDO',
@@ -56,8 +55,6 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
 
     const handleCompleteEdit = useCallback(
         async (formData: InfoGeralFormData) => {
-            console.log(formData);
-            console.log(caso.id);
             const payload: EditInfoGeralRequest = {
                 causaPrimaria: formData.CausaPrimaria,
                 causaSecundaria: formData.CausaSecundaria,
@@ -66,7 +63,6 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
             };
 
             const response = await editInfoGeral(payload, caso.id);
-            console.log(response);
         },
         [caso.id]
     );

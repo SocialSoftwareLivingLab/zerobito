@@ -24,5 +24,6 @@ export const CasoContent = styled.main`
     background-color: #f0f0f5;
     padding-top: 1px;
     padding: 0 10% 1rem;
-    width: 100%;
+    /* width: 100%; */
+    min-height: 100%;
 `;

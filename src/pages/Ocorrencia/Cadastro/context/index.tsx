@@ -69,8 +69,6 @@ export function CriarOcorrenciaWizardContextProvider({
 
     const setDenuncianteData = useCallback(
         (data: DenuncianteData) => {
-            console.log('Dados');
-            console.log(data);
             setFormData({
                 ...formData,
                 denunciante: data
@@ -81,8 +79,6 @@ export function CriarOcorrenciaWizardContextProvider({
 
     const setGravidadeData = useCallback(
         (data: GravidadeData) => {
-            console.log('Dados');
-            console.log(data);
             setFormData({
                 ...formData,
                 gravidade: data

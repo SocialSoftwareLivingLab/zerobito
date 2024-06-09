@@ -14,9 +14,6 @@ export interface NovoCasoPageProps {
 export default function NovoCasoPage({ ocorrencia }: NovoCasoPageProps) {
     const navigate = useNavigate();
     const submit = async (data: CriarCasoFormData) => {
-        console.log(ocorrencia);
-        console.log(data);
-
         await aceitarOcorrenciaComoCaso({
             ocorrencia: { id: ocorrencia.id },
             caso: { nome: data.nome, coordenador: { id: data.coordenador } }
