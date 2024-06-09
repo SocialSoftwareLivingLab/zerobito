@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const DossieBarContainerStyle = styled.div`
     width: 80%;
     max-width: calc(100% - 48px);
-    background: #fff;
+    background: #dadfea;
 
     margin: 0 auto; /* Added to horizontally center the container */
     margin-top: 2rem;

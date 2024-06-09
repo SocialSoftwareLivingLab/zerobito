@@ -3,11 +3,11 @@ import './style.css';
 import Container from '../Container';
 
 interface HeaderProps {
-    title: string;
+    titulo: string;
     explicacao: string;
 }
 
-function Header({ title, explicacao }: HeaderProps): JSX.Element {
+function Header({ titulo: title, explicacao }: HeaderProps): JSX.Element {
     return (
         <div>
             <Container className="container-header">

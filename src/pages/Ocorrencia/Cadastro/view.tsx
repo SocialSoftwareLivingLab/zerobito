@@ -30,7 +30,7 @@ export default function RegistrarOcorrenciaView({ handles, refs }: RegistrarOcor
     return (
         <>
             <Header
-                title="Comunicação de Evento"
+                titulo="Comunicação de Evento"
                 explicacao="Nesta etapa o usuário será capaz de adicionar um evento novo, preenchendo as informações abaixo"
             />
             <div className="content-bar">
