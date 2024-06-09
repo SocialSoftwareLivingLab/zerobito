@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PrivateRoute from '../../components/PrivateRoute';
 import BibliotecaCasos from '../../pages/BibliotecaCaso';
 import Cadastro from '../../pages/Cadastro';
 import Contato from '../../pages/Contato';
@@ -17,25 +16,13 @@ import Perfil from '../../pages/Perfil';
 import SobreNos from '../../pages/SobreNos';
 import BarraNavegacao from '../../components/BarraNavegacao';
 import Caso from '../../pages/Caso';
+import PrivateRoute from './PrivateRoute';
+import DossiePage from '../../pages/Caso/Dossie';
 
 interface PrivateRouteConfig {
     path: string;
     Component: React.ComponentType;
 }
-
-const privateRoutes: PrivateRouteConfig[] = [
-    { path: '/', Component: Home },
-    { path: '/home', Component: Home },
-    { path: '/ocorrencia', Component: RegistrarOcorrencia },
-    { path: '/ocorrencia/:id/aceitar', Component: AceitarOcorrenciaPage },
-    { path: '/biblioteca', Component: BibliotecaCasos },
-    { path: '/material', Component: Material },
-    { path: '/painel', Component: PainelControle },
-    { path: '/imprensa', Component: Imprensa },
-    { path: '/perfil', Component: Perfil },
-    { path: '/observatorio', Component: ObservatorioZeroObito },
-    { path: '/casos/:id', Component: Caso }
-];
 
 const publicRoutes: PrivateRouteConfig[] = [
     { path: '/login', Component: Login },
@@ -49,17 +36,22 @@ const AppRoutes = () => {
         <BrowserRouter>
             <BarraNavegacao />
             <Routes>
-                {privateRoutes.map(({ path, Component }) => (
-                    <Route
-                        key={path}
-                        path={path}
-                        element={
-                            <PrivateRoute>
-                                <Component />
-                            </PrivateRoute>
-                        }
-                    />
-                ))}
+                <Route element={<PrivateRoute />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/ocorrencia" element={<RegistrarOcorrencia />} />
+                    <Route path="/ocorrencia/:id/aceitar" element={<AceitarOcorrenciaPage />} />
+                    <Route path="/biblioteca" element={<BibliotecaCasos />} />
+                    <Route path="/material" element={<Material />} />
+                    <Route path="/painel" element={<PainelControle />} />
+                    <Route path="/imprensa" element={<Imprensa />} />
+                    <Route path="/perfil" element={<Perfil />} />
+                    <Route path="/observatorio" element={<ObservatorioZeroObito />} />
+                    <Route path="/casos" element={<Caso />}>
+                        <Route index path=":id/dossie" element={<DossiePage />} />
+                        <Route index path=":id/notificacoes" element={<DossiePage />} />
+                    </Route>
+                </Route>
                 {publicRoutes.map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} />
                 ))}

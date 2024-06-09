@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { buscarCaso } from '../../common/api/casos/consultar-caso';
 import { CasoInfo } from '../../components/Caso/CasoInfo';
 import { CasoNavegacao } from '../../components/Caso/CasoNavegacao';
@@ -33,8 +33,8 @@ export default function Caso() {
                         <CasoNavegacao />
                     </CasoHeader>
                     <CasoContent>
-                        {/* <Outlet /> */}
-                        <DossiePage />
+                        <Outlet />
+                        {/* <DossiePage /> */}
                     </CasoContent>
                 </CasoSelecionadoContextProvider>
             )}

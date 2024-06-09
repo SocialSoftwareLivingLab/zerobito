@@ -21,7 +21,7 @@ const menus: MenuNavegacao[] = [
     {
         titulo: 'Dossiê',
         icone: <TfiMenuAlt />,
-        url: (caso) => `/casos/${caso.id}`
+        url: (caso) => `/casos/${caso.id}/dossie`
     },
     {
         titulo: 'Notificações',
