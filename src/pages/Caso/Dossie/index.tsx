@@ -4,6 +4,8 @@ import { DossieCard } from '../../../components/DossieCard';
 import { BoxContainer } from '../../../components/ui/BoxContainer';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import { DossieContainer } from './styles';
+import { useOutletContext } from 'react-router-dom';
+import { OutletCasoContextProps } from '../OutletCasoContext';
 
 export default function DossiePage() {
     const { caso } = useCasoSelecionado();

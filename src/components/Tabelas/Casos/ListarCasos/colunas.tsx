@@ -13,7 +13,7 @@ function BotaoAcompanhar({ casoAtual }: BotaoAcompanharProps) {
     const navigate = useNavigate();
 
     const redirectPaginaCaso = useCallback(() => {
-        navigate(`/casos/${casoAtual.id}`);
+        navigate(`/casos/${casoAtual.id}/dossie`);
     }, [casoAtual, navigate]);
 
     return (

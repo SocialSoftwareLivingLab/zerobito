@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet, matchRoutes, useLocation, useParams } from 'react-router-dom';
 import { buscarCaso } from '../../common/api/casos/consultar-caso';
 import { CasoInfo } from '../../components/Caso/CasoInfo';
 import { CasoNavegacao } from '../../components/Caso/CasoNavegacao';
 import Header from '../../components/Page-Header';
 import { CasoSelecionadoContextProvider } from '../../contexts/caso-selecionado';
-import DossiePage from './Dossie';
 import { CasoContent, CasoHeader } from './styles';
+import { tituloPaginas } from './titulo-paginas';
 
 export default function Caso() {
     const { id } = useParams<{ id: string }>();
@@ -17,12 +17,13 @@ export default function Caso() {
         queryFn: () => buscarCaso(Number(id))
     });
 
+    const location = useLocation();
+
+    const [matchedRoute] = matchRoutes(tituloPaginas, location);
+
     return (
         <>
-            <Header
-                titulo="Dossiê"
-                explicacao="Aqui o cordenador local tem uma visão global do caso. Pode dar inicio à Preparação/Reunião de Trabalho e Qualificar a documentação"
-            />
+            <Header titulo={matchedRoute.route.titulo} explicacao={matchedRoute.route.explicacao} />
 
             {isLoading && <div>Carregando...</div>}
 
@@ -34,7 +35,6 @@ export default function Caso() {
                     </CasoHeader>
                     <CasoContent>
                         <Outlet />
-                        {/* <DossiePage /> */}
                     </CasoContent>
                 </CasoSelecionadoContextProvider>
             )}
