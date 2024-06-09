@@ -11,7 +11,7 @@ export const tituloPaginas: InfoPaginaCaso[] = [
         explicacao: 'Aqui você encontra informações detalhadas sobre o caso.'
     },
     {
-        path: '/casos/:id/notificacoes',
+        path: '/casos/:id/documentacao',
         titulo: 'Documentação Oficial',
         explicacao: 'Aqui você encontra documentos oficiais para a qualificação do caso.'
     }

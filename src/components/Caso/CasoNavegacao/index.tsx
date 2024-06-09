@@ -26,7 +26,7 @@ const menus: MenuNavegacao[] = [
     {
         titulo: 'Notificações',
         icone: <FaBell />,
-        url: (caso) => `${caso.id}/notificacoes`
+        url: (caso) => `${caso.id}/documentacao`
     },
     {
         titulo: 'Preparação',
@@ -71,7 +71,7 @@ export function CasoNavegacao() {
                     return (
                         <CasoNavegacaoItem
                             key={index}
-                            ativo={location.pathname.includes(menu.url(caso))}
+                            ativo={!!location?.pathname?.includes(menu.url(caso))}
                             titulo={menu.titulo}
                             icone={menu.icone}
                             url={menu.url(caso)}

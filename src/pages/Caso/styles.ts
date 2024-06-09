@@ -24,6 +24,7 @@ export const CasoContent = styled.main`
     background-color: #f0f0f5;
     padding-top: 1px;
     padding: 0 10% 1rem;
-    /* width: 100%; */
-    min-height: 100%;
+    min-height: calc(
+        100vh - 64px - 200px - 215px
+    ); // 64px = navbar sistema, 215px = Jumbotron, 200px = navbar caso
 `;

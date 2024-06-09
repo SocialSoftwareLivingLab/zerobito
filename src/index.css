@@ -11,10 +11,15 @@
 body {
     margin: 0;
     font-family: Lato, Roboto, sans-serif;
+    height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+div#root, div.app {
+    height: 100%;
 }

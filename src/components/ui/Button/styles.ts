@@ -59,6 +59,8 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     align-items: center;
     justify-content: center;
 
+    gap: 4px;
+
     transition: background-color 0.2s ease;
 
     color: ${(props) => buttonColors[props.type].text};
