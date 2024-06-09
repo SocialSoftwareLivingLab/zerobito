@@ -5,68 +5,79 @@ import { FaBell } from 'react-icons/fa';
 import { IoMdDownload, IoMdMap } from 'react-icons/io';
 import { RiShieldCheckFill } from 'react-icons/ri';
 import { TfiMenuAlt } from 'react-icons/tfi';
-import { CasoNavegacaoContainer } from './styles';
+import { useLocation } from 'react-router-dom';
+import { Caso } from '../../../common/models/caso/caso';
 import CasoNavegacaoItem from './CasoNavegacaoItem';
+import { CasoNavegacaoContainer } from './styles';
+import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 
-export interface OcorrenciaStep {
-    step:
-        | 'Dossiê'
-        | 'Notificações'
-        | 'Preparação'
-        | 'Planejamento'
-        | 'Investigação'
-        | 'Intervenção'
-        | 'Finalização'
-        | 'Avaliação Externa';
+interface MenuNavegacao {
+    titulo: string;
+    icone: JSX.Element;
+    url: (caso: Caso) => string;
 }
 
+const menus: MenuNavegacao[] = [
+    {
+        titulo: 'Dossiê',
+        icone: <TfiMenuAlt />,
+        url: (caso) => `/casos/${caso.id}`
+    },
+    {
+        titulo: 'Notificações',
+        icone: <FaBell />,
+        url: (caso) => `${caso.id}/notificacoes`
+    },
+    {
+        titulo: 'Preparação',
+        icone: <BsFillGearFill />,
+        url: (caso) => `${caso.id}/preparacao`
+    },
+    {
+        titulo: 'Planejamento',
+        icone: <BiSolidHelpCircle />,
+        url: (caso) => `${caso.id}/planejamento`
+    },
+    {
+        titulo: 'Investigação',
+        icone: <IoMdMap />,
+        url: (caso) => `${caso.id}/investigacao`
+    },
+    {
+        titulo: 'Intervenção',
+        icone: <IoMdDownload />,
+        url: (caso) => `${caso.id}/intervencao`
+    },
+    {
+        titulo: 'Finalização',
+        icone: <BiCheckDouble />,
+        url: (caso) => `${caso.id}/finalizacao`
+    },
+    {
+        titulo: 'Avaliação Externa',
+        icone: <RiShieldCheckFill />,
+        url: (caso) => `${caso.id}/avaliacao-externa`
+    }
+];
+
 export function CasoNavegacao() {
+    const { caso } = useCasoSelecionado();
+    const location = useLocation();
+
     return (
         <CasoNavegacaoContainer>
             <header>
-                <CasoNavegacaoItem
-                    ativo={false}
-                    titulo="Dossiê"
-                    icone={<TfiMenuAlt />}
-                    url="#/#/#"
-                />
-                <CasoNavegacaoItem ativo={false} titulo="Notificações" icone={<FaBell />} url="#" />
-                <CasoNavegacaoItem
-                    ativo={false}
-                    titulo="Preparação"
-                    icone={<BsFillGearFill />}
-                    url="#"
-                />
-                <CasoNavegacaoItem
-                    ativo={false}
-                    titulo="Planejamento"
-                    icone={<BiSolidHelpCircle />}
-                    url="#/#/#"
-                />
-                <CasoNavegacaoItem
-                    ativo={false}
-                    titulo="Investigação"
-                    icone={<IoMdMap />}
-                    url="#"
-                />
-                <CasoNavegacaoItem
-                    ativo={false}
-                    titulo="Intervenção"
-                    icone={<IoMdDownload />}
-                    url="#"
-                />
-                <CasoNavegacaoItem
-                    ativo={false}
-                    titulo="Finalização"
-                    icone={<BiCheckDouble />}
-                    url="#"
-                />
-                <CasoNavegacaoItem
-                    ativo={false}
-                    titulo="Avaliação Externa"
-                    icone={<RiShieldCheckFill />}
-                    url="#"
-                />
+                {menus.map((menu, index) => {
+                    return (
+                        <CasoNavegacaoItem
+                            key={index}
+                            ativo={location.pathname.includes(menu.url(caso))}
+                            titulo={menu.titulo}
+                            icone={menu.icone}
+                            url={menu.url(caso)}
+                        />
+                    );
+                })}
             </header>
         </CasoNavegacaoContainer>
     );

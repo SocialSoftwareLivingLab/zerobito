@@ -16,7 +16,6 @@ import PainelControle from '../../pages/PainelControleUsuario';
 import Perfil from '../../pages/Perfil';
 import SobreNos from '../../pages/SobreNos';
 import BarraNavegacao from '../../components/BarraNavegacao';
-import Dossie from '../../pages/Dossie';
 import Caso from '../../pages/Caso';
 
 interface PrivateRouteConfig {
@@ -35,8 +34,7 @@ const privateRoutes: PrivateRouteConfig[] = [
     { path: '/imprensa', Component: Imprensa },
     { path: '/perfil', Component: Perfil },
     { path: '/observatorio', Component: ObservatorioZeroObito },
-    { path: '/casos/:id', Component: Dossie },
-    { path: '/casoss/:id', Component: Caso }
+    { path: '/casos/:id', Component: Caso }
 ];
 
 const publicRoutes: PrivateRouteConfig[] = [

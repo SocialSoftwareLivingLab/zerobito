@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const DossieContainerStyle = styled.div`
+export const DossieContainer = styled.div`
     padding-top: 24px;
     width: 80%;
 
