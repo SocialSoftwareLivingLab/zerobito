@@ -6,7 +6,7 @@ import NotificacaoTable from '../../../components/Tabelas/Casos/Notificacao';
 import { BoxContainer } from '../../../components/ui/BoxContainer';
 import { Button } from '../../../components/ui/Button';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
-import { DocumentacaoContainer } from './styles';
+import { NotificacoesContainer } from './styles';
 
 function NovoDocumentoAcao() {
     return (
@@ -25,11 +25,11 @@ export default function Notificacoes() {
     });
 
     return (
-        <DocumentacaoContainer>
+        <NotificacoesContainer>
             <BoxContainer titulo="Documentos" acoesContainer={NovoDocumentoAcao}>
                 {isLoading && <p>Carregando...</p>}
                 {!isLoading && <NotificacaoTable data={data} />}
             </BoxContainer>
-        </DocumentacaoContainer>
+        </NotificacoesContainer>
     );
 }

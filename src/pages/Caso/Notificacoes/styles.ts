@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const DocumentacaoContainer = styled.section`
+export const NotificacoesContainer = styled.section`
     padding-top: 24px;
 `;

@@ -26,7 +26,7 @@ const menus: MenuNavegacao[] = [
     {
         titulo: 'Notificações',
         icone: <FaBell />,
-        url: (caso) => `${caso.id}/documentacao`
+        url: (caso) => `${caso.id}/notificacoes`
     },
     {
         titulo: 'Preparação',
