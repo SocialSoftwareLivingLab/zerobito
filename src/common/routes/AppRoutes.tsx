@@ -18,7 +18,7 @@ import BarraNavegacao from '../../components/BarraNavegacao';
 import Caso from '../../pages/Caso';
 import PrivateRoute from './PrivateRoute';
 import DossiePage from '../../pages/Caso/Dossie';
-import Documentacao from '../../pages/Caso/Documentacao';
+import Notificacoes from '../../pages/Caso/Notificacoes';
 
 interface PrivateRouteConfig {
     path: string;
@@ -50,7 +50,7 @@ const AppRoutes = () => {
                     <Route path="/observatorio" element={<ObservatorioZeroObito />} />
                     <Route path="/casos" element={<Caso />}>
                         <Route index path=":id/dossie" element={<DossiePage />} />
-                        <Route index path=":id/documentacao" element={<Documentacao />} />
+                        <Route index path=":id/notificacoes" element={<Notificacoes />} />
                     </Route>
                 </Route>
                 {publicRoutes.map(({ path, Component }) => (

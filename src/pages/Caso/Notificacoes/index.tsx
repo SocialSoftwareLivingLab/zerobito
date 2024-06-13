@@ -1,13 +1,12 @@
-import React from 'react';
-import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
-import { BoxContainer } from '../../../components/ui/BoxContainer';
-import { DocumentacaoContainer } from './styles';
-import { Button } from '../../../components/ui/Button';
-import { FaPlusSquare } from 'react-icons/fa';
-import NotificacaoTable from '../../../components/Tabelas/Casos/Notificacao';
-import { DocumentoNotificacao } from '../../../common/models/caso/notificacao';
 import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import { FaPlusSquare } from 'react-icons/fa';
 import { consultarNotificacoes } from '../../../common/api/casos/notificacoes/consultar-notificacoes';
+import NotificacaoTable from '../../../components/Tabelas/Casos/Notificacao';
+import { BoxContainer } from '../../../components/ui/BoxContainer';
+import { Button } from '../../../components/ui/Button';
+import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
+import { DocumentacaoContainer } from './styles';
 
 function NovoDocumentoAcao() {
     return (
@@ -17,7 +16,7 @@ function NovoDocumentoAcao() {
     );
 }
 
-export default function Documentacao() {
+export default function Notificacoes() {
     const { caso } = useCasoSelecionado();
 
     const { data, isLoading } = useQuery({
