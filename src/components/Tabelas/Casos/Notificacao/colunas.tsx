@@ -1,9 +1,9 @@
 import { TableColumn } from 'react-data-table-component';
-import { DocumentoNotificacao } from '../../../../common/models/caso/documento-notificacao';
+import { NotificacaoCaso } from '../../../../common/models/caso/notificacao';
 
 const dateFormat = Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' });
 
-export const ColunasTabelaListarCasos: TableColumn<DocumentoNotificacao>[] = [
+export const ColunasTabelaListarNotificacoes: TableColumn<NotificacaoCaso>[] = [
     {
         name: 'Data de Emissão',
         selector: (data) => String(data.dataEmissao),
@@ -22,8 +22,8 @@ export const ColunasTabelaListarCasos: TableColumn<DocumentoNotificacao>[] = [
         sortable: true
     },
     {
-        name: 'Identificação',
-        selector: (data) => data.identificacao,
+        name: 'Identificador',
+        selector: (data) => data.identificador,
         sortable: true
     },
     {

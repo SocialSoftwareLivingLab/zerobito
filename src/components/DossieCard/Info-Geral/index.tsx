@@ -4,13 +4,11 @@ import {
     EditInfoGeralRequest,
     editInfoGeral
 } from '../../../common/api/DossieInfoGeral/edit-info-geral';
-import { InfoGeralFormData, defaultValue } from './model';
-import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
-import { Caso } from '../../../common/models/caso/caso';
 import { listarCausas } from '../../../common/api/casos/listarCausas';
 import { listarDiagnosticos } from '../../../common/api/casos/listarDiagnosticos';
-import { useQuery } from '@tanstack/react-query';
-import Swal from 'sweetalert2';
+import { Caso } from '../../../common/models/caso/caso';
+import { InfoGeralFormData } from './model';
+import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
 
 export interface InfoGeralDossieCardProps {
     caso: Caso;
