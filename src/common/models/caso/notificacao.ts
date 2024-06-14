@@ -1,14 +1,16 @@
+export interface TipoNotificacao {
+    id: string;
+    nome: string;
+    descricao: string;
+}
+
 export interface NotificacaoCaso {
     id: string;
     identificador: string;
     isEmitida: boolean;
     dataEmissao: string;
     observacao: string;
-    tipo: {
-        id: string;
-        nome: string;
-        descricao: string;
-    };
+    tipo: TipoNotificacao;
     dataCriacao: string;
     criador: {
         id: number;

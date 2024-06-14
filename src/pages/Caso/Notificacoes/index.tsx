@@ -1,27 +1,46 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FaPlusSquare } from 'react-icons/fa';
 import { consultarNotificacoes } from '../../../common/api/casos/notificacoes/consultar-notificacoes';
+import CriarNotificacaoModal, {
+    CriarNotificacaoForm
+} from '../../../components/Caso/Notificacao/CriarNotificacaoModal';
 import NotificacaoTable from '../../../components/Tabelas/Casos/Notificacao';
 import { BoxContainer } from '../../../components/ui/BoxContainer';
 import { Button } from '../../../components/ui/Button';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import { NotificacoesContainer } from './styles';
-import ReactModal from 'react-modal';
-import Modal from '../../../components/ui/Modal';
+import { cadastrarNotificacao } from '../../../common/api/casos/notificacoes/cadastrar-notificacao';
 
 export default function Notificacoes() {
     const { caso } = useCasoSelecionado();
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: ['casos', 'notificacoes', caso.id],
         queryFn: () => consultarNotificacoes(caso.id)
     });
 
     const [modalAberto, setModalAberto] = useState(false);
 
+    const handleFecharModal = useCallback(() => setModalAberto(false), [setModalAberto]);
+    const handleAbrirModal = useCallback(() => setModalAberto(true), [setModalAberto]);
+
+    const onSubmitCadastroNotificacao = useCallback(
+        async (data: CriarNotificacaoForm) => {
+            await cadastrarNotificacao(caso.id, {
+                dataEmissao: data.dataEmissao,
+                identificador: data.identificador,
+                observacao: data.observacao,
+                tipo: data.tipoDocumento,
+                isEmitida: false
+            });
+            await refetch();
+        },
+        [caso.id, refetch]
+    );
+
     const NovaNotificacaoButton = () => (
-        <Button action={() => setModalAberto(true)}>
+        <Button action={handleAbrirModal}>
             <FaPlusSquare /> Adicionar Notificação
         </Button>
     );
@@ -32,17 +51,11 @@ export default function Notificacoes() {
                 {isLoading && <p>Carregando...</p>}
                 {!isLoading && <NotificacaoTable data={data} />}
             </BoxContainer>
-            <Modal
-                titulo="Cadastrar nova notificação"
+            <CriarNotificacaoModal
                 aberto={modalAberto}
-                handleFecharModal={() => setModalAberto(false)}>
-                <h2>Testando react modal</h2>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore
-                    vel hic impedit tenetur illum quaerat, iste, consequatur nam unde libero
-                    doloribus quasi voluptas obcaecati! Impedit consequatur cupiditate maiores et!
-                </p>
-            </Modal>
+                handleFecharModal={handleFecharModal}
+                onSubmit={onSubmitCadastroNotificacao}
+            />
         </NotificacoesContainer>
     );
 }

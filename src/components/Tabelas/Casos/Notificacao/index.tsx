@@ -9,7 +9,6 @@ export interface NotificacaoTableProps {
 }
 
 export default function NotificacaoTable({ data }: NotificacaoTableProps) {
-    console.log(data);
     return (
         <DataTable
             data={data}

@@ -19,7 +19,10 @@ export function SelectOption({ value, label, disabled, selected }: SelectOptionP
 export interface SelectProps {
     label: string;
     width?: 'auto' | 'full';
-    children: React.ReactElement<SelectOptionProps>[];
+    children:
+        | React.ReactElement<SelectOptionProps>[]
+        | React.ReactElement<SelectOptionProps>
+        | React.ReactNode;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
