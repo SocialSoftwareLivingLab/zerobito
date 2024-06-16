@@ -33,8 +33,6 @@ function RegistrarOcorrenciaPage() {
                 4: formGravidadeRef
             };
 
-            console.log(currentStep);
-
             const currentFormRef = refMapping[currentStep];
 
             if (currentFormRef.current?.validate()) {
@@ -57,8 +55,6 @@ function RegistrarOcorrenciaPage() {
     );
 
     const handleCompleteWizard = useCallback(async () => {
-        console.log(formData);
-
         const payload: CriarOcorrenciaRequest = {
             data: formData.informacoesBasicas.data,
             descricao: formData.informacoesBasicas.descricao,

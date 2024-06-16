@@ -26,7 +26,6 @@ const LoginCard = () => {
     const redirectTo = useQuerySearch({ queryName: 'redirectTo', defaultValue: '/' });
 
     if (isAutenticado) {
-        console.log(redirectTo);
         return <Navigate to={redirectTo} />;
     }
 

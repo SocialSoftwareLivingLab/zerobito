@@ -7,7 +7,6 @@ export default function PrivateRoute() {
 
     const redirectTo = window.location.pathname;
 
-    console.log('aqui');
     console.log(`/login?redirectTo=${redirectTo}`);
 
     return isAutenticado ? <Outlet /> : <Navigate to={`/login?redirectTo=${redirectTo}`} replace />;

@@ -8,7 +8,6 @@ export interface EditInfoGeralRequest {
 }
 
 export async function editInfoGeral(payload: EditInfoGeralRequest, idCaso: number) {
-    console.log(payload);
     const response = await api.put(`/api/v1/casos/${idCaso}/informacoes-basicas`, payload);
 
     return response.data;

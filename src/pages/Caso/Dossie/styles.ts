@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const DossieContainer = styled.div`
     padding-top: 24px;
-    width: 80%;
 
     display: flex;
     flex-direction: row;

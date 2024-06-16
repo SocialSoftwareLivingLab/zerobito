@@ -4,13 +4,11 @@ import {
     EditInfoGeralRequest,
     editInfoGeral
 } from '../../../common/api/DossieInfoGeral/edit-info-geral';
-import { InfoGeralFormData, defaultValue } from './model';
-import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
-import { Caso } from '../../../common/models/caso/caso';
 import { listarCausas } from '../../../common/api/casos/listarCausas';
 import { listarDiagnosticos } from '../../../common/api/casos/listarDiagnosticos';
-import { useQuery } from '@tanstack/react-query';
-import Swal from 'sweetalert2';
+import { Caso } from '../../../common/models/caso/caso';
+import { InfoGeralFormData } from './model';
+import { InfoGeralDossieView, InfoGeralDossieViewProps } from './view';
 
 export interface InfoGeralDossieCardProps {
     caso: Caso;
@@ -33,7 +31,6 @@ const loadDiagnosticoOptions = async () => {
 };
 
 const formatData = (infoData: Caso) => {
-    console.log(infoData);
     const defaultValue: InfoGeralFormData = {
         CausaPrimaria: infoData.informacoesBasicas.causaPrimaria ?? 'INDEFINIDO',
         CausaSecundaria: infoData.informacoesBasicas.causaSecundaria ?? 'INDEFINIDO',
@@ -56,8 +53,6 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
 
     const handleCompleteEdit = useCallback(
         async (formData: InfoGeralFormData) => {
-            console.log(formData);
-            console.log(caso.id);
             const payload: EditInfoGeralRequest = {
                 causaPrimaria: formData.CausaPrimaria,
                 causaSecundaria: formData.CausaSecundaria,
@@ -66,7 +61,6 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
             };
 
             const response = await editInfoGeral(payload, caso.id);
-            console.log(response);
         },
         [caso.id]
     );

@@ -44,7 +44,6 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
     }, [usuarioLogado?.token]);
 
     useEffect(() => {
-        console.log('effect');
         if (!history) return;
 
         const token = localStorage.getItem('token');
@@ -52,9 +51,7 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
             UsuarioAutenticado,
             'token'
         >;
-        console.log(token);
         if (!token) {
-            console.log('indo pro login...');
             redirect(`/login?redirectTo=${window.location.pathname ?? '/'}`);
             return;
         }

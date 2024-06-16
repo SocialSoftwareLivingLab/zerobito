@@ -32,7 +32,6 @@ const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
             tipoContrato: formData.vitima.vinculoEmpresa
         };
         reset(data);
-        console.log(data);
     }, [formData, reset]);
 
     const onSubmit: SubmitHandler<VitimaFormFields> = useCallback(
