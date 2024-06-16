@@ -7,6 +7,7 @@ import { InfoGeralDossieCard } from './Info-Geral';
 import { PalavrasDossieCard } from './palavrasChave';
 import { DossieCardStyle } from './styles';
 import { listarCausas } from '../../common/api/casos/listarCausas';
+import LocalizacaoCard from './LocalizacaoCard';
 
 interface DossieCardProps {
     data: Caso;
@@ -61,16 +62,11 @@ export function DossieCard({ data }: DossieCardProps) {
             <div>
                 <PalavrasDossieCard caso={data} />
             </div>
+            <LocalizacaoCard />
             <div className="blue-line">
                 <h3>
                     {' '}
                     <BsPaperclip /> Arquivos
-                </h3>
-            </div>
-            <div className="blue-line">
-                <h3>
-                    {' '}
-                    <FaLocationDot /> Localização
                 </h3>
             </div>
             <div className="blue-line">
