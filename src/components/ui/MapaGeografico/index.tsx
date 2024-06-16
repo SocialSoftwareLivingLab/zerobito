@@ -1,20 +1,34 @@
-import { LatLngExpression } from 'leaflet';
+import { Icon, LatLngExpression } from 'leaflet';
 import React from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
+import pinIcone from '../../../assets/pin.svg';
 
 const COORDENADA_LATLON_CAMPINAS: LatLngExpression = [-22.9102, -47.060898];
+
+export interface MarcadorLocalizacaoMapa {
+    coordenada: LatLngExpression;
+    titulo: string;
+    descricao: string;
+}
 
 export interface MapaGeograficoProps {
     coordenadaVisualizacaoInicial?: LatLngExpression;
     scrollAumentaZoom?: boolean;
+    marcadores?: MarcadorLocalizacaoMapa[];
 }
 
 export default function MapaGeografico({
     coordenadaVisualizacaoInicial = COORDENADA_LATLON_CAMPINAS,
-    scrollAumentaZoom = false
+    scrollAumentaZoom = false,
+    marcadores = []
 }: MapaGeograficoProps) {
+    const iconeCustomizado = new Icon({
+        iconUrl: pinIcone,
+        iconSize: [25, 25]
+    });
+
     return (
         <MapContainer
             center={coordenadaVisualizacaoInicial}
@@ -24,6 +38,14 @@ export default function MapaGeografico({
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            {marcadores.map((marcador, indice) => (
+                <Marker key={indice} position={marcador.coordenada} icon={iconeCustomizado}>
+                    <Popup>
+                        <strong>{marcador.titulo}</strong>
+                        <span>{marcador.descricao}</span>
+                    </Popup>
+                </Marker>
+            ))}
         </MapContainer>
     );
 }
