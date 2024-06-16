@@ -4,6 +4,7 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import { LocalizacaoCardContainer } from './styles';
 
 import 'leaflet/dist/leaflet.css';
+import MapaGeografico from '../../ui/MapaGeografico';
 
 export default function LocalizacaoCard() {
     return (
@@ -11,12 +12,7 @@ export default function LocalizacaoCard() {
             <h3>
                 <FaLocationDot /> Localização
             </h3>
-            <MapContainer center={[-22.9102, -47.060898]} zoom={13}>
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-            </MapContainer>
+            <MapaGeografico />
         </LocalizacaoCardContainer>
     );
 }
