@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import DataTable from 'react-data-table-component';
 import { NotificacaoCaso } from '../../../../common/models/caso/notificacao';
 import { dataTableStyle } from '../../custom';

@@ -1,11 +1,11 @@
 import api from '../../../api';
 
-export interface EditInfoGeralRequest {
+export interface EditNotificacaoRequest {
     isEmitida: boolean;
 }
 
 export async function editNotificacao(
-    payload: EditInfoGeralRequest,
+    payload: EditNotificacaoRequest,
     idCaso: number,
     identificador: string
 ) {
