@@ -14,6 +14,13 @@ export interface TextEditavelProps {
     cancel: () => void;
 }
 
+const formatOption = (option) => {
+    return option
+        .toLowerCase()
+        .replace(/_/g, ' ')
+        .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
+};
+
 export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
     ({ label, options, title, handleCompleteEdit, register, cancel }) => {
         const [state, setState] = useState<boolean>(true);
@@ -21,7 +28,7 @@ export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
             <TextEditavelContainer>
                 {state && (
                     <div>
-                        <span>{title}</span>
+                        <span>{formatOption(title)}</span>
                         <FaEdit onClick={() => setState(!state)} />
                     </div>
                 )}
@@ -30,7 +37,11 @@ export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
                         <div className="column">
                             <Select label={label} {...register}>
                                 {options.map((option) => (
-                                    <SelectOption key={option} label={option} value={option} />
+                                    <SelectOption
+                                        key={option}
+                                        label={formatOption(option)}
+                                        value={option}
+                                    />
                                 ))}
                             </Select>
                         </div>
