@@ -6,6 +6,20 @@ export const LocalizacaoCardContainer = styled.div`
     h3 {
         border-bottom: 1px solid #134780;
         padding-bottom: 15px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        svg:hover {
+            cursor: pointer;
+        }
     }
 
     .separador-localizacao {
@@ -17,7 +31,7 @@ export const LocalizacaoCardContainer = styled.div`
             height: 100%;
             border-radius: 0.5rem;
             margin-top: 15px;
-            width: 50%;
+            width: 60%;
         }
 
         .leaflet-control-attribution {
@@ -28,10 +42,11 @@ export const LocalizacaoCardContainer = styled.div`
 
 export const Metadados = styled.div`
     margin-left: 16px;
+    margin-top: 16px;
 `;
 
 export const Metadado = styled.div`
-    margin-top: 16px;
+    margin-bottom: 16px;
 
     h4 {
         color: #134780;

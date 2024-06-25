@@ -18,8 +18,8 @@ export const DossieCardStyle = styled.div`
     }
 
     div {
-        display: flex;
-        flex-direction: column;
+        /* display: flex;
+        flex-direction: column; */
         h3 {
             color: #134780;
             font-size: 23px;

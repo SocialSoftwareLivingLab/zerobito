@@ -6,7 +6,7 @@ import { SelectArea, SelectBorderColor, SelectLabel } from './styles';
 
 export type SelectItem = {
     label: string;
-    value: number;
+    value: number | string;
 };
 
 export interface SelectAsyncProps {
@@ -27,6 +27,7 @@ const SelectAsync = forwardRef<never, SelectAsyncProps>(
             <SelectArea>
                 <SelectLabel>{label}</SelectLabel>
                 <AsyncSelect
+                    className="select-async"
                     defaultOptions
                     loadOptions={loadOptionsDebounced}
                     loadingMessage={() => 'Carregando...'}
