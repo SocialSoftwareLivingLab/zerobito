@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const LocalizacaoCardContainer = styled.div`
-    height: 400px;
-
     h3 {
         border-bottom: 1px solid #134780;
         padding-bottom: 15px;
@@ -23,20 +21,9 @@ export const LocalizacaoCardContainer = styled.div`
     }
 
     .separador-localizacao {
-        height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: row;
-
-        .leaflet-container {
-            height: 100%;
-            border-radius: 0.5rem;
-            margin-top: 15px;
-            width: 60%;
-        }
-
-        .leaflet-control-attribution {
-            display: inline;
-        }
     }
 `;
 
