@@ -4,15 +4,15 @@ import { LocalizacaoCardContainer, Metadado, Metadados } from './styles';
 
 import { useQuery } from '@tanstack/react-query';
 import { FaEdit } from 'react-icons/fa';
-import { geosearch } from '../../../common/api/geosearch/geosearch';
+import { GeoSearchResult, geosearch } from '../../../common/api/geosearch/geosearch';
 import { Localizacao } from '../../../common/models/caso/localizacao';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import AlterarLocalizacaoCasoForm from '../../Forms/Caso/Localizacao';
 import MapaGeografico, { MarcadorLocalizacaoMapa } from '../../ui/MapaGeografico';
 
-const COORDENADA_PADRAO_ERRO = {
-    coordenada: [-22.9102, -47.060898],
-    titulo: 'Nenhuma localização encontrada',
+const COORDENADA_PADRAO_ERRO: GeoSearchResult = {
+    lat: -47.060898,
+    lon: -22.9102,
     descricao: 'Nenhuma localização encontrada'
 };
 
@@ -29,9 +29,12 @@ async function carregarMarcacaoMapaCasoSelecionado(
         };
     }
 
-    const buscaGeosearch = await geosearch(
-        `${localizacao.logradouro}, ${localizacao.cidade}, ${localizacao.estado}`
-    );
+    const buscaGeosearch = await geosearch([
+        `${localizacao.logradouro}, ${localizacao.cidade}, ${localizacao.estado}`,
+        `${localizacao.cidade}, ${localizacao.estado}`,
+        `${localizacao.estado}`
+    ]);
+
     const coordenadaEncontrada = buscaGeosearch[0] || COORDENADA_PADRAO_ERRO;
 
     return {
@@ -42,11 +45,11 @@ async function carregarMarcacaoMapaCasoSelecionado(
 }
 
 export default function LocalizacaoCard() {
+    const [marcadoresMapa, setMarcadoresMapa] = useState<MarcadorLocalizacaoMapa[]>([]);
+
     const {
         caso: { localizacao }
     } = useCasoSelecionado();
-
-    const [marcadorAtual, setMarcadorAtual] = useState<MarcadorLocalizacaoMapa | null>(null);
 
     const { isLoading, data } = useQuery({
         queryKey: ['localizacao', localizacao],
@@ -55,8 +58,9 @@ export default function LocalizacaoCard() {
 
     useEffect(() => {
         console.log('effect', isLoading, data);
+
         if (!isLoading && data) {
-            setMarcadorAtual(data);
+            setMarcadoresMapa([data as MarcadorLocalizacaoMapa]);
         }
     }, [isLoading, data]);
 
@@ -70,17 +74,9 @@ export default function LocalizacaoCard() {
         setFormEdicaoAberto(false);
     }, []);
 
-    const definirLocalAtual = useCallback(() => {
-        setMarcadorAtual(data as MarcadorLocalizacaoMapa);
-    }, [data]);
-
-    useEffect(() => {
-        if (!isLoading) definirLocalAtual();
-    }, [isLoading, definirLocalAtual]);
-
     console.log(data);
     console.log(isLoading);
-    console.log(marcadorAtual);
+    // console.log(marcadorAtual);
 
     return (
         <LocalizacaoCardContainer>
@@ -95,7 +91,7 @@ export default function LocalizacaoCard() {
 
                 {!isLoading && (
                     <>
-                        <MapaGeografico marcadores={[marcadorAtual as MarcadorLocalizacaoMapa]} />
+                        {marcadoresMapa.length && <MapaGeografico marcadores={marcadoresMapa} />}
                         <Metadados>
                             {isFormEdicaoAberto && (
                                 <AlterarLocalizacaoCasoForm

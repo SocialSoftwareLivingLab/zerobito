@@ -1,5 +1,5 @@
 import { Icon, LatLngExpression } from 'leaflet';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
 // import 'leaflet-geosearch/dist/geosearch.css';
@@ -30,15 +30,15 @@ export default function MapaGeografico({
         iconSize: [25, 25]
     });
 
-    const coordenadaVisualizacaoInicial =
-        marcadores.length > 0 ? marcadores[0].coordenada : COORDENADA_LATLON_CAMPINAS;
+    console.log('marcadores', marcadores);
+
+    const posicaoInicial = useMemo(() => {
+        return marcadores.length > 0 ? marcadores[0].coordenada : COORDENADA_LATLON_CAMPINAS;
+    }, [marcadores]);
 
     return (
         <MapaGeograficoContainer>
-            <MapContainer
-                center={coordenadaVisualizacaoInicial}
-                zoom={13}
-                scrollWheelZoom={scrollAumentaZoom}>
+            <MapContainer center={posicaoInicial} zoom={13} scrollWheelZoom={scrollAumentaZoom}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"

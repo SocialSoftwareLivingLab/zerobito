@@ -6,13 +6,21 @@ export interface GeoSearchResult {
     descricao: string;
 }
 
-export async function geosearch(query: string): Promise<GeoSearchResult[]> {
+export async function geosearch(termosPesquisa: string[]): Promise<GeoSearchResult[]> {
     const provider = new OpenStreetMapProvider();
-    const result = await provider.search({ query });
 
-    return result.map((location) => ({
-        lon: location.x,
-        lat: location.y,
-        descricao: location.label
-    }));
+    // tenta processar X termos... se nenhum trouxer resultados, retorna uma lista vazia
+    for (const termo of termosPesquisa) {
+        const result = await provider.search({ query: termo });
+
+        if (result.length > 0) {
+            return result.map((location) => ({
+                lon: location.x,
+                lat: location.y,
+                descricao: location.label
+            }));
+        }
+    }
+
+    return [];
 }

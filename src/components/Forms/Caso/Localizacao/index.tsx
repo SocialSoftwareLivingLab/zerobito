@@ -60,7 +60,6 @@ export default function AlterarLocalizacaoCasoForm({
     const coordenada = watch('coordenada');
 
     useEffect(() => {
-        console.log(coordenada);
         if (coordenada) {
             setValue('cidade', '');
             setValue('estado', '');
