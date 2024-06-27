@@ -8,12 +8,6 @@ import { Localizacao } from '../../../../common/models/caso/localizacao';
 import Input from '../../../ui/Input';
 import SelectAsync, { SelectItem } from '../../../ui/SelectAsync';
 
-export interface AlterarLocalizacaoCasoFormProps {
-    localizacao: Localizacao;
-    handleFecharForm: () => void;
-    handleLocalizacaoSelecionada(longitude: number, latitude: number): void;
-}
-
 export interface LocalizacaoFormField {
     cidade: string;
     estado: string;
@@ -24,12 +18,20 @@ export interface LocalizacaoFormField {
     };
 }
 
+export interface AlterarLocalizacaoCasoFormProps {
+    localizacao: Localizacao;
+    handleFecharForm: () => void;
+    handleLocalizacaoSelecionada(longitude: number, latitude: number): void;
+    handleSubmitEdicao: (data: LocalizacaoFormField, e?: unknown) => void;
+}
+
 export default function AlterarLocalizacaoCasoForm({
     localizacao,
     handleFecharForm,
-    handleLocalizacaoSelecionada
+    handleLocalizacaoSelecionada,
+    handleSubmitEdicao
 }: AlterarLocalizacaoCasoFormProps) {
-    const { register, watch, control, setValue, resetField } = useForm<LocalizacaoFormField>({
+    const { register, watch, control, setValue, handleSubmit } = useForm<LocalizacaoFormField>({
         defaultValues: {
             cidade: localizacao.cidade,
             estado: localizacao.estado,
@@ -41,8 +43,20 @@ export default function AlterarLocalizacaoCasoForm({
         }
     });
 
+    const coordenada = watch('coordenada');
+
+    useEffect(() => {
+        if (coordenada) {
+            setValue('cidade', '');
+            setValue('estado', '');
+            setValue('logradouro', '');
+
+            handleLocalizacaoSelecionada(coordenada.longitude, coordenada.latitude);
+        }
+    }, [coordenada, setValue, handleLocalizacaoSelecionada]);
+
     const loadOptions = async (inputValue: string): Promise<SelectItem[]> => {
-        const response = await geosearch(inputValue);
+        const response = await geosearch([inputValue]);
 
         return response.map((result) => ({
             value: `${result.lon}#${result.lat}`,
@@ -57,21 +71,9 @@ export default function AlterarLocalizacaoCasoForm({
         setValue('coordenada', { latitude: Number(latitude), longitude: Number(longitude) });
     };
 
-    const coordenada = watch('coordenada');
-
-    useEffect(() => {
-        if (coordenada) {
-            setValue('cidade', '');
-            setValue('estado', '');
-            setValue('logradouro', '');
-
-            handleLocalizacaoSelecionada(coordenada.longitude, coordenada.latitude);
-        }
-    }, [coordenada, setValue, handleLocalizacaoSelecionada]);
-
     return (
         <div>
-            <FormLocalizacaoContainer>
+            <FormLocalizacaoContainer onSubmit={handleSubmit(handleSubmitEdicao)}>
                 <Controller
                     name="coordenada"
                     control={control}
@@ -94,16 +96,15 @@ export default function AlterarLocalizacaoCasoForm({
                     type="text"
                     {...register('logradouro', { required: true })}
                 />
+                <ButtonGroup>
+                    <Button size="small" type="submit">
+                        Salvar
+                    </Button>
+                    <Button size="small" type="cancel" action={handleFecharForm}>
+                        Fechar
+                    </Button>
+                </ButtonGroup>
             </FormLocalizacaoContainer>
-
-            <ButtonGroup>
-                <Button size="small" type="submit" action={handleFecharForm}>
-                    Salvar
-                </Button>
-                <Button size="small" type="cancel" action={handleFecharForm}>
-                    Fechar
-                </Button>
-            </ButtonGroup>
         </div>
     );
 }

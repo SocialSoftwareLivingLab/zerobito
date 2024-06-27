@@ -9,6 +9,7 @@ import { Localizacao } from '../../../common/models/caso/localizacao';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import AlterarLocalizacaoCasoForm from '../../Forms/Caso/Localizacao';
 import MapaGeografico, { MarcadorLocalizacaoMapa } from '../../ui/MapaGeografico';
+import { editarLocalizacaoCaso } from '../../../common/api/casos/localizacao/editar-localizacao';
 
 const COORDENADA_PADRAO_ERRO: GeoSearchResult = {
     lat: -47.060898,
@@ -48,10 +49,10 @@ export default function LocalizacaoCard() {
     const [marcadoresMapa, setMarcadoresMapa] = useState<MarcadorLocalizacaoMapa[]>([]);
 
     const {
-        caso: { localizacao }
+        caso: { localizacao, id }
     } = useCasoSelecionado();
 
-    const { isLoading, data } = useQuery({
+    const { isLoading, data, refetch } = useQuery({
         queryKey: ['localizacao', localizacao],
         queryFn: () => carregarMarcacaoMapaCasoSelecionado(localizacao)
     });
@@ -72,10 +73,37 @@ export default function LocalizacaoCard() {
 
     const handleFecharFormEdicao = useCallback(async () => {
         setFormEdicaoAberto(false);
+        setMarcadoresMapa([data as MarcadorLocalizacaoMapa]);
+    }, [data]);
+
+    const handleLocalizacaoSelecionada = useCallback((latitude: number, longitude: number) => {
+        console.log('handleLocalizacaoSelecionada', latitude, longitude);
+        if (latitude && longitude) {
+            setMarcadoresMapa([{ coordenada: [longitude, latitude], descricao: '', titulo: '' }]);
+        }
     }, []);
 
-    console.log(data);
-    console.log(isLoading);
+    const handleFormEdicaoSubmit = useCallback(
+        async (data, event) => {
+            event.preventDefault();
+
+            await editarLocalizacaoCaso(
+                {
+                    cidade: data.cidade,
+                    estado: data.estado,
+                    logradouro: data.logradouro,
+                    latitude: data.coordenada.latitude,
+                    longitude: data.coordenada.longitude
+                },
+                id
+            );
+
+            handleFecharFormEdicao();
+            refetch({ force: true });
+        },
+        [id, refetch, handleFecharFormEdicao]
+    );
+
     // console.log(marcadorAtual);
 
     return (
@@ -96,8 +124,9 @@ export default function LocalizacaoCard() {
                             {isFormEdicaoAberto && (
                                 <AlterarLocalizacaoCasoForm
                                     localizacao={localizacao}
+                                    handleSubmitEdicao={handleFormEdicaoSubmit}
                                     handleFecharForm={handleFecharFormEdicao}
-                                    handleLocalizacaoSelecionada={(localizacao) => {}}
+                                    handleLocalizacaoSelecionada={handleLocalizacaoSelecionada}
                                 />
                             )}
 
