@@ -4,16 +4,18 @@ import AsyncSelect from 'react-select/async';
 import { useDebouncedCallback } from 'use-debounce';
 import { SelectArea, SelectBorderColor, SelectLabel } from './styles';
 
+type SelectAsyncItemValue = number | string;
+
 export type SelectItem = {
     label: string;
-    value: number | string;
+    value: SelectAsyncItemValue;
 };
 
 export interface SelectAsyncProps {
     loadOptions: (inputValue: string) => Promise<SelectItem[]>;
     label: string;
     placeholder?: string;
-    onChange: (value: number) => void;
+    onChange: (value: SelectAsyncItemValue) => void;
     name: string;
 }
 

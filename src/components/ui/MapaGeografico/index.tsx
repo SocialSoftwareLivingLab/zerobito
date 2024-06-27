@@ -17,13 +17,11 @@ export interface MarcadorLocalizacaoMapa {
 }
 
 export interface MapaGeograficoProps {
-    coordenadaVisualizacaoInicial?: LatLngExpression;
     scrollAumentaZoom?: boolean;
     marcadores?: MarcadorLocalizacaoMapa[];
 }
 
 export default function MapaGeografico({
-    coordenadaVisualizacaoInicial = COORDENADA_LATLON_CAMPINAS,
     scrollAumentaZoom = false,
     marcadores = []
 }: MapaGeograficoProps) {
@@ -31,6 +29,9 @@ export default function MapaGeografico({
         iconUrl: pinIcone,
         iconSize: [25, 25]
     });
+
+    const coordenadaVisualizacaoInicial =
+        marcadores.length > 0 ? marcadores[0].coordenada : COORDENADA_LATLON_CAMPINAS;
 
     return (
         <MapaGeograficoContainer>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '../../../ui/Button';
 import { ButtonGroup, FormLocalizacaoContainer } from './styles';
 
@@ -11,6 +11,7 @@ import SelectAsync, { SelectItem } from '../../../ui/SelectAsync';
 export interface AlterarLocalizacaoCasoFormProps {
     localizacao: Localizacao;
     handleFecharForm: () => void;
+    handleLocalizacaoSelecionada(longitude: number, latitude: number): void;
 }
 
 export interface LocalizacaoFormField {
@@ -25,9 +26,10 @@ export interface LocalizacaoFormField {
 
 export default function AlterarLocalizacaoCasoForm({
     localizacao,
-    handleFecharForm
+    handleFecharForm,
+    handleLocalizacaoSelecionada
 }: AlterarLocalizacaoCasoFormProps) {
-    const { register, watch, control } = useForm<LocalizacaoFormField>({
+    const { register, watch, control, setValue, resetField } = useForm<LocalizacaoFormField>({
         defaultValues: {
             cidade: localizacao.cidade,
             estado: localizacao.estado,
@@ -43,10 +45,30 @@ export default function AlterarLocalizacaoCasoForm({
         const response = await geosearch(inputValue);
 
         return response.map((result) => ({
-            value: `${result.lat}#${result.lon}`,
+            value: `${result.lon}#${result.lat}`,
             label: result.descricao
         }));
     };
+
+    const onChange = (selectedOption: string | number) => {
+        const coordenada = selectedOption as string;
+        const [longitude, latitude] = coordenada.split('#');
+
+        setValue('coordenada', { latitude: Number(latitude), longitude: Number(longitude) });
+    };
+
+    const coordenada = watch('coordenada');
+
+    useEffect(() => {
+        console.log(coordenada);
+        if (coordenada) {
+            setValue('cidade', '');
+            setValue('estado', '');
+            setValue('logradouro', '');
+
+            handleLocalizacaoSelecionada(coordenada.longitude, coordenada.latitude);
+        }
+    }, [coordenada, setValue, handleLocalizacaoSelecionada]);
 
     return (
         <div>
@@ -61,6 +83,7 @@ export default function AlterarLocalizacaoCasoForm({
                                 {...field}
                                 label="Pesquisar local"
                                 loadOptions={loadOptions}
+                                onChange={onChange}
                             />
                         </div>
                     )}
