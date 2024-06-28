@@ -71,7 +71,7 @@ export function CasoNavegacao() {
                     return (
                         <CasoNavegacaoItem
                             key={index}
-                            ativo={!!location?.pathname?.includes(menu.url(caso))}
+                            ativo={location.pathname.includes(menu.url(caso)) ?? false}
                             titulo={menu.titulo}
                             icone={menu.icone}
                             url={menu.url(caso)}

@@ -26,7 +26,6 @@ function BotaoEmissao({ notificacaoAtual }: EmissaoProps) {
                 Number(notificacaoAtual.id),
                 notificacaoAtual.identificador
             );
-            console.log('Notificação atualizada:', response);
         } catch (error) {
             console.error('Erro ao atualizar notificação:', error);
         }
