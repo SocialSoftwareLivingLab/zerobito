@@ -46,11 +46,10 @@ async function carregarMarcacaoMapaCasoSelecionado(
 }
 
 export default function LocalizacaoCard() {
-    const [marcadoresMapa, setMarcadoresMapa] = useState<MarcadorLocalizacaoMapa[]>([]);
+    const { caso } = useCasoSelecionado();
 
-    const {
-        caso: { localizacao, id }
-    } = useCasoSelecionado();
+    const [marcadoresMapa, setMarcadoresMapa] = useState<MarcadorLocalizacaoMapa[]>([]);
+    const [localizacao, setLocalizacao] = useState(caso.localizacao);
 
     const { isLoading, data, refetch } = useQuery({
         queryKey: ['localizacao', localizacao],
@@ -64,6 +63,10 @@ export default function LocalizacaoCard() {
             setMarcadoresMapa([data as MarcadorLocalizacaoMapa]);
         }
     }, [isLoading, data]);
+
+    useEffect(() => {
+        refetch();
+    }, [localizacao, refetch]);
 
     const [isFormEdicaoAberto, setFormEdicaoAberto] = useState(false);
 
@@ -95,13 +98,20 @@ export default function LocalizacaoCard() {
                     latitude: data.coordenada.latitude,
                     longitude: data.coordenada.longitude
                 },
-                id
+                caso.id
             );
 
             handleFecharFormEdicao();
-            refetch({ force: true });
+
+            setLocalizacao({
+                cidade: data.cidade,
+                estado: data.estado,
+                logradouro: data.logradouro,
+                latitude: data.coordenada.latitude,
+                longitude: data.coordenada.longitude
+            });
         },
-        [id, refetch, handleFecharFormEdicao]
+        [caso.id, handleFecharFormEdicao]
     );
 
     // console.log(marcadorAtual);
