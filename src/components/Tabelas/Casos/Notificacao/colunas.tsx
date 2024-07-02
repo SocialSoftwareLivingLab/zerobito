@@ -18,7 +18,7 @@ export const ColunasTabelaListarNotificacoes: TableColumn<NotificacaoCaso>[] = [
     {
         name: 'Data de Emissão',
         selector: (data) => String(data.dataEmissao),
-        format: (row) => dateFormat.format(new Date(row.dataEmissao)),
+        format: (row) => (row.dataEmissao ? dateFormat.format(new Date(row.dataEmissao)) : ''),
         sortable: true
     },
     {
