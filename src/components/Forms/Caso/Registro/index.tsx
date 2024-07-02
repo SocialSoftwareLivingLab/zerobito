@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { buscarCoordenador } from '../../../common/api/usuarios/coordenador/buscar-coordenador';
+import { buscarCoordenador } from '../../../../common/api/usuarios/coordenador/buscar-coordenador';
 import CriarCasoFormView, { CriarCasoFormViewProps } from './view';
 import { CriarCasoFormData } from './models';
 

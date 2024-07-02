@@ -1,3 +1,5 @@
+import { Localizacao } from "./localizacao";
+
 export interface Caso {
     id: number;
     nome: string;
@@ -16,4 +18,5 @@ export interface Caso {
         id: number;
         nome: string;
     };
+    localizacao: Localizacao
 }

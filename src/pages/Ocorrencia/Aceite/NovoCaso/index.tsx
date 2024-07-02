@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { aceitarOcorrenciaComoCaso } from '../../../../common/api/ocorrencias/aceitar-ocorrencia';
 import { OcorrenciaModel } from '../../../../common/models/ocorrencias/model';
-import CriarCasoForm from '../../../../components/Forms/Caso';
-import { CriarCasoFormData } from '../../../../components/Forms/Caso/models';
+import CriarCasoForm from '../../../../components/Forms/Caso/Registro';
+import { CriarCasoFormData } from '../../../../components/Forms/Caso/Registro/models';
 import { Secao } from '../styles';
 
 export interface NovoCasoPageProps {

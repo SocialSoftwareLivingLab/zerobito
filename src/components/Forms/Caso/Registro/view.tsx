@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormContainer } from './styles';
 import { Control, Controller, SubmitHandler, UseFormRegister } from 'react-hook-form';
-import SelectAsync from '../../ui/SelectAsync';
-import { Button } from '../../ui/Button';
+import SelectAsync from '../../../ui/SelectAsync';
+import { Button } from '../../../ui/Button';
 
 import { CriarCasoFormData } from './models';
-import Input from '../../ui/Input';
+import Input from '../../../ui/Input';
 
 export interface CriarCasoFormViewProps {
     register: UseFormRegister<CriarCasoFormData>;
