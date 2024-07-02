@@ -40,7 +40,7 @@ export default function CriarNotificacaoModalView({
 
     return (
         <Modal
-            titulo="Cadastrar nova notificação"
+            titulo="Emitir/Atualizar notificação existente"
             aberto={aberto}
             handleFecharModal={handleFecharModal}>
             {isLoadingTiposNotificacoes && <p>Carregando...</p>}
