@@ -10,7 +10,10 @@ import { BoxContainer } from '../../../components/ui/BoxContainer';
 import { Button } from '../../../components/ui/Button';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import { NotificacoesContainer } from './styles';
-import { cadastrarNotificacao } from '../../../common/api/casos/notificacoes/cadastrar-notificacao';
+import {
+    EditarNotificacao,
+    cadastrarNotificacao
+} from '../../../common/api/casos/notificacoes/cadastrar-notificacao';
 
 export default function Notificacoes() {
     const { caso } = useCasoSelecionado();
@@ -27,12 +30,13 @@ export default function Notificacoes() {
 
     const onSubmitCadastroNotificacao = useCallback(
         async (data: CriarNotificacaoForm) => {
-            await cadastrarNotificacao(caso.id, {
+            await EditarNotificacao(caso.id, {
                 dataEmissao: data.dataEmissao,
                 identificador: data.identificador,
                 observacao: data.observacao,
                 tipo: data.tipoDocumento,
-                isEmitida: false
+                isEmitida: true,
+                statusNotificacao: 'Emitida'
             });
             await refetch();
         },
