@@ -17,7 +17,7 @@ export interface CriarNotificacaoModalProps {
     onSubmit: (data: CriarNotificacaoForm) => Promise<void>;
 }
 
-export default function EditarNotificacaoModal({
+export default function CriarNotificacaoModal({
     aberto,
     handleFecharModal,
     onSubmit

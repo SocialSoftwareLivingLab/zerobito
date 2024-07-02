@@ -10,10 +10,7 @@ import { BoxContainer } from '../../../components/ui/BoxContainer';
 import { Button } from '../../../components/ui/Button';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import { NotificacoesContainer } from './styles';
-import {
-    EditarNotificacao,
-    cadastrarNotificacao
-} from '../../../common/api/casos/notificacoes/cadastrar-notificacao';
+import { EditarNotificacao } from '../../../common/api/casos/notificacoes/cadastrar-notificacao';
 
 export default function Notificacoes() {
     const { caso } = useCasoSelecionado();
@@ -45,7 +42,7 @@ export default function Notificacoes() {
 
     const NovaNotificacaoButton = () => (
         <Button action={handleAbrirModal}>
-            <FaPlusSquare /> Adicionar Notificação
+            <FaPlusSquare /> Emitir Notificação
         </Button>
     );
 

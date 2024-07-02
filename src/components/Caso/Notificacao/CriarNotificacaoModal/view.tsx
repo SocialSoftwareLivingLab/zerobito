@@ -67,13 +67,15 @@ export default function CriarNotificacaoModalView({
                                 label="Tipo de Notificação"
                                 {...register('tipoDocumento', { required: true })}>
                                 <SelectOption label="Selecione..." disabled />
-                                {tiposNotificacoes.map((tipo) => (
-                                    <SelectOption
-                                        key={tipo.id}
-                                        label={tipo.nome}
-                                        value={tipo.nome}
-                                    />
-                                ))}
+                                {tiposNotificacoes
+                                    .filter((tipo) => tipo.nome !== 'CAT*')
+                                    .map((tipo) => (
+                                        <SelectOption
+                                            key={tipo.id}
+                                            label={tipo.nome}
+                                            value={tipo.nome}
+                                        />
+                                    ))}
                             </Select>
 
                             <TextArea
