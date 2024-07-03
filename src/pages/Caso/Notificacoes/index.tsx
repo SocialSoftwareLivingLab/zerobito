@@ -28,12 +28,13 @@ export default function Notificacoes() {
     const onSubmitCadastroNotificacao = useCallback(
         async (data: CriarNotificacaoForm) => {
             await EditarNotificacao(caso.id, {
-                dataEmissao: data.dataEmissao,
-                identificador: data.identificador,
-                observacao: data.observacao,
+                dataEmissao: data.statusNotificacao !== 'Não se aplica' ? data.dataEmissao : null,
+                identificador: data.statusNotificacao !== 'Não se aplica' ? data.identificador : '',
+                observacao: data.statusNotificacao !== 'Não se aplica' ? data.observacao : '',
                 tipo: data.tipoDocumento,
-                isEmitida: true,
-                statusNotificacao: 'Emitida'
+                isEmitida: data.statusNotificacao !== 'Não se aplica',
+                statusNotificacao:
+                    data.statusNotificacao === 'Não se aplica' ? 'Não se aplica' : 'Emitida'
             });
             await refetch();
         },
@@ -42,7 +43,7 @@ export default function Notificacoes() {
 
     const NovaNotificacaoButton = () => (
         <Button action={handleAbrirModal}>
-            <FaPlusSquare /> Emitir Notificação
+            <FaPlusSquare /> Atualizar Notificação
         </Button>
     );
 

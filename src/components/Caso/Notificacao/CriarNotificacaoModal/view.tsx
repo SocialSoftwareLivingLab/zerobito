@@ -13,6 +13,8 @@ export interface CriarNotificacaoModalViewProps {
     aberto: boolean;
     isLoadingTiposNotificacoes: boolean;
     tiposNotificacoes: TipoNotificacao[];
+    statusNotificacaoSelecionado: string;
+    tipoNotificacaoSelecionado: string;
     handleFecharModal: () => void;
     onSubmitForm: () => Promise<void>;
     reset: () => void;
@@ -23,6 +25,8 @@ export default function CriarNotificacaoModalView({
     aberto,
     isLoadingTiposNotificacoes,
     tiposNotificacoes,
+    statusNotificacaoSelecionado,
+    tipoNotificacaoSelecionado,
     handleFecharModal,
     onSubmitForm,
     register,
@@ -50,39 +54,47 @@ export default function CriarNotificacaoModalView({
 
                     <CriarNotificacaoModalContainer>
                         <form onSubmit={onSubmitFormComReset}>
-                            <Input
-                                label="Data Emissao"
-                                placeholder="Selecione a data de emissão"
-                                type="date"
-                                {...register('dataEmissao', { required: true })}
-                            />
-
-                            <Input
-                                label="Identificador"
-                                placeholder="Informe o identificador da notificação"
-                                {...register('identificador', { required: true })}
-                            />
-
                             <Select
                                 label="Tipo de Notificação"
                                 {...register('tipoDocumento', { required: true })}>
                                 <SelectOption label="Selecione..." disabled />
-                                {tiposNotificacoes
-                                    .filter((tipo) => tipo.nome !== 'CAT*')
-                                    .map((tipo) => (
-                                        <SelectOption
-                                            key={tipo.id}
-                                            label={tipo.nome}
-                                            value={tipo.nome}
-                                        />
-                                    ))}
+                                {tiposNotificacoes.map((tipo) => (
+                                    <SelectOption
+                                        key={tipo.id}
+                                        label={tipo.nome}
+                                        value={tipo.nome}
+                                    />
+                                ))}
                             </Select>
-
-                            <TextArea
-                                label="Observação"
-                                placeholder="Informe uma observação sobre a notificação"
-                                {...register('observacao')}
-                            />
+                            {tipoNotificacaoSelecionado === 'CAT*' && (
+                                <Select
+                                    label="Tipo de Notificação"
+                                    {...register('statusNotificacao', { required: true })}>
+                                    <SelectOption label="Selecione..." disabled />
+                                    <SelectOption label="Aplicável" />
+                                    <SelectOption label="Não se aplica" />
+                                </Select>
+                            )}
+                            {statusNotificacaoSelecionado !== 'Não se aplica' && (
+                                <>
+                                    <Input
+                                        label="Data Emissao"
+                                        placeholder="Selecione a data de emissão"
+                                        type="date"
+                                        {...register('dataEmissao', { required: true })}
+                                    />
+                                    <Input
+                                        label="Identificador"
+                                        placeholder="Informe o identificador da notificação"
+                                        {...register('identificador', { required: true })}
+                                    />
+                                    <TextArea
+                                        label="Observação"
+                                        placeholder="Informe uma observação sobre a notificação"
+                                        {...register('observacao')}
+                                    />
+                                </>
+                            )}
                             <footer>
                                 <Button type="submit">Cadastrar</Button>
                             </footer>

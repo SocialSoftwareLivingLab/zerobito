@@ -1,4 +1,4 @@
-import { Localizacao } from "./localizacao";
+import { Localizacao } from './localizacao';
 
 export interface Caso {
     id: number;
@@ -18,5 +18,5 @@ export interface Caso {
         id: number;
         nome: string;
     };
-    localizacao: Localizacao
+    localizacao: Localizacao;
 }
