@@ -6,15 +6,17 @@ import { ColunasTabelaListarNotificacoes } from './colunas';
 
 export interface NotificacaoTableProps {
     data: NotificacaoCaso[];
+    onRowClick: (row: NotificacaoCaso) => void;
 }
 
-export default function NotificacaoTable({ data }: NotificacaoTableProps) {
+export default function NotificacaoTable({ data, onRowClick }: NotificacaoTableProps) {
     return (
         <DataTable
             data={data}
             columns={ColunasTabelaListarNotificacoes}
             customStyles={dataTableStyle}
             noDataComponent="Nenhuma notificação encontrada"
+            onRowClicked={onRowClick}
         />
     );
 }

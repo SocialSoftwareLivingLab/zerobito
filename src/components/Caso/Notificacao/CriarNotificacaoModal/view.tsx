@@ -36,15 +36,14 @@ export default function CriarNotificacaoModalView({
         async (evt: React.FormEvent) => {
             evt.preventDefault();
             await onSubmitForm();
-            reset();
             handleFecharModal();
         },
-        [onSubmitForm, reset, handleFecharModal]
+        [onSubmitForm, handleFecharModal]
     );
 
     return (
         <Modal
-            titulo="Emitir/Atualizar notificação existente"
+            titulo={`Emitir/Atualizar ${tipoNotificacaoSelecionado}`}
             aberto={aberto}
             handleFecharModal={handleFecharModal}>
             {isLoadingTiposNotificacoes && <p>Carregando...</p>}
@@ -54,18 +53,6 @@ export default function CriarNotificacaoModalView({
 
                     <CriarNotificacaoModalContainer>
                         <form onSubmit={onSubmitFormComReset}>
-                            <Select
-                                label="Tipo de Notificação"
-                                {...register('tipoDocumento', { required: true })}>
-                                <SelectOption label="Selecione..." disabled />
-                                {tiposNotificacoes.map((tipo) => (
-                                    <SelectOption
-                                        key={tipo.id}
-                                        label={tipo.nome}
-                                        value={tipo.nome}
-                                    />
-                                ))}
-                            </Select>
                             {tipoNotificacaoSelecionado === 'CAT*' && (
                                 <Select
                                     label="Tipo de Notificação"

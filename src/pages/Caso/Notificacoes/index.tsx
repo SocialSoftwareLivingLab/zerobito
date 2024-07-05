@@ -11,6 +11,7 @@ import { Button } from '../../../components/ui/Button';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import { NotificacoesContainer } from './styles';
 import { EditarNotificacao } from '../../../common/api/casos/notificacoes/cadastrar-notificacao';
+import { NotificacaoCaso } from '../../../common/models/caso/notificacao';
 
 export default function Notificacoes() {
     const { caso } = useCasoSelecionado();
@@ -21,9 +22,18 @@ export default function Notificacoes() {
     });
 
     const [modalAberto, setModalAberto] = useState(false);
+    const [notificacaoSelecionada, setNotificacaoSelecionada] = useState<NotificacaoCaso | null>(
+        null
+    );
 
     const handleFecharModal = useCallback(() => setModalAberto(false), [setModalAberto]);
-    const handleAbrirModal = useCallback(() => setModalAberto(true), [setModalAberto]);
+    const handleAbrirModal = useCallback(
+        (notificacao: NotificacaoCaso) => {
+            setNotificacaoSelecionada(notificacao);
+            setModalAberto(true);
+        },
+        [setModalAberto, setNotificacaoSelecionada]
+    );
 
     const onSubmitCadastroNotificacao = useCallback(
         async (data: CriarNotificacaoForm) => {
@@ -41,22 +51,17 @@ export default function Notificacoes() {
         [caso.id, refetch]
     );
 
-    const NovaNotificacaoButton = () => (
-        <Button action={handleAbrirModal}>
-            <FaPlusSquare /> Atualizar Notificação
-        </Button>
-    );
-
     return (
         <NotificacoesContainer>
-            <BoxContainer titulo="Documentos" acoesContainer={NovaNotificacaoButton}>
+            <BoxContainer titulo="Documentos">
                 {isLoading && <p>Carregando...</p>}
-                {!isLoading && <NotificacaoTable data={data} />}
+                {!isLoading && <NotificacaoTable data={data} onRowClick={handleAbrirModal} />}
             </BoxContainer>
             <CriarNotificacaoModal
                 aberto={modalAberto}
                 handleFecharModal={handleFecharModal}
                 onSubmit={onSubmitCadastroNotificacao}
+                notificacao={notificacaoSelecionada}
             />
         </NotificacoesContainer>
     );
