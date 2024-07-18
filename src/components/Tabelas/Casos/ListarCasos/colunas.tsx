@@ -5,24 +5,6 @@ import { Button } from '../../../ui/Button';
 import { FaEye } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-interface BotaoAcompanharProps {
-    casoAtual: Caso;
-}
-
-function BotaoAcompanhar({ casoAtual }: BotaoAcompanharProps) {
-    const navigate = useNavigate();
-
-    const redirectPaginaCaso = useCallback(() => {
-        navigate(`/casos/${casoAtual.id}/dossie`);
-    }, [casoAtual, navigate]);
-
-    return (
-        <Button action={redirectPaginaCaso} type="default">
-            <FaEye /> Acompanhar
-        </Button>
-    );
-}
-
 export const ColunasTabelaListarCasos: TableColumn<Caso>[] = [
     {
         name: 'Nome',
@@ -45,10 +27,5 @@ export const ColunasTabelaListarCasos: TableColumn<Caso>[] = [
         sortable: true,
         format: (row) =>
             Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(row.dataCriacao))
-    },
-    {
-        name: 'Ação',
-        sortable: false,
-        cell: (row) => <BotaoAcompanhar casoAtual={row} />
     }
 ];

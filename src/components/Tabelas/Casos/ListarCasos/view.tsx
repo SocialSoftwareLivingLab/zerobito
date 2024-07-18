@@ -6,9 +6,10 @@ import { Paginacao, dataTableStyle } from '../../custom';
 export interface ListarCasoTableViewProps {
     casos: Caso[];
     colunas: TableColumn<Caso>[];
+    onRowClick: (row: Caso) => void;
 }
 
-export function ListarCasosTableView({ casos, colunas }: ListarCasoTableViewProps) {
+export function ListarCasosTableView({ casos, colunas, onRowClick }: ListarCasoTableViewProps) {
     return (
         <DataTable
             data={casos}
@@ -17,6 +18,7 @@ export function ListarCasosTableView({ casos, colunas }: ListarCasoTableViewProp
             noDataComponent="Nenhum caso encontrado"
             pagination
             paginationComponent={Paginacao}
+            onRowClicked={onRowClick}
         />
     );
 }
