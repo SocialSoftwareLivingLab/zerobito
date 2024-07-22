@@ -18,3 +18,19 @@
     font-size: 16px;
     margin-top: 1rem;
 }
+
+.error-message {
+    color: red;
+    background-color: #ffe6e6;
+    border: 1px solid red;
+    border-radius: 4px;
+    width: 10rem;
+    margin-left: 1rem;
+    padding: 5px;
+    position: relative;
+    margin-top: 5px;
+    font-size: 12px;
+    z-index: 1;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -6,6 +6,7 @@ import { Select, SelectOption } from '../../../../ui/Select';
 import '../style.css';
 import { FormContainer } from '../styles';
 import { VitimaFormFields } from './model';
+import { validarCNPJ } from '../../../../../common/Errors/MascaraCNPJ';
 
 export interface VitimaViewProps {
     submitForm: () => void;
@@ -32,13 +33,26 @@ export default function VitimaView({
                     label="Empresa Empregadora"
                     {...register('nomeEmpresa', { required: false })}
                 />
-                <ErrorMessage name="nomeEmpresa" errors={errors} as="p" />
+                <ErrorMessage
+                    name="nomeEmpresa"
+                    errors={errors}
+                    as={<p className="error-message" />}
+                />
 
                 <Input
                     label="CNPJ Empresa Empregadora"
-                    {...register('cnpjEmpresa', { required: false })}
+                    {...register('cnpjEmpresa', {
+                        required: false,
+                        validate: {
+                            isValidCNPJ: (value) => validarCNPJ(value) || 'CNPJ inválido'
+                        }
+                    })}
                 />
-                <ErrorMessage name="cnpjEmpresa" errors={errors} as="p" />
+                <ErrorMessage
+                    name="cnpjEmpresa"
+                    errors={errors}
+                    as={<p className="error-message" />}
+                />
 
                 {/* <input type="text" placeholder="Nome da tomadora de serviço" {...register('tomadoraDeServicoNome')} /> */}
                 <Input label="Tomadora de Serviço" {...register('tomadoraDeServicoNome')} />
@@ -49,9 +63,18 @@ export default function VitimaView({
                         {/* <input type="text" placeholder="CNPJ da tomadora de serviço" {...register('tomadoraDeServicoCNPJ')} /> */}
                         <Input
                             label="CNPJ Tomadora de Serviço"
-                            {...register('tomadoraDeServicoCNPJ', { required: false })}
+                            {...register('tomadoraDeServicoCNPJ', {
+                                required: false,
+                                validate: {
+                                    isValidCNPJ: (value) => validarCNPJ(value) || 'CNPJ inválido'
+                                }
+                            })}
                         />
-                        <ErrorMessage name="tomadoraDeServicoCNPJ" errors={errors} as="p" />
+                        <ErrorMessage
+                            name="tomadoraDeServicoCNPJ"
+                            errors={errors}
+                            as={<p className="error-message" />}
+                        />
                     </>
                 )}
 

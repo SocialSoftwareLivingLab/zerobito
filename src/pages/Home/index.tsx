@@ -36,14 +36,6 @@ const Home = () => {
                         </button>
                     </Link>
                 </h2>
-                <hr />
-                <h2>
-                    SINAN, RAAT, SIM{' '}
-                    <button className="button-denuncia">
-                        Fazer Denuncia a partir dos Serviços de Saude
-                    </button>
-                </h2>
-                <hr />
             </div>
         </div>
     );
