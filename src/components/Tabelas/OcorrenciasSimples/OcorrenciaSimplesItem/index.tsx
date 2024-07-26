@@ -29,7 +29,7 @@ const tipoGravidade = {
     POUCO_URGENTE: 'Pouco Urgente'
 };
 
-export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
+export default function OcorrenciaItemSimples({ data }: OcorrenciaExpandidaProps) {
     const dateFormat = Intl.DateTimeFormat('pt-br');
 
     return (
