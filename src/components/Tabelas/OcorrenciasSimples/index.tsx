@@ -22,7 +22,7 @@ interface TabelaOcorrenciaNovoProps {
 
 export function TabelaOcorrenciaSimplesNovo(props: TabelaOcorrenciaNovoProps) {
     return (
-        <BoxContainer titulo="Eventos relacionados ao caso">
+        <BoxContainer titulo="Eventos relacionados ao casogit">
             <DataTable
                 data={props.ocorrencias}
                 columns={COLUNAS_TABELA_OCORRENCIAS}
