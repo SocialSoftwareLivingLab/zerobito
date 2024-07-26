@@ -35,9 +35,10 @@ export const COLUNAS_TABELA_OCORRENCIAS: TableColumn<OcorrenciaModel>[] = [
     //     wrap: true
     // },
     {
-        name: 'Status',
-        cell: (row) => <BadgeStatus status={row.status.sigla} />,
+        selector: (sel) => String(sel.dataAlteracao),
         sortable: true,
+        format: (row) =>
+            Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(row.data)),
         wrap: true
     }
 ];
