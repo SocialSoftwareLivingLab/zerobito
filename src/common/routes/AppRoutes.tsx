@@ -19,6 +19,7 @@ import Caso from '../../pages/Caso';
 import PrivateRoute from './PrivateRoute';
 import DossiePage from '../../pages/Caso/Dossie';
 import Notificacoes from '../../pages/Caso/Notificacoes';
+import Preparacao from '../../pages/Caso/Preparacao';
 
 interface PrivateRouteConfig {
     path: string;
@@ -51,6 +52,7 @@ const AppRoutes = () => {
                     <Route path="/casos" element={<Caso />}>
                         <Route index path=":id/dossie" element={<DossiePage />} />
                         <Route index path=":id/notificacoes" element={<Notificacoes />} />
+                        <Route index path=":id/preparacao" element={<Preparacao />} />
                     </Route>
                 </Route>
                 {publicRoutes.map(({ path, Component }) => (
