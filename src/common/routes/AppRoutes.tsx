@@ -19,7 +19,7 @@ import Caso from '../../pages/Caso';
 import PrivateRoute from './PrivateRoute';
 import DossiePage from '../../pages/Caso/Dossie';
 import Notificacoes from '../../pages/Caso/Notificacoes';
-import Preparacao from '../../pages/Caso/Preparacao';
+import CasoConvite from '../../pages/CasoConvite';
 
 interface PrivateRouteConfig {
     path: string;
@@ -38,6 +38,7 @@ const AppRoutes = () => {
         <BrowserRouter>
             <BarraNavegacao />
             <Routes>
+                {/* Rotas Privadas */}
                 <Route element={<PrivateRoute />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
@@ -52,12 +53,14 @@ const AppRoutes = () => {
                     <Route path="/casos" element={<Caso />}>
                         <Route index path=":id/dossie" element={<DossiePage />} />
                         <Route index path=":id/notificacoes" element={<Notificacoes />} />
-                        <Route index path=":id/preparacao" element={<Preparacao />} />
                     </Route>
                 </Route>
+                {/* Rotas Públicas */}
                 {publicRoutes.map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} />
                 ))}
+
+                <Route path="/convites/:token" element={<CasoConvite />} />
             </Routes>
         </BrowserRouter>
     );
