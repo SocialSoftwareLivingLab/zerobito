@@ -4,82 +4,21 @@ import { Button } from '../../../../components/ui/Button';
 import { FaUserPlus } from 'react-icons/fa6';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { dataTableStyle } from '../../../../components/Tabelas/custom';
+import { COLUNAS_MEMBROS_GRUPO_TRABALHO } from './tabela-membros-grupo';
 
-type MembroType = {
-    nome: string;
-    instituicao: string;
-    status: { nome: string; descricao: string };
-    atribuicoes: string;
-};
+import { useQuery } from '@tanstack/react-query';
 
-const membros: MembroType[] = [
-    {
-        nome: 'Leonardo Braz',
-        instituicao: 'UNICAMP',
-        status: {
-            nome: 'Inativo',
-            descricao: 'Membro do grupo de trabalho inativo para o caso atual'
-        },
-        atribuicoes:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, nulla omnis. Neque illum laborum impedit, officiis fugit porro est iusto praesentium accusamus et, hic, nesciunt harum reprehenderit cum natus ducimus.'
-    },
-    {
-        nome: 'Breno França',
-        instituicao: 'UNICAMP',
-        status: {
-            nome: 'Ativo',
-            descricao: 'Membro do grupo de trabalho ativo para o caso atual'
-        },
-        atribuicoes:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, nulla omnis. Neque illum laborum impedit, officiis fugit porro est iusto praesentium accusamus et, hic, nesciunt harum reprehenderit cum natus ducimus.'
-    },
-    {
-        nome: 'Henrique Manoel',
-        instituicao: 'UNICAMP',
-        status: {
-            nome: 'Ativo',
-            descricao: 'Membro do grupo de trabalho ativo para o caso atual'
-        },
-        atribuicoes:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, nulla omnis. Neque illum laborum impedit, officiis fugit porro est iusto praesentium accusamus et, hic, nesciunt harum reprehenderit cum natus ducimus.'
-    },
-    {
-        nome: 'Lucas Almeida',
-        instituicao: 'UNICAMP',
-        status: {
-            nome: 'Aguardando aceite',
-            descricao: 'Aguardando o aceite para o novo membro do grupo'
-        },
-        atribuicoes:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, nulla omnis. Neque illum laborum impedit, officiis fugit porro est iusto praesentium accusamus et, hic, nesciunt harum reprehenderit cum natus ducimus.'
-    }
-];
-
-const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroType>[] = [
-    {
-        name: 'Nome',
-        selector: (sel) => sel.nome,
-        sortable: true
-    },
-    {
-        name: 'Instituição',
-        selector: (sel) => sel.instituicao,
-        sortable: true
-    },
-    {
-        name: 'Status',
-        selector: (sel) => sel.status.nome,
-        sortable: true
-    },
-    {
-        name: 'Atribuições',
-        selector: (sel) => sel.atribuicoes,
-        grow: 2,
-        sortable: true
-    }
-];
+import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
+import { buscarMembrosGrupo } from '../../../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
 
 export default function ConvidadosGrupoTrabalho() {
+    const { caso } = useCasoSelecionado();
+
+    const { data, isLoading } = useQuery({
+        queryKey: ['casos', 'membros-grupo-trabalho'],
+        queryFn: () => buscarMembrosGrupo(caso.id)
+    });
+
     return (
         <BoxContainer
             titulo="Convidados"
@@ -90,7 +29,10 @@ export default function ConvidadosGrupoTrabalho() {
                 </Button>
             )}>
             <DataTable
-                data={membros}
+                data={data ?? []}
+                progressPending={isLoading}
+                progressComponent="Carregando..."
+                noDataComponent="Nenhum membro foi encontrado"
                 columns={COLUNAS_MEMBROS_GRUPO_TRABALHO}
                 customStyles={dataTableStyle}></DataTable>
         </BoxContainer>

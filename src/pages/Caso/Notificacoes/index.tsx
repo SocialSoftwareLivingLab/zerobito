@@ -53,7 +53,7 @@ export default function Notificacoes() {
         <NotificacoesContainer>
             <BoxContainer titulo="Documentos">
                 {isLoading && <p>Carregando...</p>}
-                {!isLoading && <NotificacaoTable data={data} onRowClick={handleAbrirModal} />}
+                {!isLoading && <NotificacaoTable data={data ?? []} onRowClick={handleAbrirModal} />}
             </BoxContainer>
             <CriarNotificacaoModal
                 aberto={modalAberto}
