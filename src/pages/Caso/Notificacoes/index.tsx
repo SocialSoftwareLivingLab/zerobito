@@ -1,17 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useCallback, useState } from 'react';
-import { FaPlusSquare } from 'react-icons/fa';
+import { EditarNotificacao } from '../../../common/api/casos/notificacoes/cadastrar-notificacao';
 import { consultarNotificacoes } from '../../../common/api/casos/notificacoes/consultar-notificacoes';
+import { NotificacaoCaso } from '../../../common/models/caso/notificacao';
 import CriarNotificacaoModal, {
     CriarNotificacaoForm
 } from '../../../components/Caso/Notificacao/CriarNotificacaoModal';
 import NotificacaoTable from '../../../components/Tabelas/Casos/Notificacao';
 import { BoxContainer } from '../../../components/ui/BoxContainer';
-import { Button } from '../../../components/ui/Button';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import { NotificacoesContainer } from './styles';
-import { EditarNotificacao } from '../../../common/api/casos/notificacoes/cadastrar-notificacao';
-import { NotificacaoCaso } from '../../../common/models/caso/notificacao';
 
 export default function Notificacoes() {
     const { caso } = useCasoSelecionado();
@@ -55,7 +53,7 @@ export default function Notificacoes() {
         <NotificacoesContainer>
             <BoxContainer titulo="Documentos">
                 {isLoading && <p>Carregando...</p>}
-                {!isLoading && <NotificacaoTable data={data} onRowClick={handleAbrirModal} />}
+                {!isLoading && <NotificacaoTable data={data ?? []} onRowClick={handleAbrirModal} />}
             </BoxContainer>
             <CriarNotificacaoModal
                 aberto={modalAberto}

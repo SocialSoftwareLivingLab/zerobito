@@ -1,11 +1,13 @@
 import React, { useCallback } from 'react';
-import { ButtonStyle } from './styles';
+import { ClipLoader } from 'react-spinners';
+import { buttonColors, ButtonStyle } from './styles';
 
 export interface ButtonProps {
     size?: 'small' | 'medium' | 'large';
     type?: 'button' | 'submit' | 'cancel' | 'default';
     action?: () => void;
     disabled?: boolean;
+    loading?: boolean;
     children: React.ReactNode | React.ReactNode[];
 }
 
@@ -14,7 +16,8 @@ export function Button({
     size = 'medium',
     type = 'button',
     action,
-    disabled = false
+    disabled = false,
+    loading = false
 }: ButtonProps) {
     const handleClick = useCallback(() => {
         if (action) {
@@ -22,9 +25,22 @@ export function Button({
         }
     }, [action]);
 
+    const spinnerColor = buttonColors[type].text;
+
     return (
-        <ButtonStyle size={size} type={type} onClick={handleClick} disabled={disabled}>
-            {children}
+        <ButtonStyle size={size} type={type} onClick={handleClick} disabled={disabled || loading}>
+            {loading ? (
+                <ClipLoader
+                    color={spinnerColor}
+                    loading={true}
+                    size={10}
+                    speedMultiplier={0.6}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+            ) : (
+                children
+            )}
         </ButtonStyle>
     );
 }

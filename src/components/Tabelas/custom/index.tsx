@@ -29,6 +29,9 @@ export const dataTableStyle: TableStyles = {
                 borderBottomStyle: 'solid',
                 borderBottomWidth: '0.5px',
                 borderBottomColor: '#E6EBF0'
+            },
+            '&:hover': {
+                cursor: 'pointer'
             }
         }
     },
