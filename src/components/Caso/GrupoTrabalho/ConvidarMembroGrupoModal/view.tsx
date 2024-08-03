@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { Button } from '../../../ui/Button';
 import Input from '../../../ui/Input';
@@ -20,13 +20,16 @@ export default function ConvidarMembroGrupoModalView({
     onSubmitForm,
     register
 }: ConvidarMembroGrupoModalViewProps) {
+    const [loading, setLoading] = useState(false);
+
     const onSubmitFormComReset = useCallback(
         async (evt: React.FormEvent) => {
+            setLoading(true);
             evt.preventDefault();
             await onSubmitForm();
-            handleFecharModal();
+            setLoading(false);
         },
-        [onSubmitForm, handleFecharModal]
+        [onSubmitForm]
     );
 
     return (
@@ -42,23 +45,28 @@ export default function ConvidarMembroGrupoModalView({
                         label="E-mail"
                         placeholder="fulano@mail.com"
                         type="email"
+                        required
                         {...register('email', { required: true })}
                     />
                     <Input
                         label="Nome completo"
                         placeholder="Fulano da Silva"
+                        required
                         {...register('nome', { required: true })}
                     />
                     <TextArea
                         label="Motivo"
                         placeholder="Informe o motivo do convite aqui"
+                        required
                         {...register('motivo', { required: true })}
                     />
                     <footer>
                         <Button type="default" action={() => handleFecharModal()}>
                             Cancelar
                         </Button>
-                        <Button type="submit">Convidar</Button>
+                        <Button type="submit" loading={loading}>
+                            Convidar
+                        </Button>
                     </footer>
                 </form>
             </Container>

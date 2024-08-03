@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import ConvidarMembroGrupoModalView, { ConvidarMembroGrupoModalViewProps } from './view';
 
@@ -19,13 +19,13 @@ export default function ConvidarMembroGrupoModal({
     handleFecharModal,
     onSubmit
 }: ConvidarMembroGrupoModalProps) {
-    const { register, handleSubmit } = useForm<ConvidarMembroGrupoFormData>({
-        defaultValues: {
-            motivo: '',
-            nome: '',
-            email: ''
+    const { register, handleSubmit, reset } = useForm<ConvidarMembroGrupoFormData>();
+
+    useEffect(() => {
+        if (!aberto) {
+            reset();
         }
-    });
+    }, [aberto, reset]);
 
     const props: ConvidarMembroGrupoModalViewProps = {
         aberto,
