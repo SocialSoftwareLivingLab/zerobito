@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import { FaUserPlus } from 'react-icons/fa6';
@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
 import { buscarMembrosGrupo } from '../../../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
+import ConvidarMembroGrupoModal from '../../../../components/Caso/GrupoTrabalho/ConvidarMembroGrupoModal';
 
 export default function ConvidadosGrupoTrabalho() {
     const { caso } = useCasoSelecionado();
@@ -19,11 +20,13 @@ export default function ConvidadosGrupoTrabalho() {
         queryFn: () => buscarMembrosGrupo(caso.id)
     });
 
+    const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
+
     return (
         <BoxContainer
             titulo="Convidados"
             acoesContainer={() => (
-                <Button>
+                <Button action={() => setModalConvidarAberto(true)}>
                     <FaUserPlus />
                     Convidar
                 </Button>
@@ -35,6 +38,13 @@ export default function ConvidadosGrupoTrabalho() {
                 noDataComponent="Nenhum membro foi encontrado"
                 columns={COLUNAS_MEMBROS_GRUPO_TRABALHO}
                 customStyles={dataTableStyle}></DataTable>
+            <ConvidarMembroGrupoModal
+                aberto={isModalConvidarAberto}
+                handleFecharModal={() => setModalConvidarAberto(false)}
+                onSubmit={async (data) => {
+                    console.log(data);
+                }}
+            />
         </BoxContainer>
     );
 }
