@@ -79,39 +79,41 @@ export default function LocalizacaoCard() {
         setMarcadoresMapa([data as MarcadorLocalizacaoMapa]);
     }, [data]);
 
-    const handleLocalizacaoSelecionada = useCallback((latitude: number, longitude: number) => {
-        console.log('handleLocalizacaoSelecionada', latitude, longitude);
-        if (latitude && longitude) {
-            setMarcadoresMapa([{ coordenada: [longitude, latitude], descricao: '', titulo: '' }]);
-        }
-    }, []);
-
+    const handleLocalizacaoSelecionada = (longitude: number, latitude: number) => {
+        setLocalizacao((prev) => ({
+            ...prev,
+            latitude,
+            longitude,
+            logradouro: '',
+            estado: '',
+            cidade: ''
+        }));
+    };
     const handleFormEdicaoSubmit = useCallback(
         async (data, event) => {
             event.preventDefault();
 
-            await editarLocalizacaoCaso(
-                {
-                    cidade: data.cidade,
-                    estado: data.estado,
-                    logradouro: data.logradouro,
-                    latitude: data.coordenada.latitude,
-                    longitude: data.coordenada.longitude
-                },
-                caso.id
-            );
+            const novaLocalizacao = {
+                cidade: data.cidade || localizacao.cidade,
+                estado: data.estado || localizacao.estado,
+                logradouro: data.logradouro || localizacao.logradouro,
+                latitude: data.coordenada.latitude,
+                longitude: data.coordenada.longitude
+            };
+
+            await editarLocalizacaoCaso(novaLocalizacao, caso.id);
 
             handleFecharFormEdicao();
 
-            setLocalizacao({
-                cidade: data.cidade,
-                estado: data.estado,
-                logradouro: data.logradouro,
-                latitude: data.coordenada.latitude,
-                longitude: data.coordenada.longitude
-            });
+            setLocalizacao(novaLocalizacao);
         },
-        [caso.id, handleFecharFormEdicao]
+        [
+            caso.id,
+            handleFecharFormEdicao,
+            localizacao.cidade,
+            localizacao.estado,
+            localizacao.logradouro
+        ]
     );
 
     // console.log(marcadorAtual);
@@ -129,7 +131,12 @@ export default function LocalizacaoCard() {
 
                 {!isLoading && (
                     <>
-                        {marcadoresMapa.length && <MapaGeografico marcadores={marcadoresMapa} />}
+                        {marcadoresMapa.length && (
+                            <MapaGeografico
+                                marcadores={marcadoresMapa}
+                                handleMarkerDragEnd={handleLocalizacaoSelecionada}
+                            />
+                        )}
                         <Metadados>
                             {isFormEdicaoAberto && (
                                 <AlterarLocalizacaoCasoForm

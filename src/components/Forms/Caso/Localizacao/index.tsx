@@ -46,14 +46,28 @@ export default function AlterarLocalizacaoCasoForm({
     const coordenada = watch('coordenada');
 
     useEffect(() => {
-        if (coordenada) {
+        console.log('Comparacao');
+        console.log(coordenada);
+        console.log(localizacao.latitude);
+        console.log(localizacao.longitude);
+        if (
+            coordenada &&
+            (coordenada.latitude !== localizacao.latitude ||
+                coordenada.longitude !== localizacao.longitude)
+        ) {
             setValue('cidade', '');
             setValue('estado', '');
             setValue('logradouro', '');
 
             handleLocalizacaoSelecionada(coordenada.longitude, coordenada.latitude);
         }
-    }, [coordenada, setValue, handleLocalizacaoSelecionada]);
+    }, [
+        coordenada,
+        setValue,
+        handleLocalizacaoSelecionada,
+        localizacao.latitude,
+        localizacao.longitude
+    ]);
 
     const loadOptions = async (inputValue: string): Promise<SelectItem[]> => {
         const response = await geosearch([inputValue]);

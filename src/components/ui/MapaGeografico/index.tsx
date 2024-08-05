@@ -1,5 +1,5 @@
 import { Icon, LatLngExpression, Map } from 'leaflet';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 
 // import 'leaflet-geosearch/dist/geosearch.css';
@@ -19,6 +19,7 @@ export interface MarcadorLocalizacaoMapa {
 export interface MapaGeograficoProps {
     scrollAumentaZoom?: boolean;
     marcadores?: MarcadorLocalizacaoMapa[];
+    handleMarkerDragEnd: (longitude: number, latitude: number) => void;
 }
 
 const RecenterAutomatically = ({ lat, lng }: { lat: number; lng: number }) => {
@@ -33,7 +34,8 @@ const RecenterAutomatically = ({ lat, lng }: { lat: number; lng: number }) => {
 
 export default function MapaGeografico({
     scrollAumentaZoom = false,
-    marcadores = []
+    marcadores = [],
+    handleMarkerDragEnd
 }: MapaGeograficoProps) {
     const ref = useRef<Map>(null);
 
@@ -52,6 +54,30 @@ export default function MapaGeografico({
         ref.current?.flyTo(posicaoInicial, 13, { duration: 1 });
     }, [posicaoInicial]);
 
+    const [markerPositions, setMarkerPositions] = useState(
+        marcadores.map((marcador) => marcador.coordenada)
+    );
+
+    const handleDragEnd = (event, index) => {
+        const newPosition = event.target.getLatLng();
+        const oldPosition = markerPositions[index];
+
+        if (newPosition.lat !== oldPosition[0] || newPosition.lng !== oldPosition[1]) {
+            setMarkerPositions((prevPositions) => {
+                const updatedPositions = [...prevPositions];
+                updatedPositions[index] = [newPosition.lat, newPosition.lng];
+                return updatedPositions;
+            });
+
+            if (index === 0 && ref.current) {
+                ref.current.flyTo([newPosition.lat, newPosition.lng], 13, { duration: 1 });
+            }
+
+            // Chamar o callback para atualizar o formulário
+            handleMarkerDragEnd(newPosition.lng, newPosition.lat);
+        }
+    };
+
     return (
         <MapaGeograficoContainer>
             <MapContainer
@@ -65,7 +91,14 @@ export default function MapaGeografico({
                 />
                 {/* <BuscaGeografica /> */}
                 {marcadores.map((marcador, indice) => (
-                    <Marker key={indice} position={marcador.coordenada} icon={iconeCustomizado}>
+                    <Marker
+                        key={indice}
+                        position={marcador.coordenada}
+                        icon={iconeCustomizado}
+                        draggable={true}
+                        eventHandlers={{
+                            dragend: (event) => handleDragEnd(event, indice)
+                        }}>
                         <Popup>
                             <strong>{marcador.titulo}</strong>
                             <span>{marcador.descricao}</span>
