@@ -31,19 +31,6 @@ export default function InformacoesBasicasView({
                 <Fieldset legend="Identificação">
                     <div className="input-container">
                         <Input
-                            placeholder="Informe a data"
-                            label="Data relatada"
-                            type="date"
-                            {...register('data', { required: 'Data inválida' })}
-                        />
-                        <ErrorMessage
-                            name="data"
-                            errors={errors}
-                            as={<p className="error-message" />}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <Input
                             placeholder="Título"
                             label="Informe um título"
                             type="text"
@@ -51,6 +38,19 @@ export default function InformacoesBasicasView({
                         />
                         <ErrorMessage
                             name="titulo"
+                            errors={errors}
+                            as={<p className="error-message" />}
+                        />
+                    </div>
+                    <div className="input-container">
+                        <Input
+                            placeholder="Informe a data"
+                            label="Data relatada"
+                            type="date"
+                            {...register('data', { required: 'Data inválida' })}
+                        />
+                        <ErrorMessage
+                            name="data"
                             errors={errors}
                             as={<p className="error-message" />}
                         />
