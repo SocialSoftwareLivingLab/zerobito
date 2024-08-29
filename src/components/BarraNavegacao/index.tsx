@@ -13,8 +13,7 @@ export default function BarraNavegacao(): JSX.Element {
     return (
         <NavbarContainer>
             <NavbarHomeContainer to="/">
-                <span className="Zer">Zer</span>
-                <span className="Obito">Óbito</span>
+                <img src="/logo.svg" width={150} alt="Logo" />
             </NavbarHomeContainer>
             {isAutenticado && (
                 <NavbarAcoesContainer>

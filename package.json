@@ -1,6 +1,6 @@
 {
     "name": "zerobito",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "private": true,
     "dependencies": {
         "@hookform/error-message": "^2.0.1",
