@@ -16,7 +16,7 @@ export default function DossiePage() {
     return (
         <DossieContainer>
             <ColumnContainer>
-                <DossieCard data={caso}></DossieCard>
+                <DossieCard caso={caso}></DossieCard>
             </ColumnContainer>
             <ColumnContainer>
                 <BoxContainer titulo={'Digite infos'}>
