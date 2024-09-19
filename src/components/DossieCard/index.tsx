@@ -12,6 +12,7 @@ import Input from '../ui/Input';
 import { Button } from '../ui/Button';
 import { Form, useForm } from 'react-hook-form';
 import { editDataObito } from '../../common/api/casos/datas-dossie/alterar-data-obito';
+import { editData } from '../../common/api/casos/datas-dossie/alterar-data';
 
 interface DossieCardProps {
     caso: Caso;
@@ -68,11 +69,11 @@ export function DossieCard({ caso }: DossieCardProps) {
     };
     const handleCompleteEditData = useCallback(
         async (formData: DataObitoFormField) => {
-            const payload = formData.dataObito;
-            setIsEditingDataObito(false);
-            setDataObito(payload);
+            const payload = formData.data;
+            setIsEditingData(false);
+            setData(payload);
             console.log(payload);
-            const response = await editDataObito(payload, caso.id);
+            const response = await editData(payload, caso.id);
             console.log('terminouuu');
             console.log(response);
         },
@@ -86,12 +87,6 @@ export function DossieCard({ caso }: DossieCardProps) {
             </header>
             <div className="row">
                 <div className="column">
-                    <h3>Data do Acidente</h3>
-                    <span>
-                        {Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(
-                            new Date(caso.dataCriacao)
-                        )}
-                    </span>
                     <h3 onClick={handleEditDataObitoClick}>Data de Óbito</h3>
                     <form onSubmit={handleSubmit(handleCompleteEditDataObito)}>
                         {isEditingDataObito ? (
@@ -123,7 +118,7 @@ export function DossieCard({ caso }: DossieCardProps) {
                             )
                         )}
                     </form>
-                    <h3 onClick={handleEditDataClick}>Data de Óbito</h3>
+                    <h3 onClick={handleEditDataClick}>Data de Acidente</h3>
                     <form onSubmit={handleSubmit(handleCompleteEditData)}>
                         {isEditingData ? (
                             <>
