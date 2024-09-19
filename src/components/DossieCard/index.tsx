@@ -65,7 +65,7 @@ export function DossieCard({ caso }: DossieCardProps) {
         setIsEditingData(true);
     };
     const handleCancelDataClick = () => {
-        setIsEditingDataObito(false);
+        setIsEditingData(false);
     };
     const handleCompleteEditData = useCallback(
         async (formData: DataObitoFormField) => {
