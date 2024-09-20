@@ -4,8 +4,6 @@ export interface Caso {
     id: number;
     nome: string;
     dataCriacao: Date;
-    dataObito: Date;
-    dataCaso: Date;
     informacoesBasicas: {
         comentario: string;
         causaPrimaria: string;
@@ -21,4 +19,6 @@ export interface Caso {
         nome: string;
     };
     localizacao: Localizacao;
+    dataObito: Date;
+    dataCaso: Date;
 }

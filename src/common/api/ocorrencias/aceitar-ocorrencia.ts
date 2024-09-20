@@ -26,5 +26,6 @@ export async function aceitarOcorrenciaComoCaso(data: AceitarOcorrenciaRequest) 
             coordenador: data.caso.coordenador.id
         }
     };
-    await api.post(`/api/v1/ocorrencias/${data.ocorrencia.id}/aceitar`, body);
+    const response = await api.post(`/api/v1/ocorrencias/${data.ocorrencia.id}/aceitar`, body);
+    console.log(response);
 }
