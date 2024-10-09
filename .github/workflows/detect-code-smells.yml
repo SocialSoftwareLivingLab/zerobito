@@ -1,0 +1,141 @@
+on:
+  workflow_dispatch:
+    inputs:
+      thresholds.large-component:
+        description: 'Threshold for Large Component: too many props, attributes, and/or lines of code. (use -1 to ignore)'
+        required: false
+        default: '-1'
+      thresholds.too-many-props:
+        description: 'Threshold for Too Many Props: Passing too many properties to a single component. (use -1 to ignore)'
+        required: false
+        default: '-1'
+      thresholds.inheritance-instead-of-composition:
+        description: 'Threshold for Inheritance Instead of Composition : Using inheritance to reuse code among components. (use -1 to ignore)'
+        required: false
+        default: '-1'
+      thresholds.props-in-initial-state:
+        description: 'Threshold for Props in Initial State: Initializing state with props. (use -1 to ignore)'
+        required: false
+        default: '-1'
+      thresholds.direct-dom-manipulation:
+        description: 'Threshold for Direct Dom Manipulation: Manipulating DOM directly. (use -1 to ignore)'
+        required: false
+        default: '-1'
+      thresholds.force-update:
+        description: 'Threshold for Force Update: Forcing the component or page to update. (use -1 to ignore)'
+        required: false
+        default: '-1'
+      thresholds.jsx-outside-render-method:
+        description: 'Threshold for JSX Outside Render Method: Implementing markup in multiple methods. (use -1 to ignore)'
+        required: false
+        default: '-1'
+      thresholds.uncontrolled-components:
+        description: 'Threshold for Uncontrolled Components: A component that does not use props/state to handle forms data. (use -1 to ignore)'
+        required: false
+        default: '-1'
+      thresholds.large-file:
+        description: 'Threshold for Large File: A file with several components and lines of code. (use -1 to ignore)'
+        required: false
+        default: '-1'
+    
+jobs:
+  sniff:
+    name: Identify code smells through reactsniffer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: latest
+
+    - name: Install reactsniffer
+      run: npm install -g reactsniffer
+
+    - name: Run react-sniffer
+      run: reactsniffer src
+
+    - name: Upload smell files as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: smells
+        path: |
+          components_smells.csv
+          files_smells.csv
+
+    - name: Validate components smells
+      run: |
+        thresholds_large_component="${{ github.event.inputs['thresholds.large-component'] }}"
+        thresholds_too_many_props="${{ github.event.inputs['thresholds.too-many-props'] }}"
+        thresholds_inheritance_instead_of_composition="${{ github.event.inputs['thresholds.inheritance-instead-of-composition'] }}"
+        thresholds_props_in_initial_state="${{ github.event.inputs['thresholds.props-in-initial-state'] }}"
+        thresholds_direct_dom_manipulation="${{ github.event.inputs['thresholds.direct-dom-manipulation'] }}"
+        thresholds_force_update="${{ github.event.inputs['thresholds.force-update'] }}"
+        thresholds_jsx_outside_render_method="${{ github.event.inputs['thresholds.jsx-outside-render-method'] }}"
+        thresholds_uncontrolled_components="${{ github.event.inputs['thresholds.uncontrolled-components'] }}"
+    
+        declare -A error_thresholds=(
+          ["Large Component"]=$thresholds_large_component
+          ["Too many props"]=$thresholds_too_many_props
+          ["Inheritance instead of composition"]=$thresholds_inheritance_instead_of_composition
+          ["Props in initial state"]=$thresholds_props_in_initial_state
+          ["Direct DOM Manipulation"]=$thresholds_direct_dom_manipulation
+          ["Force Update"]=$thresholds_force_update
+          ["JSX outside the render method"]=$thresholds_jsx_outside_render_method
+          ["Uncontrolled component"]=$thresholds_uncontrolled_components
+        )
+    
+        check_csv_for_errors() {
+          local file_path="$1"
+          local -n thresholds="$2"
+    
+          for error in "${!thresholds[@]}"; do
+            local threshold="${thresholds[$error]}"
+    
+            if [ "$threshold" -eq "-1" ]; then
+              echo "Skipping check for '$error' as its threshold is set to -1."
+              continue
+            fi
+    
+            error_count=$(grep -o "$error" "$file_path" | wc -l)
+            echo "Found '$error' $error_count times in $file_path with threshold $threshold."
+    
+            if [ "$error_count" -ge "$threshold" ]; then
+              echo "Error '$error' count ($error_count) exceeds its threshold ($threshold). Failing the build."
+              exit 1
+            fi
+          done
+    
+          echo "Validation passed for errors. No errors exceed their thresholds in $file_path."
+        }
+    
+        check_csv_for_errors "components_smells.csv" error_thresholds
+
+    - name: Validate file smells
+      run: |
+        thresholds_large_file="${{ github.event.inputs['thresholds.large-file'] }}"
+    
+        check_csv_line_count_excluding_header() {
+          local file_path="$1"
+          local threshold="$2"
+    
+          if [ "$threshold" -eq "-1" ]; then
+            echo "Skipping line count check for '$file_path' as the threshold is set to -1."
+            return
+          fi
+    
+          line_count=$(($(wc -l < "$file_path") - 3))
+          echo "Found $line_count lines (excluding header) in $file_path with threshold $threshold."
+    
+          if [ "$line_count" -ge "$threshold" ]; then
+            echo "Line count ($line_count) exceeds the threshold ($threshold). Failing the build."
+            exit 1
+          fi
+    
+          echo "Validation passed for line count in $file_path. Line count is within the threshold."
+        }
+    
+        check_csv_line_count_excluding_header "files_smells.csv" "$thresholds_large_file"
