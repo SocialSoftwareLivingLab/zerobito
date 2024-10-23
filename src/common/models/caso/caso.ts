@@ -3,6 +3,7 @@ import { Localizacao } from './localizacao';
 export interface Caso {
     id: number;
     nome: string;
+    status: string;
     dataCriacao: Date;
     informacoesBasicas: {
         comentario: string;

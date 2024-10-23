@@ -7,11 +7,12 @@ import { OcorrenciaCarregadaType } from './models';
 import { Secao, ToggleButton, ToggleButtonGroup } from './styles';
 import NovoCasoPage from './NovoCaso';
 import VincularOcorrenciaAoCasoPage from './VincularCaso';
+import { Navigate } from 'react-router-dom';
 
 export interface AceitarOcorrenciaPageProps {
     ocorrencia: OcorrenciaCarregadaType;
-    opcaoAceiteSelecionada: 'criar' | 'vincular' | undefined;
-    setOpcaoAceiteSelecionada: (opcao: 'criar' | 'vincular' | undefined) => void;
+    opcaoAceiteSelecionada: 'criar' | 'vincular' | 'cancelar' | undefined;
+    setOpcaoAceiteSelecionada: (opcao: 'criar' | 'vincular' | 'cancelar' | undefined) => void;
 }
 
 export default function AceitarOcorrenciaPageView({
@@ -66,6 +67,13 @@ export default function AceitarOcorrenciaPageView({
                                     selected={opcaoAceiteSelecionada === 'vincular'}>
                                     Vincular a um caso existente
                                 </ToggleButton>
+                                <ToggleButton
+                                    size="large"
+                                    type="button"
+                                    onClick={() => setOpcaoAceiteSelecionada('cancelar')}
+                                    selected={opcaoAceiteSelecionada === 'cancelar'}>
+                                    Cancelar aceite
+                                </ToggleButton>
                             </ToggleButtonGroup>
                         </Secao>
 
@@ -75,6 +83,8 @@ export default function AceitarOcorrenciaPageView({
                         {opcaoAceiteSelecionada === 'vincular' && (
                             <VincularOcorrenciaAoCasoPage ocorrencia={ocorrencia.data} />
                         )}
+
+                        {opcaoAceiteSelecionada === 'cancelar' && <Navigate to="/" replace />}
                     </>
                 )}
             </Container>

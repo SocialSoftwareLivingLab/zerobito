@@ -5,6 +5,12 @@ import { CasoInfoContainer } from './styles';
 import CasoInfoItem from './CasoInfoItem';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 
+const statusLabel = {
+    AGUARDANDO_NOTIFICACOES: 'Aguardando Notificações',
+    EM_PLANEJAMENTO: 'Em Planejamento',
+    EM_PREPARACAO: 'Em Preparação'
+};
+
 export function CasoInfo() {
     const dateFormat = Intl.DateTimeFormat('pt-br');
     const { caso } = useCasoSelecionado();
@@ -23,8 +29,8 @@ export function CasoInfo() {
             />
             <CasoInfoItem
                 icone={<FaBell />}
-                label="Status de notificação obrigatório"
-                valor="Aguardando Análise"
+                label="Status do caso"
+                valor={statusLabel[caso.status] ?? 'Desconhecido'}
             />
         </CasoInfoContainer>
     );
