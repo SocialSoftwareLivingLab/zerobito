@@ -33,7 +33,8 @@ export const DossieCardStyle = styled.div`
 
         button {
             width: 150px;
-            margin-top: 27px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
     }
 
@@ -66,10 +67,15 @@ export const DossieCardStyle = styled.div`
         width: 0 auto;
         justify-content: space-between;
         flex-direction: row;
+        gap: 18px;
     }
 
     .column {
         width: 400px;
+        display: flex;
+        width: 50%;
+        flex-direction: column;
+        padding-top: 10px;
     }
 
     .Select {

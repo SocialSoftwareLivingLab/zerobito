@@ -7,6 +7,7 @@ export const TextEditavelContainer = styled.fieldset`
         width: 50%;
         flex-direction: column;
         padding-top: 10px;
+        gap: 10px;
     }
     div {
         display: flex;
@@ -21,6 +22,12 @@ export const TextEditavelContainer = styled.fieldset`
         width: 100%;
     }
     .row {
-        justify-content: space-around;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .rowButton {
+        margin-top: 17px;
+        gap: 30px;
+        justify-content: flex-start;
     }
 `;

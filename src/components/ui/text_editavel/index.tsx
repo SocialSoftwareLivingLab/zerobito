@@ -46,7 +46,7 @@ export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(
                             </Select>
                         </div>
                         <div className="column">
-                            <div className="row">
+                            <div className="rowButton">
                                 <Button
                                     type="submit"
                                     size="small"

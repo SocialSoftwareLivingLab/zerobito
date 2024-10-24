@@ -140,7 +140,7 @@ export function DossieCard({ caso }: DossieCardProps) {
                     </form>
 
                     <h3 onClick={handleEditDataClick} style={{ cursor: 'pointer' }}>
-                        Data de Acidente{' '}
+                        Data do Acidente{' '}
                         <FaEdit
                             style={{ cursor: 'pointer', fontSize: '18px' }}
                             onClick={handleEditDataClick}
