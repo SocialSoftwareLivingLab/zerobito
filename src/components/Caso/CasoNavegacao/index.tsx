@@ -71,14 +71,14 @@ export function CasoNavegacao() {
                 {menus.map((menu, index) => {
                     // Define a URL condicional para "Planejamento"
                     const url =
-                        menu.titulo === 'Planejamento' && caso.status === 'AGUARDANDO_NOTIFICACOES'
+                        menu.titulo === 'Planejamento' && caso.status !== 'EM_PLANEJAMENTO'
                             ? '#' // Retorna '#' para impedir navegação
                             : menu.url(caso); // URL normal para outros casos
 
                     // Adiciona ação ao clique para exibir o alerta, se aplicável
                     const InvalidAcess = () => {
                         alert(
-                            'Não é possível acessar "Planejamento" enquanto o caso está aguardando notificações.'
+                            'Não é possível acessar "Planejamento" enquanto o caso não está nessa etapa.'
                         );
                     };
 
@@ -90,8 +90,7 @@ export function CasoNavegacao() {
                             icone={menu.icone}
                             url={url} // Usa a URL condicional
                             action={
-                                menu.titulo === 'Planejamento' &&
-                                caso.status === 'AGUARDANDO_NOTIFICACOES'
+                                menu.titulo === 'Planejamento' && caso.status !== 'EM_PLANEJAMENTO'
                                     ? InvalidAcess
                                     : undefined
                             } // Define onClick somente para Planejamento
