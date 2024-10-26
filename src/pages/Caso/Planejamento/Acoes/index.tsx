@@ -3,11 +3,13 @@ import { Button } from '../../../../components/ui/Button';
 import { FiLogOut } from 'react-icons/fi';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { SeparadorAcoes } from './styles';
+import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
 
 function BotoesAcoesReuniao() {
+    const { caso } = useCasoSelecionado();
     return (
         <SeparadorAcoes>
-            <Button>
+            <Button action={() => console.log(caso)}>
                 <FiLogOut />
                 Fechar Reunião
             </Button>

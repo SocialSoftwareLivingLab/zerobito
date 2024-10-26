@@ -15,6 +15,7 @@ interface MenuNavegacao {
     titulo: string;
     icone: JSX.Element;
     url: (caso: Caso) => string;
+    action?: (caso: Caso) => void;
 }
 
 const menus: MenuNavegacao[] = [
@@ -68,13 +69,32 @@ export function CasoNavegacao() {
         <CasoNavegacaoContainer>
             <header>
                 {menus.map((menu, index) => {
+                    // Define a URL condicional para "Planejamento"
+                    const url =
+                        menu.titulo === 'Planejamento' && caso.status === 'AGUARDANDO_NOTIFICACOES'
+                            ? '#' // Retorna '#' para impedir navegação
+                            : menu.url(caso); // URL normal para outros casos
+
+                    // Adiciona ação ao clique para exibir o alerta, se aplicável
+                    const InvalidAcess = () => {
+                        alert(
+                            'Não é possível acessar "Planejamento" enquanto o caso está aguardando notificações.'
+                        );
+                    };
+
                     return (
                         <CasoNavegacaoItem
                             key={index}
                             ativo={location.pathname.includes(menu.url(caso)) ?? false}
                             titulo={menu.titulo}
                             icone={menu.icone}
-                            url={menu.url(caso)}
+                            url={url} // Usa a URL condicional
+                            action={
+                                menu.titulo === 'Planejamento' &&
+                                caso.status === 'AGUARDANDO_NOTIFICACOES'
+                                    ? InvalidAcess
+                                    : undefined
+                            } // Define onClick somente para Planejamento
                         />
                     );
                 })}
