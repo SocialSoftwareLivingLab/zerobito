@@ -33,4 +33,21 @@ export const PlanejamentoContainer = styled.div`
         flex-direction: row;
         gap: 18px;
     }
+    .rowInput {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px; /* Espaço pequeno entre os campos */
+    }
+
+    .rowInput Input {
+        width: 150px;
+    }
+
+    .rowInput Button {
+        margin-top: 25px;
+        padding: 8px 16px; /* Ajusta o preenchimento para um tamanho adequado */
+        margin-left: auto;
+    }
 `;
