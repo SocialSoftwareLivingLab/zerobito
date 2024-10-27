@@ -35,28 +35,27 @@ export default function Planejamento() {
             console.log(dataString);
             const dataSelecionada = new Date(dataString);
             const dataFormatada = dataSelecionada.toISOString();
+            try {
+                const data: AgendarReuniaoRequest = {
+                    data: dataFormatada
+                };
+                setData(dataSelecionada);
+                setErrorData(null);
+                await agendarReuniao(data, caso.id);
 
-            if (dataSelecionada <= new Date()) {
-                setErrorData('A data e horário da reunião devem ser maiores que o atual.');
-                return;
+                const dataLegivel = dataSelecionada.toLocaleString();
+
+                Swal.fire({
+                    title: 'Reunião agendada!',
+                    text: `A reunião foi marcada para ${dataLegivel}.`,
+                    icon: 'success',
+                    timer: 4000,
+                    confirmButtonText: 'Continuar'
+                });
+            } catch (error) {
+                const errorMessage = error.response?.data?.message;
+                alert(errorMessage);
             }
-
-            const data: AgendarReuniaoRequest = {
-                data: dataFormatada
-            };
-            setData(dataSelecionada);
-            setErrorData(null);
-            await agendarReuniao(data, caso.id);
-
-            const dataLegivel = dataSelecionada.toLocaleString();
-
-            Swal.fire({
-                title: 'Reunião agendada!',
-                text: `A reunião foi marcada para ${dataLegivel}`,
-                icon: 'success',
-                timer: 4000,
-                confirmButtonText: 'Continuar'
-            });
         },
         [caso.id]
     );
