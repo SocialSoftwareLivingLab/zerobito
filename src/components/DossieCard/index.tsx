@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BsPaperclip } from 'react-icons/bs';
 import { FaFileAlt, FaInfoCircle, FaEdit } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -13,6 +13,7 @@ import { Button } from '../ui/Button';
 import { useForm } from 'react-hook-form';
 import { editDataObito } from '../../common/api/casos/datas-dossie/alterar-data-obito';
 import { editData } from '../../common/api/casos/datas-dossie/alterar-data';
+import { getReunioes } from '../../common/api/casos/planejamento/get-reunioes-marcadas';
 
 interface DossieCardProps {
     caso: Caso;
@@ -66,6 +67,29 @@ export function DossieCard({ caso }: DossieCardProps) {
         },
         [caso.id]
     );
+
+    const [proximaReuniao, setProximaReuniao] = useState<string | null>(null);
+
+    const getProximaReuniao = useCallback(async () => {
+        try {
+            const response = await getReunioes(caso.id);
+            if (response.length > 0) {
+                setProximaReuniao(
+                    Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(
+                        new Date(response[0].dataReuniao)
+                    )
+                );
+            } else {
+                setProximaReuniao('Sem reuniões agendadas');
+            }
+        } catch (error) {
+            console.error('Erro ao buscar a próxima reunião:', error);
+            setProximaReuniao('Erro ao carregar data');
+        }
+    }, [caso.id]);
+    useEffect(() => {
+        getProximaReuniao();
+    }, [getProximaReuniao]);
 
     const handleEditDataClick = () => {
         setIsEditingData(true);
@@ -192,7 +216,7 @@ export function DossieCard({ caso }: DossieCardProps) {
 
                 <div className="column">
                     <h3>Próxima Reunião</h3>
-                    <span>{caso[4]}</span>
+                    <span>{proximaReuniao}</span>
                 </div>
             </div>
 
