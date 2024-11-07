@@ -1,42 +1,51 @@
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       thresholds.large-component:
         description: 'Threshold for Large Component: too many props, attributes, and/or lines of code. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
       thresholds.too-many-props:
         description: 'Threshold for Too Many Props: Passing too many properties to a single component. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
       thresholds.inheritance-instead-of-composition:
         description: 'Threshold for Inheritance Instead of Composition : Using inheritance to reuse code among components. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
       thresholds.props-in-initial-state:
         description: 'Threshold for Props in Initial State: Initializing state with props. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
       thresholds.direct-dom-manipulation:
         description: 'Threshold for Direct Dom Manipulation: Manipulating DOM directly. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
       thresholds.force-update:
         description: 'Threshold for Force Update: Forcing the component or page to update. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
       thresholds.jsx-outside-render-method:
         description: 'Threshold for JSX Outside Render Method: Implementing markup in multiple methods. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
       thresholds.uncontrolled-components:
         description: 'Threshold for Uncontrolled Components: A component that does not use props/state to handle forms data. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
       thresholds.large-file:
         description: 'Threshold for Large File: A file with several components and lines of code. (use -1 to ignore)'
         required: false
         default: '-1'
+        type: string
     
 jobs:
   sniff:

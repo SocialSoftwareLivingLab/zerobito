@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  call-sniff:
+    uses: SocialSoftwareLivingLab/zerobito/.github/workflows/detect-code-smells-reusable.yml@main
+    with:
+      thresholds.large-component: "-1"
+      thresholds.too-many-props: "-1"
+      thresholds.inheritance-instead-of-composition: "-1"
+      thresholds.props-in-initial-state: "-1"
+      thresholds.direct-dom-manipulation: "-1"
+      thresholds.force-update: "-1"
+      thresholds.jsx-outside-render-method: "-1"
+      thresholds.uncontrolled-components: "-1"
+      thresholds.large-file: "-1"
