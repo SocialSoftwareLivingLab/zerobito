@@ -1,23 +1,20 @@
-import React, { useCallback, useState } from 'react';
-import { BoxContainer } from '../../../../components/ui/BoxContainer';
-import { Button } from '../../../../components/ui/Button';
-import { FaUserPlus } from 'react-icons/fa6';
-import DataTable, { TableColumn } from 'react-data-table-component';
-import { dataTableStyle } from '../../../../components/Tabelas/custom';
-
+import React, { useState } from 'react';
+import { MembroGrupoTrabalho } from '../../../../../common/models/caso/grupo-trabalho/membro';
+import { ColunaAcao } from '../../Tarefas/styles';
+import { Button } from '../../../../../components/ui/Button';
+import { useCasoSelecionado } from '../../../../../contexts/caso-selecionado';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
-import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
-import { buscarMembrosGrupo } from '../../../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
+import { buscarMembrosGrupo } from '../../../../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
 import ConvidarMembroGrupoModal, {
     ConvidarMembroGrupoFormData
-} from '../../../../components/Caso/GrupoTrabalho/ConvidarMembroGrupoModal';
-import { enviarConviteMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/enviar-convite';
+} from '../../../../../components/Caso/GrupoTrabalho/ConvidarMembroGrupoModal';
+import { enviarConviteMembroGrupo } from '../../../../../common/api/casos/grupo-trabalho/enviar-convite';
 import Swal from 'sweetalert2';
-import { COLUNAS_MEMBROS_GRUPO_TRABALHO } from './tabela-membros-grupo';
-import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
-import { ColunaAcao } from './styles';
-import EditarTarefaGrupoModal from '../../../../components/Caso/GrupoTrabalho/EditarTarefaModal';
+import { BoxContainer } from '../../../../../components/ui/BoxContainer';
+import { FaUserPlus } from 'react-icons/fa';
+import DataTable from 'react-data-table-component';
+import { dataTableStyle } from '../../../../../components/Tabelas/custom';
+import { COLUNAS_MEMBROS } from './tebela-membors-grupo';
 
 export function AcoesLinha({ row }: { row: MembroGrupoTrabalho }) {
     return (
@@ -27,7 +24,7 @@ export function AcoesLinha({ row }: { row: MembroGrupoTrabalho }) {
     );
 }
 
-export default function AtoresReuniao() {
+export default function TarefasReuniao() {
     const { caso } = useCasoSelecionado();
 
     const { data, isLoading } = useQuery({
@@ -62,13 +59,9 @@ export default function AtoresReuniao() {
 
     const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
 
-    const [isModalEditarAberto, setModalEditar] = useState(false);
-
-    const abrirModal = (row: MembroGrupoTrabalho) => setModalEditar(true);
-
     return (
         <BoxContainer
-            titulo="Atores / Situação das ações"
+            titulo="Tarefas"
             acoesContainer={() => (
                 <Button action={() => setModalConvidarAberto(true)}>
                     <FaUserPlus />
@@ -80,17 +73,12 @@ export default function AtoresReuniao() {
                 progressPending={isLoading}
                 progressComponent="Carregando..."
                 noDataComponent="Nenhum membro foi encontrado"
-                columns={COLUNAS_MEMBROS_GRUPO_TRABALHO}
-                customStyles={dataTableStyle}
-                onRowClicked={abrirModal}></DataTable>
+                columns={COLUNAS_MEMBROS}
+                customStyles={dataTableStyle}></DataTable>
             <ConvidarMembroGrupoModal
                 aberto={isModalConvidarAberto}
                 handleFecharModal={() => setModalConvidarAberto(false)}
                 onSubmit={(data) => enviarConviteMutation.mutateAsync(data)}
-            />
-            <EditarTarefaGrupoModal
-                aberto={isModalEditarAberto}
-                handleFecharModal={() => setModalEditar(false)}
             />
         </BoxContainer>
     );
