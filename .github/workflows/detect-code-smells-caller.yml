@@ -1,3 +1,5 @@
+name: Chamar action para detectar code smells
+
 on:
   push:
     branches:
@@ -5,7 +7,7 @@ on:
 
 jobs:
   call-sniff:
-    uses: SocialSoftwareLivingLab/zerobito/.github/workflows/detect-code-smells-reusable.yml@main
+    uses: SocialSoftwareLivingLab/zerobito/.github/workflows/detect-code-smells-reusable.yml@develop
     with:
       thresholds.large-component: "-1"
       thresholds.too-many-props: "-1"
