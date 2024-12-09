@@ -33,6 +33,5 @@ export default function EditarTarefaGrupoModal({
         handleFecharModal,
         register
     };
-
     return <EditarTarefaGrupoModalView {...props} />;
 }

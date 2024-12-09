@@ -18,6 +18,11 @@ import { COLUNAS_MEMBROS_GRUPO_TRABALHO } from './tabela-membros-grupo';
 import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
 import { ColunaAcao } from './styles';
 import EditarTarefaGrupoModal from '../../../../components/Caso/GrupoTrabalho/EditarTarefaModal';
+import RegistrarTarefaGrupoModalView from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal/view';
+import RegistrarTarefaGrupoModal, {
+    RegistrarTarefaGrupoModalFormData
+} from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal';
+import { RegistrarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/registrar-tarefa';
 
 export function AcoesLinha({ row }: { row: MembroGrupoTrabalho }) {
     return (
@@ -60,9 +65,21 @@ export default function AtoresReuniao() {
         }
     });
 
+    const enviarTarefaMutation = useMutation({
+        mutationFn: (data: RegistrarTarefaGrupoModalFormData) => {
+            return RegistrarTarefaMembroGrupo(caso.id, {
+                nomeMembro: data.responsavel,
+                comentario: data.comentario,
+                nome: data.nome,
+                prazo: data.prazo
+            });
+        }
+    });
+
     const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
 
     const [isModalEditarAberto, setModalEditar] = useState(false);
+    const [isModalTarefaAberto, setModalTarefa] = useState(false);
 
     const abrirModal = (row: MembroGrupoTrabalho) => setModalEditar(true);
 
@@ -70,10 +87,16 @@ export default function AtoresReuniao() {
         <BoxContainer
             titulo="Atores / Situação das ações"
             acoesContainer={() => (
-                <Button action={() => setModalConvidarAberto(true)}>
-                    <FaUserPlus />
-                    Convidar
-                </Button>
+                <div>
+                    <Button action={() => setModalConvidarAberto(true)}>
+                        <FaUserPlus />
+                        Convidar
+                    </Button>
+                    <Button action={() => setModalTarefa(true)}>
+                        <FaUserPlus />
+                        Registrar Tarefa
+                    </Button>
+                </div>
             )}>
             <DataTable
                 data={data ?? []}
@@ -91,6 +114,11 @@ export default function AtoresReuniao() {
             <EditarTarefaGrupoModal
                 aberto={isModalEditarAberto}
                 handleFecharModal={() => setModalEditar(false)}
+            />
+            <RegistrarTarefaGrupoModal
+                aberto={isModalTarefaAberto}
+                handleFecharModal={() => setModalTarefa(false)}
+                onSubmit={(data) => enviarTarefaMutation.mutateAsync(data)}
             />
         </BoxContainer>
     );
