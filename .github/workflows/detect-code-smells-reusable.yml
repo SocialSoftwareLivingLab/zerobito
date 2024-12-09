@@ -1,3 +1,5 @@
+name: Detectar code smells
+
 on:
   workflow_call:
     inputs:
