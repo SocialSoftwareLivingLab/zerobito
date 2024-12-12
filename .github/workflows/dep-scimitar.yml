@@ -1,0 +1,40 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  check-unused-dep:
+    name: Check For Unused-Dependency Commits
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: latest
+
+    - name: Install dep-scimitar
+      run: npm install dep-scimitar
+
+    - name: Run dep-scimitar
+      run: |
+        unusedDepChange=$(npx dep-scimitar runremote)
+        echo "UnusedDepChange=$unusedDepChange" >> $GITHUB_ENV
+
+    - name: Print Env variable
+      run: |
+        echo "UnusedDepChange: ${{ env.UnusedDepChange }}"
+        
+    - name: Check results of Dep-sCImitar
+      if:  ${{ env.UnusedDepChange != 1 }}
+      run: |
+        cd $GITHUB_WORKSPACE
+        echo "Current directory: $(pwd)"
+        echo "Contents of the directory: $(ls -a)"
+        git log -n 1 --format="%H"  
+        git log -n 1 --format="%P"
+        
