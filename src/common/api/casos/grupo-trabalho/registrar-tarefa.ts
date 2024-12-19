@@ -9,5 +9,9 @@ interface RegistrarTarefaRequest {
 
 export async function RegistrarTarefaMembroGrupo(idCaso: number, payload: RegistrarTarefaRequest) {
     console.log(payload);
-    await api.post(`/api/v1/casos/${idCaso}/grupo-trabalho/membros/registrar-tarefa`, payload);
+    const response = await api.post(
+        `/api/v1/casos/${idCaso}/grupo-trabalho/membros/registrar-tarefa`,
+        payload
+    );
+    console.log('response: ', response);
 }

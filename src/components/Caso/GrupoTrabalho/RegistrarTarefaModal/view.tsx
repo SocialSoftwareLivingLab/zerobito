@@ -26,8 +26,17 @@ export default function RegistrarTarefaGrupoModalView({
         async (evt: React.FormEvent) => {
             setLoading(true);
             evt.preventDefault();
-            await onSubmitForm();
-            setLoading(false);
+
+            try {
+                const response = await onSubmitForm();
+            } catch (error) {
+                console.error('Erro ao registrar tarefa:', error);
+                if (error.response.statusText === 'Not Found') {
+                    alert('Membro não encontrado no caso. Por favor, revise as informações.');
+                }
+            } finally {
+                setLoading(false);
+            }
         },
         [onSubmitForm]
     );

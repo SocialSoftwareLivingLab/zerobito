@@ -24,13 +24,55 @@ import RegistrarTarefaGrupoModal, {
 } from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal';
 import { RegistrarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/registrar-tarefa';
 
-export function AcoesLinha({ row }: { row: MembroGrupoTrabalho }) {
-    return (
-        <ColunaAcao>
-            <Button>Aceitar</Button>
-        </ColunaAcao>
-    );
+interface Tarefa {
+    nome: string;
+    status: string;
 }
+const sampleTarefa: Tarefa[] = [
+    { nome: 'Task 1', status: 'Aceito' },
+    { nome: 'Task 2', status: 'Em andamento' },
+    { nome: 'Task 3', status: 'Atrasado' }
+];
+// Columns for tarefas DataTable
+const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
+    {
+        selector: (row) => row.nome,
+        sortable: true,
+        grow: 1.17
+    },
+    {
+        selector: (row) => row.status,
+        sortable: true
+    }
+];
+
+// Expandable row component with inner DataTable
+interface ExpandableRowProps {
+    data: Tarefa[];
+}
+
+const ExpandableRowComponent: React.FC<ExpandableRowProps> = ({ data }) => {
+    const [isModalEditarAberto, setModalEditar] = useState(false);
+    const abrirModal = (row: Tarefa) => setModalEditar(true);
+
+    return (
+        <div style={{ padding: '10px', backgroundColor: '#f9f9f9' }}>
+            <DataTable
+                data={data}
+                columns={TAREFAS_COLUMNS}
+                customStyles={dataTableStyle}
+                noDataComponent="Nenhuma tarefa encontrada"
+                onRowClicked={abrirModal}
+                noHeader
+                noTableHead
+            />
+            <EditarTarefaGrupoModal
+                aberto={isModalEditarAberto}
+                handleFecharModal={() => setModalEditar(false)}
+            />
+        </div>
+    );
+};
 
 export default function AtoresReuniao() {
     const { caso } = useCasoSelecionado();
@@ -78,10 +120,7 @@ export default function AtoresReuniao() {
 
     const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
 
-    const [isModalEditarAberto, setModalEditar] = useState(false);
     const [isModalTarefaAberto, setModalTarefa] = useState(false);
-
-    const abrirModal = (row: MembroGrupoTrabalho) => setModalEditar(true);
 
     return (
         <BoxContainer
@@ -105,15 +144,14 @@ export default function AtoresReuniao() {
                 noDataComponent="Nenhum membro foi encontrado"
                 columns={COLUNAS_MEMBROS_GRUPO_TRABALHO}
                 customStyles={dataTableStyle}
-                onRowClicked={abrirModal}></DataTable>
+                expandableRows
+                expandOnRowClicked
+                expandableRowsComponent={(row) => <ExpandableRowComponent data={sampleTarefa} />}
+            />
             <ConvidarMembroGrupoModal
                 aberto={isModalConvidarAberto}
                 handleFecharModal={() => setModalConvidarAberto(false)}
                 onSubmit={(data) => enviarConviteMutation.mutateAsync(data)}
-            />
-            <EditarTarefaGrupoModal
-                aberto={isModalEditarAberto}
-                handleFecharModal={() => setModalEditar(false)}
             />
             <RegistrarTarefaGrupoModal
                 aberto={isModalTarefaAberto}
