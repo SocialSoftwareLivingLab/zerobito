@@ -1,7 +1,8 @@
 import { TableColumn } from 'react-data-table-component';
 import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
+import { MembroGrupo } from '.';
 
-export const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroGrupoTrabalho>[] = [
+export const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroGrupo>[] = [
     {
         name: 'Nome',
         selector: (sel) => sel.nome,
@@ -19,6 +20,7 @@ export const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroGrupoTrabalho>[] 
     },
     {
         name: 'Tarefas',
-        selector: (sel) => '3'
+        selector: (sel) => sel.tarefasCount?.toString() || '0', // Use tarefasCount or fallback to '0'
+        sortable: true
     }
 ];

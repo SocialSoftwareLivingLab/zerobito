@@ -5,6 +5,7 @@ export async function buscarMembrosGrupo(idCaso: number) {
     const response = await api.get<MembroGrupoTrabalho[]>(
         `/api/v1/casos/${idCaso}/grupo-trabalho/membros`
     );
+    console.log(response.data);
 
     return response.data;
 }

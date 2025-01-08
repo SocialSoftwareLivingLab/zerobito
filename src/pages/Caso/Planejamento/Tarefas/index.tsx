@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import { FaUserPlus } from 'react-icons/fa6';
@@ -23,11 +23,25 @@ import RegistrarTarefaGrupoModal, {
     RegistrarTarefaGrupoModalFormData
 } from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal';
 import { RegistrarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/registrar-tarefa';
+import { buscarTarefasMembro } from '../../../../common/api/casos/grupo-trabalho/tarefas-membro';
 
 interface Tarefa {
     nome: string;
     status: string;
 }
+
+export interface MembroGrupo {
+    id: number;
+    identificador: string;
+    nome: string;
+    email: string;
+    status: {
+        codigo: string;
+        nome: string;
+    };
+    tarefasCount: number;
+}
+
 const sampleTarefa: Tarefa[] = [
     { nome: 'Task 1', status: 'Aceito' },
     { nome: 'Task 2', status: 'Em andamento' },
@@ -51,21 +65,48 @@ interface ExpandableRowProps {
     data: Tarefa[];
 }
 
-const ExpandableRowComponent: React.FC<ExpandableRowProps> = ({ data }) => {
+const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
+    const [tarefas, setTarefas] = useState<Tarefa[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const { caso } = useCasoSelecionado();
     const [isModalEditarAberto, setModalEditar] = useState(false);
+
+    useEffect(() => {
+        const fetchTarefas = async () => {
+            try {
+                const result = await buscarTarefasMembro(caso.id, id);
+                const transformedResult = result.map((tarefa) => ({
+                    ...tarefa,
+                    status: tarefa.status.nome // Transforme o status para string
+                }));
+                setTarefas(transformedResult);
+            } catch (error) {
+                console.error('Erro ao buscar tarefas:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchTarefas();
+    }, [id, caso]);
+
     const abrirModal = (row: Tarefa) => setModalEditar(true);
 
     return (
         <div style={{ padding: '10px', backgroundColor: '#f9f9f9' }}>
-            <DataTable
-                data={data}
-                columns={TAREFAS_COLUMNS}
-                customStyles={dataTableStyle}
-                noDataComponent="Nenhuma tarefa encontrada"
-                onRowClicked={abrirModal}
-                noHeader
-                noTableHead
-            />
+            {isLoading ? (
+                <div>Carregando tarefas...</div>
+            ) : (
+                <DataTable
+                    data={tarefas}
+                    columns={TAREFAS_COLUMNS}
+                    customStyles={dataTableStyle}
+                    noDataComponent="Nenhuma tarefa encontrada"
+                    onRowClicked={abrirModal}
+                    noHeader
+                    noTableHead
+                />
+            )}
             <EditarTarefaGrupoModal
                 aberto={isModalEditarAberto}
                 handleFecharModal={() => setModalEditar(false)}
@@ -81,6 +122,38 @@ export default function AtoresReuniao() {
         queryKey: ['casos', 'membros-grupo-trabalho'],
         queryFn: () => buscarMembrosGrupo(caso.id)
     });
+
+    const [membrosWithTaskCount, setMembrosWithTaskCount]: [
+        MembroGrupo[],
+        Dispatch<SetStateAction<MembroGrupo[]>>
+    ] = useState<MembroGrupo[]>([]);
+
+    useEffect(() => {
+        if (!data) return;
+
+        const fetchTarefasForMembros = async () => {
+            const updatedMembros = await Promise.all(
+                data.map(async (membro) => {
+                    try {
+                        const tarefas = await buscarTarefasMembro(caso.id, membro.id); // Fetch tasks for each member
+                        return {
+                            ...membro,
+                            tarefasCount: tarefas.length // Add task count
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching tasks for member ${membro.id}:`, error);
+                        return {
+                            ...membro,
+                            tarefasCount: 0 // Default to 0 if fetching fails
+                        };
+                    }
+                })
+            );
+            setMembrosWithTaskCount(updatedMembros);
+        };
+
+        fetchTarefasForMembros();
+    }, [caso.id, data]);
 
     const queryClient = useQueryClient();
 
@@ -138,7 +211,7 @@ export default function AtoresReuniao() {
                 </div>
             )}>
             <DataTable
-                data={data ?? []}
+                data={membrosWithTaskCount ?? []}
                 progressPending={isLoading}
                 progressComponent="Carregando..."
                 noDataComponent="Nenhum membro foi encontrado"
@@ -146,7 +219,7 @@ export default function AtoresReuniao() {
                 customStyles={dataTableStyle}
                 expandableRows
                 expandOnRowClicked
-                expandableRowsComponent={(row) => <ExpandableRowComponent data={sampleTarefa} />}
+                expandableRowsComponent={({ data }) => <ExpandableRowComponent id={data.id} />}
             />
             <ConvidarMembroGrupoModal
                 aberto={isModalConvidarAberto}

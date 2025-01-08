@@ -1,4 +1,5 @@
 export interface MembroGrupoTrabalho {
+    id: number;
     identificador: string;
     nome: string;
     email: string;
