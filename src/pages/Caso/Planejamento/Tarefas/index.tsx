@@ -66,31 +66,20 @@ interface ExpandableRowProps {
 }
 
 const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
-    const [tarefas, setTarefas] = useState<Tarefa[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
     const { caso } = useCasoSelecionado();
     const [isModalEditarAberto, setModalEditar] = useState(false);
 
-    useEffect(() => {
-        const fetchTarefas = async () => {
-            try {
-                const result = await buscarTarefasMembro(caso.id, id);
-                const transformedResult = result.map((tarefa) => ({
-                    ...tarefa,
-                    status: tarefa.status.nome // Transforme o status para string
-                }));
-                setTarefas(transformedResult);
-            } catch (error) {
-                console.error('Erro ao buscar tarefas:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchTarefas();
-    }, [id, caso]);
-
     const abrirModal = (row: Tarefa) => setModalEditar(true);
+
+    const { data: tarefas = [], isLoading } = useQuery({
+        queryKey: ['tarefas', caso.id, id],
+        queryFn: () => buscarTarefasMembro(caso.id, id),
+        select: (result) =>
+            result.map((tarefa) => ({
+                ...tarefa,
+                status: tarefa.status.nome // transforma status em string
+            }))
+    });
 
     return (
         <div style={{ padding: '10px', backgroundColor: '#f9f9f9' }}>
@@ -117,45 +106,32 @@ const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
 
 export default function AtoresReuniao() {
     const { caso } = useCasoSelecionado();
+    const queryClient = useQueryClient();
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['casos', 'membros-grupo-trabalho'],
-        queryFn: () => buscarMembrosGrupo(caso.id)
-    });
-
-    const [membrosWithTaskCount, setMembrosWithTaskCount]: [
-        MembroGrupo[],
-        Dispatch<SetStateAction<MembroGrupo[]>>
-    ] = useState<MembroGrupo[]>([]);
-
-    useEffect(() => {
-        if (!data) return;
-
-        const fetchTarefasForMembros = async () => {
-            const updatedMembros = await Promise.all(
-                data.map(async (membro) => {
+    const { data: membrosWithTaskCount = [], isLoading } = useQuery({
+        queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id],
+        queryFn: async () => {
+            const membros = await buscarMembrosGrupo(caso.id);
+            const membrosComTarefas = await Promise.all(
+                membros.map(async (membro) => {
                     try {
-                        const tarefas = await buscarTarefasMembro(caso.id, membro.id); // Fetch tasks for each member
+                        const tarefas = await buscarTarefasMembro(caso.id, membro.id);
                         return {
                             ...membro,
-                            tarefasCount: tarefas.length // Add task count
+                            tarefasCount: tarefas.length
                         };
                     } catch (error) {
-                        console.error(`Error fetching tasks for member ${membro.id}:`, error);
+                        console.error(`Erro ao buscar tarefas do membro ${membro.id}:`, error);
                         return {
                             ...membro,
-                            tarefasCount: 0 // Default to 0 if fetching fails
+                            tarefasCount: 0
                         };
                     }
                 })
             );
-            setMembrosWithTaskCount(updatedMembros);
-        };
-
-        fetchTarefasForMembros();
-    }, [caso.id, data]);
-
-    const queryClient = useQueryClient();
+            return membrosComTarefas;
+        }
+    });
 
     const enviarConviteMutation = useMutation({
         mutationFn: (data: ConvidarMembroGrupoFormData) => {
@@ -168,7 +144,9 @@ export default function AtoresReuniao() {
             });
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['casos', 'membros-grupo-trabalho'] });
+            await queryClient.invalidateQueries({
+                queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
+            });
             setModalConvidarAberto(false);
             await Swal.fire({
                 title: 'Convite enviado!',
@@ -188,11 +166,26 @@ export default function AtoresReuniao() {
                 nome: data.nome,
                 prazo: data.prazo
             });
+        },
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
+            });
+            await queryClient.invalidateQueries({
+                queryKey: ['tarefas', caso.id],
+                exact: false
+            });
+            await Swal.fire({
+                title: 'Tarefa registrada!',
+                text: 'Uma nova tarefa foi registrada com sucesso.',
+                icon: 'success',
+                timer: 4000,
+                confirmButtonText: 'Continuar'
+            });
         }
     });
 
     const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
-
     const [isModalTarefaAberto, setModalTarefa] = useState(false);
 
     return (
@@ -229,7 +222,10 @@ export default function AtoresReuniao() {
             <RegistrarTarefaGrupoModal
                 aberto={isModalTarefaAberto}
                 handleFecharModal={() => setModalTarefa(false)}
-                onSubmit={(data) => enviarTarefaMutation.mutateAsync(data)}
+                onSubmit={async (data) => {
+                    enviarTarefaMutation.mutateAsync(data);
+                    setModalTarefa(false);
+                }}
             />
         </BoxContainer>
     );
