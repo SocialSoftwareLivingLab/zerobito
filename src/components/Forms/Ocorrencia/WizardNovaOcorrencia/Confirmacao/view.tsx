@@ -52,6 +52,7 @@ export default function ConfirmacaoOcorrenciaView({
             <Section>
                 <h3>Informações da vítima</h3>
 
+                <p>Quantidade de vítimas: {data.vitima.quantidade}</p>
                 <p>Nome: {data.vitima.nome}</p>
                 <p>Vínculo: {data.vitima.vinculoEmpresa}</p>
 

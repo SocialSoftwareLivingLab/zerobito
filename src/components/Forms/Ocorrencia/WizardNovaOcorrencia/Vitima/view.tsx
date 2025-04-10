@@ -25,6 +25,10 @@ export default function VitimaView({
         <FormContainer>
             <form onSubmit={submitForm}>
                 {/* <input type="text" placeholder="Nome" {...register('nome')} /> */}
+                <Input
+                    label="Quantidade de Vítimas"
+                    {...register('quantidade', { required: false })}
+                />
                 <Input label="Nome da Vítima" {...register('nome', { required: false })} />
                 <ErrorMessage name="nome" errors={errors} as="p" />
 

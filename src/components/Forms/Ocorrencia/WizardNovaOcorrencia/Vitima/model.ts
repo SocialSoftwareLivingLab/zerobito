@@ -1,4 +1,5 @@
 export interface VitimaFormFields {
+    quantidade: string;
     nome: string;
     nomeEmpresa: string;
     cnpjEmpresa: string;

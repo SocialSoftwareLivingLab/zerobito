@@ -21,6 +21,7 @@ export interface CriarOcorrenciaRequest {
         logradouro: string;
     };
     vitima: {
+        numero: string;
         nome: string;
         vinculo: string;
         condicao: CondicaoVitima;

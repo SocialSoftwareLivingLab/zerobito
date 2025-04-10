@@ -35,6 +35,7 @@ export interface OcorrenciaModel {
         logradouro: string;
     };
     vitima: {
+        numero: string;
         nome: string;
         vinculo: string;
         condicao: string;

@@ -10,6 +10,7 @@ export interface InformacoesBasicasData {
 }
 
 export interface VitimaData {
+    quantidade: string;
     nome: string;
     nomeEmpresa: string;
     cnpjEmpresa: string;
