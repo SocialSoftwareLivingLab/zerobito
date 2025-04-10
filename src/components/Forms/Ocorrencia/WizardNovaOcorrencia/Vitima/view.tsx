@@ -26,8 +26,22 @@ export default function VitimaView({
             <form onSubmit={submitForm}>
                 {/* <input type="text" placeholder="Nome" {...register('nome')} /> */}
                 <Input
+                    type="number"
                     label="Quantidade de Vítimas"
-                    {...register('quantidade', { required: false })}
+                    {...register('quantidade', {
+                        required: 'Campo Obrigatório',
+                        validate: {
+                            isNumber: (value) =>
+                                !isNaN(Number(value)) || 'Quantidade precisa ser um número válido',
+                            minOne: (value) =>
+                                Number(value) >= 1 || 'Quantidade deve ser maior ou igual a 1'
+                        }
+                    })}
+                />
+                <ErrorMessage
+                    name="quantidade"
+                    errors={errors}
+                    as={<p className="error-message" />}
                 />
                 <Input label="Nome da Vítima" {...register('nome', { required: false })} />
                 <ErrorMessage name="nome" errors={errors} as="p" />

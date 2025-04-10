@@ -24,10 +24,10 @@
     background-color: #ffe6e6;
     border: 1px solid red;
     border-radius: 4px;
-    width: 10rem;
+    display: inline-block;
     margin-left: 1rem;
     padding: 5px;
-    position: relative;
+    text-align: left;
     margin-top: 5px;
     font-size: 12px;
     z-index: 1;
