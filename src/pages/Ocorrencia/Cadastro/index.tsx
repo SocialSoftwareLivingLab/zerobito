@@ -67,6 +67,7 @@ function RegistrarOcorrenciaPage() {
             empresa: {
                 cnpj: formData.vitima.cnpjEmpresa,
                 nome: formData.vitima.nomeEmpresa,
+                cnae: formData.vitima.cnaeEmpresa,
                 tomadoraServico: {
                     cnpj: formData.vitima.tomadoraDeServicoCNPJ,
                     nome: formData.vitima.tomadoraDeServicoNome

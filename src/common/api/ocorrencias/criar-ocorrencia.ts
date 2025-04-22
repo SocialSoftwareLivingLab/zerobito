@@ -29,6 +29,7 @@ export interface CriarOcorrenciaRequest {
     empresa: {
         nome: string;
         cnpj: string;
+        cnae: string;
         tomadoraServico: {
             nome: string;
             cnpj: string;

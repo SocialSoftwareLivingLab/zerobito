@@ -28,6 +28,7 @@ const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
             nome: formData.vitima.nome,
             nomeEmpresa: formData.vitima.nomeEmpresa,
             cnpjEmpresa: formData.vitima.cnpjEmpresa,
+            cnaeEmpresa: formData.vitima.cnaeEmpresa,
             tomadoraDeServicoNome: formData.vitima.tomadoraDeServicoNome,
             tomadoraDeServicoCNPJ: formData.vitima.tomadoraDeServicoCNPJ,
             tipoContrato: formData.vitima.vinculoEmpresa
@@ -42,6 +43,7 @@ const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
                 nome: data.nome,
                 nomeEmpresa: data.nomeEmpresa,
                 cnpjEmpresa: data.cnpjEmpresa,
+                cnaeEmpresa: data.cnaeEmpresa,
                 tomadoraDeServicoNome: data.tomadoraDeServicoNome,
                 tomadoraDeServicoCNPJ: data.tomadoraDeServicoCNPJ,
                 vinculoEmpresa: data.tipoContrato

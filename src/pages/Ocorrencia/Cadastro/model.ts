@@ -14,6 +14,7 @@ export interface VitimaData {
     nome: string;
     nomeEmpresa: string;
     cnpjEmpresa: string;
+    cnaeEmpresa: string;
     tomadoraDeServicoCNPJ: string;
     tomadoraDeServicoNome: string;
     vinculoEmpresa: string;

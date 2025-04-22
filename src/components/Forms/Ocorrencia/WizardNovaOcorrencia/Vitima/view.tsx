@@ -7,6 +7,7 @@ import '../style.css';
 import { FormContainer } from '../styles';
 import { VitimaFormFields } from './model';
 import { validarCNPJ } from '../../../../../common/Errors/MascaraCNPJ';
+import { validarCNAE } from '../../../../../common/Errors/MascaraCNAE';
 
 export interface VitimaViewProps {
     submitForm: () => void;
@@ -68,6 +69,21 @@ export default function VitimaView({
                 />
                 <ErrorMessage
                     name="cnpjEmpresa"
+                    errors={errors}
+                    as={<p className="error-message" />}
+                />
+
+                <Input
+                    label="CNAE Empresa Empregadora"
+                    {...register('cnaeEmpresa', {
+                        required: false,
+                        validate: {
+                            isValidCNAE: (value) => validarCNAE(value) || 'CNAE inválido'
+                        }
+                    })}
+                />
+                <ErrorMessage
+                    name="cnaeEmpresa"
                     errors={errors}
                     as={<p className="error-message" />}
                 />

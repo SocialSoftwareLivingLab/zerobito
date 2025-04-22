@@ -24,10 +24,44 @@ import RegistrarTarefaGrupoModal, {
 } from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal';
 import { RegistrarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/registrar-tarefa';
 import { buscarTarefasMembro } from '../../../../common/api/casos/grupo-trabalho/tarefas-membro';
+import Badge from '../../../../components/ui/Badge';
 
 interface Tarefa {
     nome: string;
     status: string;
+}
+
+const TIPOS_STATUS = {
+    CONCLUIDO: {
+        label: 'Pendente',
+        type: 'success'
+    },
+    ATRASADO: {
+        label: 'Atrasado',
+        type: 'danger'
+    },
+    EM_ANDAMENTO: {
+        label: 'Em andamento',
+        type: 'warning'
+    },
+    PENDENTE: {
+        label: 'Pendente',
+        type: 'warning'
+    },
+    ACEITO: {
+        label: 'Aceito',
+        type: 'success'
+    },
+    MONITORANDO: {
+        label: 'Atrasado',
+        type: 'danger'
+    }
+};
+
+export function BadgeStatusTarefa({ status }: { status: string | null }) {
+    console.log(status);
+    const tipo = TIPOS_STATUS[status];
+    return status && <Badge texto={tipo.label} type={tipo.type} />;
 }
 
 export interface MembroGrupo {
@@ -53,6 +87,14 @@ const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
         selector: (row) => row.nome,
         sortable: true,
         grow: 1.17
+    },
+    {
+        cell: (row) => {
+            const statusKey = row.status.toUpperCase().replace(/\s+/g, '_');
+            return <BadgeStatusTarefa status={statusKey} />;
+        },
+        sortable: true,
+        wrap: true
     },
     {
         selector: (row) => row.status,

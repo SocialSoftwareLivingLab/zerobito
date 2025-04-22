@@ -58,6 +58,7 @@ export default function ConfirmacaoOcorrenciaView({
 
                 {data.vitima.nomeEmpresa && <p>Empresa: {data.vitima.nomeEmpresa}</p>}
                 {data.vitima.cnpjEmpresa && <p>CNPJ Empresa: {data.vitima.cnpjEmpresa}</p>}
+                {data.vitima.cnaeEmpresa && <p>CNAE Empresa: {data.vitima.cnaeEmpresa}</p>}
 
                 {data.vitima.tomadoraDeServicoNome && (
                     <p>Tomadora de Serviço: {data.vitima.tomadoraDeServicoNome}</p>
