@@ -9,11 +9,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
 import { buscarMembrosGrupo } from '../../../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
-import ConvidarMembroGrupoModal, {
-    ConvidarMembroGrupoFormData
-} from '../../../../components/Caso/GrupoTrabalho/ConvidarMembroGrupoModal';
-import { enviarConviteMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/enviar-convite';
-import Swal from 'sweetalert2';
 import { COLUNAS_MEMBROS_GRUPO_TRABALHO } from './tabela-membros-grupo';
 import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
 import { ColunaAcao } from './styles';

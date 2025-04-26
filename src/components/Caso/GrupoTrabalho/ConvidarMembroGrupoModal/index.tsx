@@ -6,6 +6,7 @@ export interface ConvidarMembroGrupoFormData {
     motivo: string;
     nome: string;
     email: string;
+    instituicao: string;
 }
 
 export interface ConvidarMembroGrupoModalProps {

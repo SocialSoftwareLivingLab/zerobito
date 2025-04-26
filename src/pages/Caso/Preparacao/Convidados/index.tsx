@@ -31,6 +31,7 @@ export default function ConvidadosGrupoTrabalho() {
             return enviarConviteMembroGrupo(caso.id, {
                 motivo: data.motivo,
                 convidado: {
+                    instituicao: data.instituicao,
                     nome: data.nome,
                     email: data.email
                 }

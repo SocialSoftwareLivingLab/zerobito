@@ -7,6 +7,7 @@ import { DossieContainer } from './styles';
 import { TabelaOcorrenciaNovo } from '../../../components/Tabelas/Ocorrencias';
 import useDossieViewModel from './model';
 import { TabelaOcorrenciaSimplesNovo } from '../../../components/Tabelas/OcorrenciasSimples';
+import SuasTarefas from '../../../components/Tabelas/tarefas-user-dossie';
 
 export default function DossiePage() {
     const { caso } = useCasoSelecionado();
@@ -19,34 +20,8 @@ export default function DossiePage() {
                 <DossieCard caso={caso}></DossieCard>
             </ColumnContainer>
             <ColumnContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
-                <BoxContainer titulo={'Digite infos'}>
-                    <span>Infos</span>
-                </BoxContainer>
                 <TabelaOcorrenciaSimplesNovo ocorrencias={eventos} />
+                <SuasTarefas />
             </ColumnContainer>
         </DossieContainer>
     );

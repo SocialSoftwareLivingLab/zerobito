@@ -3,8 +3,16 @@ import { ConvitePageContainer, DadosConviteContainer } from './styles';
 import { Button } from '../../components/ui/Button';
 
 import { MdOutgoingMail } from 'react-icons/md';
+import { aceitarConviteMembroGrupo } from '../../common/api/casos/grupo-trabalho/aceitar-convite';
+import { useParams } from 'react-router-dom';
 
 export default function CasoConvite() {
+    const { token } = useParams(); // pega o ID da URL
+
+    const handleAceitar = async () => {
+        await aceitarConviteMembroGrupo(token);
+    };
+
     return (
         <ConvitePageContainer>
             <DadosConviteContainer>
@@ -26,7 +34,9 @@ export default function CasoConvite() {
                     </span>
                 </section>
                 <section>
-                    <Button type="submit">Aceitar</Button>
+                    <Button type="submit" action={handleAceitar}>
+                        Aceitar
+                    </Button>
                     <Button type="cancel">Recusar</Button>
                     <Button>Indicar outro ator</Button>
                 </section>

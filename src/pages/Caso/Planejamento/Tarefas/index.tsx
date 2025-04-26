@@ -69,6 +69,7 @@ export interface MembroGrupo {
     identificador: string;
     nome: string;
     email: string;
+    instituicao: string;
     status: {
         codigo: string;
         nome: string;
@@ -95,17 +96,8 @@ const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
         },
         sortable: true,
         wrap: true
-    },
-    {
-        selector: (row) => row.status,
-        sortable: true
     }
 ];
-
-// Expandable row component with inner DataTable
-interface ExpandableRowProps {
-    data: Tarefa[];
-}
 
 const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
     const { caso } = useCasoSelecionado();
@@ -181,7 +173,8 @@ export default function AtoresReuniao() {
                 motivo: data.motivo,
                 convidado: {
                     nome: data.nome,
-                    email: data.email
+                    email: data.email,
+                    instituicao: data.instituicao
                 }
             });
         },

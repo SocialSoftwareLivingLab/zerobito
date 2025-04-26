@@ -9,7 +9,7 @@ export const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroGrupoTrabalho>[] 
     },
     {
         name: 'Instituição',
-        selector: (sel) => 'Não informada',
+        selector: (sel) => sel.instituicao || 'Não informada',
         sortable: true
     },
     {

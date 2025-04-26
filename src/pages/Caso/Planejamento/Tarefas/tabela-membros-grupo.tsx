@@ -1,7 +1,6 @@
 import { TableColumn } from 'react-data-table-component';
 import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
 import { BadgeStatusTarefa, MembroGrupo } from '.';
-import { BadgeStatus } from './index';
 import React from 'react';
 
 export const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroGrupo>[] = [
@@ -12,7 +11,7 @@ export const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroGrupo>[] = [
     },
     {
         name: 'Instituições',
-        selector: (sel) => 'Não informada',
+        selector: (sel) => sel.instituicao || 'Não informada',
         sortable: true
     },
     {
