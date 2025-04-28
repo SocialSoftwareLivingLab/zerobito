@@ -57,8 +57,6 @@ export default function LocalizacaoCard() {
     });
 
     useEffect(() => {
-        console.log('effect', isLoading, data);
-
         if (!isLoading && data) {
             setMarcadoresMapa([data as MarcadorLocalizacaoMapa]);
         }
@@ -115,8 +113,6 @@ export default function LocalizacaoCard() {
             localizacao.logradouro
         ]
     );
-
-    // console.log(marcadorAtual);
 
     return (
         <LocalizacaoCardContainer>

@@ -11,7 +11,7 @@ export interface CriarCasoFormProps {
 
 export default function CriarCasoForm({ submit }: CriarCasoFormProps) {
     const { register, control, handleSubmit } = useForm<CriarCasoFormData>({
-        defaultValues: { nome: null, coordenador: null }
+        defaultValues: { nome: null, coordenador: null, instituicao: null }
     });
 
     const loadOptions = async (inputValue: string) => {

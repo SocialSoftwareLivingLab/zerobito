@@ -10,6 +10,5 @@ export interface CriarNotificacaoRequest {
 }
 
 export async function EditarNotificacao(idCaso: number, notificacao: CriarNotificacaoRequest) {
-    console.log(notificacao);
     await api.put(`/api/v1/casos/${idCaso}/notificacoes`, notificacao);
 }

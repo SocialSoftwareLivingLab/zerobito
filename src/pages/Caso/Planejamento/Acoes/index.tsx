@@ -17,7 +17,6 @@ function BotoesAcoesReuniao() {
 
     const onReunioesClick = useCallback(
         (caso: Caso) => {
-            console.log(caso.id);
             navigate(`/casos/${caso.id}/planejemento/reunioes`);
         },
         [navigate]

@@ -24,6 +24,12 @@ export default function CriarCasoFormView({
         <FormContainer onSubmit={submit}>
             <Input label="Nome do caso" type="text" {...register('nome', { required: true })} />
 
+            <Input
+                label="Instituição"
+                type="text"
+                {...register('instituicao', { required: true })}
+            />
+
             <Controller
                 name="coordenador"
                 control={control}

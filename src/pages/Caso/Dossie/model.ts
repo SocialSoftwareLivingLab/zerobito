@@ -11,9 +11,6 @@ const useDossieViewModel = (id: number) => {
         });
     }, [id]);
 
-    console.log('eventos:');
-    console.log(eventos);
-
     return {
         eventos
     };

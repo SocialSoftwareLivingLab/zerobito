@@ -30,7 +30,6 @@ export default function ReunioesPlanejamento() {
     const handleSubmitDataReuniao = useCallback(
         async (formData: DataReuniaoFormField) => {
             const dataString = `${formData.data}T${formData.hora}:00`;
-            console.log(dataString);
             const dataSelecionada = new Date(dataString);
             const dataFormatada = dataSelecionada.toISOString();
             try {

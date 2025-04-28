@@ -61,7 +61,6 @@ const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
 ];
 
 export function BadgeStatusTarefa({ status }: { status: string | null }) {
-    console.log(status);
     const tipo = TIPOS_STATUS[status];
     return status && <Badge texto={tipo.label} type={tipo.type} />;
 }

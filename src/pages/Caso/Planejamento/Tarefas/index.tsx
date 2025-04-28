@@ -59,7 +59,6 @@ const TIPOS_STATUS = {
 };
 
 export function BadgeStatusTarefa({ status }: { status: string | null }) {
-    console.log(status);
     const tipo = TIPOS_STATUS[status];
     return status && <Badge texto={tipo.label} type={tipo.type} />;
 }

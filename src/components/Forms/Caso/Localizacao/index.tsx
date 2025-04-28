@@ -46,10 +46,6 @@ export default function AlterarLocalizacaoCasoForm({
     const coordenada = watch('coordenada');
 
     useEffect(() => {
-        console.log('Comparacao');
-        console.log(coordenada);
-        console.log(localizacao.latitude);
-        console.log(localizacao.longitude);
         if (
             coordenada &&
             (coordenada.latitude !== localizacao.latitude ||
