@@ -45,12 +45,10 @@ export default function MapaGeografico({
     });
 
     const posicaoInicial = useMemo(() => {
-        console.log('Carregando posicao inicial', marcadores);
         return marcadores.length > 0 ? marcadores[0].coordenada : COORDENADA_LATLON_CAMPINAS;
     }, [marcadores]);
 
     useEffect(() => {
-        console.log('Atualizando posicao inicial', posicaoInicial, ref.current);
         ref.current?.flyTo(posicaoInicial, 13, { duration: 1 });
     }, [posicaoInicial]);
 

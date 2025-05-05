@@ -24,9 +24,11 @@ const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
 
     useEffect(() => {
         const data: VitimaFormFields = {
+            quantidade: Number(formData.vitima.quantidade),
             nome: formData.vitima.nome,
             nomeEmpresa: formData.vitima.nomeEmpresa,
             cnpjEmpresa: formData.vitima.cnpjEmpresa,
+            cnaeEmpresa: formData.vitima.cnaeEmpresa,
             tomadoraDeServicoNome: formData.vitima.tomadoraDeServicoNome,
             tomadoraDeServicoCNPJ: formData.vitima.tomadoraDeServicoCNPJ,
             tipoContrato: formData.vitima.vinculoEmpresa
@@ -37,9 +39,11 @@ const Vitima = forwardRef<FormStepApi, VitimaProps>((props, ref) => {
     const onSubmit: SubmitHandler<VitimaFormFields> = useCallback(
         (data) => {
             setVitimaData({
+                quantidade: String(data.quantidade),
                 nome: data.nome,
                 nomeEmpresa: data.nomeEmpresa,
                 cnpjEmpresa: data.cnpjEmpresa,
+                cnaeEmpresa: data.cnaeEmpresa,
                 tomadoraDeServicoNome: data.tomadoraDeServicoNome,
                 tomadoraDeServicoCNPJ: data.tomadoraDeServicoCNPJ,
                 vinculoEmpresa: data.tipoContrato

@@ -125,6 +125,10 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                 <div className="info">
                     <div className="linha">
                         <div className="coluna">
+                            <strong>Quantidade de Vítimas</strong>
+                            <span>{data.vitima.numero || 'Não informado'}</span>
+                        </div>
+                        <div className="coluna">
                             <strong>Nome</strong>
                             <span>{data.vitima.nome || 'Não informado'}</span>
                         </div>
@@ -148,6 +152,10 @@ export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
                         <div className="coluna">
                             <strong>CNPJ Empresa</strong>
                             <span>{data.empresa.cnpj || 'Não informado'}</span>
+                        </div>
+                        <div className="coluna">
+                            <strong>CNAE Empresa</strong>
+                            <span>{data.empresa.cnae || 'Não informado'}</span>
                         </div>
                     </div>
                     {data.empresa.tomadoraServico && (

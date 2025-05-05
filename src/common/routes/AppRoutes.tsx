@@ -22,6 +22,7 @@ import Notificacoes from '../../pages/Caso/Notificacoes';
 import CasoConvite from '../../pages/CasoConvite';
 import Preparacao from '../../pages/Caso/Preparacao';
 import Planejamento from '../../pages/Caso/Planejamento';
+import ReunioesPlanejamento from '../../pages/Caso/Planejamento/Reunioes';
 
 interface PrivateRouteConfig {
     path: string;
@@ -57,6 +58,11 @@ const AppRoutes = () => {
                         <Route index path=":id/notificacoes" element={<Notificacoes />} />
                         <Route index path=":id/preparacao" element={<Preparacao />} />
                         <Route index path=":id/planejamento" element={<Planejamento />} />
+                        <Route
+                            index
+                            path=":id/planejemento/reunioes"
+                            element={<ReunioesPlanejamento />}
+                        />
                     </Route>
                 </Route>
                 {/* Rotas Públicas */}

@@ -16,7 +16,11 @@ export default function NovoCasoPage({ ocorrencia }: NovoCasoPageProps) {
     const submit = async (data: CriarCasoFormData) => {
         await aceitarOcorrenciaComoCaso({
             ocorrencia: { id: ocorrencia.id },
-            caso: { nome: data.nome, coordenador: { id: data.coordenador } }
+            caso: {
+                nome: data.nome,
+                coordenador: { id: data.coordenador },
+                instituicao: data.instituicao
+            }
         });
 
         await Swal.fire({

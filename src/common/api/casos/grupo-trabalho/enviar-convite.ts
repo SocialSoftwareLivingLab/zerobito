@@ -5,6 +5,7 @@ interface EnviarConviteRequest {
     convidado: {
         nome: string;
         email: string;
+        instituicao: string;
     };
 }
 

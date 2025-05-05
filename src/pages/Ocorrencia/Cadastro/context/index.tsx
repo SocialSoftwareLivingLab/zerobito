@@ -29,6 +29,7 @@ export function CriarOcorrenciaWizardContextProvider({
             }
         },
         vitima: {
+            quantidade: '',
             nome: '',
             nomeEmpresa: '',
             cnpjEmpresa: '',

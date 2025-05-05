@@ -71,7 +71,9 @@ export function CasoNavegacao() {
                 {menus.map((menu, index) => {
                     // Define a URL condicional para "Planejamento"
                     const url =
-                        menu.titulo === 'Planejamento' && caso.status !== 'EM_PLANEJAMENTO'
+                        menu.titulo === 'Planejamento' &&
+                        caso.status !== 'EM_PLANEJAMENTO' &&
+                        caso.status !== null
                             ? '#' // Retorna '#' para impedir navegação
                             : menu.url(caso); // URL normal para outros casos
 

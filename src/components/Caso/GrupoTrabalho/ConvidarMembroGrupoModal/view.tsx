@@ -54,6 +54,12 @@ export default function ConvidarMembroGrupoModalView({
                         required
                         {...register('nome', { required: true })}
                     />
+                    <Input
+                        label="Instituição"
+                        placeholder="i.e orgão público x"
+                        required
+                        {...register('instituicao', { required: true })}
+                    />
                     <TextArea
                         label="Motivo"
                         placeholder="Informe o motivo do convite aqui"

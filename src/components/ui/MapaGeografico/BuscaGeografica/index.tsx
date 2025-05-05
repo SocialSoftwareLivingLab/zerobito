@@ -11,8 +11,6 @@ export default function BuscaGeografica() {
     const provider = getProviderBuscaGeografica();
     const result = provider.search({ query: 'Ji-Paraná' });
 
-    result.then((response) => console.log(response));
-
     useEffect(() => {
         map.addControl(control);
 

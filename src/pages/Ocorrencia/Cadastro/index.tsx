@@ -67,6 +67,7 @@ function RegistrarOcorrenciaPage() {
             empresa: {
                 cnpj: formData.vitima.cnpjEmpresa,
                 nome: formData.vitima.nomeEmpresa,
+                cnae: formData.vitima.cnaeEmpresa,
                 tomadoraServico: {
                     cnpj: formData.vitima.tomadoraDeServicoCNPJ,
                     nome: formData.vitima.tomadoraDeServicoNome
@@ -78,6 +79,7 @@ function RegistrarOcorrenciaPage() {
                 detalhe: formData.denunciante.adicionais
             },
             vitima: {
+                numero: formData.vitima.quantidade,
                 nome: formData.vitima.nome,
                 vinculo: formData.vitima.vinculoEmpresa,
                 condicao: formData.gravidade.obito as CondicaoVitima

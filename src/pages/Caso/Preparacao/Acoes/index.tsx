@@ -22,7 +22,6 @@ function BotoesAcoesPreparacao() {
 
     const iniciarPlanejamentoMutation = useMutation({
         mutationFn: () => {
-            console.log('Entrou na mutation');
             if (caso.status !== 'EM_PREPARACAO') {
                 // Lança um erro se a condição não for atendida
                 if (caso.status === 'Em Planejamento') {

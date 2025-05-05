@@ -7,6 +7,7 @@ import '../style.css';
 import { FormContainer } from '../styles';
 import { VitimaFormFields } from './model';
 import { validarCNPJ } from '../../../../../common/Errors/MascaraCNPJ';
+import { validarCNAE } from '../../../../../common/Errors/MascaraCNAE';
 
 export interface VitimaViewProps {
     submitForm: () => void;
@@ -25,6 +26,24 @@ export default function VitimaView({
         <FormContainer>
             <form onSubmit={submitForm}>
                 {/* <input type="text" placeholder="Nome" {...register('nome')} /> */}
+                <Input
+                    type="number"
+                    label="Quantidade de Vítimas"
+                    {...register('quantidade', {
+                        required: 'Campo Obrigatório',
+                        validate: {
+                            isNumber: (value) =>
+                                !isNaN(Number(value)) || 'Quantidade precisa ser um número válido',
+                            minOne: (value) =>
+                                Number(value) >= 1 || 'Quantidade deve ser maior ou igual a 1'
+                        }
+                    })}
+                />
+                <ErrorMessage
+                    name="quantidade"
+                    errors={errors}
+                    as={<p className="error-message" />}
+                />
                 <Input label="Nome da Vítima" {...register('nome', { required: false })} />
                 <ErrorMessage name="nome" errors={errors} as="p" />
 
@@ -50,6 +69,21 @@ export default function VitimaView({
                 />
                 <ErrorMessage
                     name="cnpjEmpresa"
+                    errors={errors}
+                    as={<p className="error-message" />}
+                />
+
+                <Input
+                    label="CNAE Empresa Empregadora"
+                    {...register('cnaeEmpresa', {
+                        required: false,
+                        validate: {
+                            isValidCNAE: (value) => validarCNAE(value) || 'CNAE inválido'
+                        }
+                    })}
+                />
+                <ErrorMessage
+                    name="cnaeEmpresa"
                     errors={errors}
                     as={<p className="error-message" />}
                 />

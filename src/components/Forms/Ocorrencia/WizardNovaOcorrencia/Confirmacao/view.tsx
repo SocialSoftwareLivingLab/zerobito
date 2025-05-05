@@ -52,11 +52,13 @@ export default function ConfirmacaoOcorrenciaView({
             <Section>
                 <h3>Informações da vítima</h3>
 
+                <p>Quantidade de vítimas: {data.vitima.quantidade}</p>
                 <p>Nome: {data.vitima.nome}</p>
                 <p>Vínculo: {data.vitima.vinculoEmpresa}</p>
 
                 {data.vitima.nomeEmpresa && <p>Empresa: {data.vitima.nomeEmpresa}</p>}
                 {data.vitima.cnpjEmpresa && <p>CNPJ Empresa: {data.vitima.cnpjEmpresa}</p>}
+                {data.vitima.cnaeEmpresa && <p>CNAE Empresa: {data.vitima.cnaeEmpresa}</p>}
 
                 {data.vitima.tomadoraDeServicoNome && (
                     <p>Tomadora de Serviço: {data.vitima.tomadoraDeServicoNome}</p>

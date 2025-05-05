@@ -44,7 +44,6 @@ export default function CriarNotificacaoModal({
 
     useEffect(() => {
         if (notificacao) {
-            console.log(notificacao);
             setValue('dataEmissao', new Date(notificacao.dataEmissao));
             setValue('tipoDocumento', notificacao.tipo.nome);
             setValue('identificador', notificacao.identificador);

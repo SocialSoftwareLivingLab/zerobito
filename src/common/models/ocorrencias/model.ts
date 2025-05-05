@@ -12,6 +12,7 @@ export interface OcorrenciaModel {
     empresa: {
         nome: string;
         cnpj: string;
+        cnae: string;
         tomadoraServico: {
             nome: string;
             cnpj?: string;
@@ -35,6 +36,7 @@ export interface OcorrenciaModel {
         logradouro: string;
     };
     vitima: {
+        numero: string;
         nome: string;
         vinculo: string;
         condicao: string;

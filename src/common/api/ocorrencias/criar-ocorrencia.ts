@@ -21,6 +21,7 @@ export interface CriarOcorrenciaRequest {
         logradouro: string;
     };
     vitima: {
+        numero: string;
         nome: string;
         vinculo: string;
         condicao: CondicaoVitima;
@@ -28,6 +29,7 @@ export interface CriarOcorrenciaRequest {
     empresa: {
         nome: string;
         cnpj: string;
+        cnae: string;
         tomadoraServico: {
             nome: string;
             cnpj: string;
