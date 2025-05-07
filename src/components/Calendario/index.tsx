@@ -2,44 +2,64 @@ import React from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './style.css';
+import { Tarefa } from '../../contexts/minhas-tarefas';
 
 export type CalendarItem = { data: string };
 
 interface MeuCalendarioProps {
-    tarefas?: CalendarItem[];
+    tarefas?: Tarefa[];
     reunioes?: CalendarItem[];
 }
 
-const tarefas = [
-    { id: 1, titulo: 'Fazer relatório', data: '2025-05-06' },
-    { id: 2, titulo: 'Enviar e-mail', data: '2025-05-08' }
-];
+export function MeuCalendario({ reunioes = [], tarefas = [] }: MeuCalendarioProps) {
+    const hojeStr = new Date().toISOString().split('T')[0];
 
-export function MeuCalendario({ reunioes = [] }: MeuCalendarioProps) {
-    const datasTarefas = tarefas.map((t) => t.data);
+    const datasTarefasDetalhadas = tarefas.map((t) => {
+        const dataStr = new Date(t.prazo).toISOString().split('T')[0];
+        const atrasada = dataStr < hojeStr;
+        return { data: dataStr, atrasada };
+    });
+
     const datasReunioes = reunioes.map((r) => new Date(r.data).toISOString().split('T')[0]);
-    console.log(datasReunioes);
 
     return (
-        <Calendar
-            tileContent={({ date, view }) => {
-                if (view !== 'month') return null;
-                const dateStr = date.toISOString().split('T')[0];
-                const hasTarefa = datasTarefas.includes(dateStr);
-                const hasReuniao = datasReunioes.includes(dateStr);
+        <div>
+            <Calendar
+                tileContent={({ date, view }) => {
+                    if (view !== 'month') return null;
+                    const dateStr = date.toISOString().split('T')[0];
 
-                return (
-                    <div className="bolinhas-container">
-                        {hasTarefa && (
-                            <span className="bolinha tarefa" title="Tarefa">
-                                {' '}
-                            </span>
-                        )}
-                        {hasReuniao && <span className="bolinha reuniao" title="Reunião"></span>}
-                    </div>
-                );
-            }}
-        />
+                    const tarefaDoDia = datasTarefasDetalhadas.find((t) => t.data === dateStr);
+                    const hasTarefa = !!tarefaDoDia;
+                    const isAtrasada = tarefaDoDia?.atrasada;
+                    const hasReuniao = datasReunioes.includes(dateStr);
+
+                    return (
+                        <div className="bolinhas-container">
+                            {hasTarefa && (
+                                <span
+                                    className={`bolinha ${isAtrasada ? 'atrasada' : 'tarefa'}`}
+                                    title={isAtrasada ? 'Tarefa Atrasada' : 'Tarefa'}></span>
+                            )}
+                            {hasReuniao && (
+                                <span className="bolinha reuniao" title="Reunião"></span>
+                            )}
+                        </div>
+                    );
+                }}
+            />
+            <div className="legenda">
+                <div>
+                    <span className="bolinha tarefa"></span> Tarefa
+                </div>
+                <div>
+                    <span className="bolinha atrasada"></span> Tarefa Atrasada
+                </div>
+                <div>
+                    <span className="bolinha reuniao"></span> Reunião
+                </div>
+            </div>
+        </div>
     );
 }
 

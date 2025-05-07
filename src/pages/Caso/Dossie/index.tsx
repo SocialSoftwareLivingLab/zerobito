@@ -13,11 +13,14 @@ import 'react-calendar/dist/Calendar.css';
 import { Value } from 'react-calendar/dist/esm/shared/types.js';
 import CalendarioCustomizado, { CalendarItem } from '../../../components/Calendario';
 import { getReunioes } from '../../../common/api/casos/planejamento/get-reunioes-marcadas';
+import { useTarefas } from '../../../contexts/minhas-tarefas';
 
 export default function DossiePage() {
     const { caso } = useCasoSelecionado();
 
     const { eventos } = useDossieViewModel(caso.id);
+
+    const { tarefas } = useTarefas();
 
     const [value, onChange] = useState<Value>(new Date());
 
@@ -46,7 +49,7 @@ export default function DossiePage() {
             <ColumnContainer>
                 <TabelaOcorrenciaSimplesNovo ocorrencias={eventos} />
                 <SuasTarefas />
-                <CalendarioCustomizado reunioes={reunioes} />
+                <CalendarioCustomizado reunioes={reunioes} tarefas={tarefas} />
             </ColumnContainer>
         </DossieContainer>
     );

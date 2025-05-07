@@ -8,10 +8,12 @@ import Badge from '../../ui/Badge';
 import { dataTableStyle } from '../custom';
 import { useUsuarioAutenticado } from '../../../contexts/usuario-autenticado';
 import { buscarMembrosGrupo } from '../../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
+import { useTarefas } from '../../../contexts/minhas-tarefas';
 
 interface Tarefa {
     nome: string;
     status: string;
+    prazo: Date;
 }
 
 const TIPOS_STATUS = {
@@ -77,34 +79,8 @@ export interface MembroGrupo {
     tarefasCount: number;
 }
 
-const sampleTarefa: Tarefa[] = [
-    { nome: 'Task 1', status: 'Aceito' },
-    { nome: 'Task 2', status: 'Em andamento' },
-    { nome: 'Task 3', status: 'Atrasado' }
-];
-
 export default function SuasTarefas() {
-    const { caso } = useCasoSelecionado();
-    const { data } = useUsuarioAutenticado();
-    const queryClient = useQueryClient();
-
-    const user = data;
-
-    const { data: membro } = useQuery({
-        queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id],
-        queryFn: async () => await buscarMembrosGrupo(caso.id),
-        select: (result) => result.find((m) => m.nome === user.nome)
-    });
-
-    const { data: tarefas = [], isLoading } = useQuery({
-        queryKey: ['tarefas', caso.id, membro?.id],
-        queryFn: () => (membro?.id ? buscarTarefasMembro(caso.id, membro.id) : Promise.resolve([])),
-        select: (result) =>
-            result.map((tarefa) => ({
-                ...tarefa,
-                status: tarefa.status.nome
-            }))
-    });
+    const { tarefas, isLoading } = useTarefas();
 
     return (
         <BoxContainer titulo="Suas tarefas do caso">
