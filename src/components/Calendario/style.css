@@ -1,0 +1,41 @@
+.bolinhas-container {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 2px;
+  }
+  
+  .bolinha {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .tarefa {
+    background-color: orange;
+  }
+  
+  .reuniao {
+    background-color: blue;
+  }
+  
+  /* Remove fundo do dia atual */
+.react-calendar__tile--now {
+    background: none !important;
+    color: inherit;
+    font-weight: normal;
+  }
+  
+  /* Remove fundo do dia selecionado */
+  .react-calendar__tile--active {
+    background: none !important;
+    color: inherit;
+    font-weight: normal;
+  }
+  
+  /* Evita hover mudar a cor também, opcional */
+  .react-calendar__tile:enabled:hover,
+  .react-calendar__tile:enabled:focus {
+    background: none;
+  }
