@@ -23,6 +23,8 @@ import CasoConvite from '../../pages/CasoConvite';
 import Preparacao from '../../pages/Caso/Preparacao';
 import Planejamento from '../../pages/Caso/Planejamento';
 import ReunioesPlanejamento from '../../pages/Caso/Planejamento/Reunioes';
+import EsqueciSenha from '../../pages/EsqueciSenha';
+import RedefinirSenha from '../../pages/RedefinirSenha';
 
 interface PrivateRouteConfig {
     path: string;
@@ -33,7 +35,9 @@ const publicRoutes: PrivateRouteConfig[] = [
     { path: '/login', Component: Login },
     { path: '/cadastro', Component: Cadastro },
     { path: '/sobre', Component: SobreNos },
-    { path: '/contato', Component: Contato }
+    { path: '/contato', Component: Contato },
+    { path: '/esqueci-minha-senha', Component: EsqueciSenha },
+    { path: '/redefinir-senha', Component: RedefinirSenha }
 ];
 
 const AppRoutes = () => {
