@@ -33,6 +33,7 @@ export interface CriarOcorrenciaRequest {
         tomadoraServico: {
             nome: string;
             cnpj: string;
+            cnae: string;
         };
     };
     fonte: {

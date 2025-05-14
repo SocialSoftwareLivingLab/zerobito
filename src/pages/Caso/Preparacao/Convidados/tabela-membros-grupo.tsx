@@ -1,5 +1,34 @@
 import { TableColumn } from 'react-data-table-component';
 import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
+import BadgeStatus, { BadgeStatusTarefa } from '.';
+import React from 'react';
+
+export const TIPOS_STATUS = {
+    CONCLUIDO: {
+        label: 'Pendente',
+        type: 'success'
+    },
+    ATRASADO: {
+        label: 'Atrasado',
+        type: 'danger'
+    },
+    EM_ANDAMENTO: {
+        label: 'Em andamento',
+        type: 'warning'
+    },
+    PENDENTE: {
+        label: 'Pendente',
+        type: 'warning'
+    },
+    ACEITO: {
+        label: 'Aceito',
+        type: 'success'
+    },
+    MONITORANDO: {
+        label: 'Atrasado',
+        type: 'danger'
+    }
+};
 
 export const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroGrupoTrabalho>[] = [
     {
@@ -14,7 +43,7 @@ export const COLUNAS_MEMBROS_GRUPO_TRABALHO: TableColumn<MembroGrupoTrabalho>[] 
     },
     {
         name: 'Status',
-        selector: (sel) => sel.status.nome,
+        cell: (sel) => <BadgeStatusTarefa status={sel.status.codigo} />,
         sortable: true
     },
     {

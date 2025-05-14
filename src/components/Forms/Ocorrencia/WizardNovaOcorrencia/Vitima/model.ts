@@ -6,5 +6,6 @@ export interface VitimaFormFields {
     cnaeEmpresa: string;
     tomadoraDeServicoNome: string;
     tomadoraDeServicoCNPJ: string;
+    tomadoraDeServicoCNAE: string;
     tipoContrato: string;
 }

@@ -70,7 +70,8 @@ function RegistrarOcorrenciaPage() {
                 cnae: formData.vitima.cnaeEmpresa,
                 tomadoraServico: {
                     cnpj: formData.vitima.tomadoraDeServicoCNPJ,
-                    nome: formData.vitima.tomadoraDeServicoNome
+                    nome: formData.vitima.tomadoraDeServicoNome,
+                    cnae: formData.vitima.tomadoraDeServicoCNAE
                 }
             },
             fonte: {

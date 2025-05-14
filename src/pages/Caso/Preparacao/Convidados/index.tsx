@@ -4,7 +4,7 @@ import { Button } from '../../../../components/ui/Button';
 import { FaUserPlus } from 'react-icons/fa6';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { dataTableStyle } from '../../../../components/Tabelas/custom';
-import { COLUNAS_MEMBROS_GRUPO_TRABALHO } from './tabela-membros-grupo';
+import { COLUNAS_MEMBROS_GRUPO_TRABALHO, TIPOS_STATUS } from './tabela-membros-grupo';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -15,6 +15,12 @@ import ConvidarMembroGrupoModal, {
 } from '../../../../components/Caso/GrupoTrabalho/ConvidarMembroGrupoModal';
 import { enviarConviteMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/enviar-convite';
 import Swal from 'sweetalert2';
+import Badge from '../../../../components/ui/Badge';
+
+export function BadgeStatusTarefa({ status }: { status: string | null }) {
+    const tipo = TIPOS_STATUS[status];
+    return status && <Badge texto={tipo.label} type={tipo.type} />;
+}
 
 export default function ConvidadosGrupoTrabalho() {
     const { caso } = useCasoSelecionado();

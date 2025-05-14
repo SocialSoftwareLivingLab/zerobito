@@ -109,6 +109,20 @@ export default function VitimaView({
                             errors={errors}
                             as={<p className="error-message" />}
                         />
+                        <Input
+                            label="CNAE Tomadora de Serviço"
+                            {...register('tomadoraDeServicoCNAE', {
+                                required: false,
+                                validate: {
+                                    isValidCNPJ: (value) => validarCNAE(value) || 'CNAE inválido'
+                                }
+                            })}
+                        />
+                        <ErrorMessage
+                            name="tomadoraDeServicoCNAE"
+                            errors={errors}
+                            as={<p className="error-message" />}
+                        />
                     </>
                 )}
 
