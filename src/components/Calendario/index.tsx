@@ -16,15 +16,25 @@ export function MeuCalendario({ reunioes = [], tarefas = [] }: MeuCalendarioProp
 
     const datasTarefasDetalhadas = tarefas.map((t) => {
         const dataStr = new Date(t.prazo).toISOString().split('T')[0];
-        const atrasada = dataStr < hojeStr;
+        const atrasada = t.status === 'Atrasado';
         return { data: dataStr, atrasada };
     });
 
     const datasReunioes = reunioes.map((r) => new Date(r.data).toISOString().split('T')[0]);
 
     return (
-        <div>
+        <div className="calendario-wrapper">
             <Calendar
+                view="month" // mostra apenas os meses
+                minDetail="month" // impede seleção de ano
+                maxDetail="month" // impede seleção de dia/ano
+                prevLabel="‹"
+                nextLabel="›"
+                showNeighboringMonth={false}
+                formatMonthYear={(locale, date) => date.toLocaleString(locale, { month: 'long' })}
+                formatShortWeekday={(locale, date) =>
+                    date.toLocaleDateString(locale, { weekday: 'short' }).charAt(0).toUpperCase()
+                }
                 tileContent={({ date, view }) => {
                     if (view !== 'month') return null;
                     const dateStr = date.toISOString().split('T')[0];
@@ -48,17 +58,6 @@ export function MeuCalendario({ reunioes = [], tarefas = [] }: MeuCalendarioProp
                     );
                 }}
             />
-            <div className="legenda">
-                <div>
-                    <span className="bolinha tarefa"></span> Tarefa
-                </div>
-                <div>
-                    <span className="bolinha atrasada"></span> Tarefa Atrasada
-                </div>
-                <div>
-                    <span className="bolinha reuniao"></span> Reunião
-                </div>
-            </div>
         </div>
     );
 }

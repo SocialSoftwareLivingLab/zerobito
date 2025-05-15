@@ -15,41 +15,51 @@ import CalendarioCustomizado, { CalendarItem } from '../../../components/Calenda
 import { getReunioes } from '../../../common/api/casos/planejamento/get-reunioes-marcadas';
 import { useTarefas } from '../../../contexts/minhas-tarefas';
 
+function formatarData(data: string | Date): string {
+    const d = new Date(data);
+    return d.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit'
+    });
+}
+
 export default function DossiePage() {
     const { caso } = useCasoSelecionado();
 
-    const { eventos } = useDossieViewModel(caso.id);
+    const { eventos, reunioes, proximosEventos, tarefas } = useDossieViewModel(caso.id);
 
-    const { tarefas } = useTarefas();
-
-    const [value, onChange] = useState<Value>(new Date());
-
-    const [reunioes, setReunioes] = useState<CalendarItem[]>([]);
-
-    useEffect(() => {
-        const fetchReunioes = async () => {
-            try {
-                if (caso?.id) {
-                    const response = await getReunioes(caso.id);
-                    setReunioes(response); // ou apenas response, conforme sua API
-                    console.log(response);
-                }
-            } catch (error) {
-                console.error('Erro ao buscar a próxima reunião:', error);
-            }
-        };
-
-        fetchReunioes(); // chama assim que a página carrega
-    }, [caso?.id]); // roda sempre que caso.id mudar
     return (
         <DossieContainer>
             <ColumnContainer>
                 <DossieCard caso={caso}></DossieCard>
             </ColumnContainer>
-            <ColumnContainer>
-                <TabelaOcorrenciaSimplesNovo ocorrencias={eventos} />
-                <SuasTarefas />
-                <CalendarioCustomizado reunioes={reunioes} tarefas={tarefas} />
+            <ColumnContainer className="semFundo">
+                <div className="space">
+                    <TabelaOcorrenciaSimplesNovo ocorrencias={eventos} />
+                </div>
+                <div className="space">
+                    <SuasTarefas />
+                </div>
+                <div className="calendario-tarefas">
+                    <div className="lista-tarefas">
+                        <h3>Calendário</h3>
+                        {proximosEventos.map((item, index) => (
+                            <div key={index} className="card-tarefa">
+                                <div>
+                                    <strong>{item.tipo === 'tarefa' ? 'Tarefa' : 'Reunião'}</strong>
+                                    <div>{formatarData(item.data)}</div>
+                                </div>
+                                {item.tipo === 'tarefa' && (
+                                    <span
+                                        className={`status ${item.status.replace(/\s+/g, '-').toLowerCase()}`}>
+                                        {item.status === 'Atrasado' ? 'Atrasada' : item.status}
+                                    </span>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                    <CalendarioCustomizado reunioes={reunioes} tarefas={tarefas} />
+                </div>
             </ColumnContainer>
         </DossieContainer>
     );
