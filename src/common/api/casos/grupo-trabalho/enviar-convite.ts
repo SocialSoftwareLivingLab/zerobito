@@ -1,4 +1,6 @@
+import { AxiosError } from 'axios';
 import api from '../../../api';
+import Swal from 'sweetalert2';
 
 interface EnviarConviteRequest {
     motivo: string;
@@ -10,5 +12,29 @@ interface EnviarConviteRequest {
 }
 
 export async function enviarConviteMembroGrupo(idCaso: number, convite: EnviarConviteRequest) {
-    await api.post(`/api/v1/casos/${idCaso}/grupo-trabalho/convite`, convite);
+    try {
+        const response = await api.post(`/api/v1/casos/${idCaso}/grupo-trabalho/convite`, convite);
+        // Se o status não for 2xx, considera como erro (por precaução)
+        if (response.status >= 200 && response.status < 300) {
+            await Swal.fire({
+                title: 'Convite enviado!',
+                text: 'Foi enviado um convite para participação ao grupo de trabalho para o e-mail informado',
+                icon: 'success',
+                timer: 4000,
+                confirmButtonText: 'Continuar'
+            });
+        }
+
+        return response;
+    } catch (error) {
+        console.log('Erro em enviarConviteMembroGrupo:', error);
+
+        // Tenta extrair mensagem do backend (se for um AxiosError)
+        const mensagemErro =
+            (error as AxiosError)?.response?.data?.message ??
+            'Erro desconhecido ao enviar convite.';
+
+        // Lança erro com a mensagem limpa
+        alert(mensagemErro);
+    }
 }

@@ -10,6 +10,7 @@ export const PlanejamentoContainer = styled.div`
     .blue-line {
         padding-bottom: 15px;
         border-bottom: 1px solid #134780;
+        margin-bottom: 20px;
     }
 
     h3 {
@@ -49,5 +50,11 @@ export const PlanejamentoContainer = styled.div`
         margin-top: 25px;
         padding: 8px 16px; /* Ajusta o preenchimento para um tamanho adequado */
         margin-left: auto;
+    }
+
+    .botao-salvar {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
     }
 `;

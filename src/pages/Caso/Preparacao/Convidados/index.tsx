@@ -46,13 +46,6 @@ export default function ConvidadosGrupoTrabalho() {
         onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: ['casos', 'membros-grupo-trabalho'] });
             setModalConvidarAberto(false);
-            await Swal.fire({
-                title: 'Convite enviado!',
-                text: 'Foi enviado um convite para participação ao grupo de trabalho para o e-mail informado',
-                icon: 'success',
-                timer: 4000,
-                confirmButtonText: 'Continuar'
-            });
         }
     });
 

@@ -1,16 +1,68 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ConvitePageContainer, DadosConviteContainer } from './styles';
 import { Button } from '../../components/ui/Button';
-
 import { MdOutgoingMail } from 'react-icons/md';
 import { aceitarConviteMembroGrupo } from '../../common/api/casos/grupo-trabalho/aceitar-convite';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { UsuarioAutenticado } from '../../contexts/usuario-autenticado/model';
+import { buscarEmailConvite } from '../../common/api/casos/grupo-trabalho/get-email-convidado';
 
 export default function CasoConvite() {
-    const { token } = useParams(); // pega o ID da URL
+    const { token } = useParams();
+    const navigate = useNavigate();
+    const redirectTo = window.location.pathname;
+
+    const [logoutDone, setLogoutDone] = React.useState(false);
+
+    useEffect(() => {
+        const tokenArmazenado = localStorage.getItem('token');
+        if (!tokenArmazenado) return;
+
+        const usuarioSalvo = JSON.parse(localStorage.getItem('usuario') || '{}') as Exclude<
+            UsuarioAutenticado,
+            'token'
+        >;
+
+        const verificarEmail = async () => {
+            try {
+                const response = await buscarEmailConvite(token);
+                const emailDoConvite = response.email;
+                console.log(usuarioSalvo);
+                console.log(emailDoConvite);
+
+                if (!usuarioSalvo?.email || usuarioSalvo.email !== emailDoConvite) {
+                    // Logout + redirecionar
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('usuario');
+                    setLogoutDone(true);
+                    alert('Por favor faça login com o e-mail convidado.');
+                }
+            } catch (err) {
+                console.error('Erro ao verificar e-mail do convite:', err);
+            }
+        };
+
+        verificarEmail();
+    }, [token, navigate, redirectTo]);
+
+    if (logoutDone) {
+        window.location.href = `/login?redirectTo=${redirectTo}`;
+        return null;
+    }
 
     const handleAceitar = async () => {
-        await aceitarConviteMembroGrupo(token);
+        const tokenArmazenado = localStorage.getItem('token');
+        if (!tokenArmazenado) {
+            navigate(`/login?redirectTo=${redirectTo}`);
+            return;
+        }
+
+        try {
+            await aceitarConviteMembroGrupo(token);
+            alert('Convite aceito!');
+        } catch (error) {
+            alert('Erro ao aceitar convite.');
+        }
     };
 
     return (

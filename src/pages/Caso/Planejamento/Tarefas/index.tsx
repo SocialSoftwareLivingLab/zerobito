@@ -182,13 +182,6 @@ export default function AtoresReuniao() {
                 queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
             });
             setModalConvidarAberto(false);
-            await Swal.fire({
-                title: 'Convite enviado!',
-                text: 'Foi enviado um convite para participação ao grupo de trabalho para o e-mail informado',
-                icon: 'success',
-                timer: 4000,
-                confirmButtonText: 'Continuar'
-            });
         }
     });
 
