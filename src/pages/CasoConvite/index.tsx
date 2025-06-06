@@ -6,6 +6,7 @@ import { aceitarConviteMembroGrupo } from '../../common/api/casos/grupo-trabalho
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { UsuarioAutenticado } from '../../contexts/usuario-autenticado/model';
 import { buscarEmailConvite } from '../../common/api/casos/grupo-trabalho/get-email-convidado';
+import Swal from 'sweetalert2';
 
 export default function CasoConvite() {
     const { token } = useParams();
@@ -59,7 +60,14 @@ export default function CasoConvite() {
 
         try {
             await aceitarConviteMembroGrupo(token);
-            alert('Convite aceito!');
+            await Swal.fire({
+                title: 'Convite aceito!',
+                text: 'Você agora faz parte do caso x.',
+                icon: 'success',
+                timer: 4000,
+                confirmButtonText: 'Continuar para a home'
+            });
+            navigate('/home');
         } catch (error) {
             alert('Erro ao aceitar convite.');
         }

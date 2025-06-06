@@ -25,6 +25,8 @@ export function BadgeStatusTarefa({ status }: { status: string | null }) {
 export default function ConvidadosGrupoTrabalho() {
     const { caso } = useCasoSelecionado();
 
+    const coordenador = caso.coordenador.nome;
+
     const { data, isLoading } = useQuery({
         queryKey: ['casos', 'membros-grupo-trabalho'],
         queryFn: () => buscarMembrosGrupo(caso.id)
@@ -51,6 +53,11 @@ export default function ConvidadosGrupoTrabalho() {
 
     const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
 
+    const membrosComNomeModificado = (data ?? []).map((membro) => ({
+        ...membro,
+        nome: membro.nome === coordenador ? `* ${membro.nome}` : membro.nome
+    }));
+
     return (
         <BoxContainer
             titulo="Convidados"
@@ -61,12 +68,15 @@ export default function ConvidadosGrupoTrabalho() {
                 </Button>
             )}>
             <DataTable
-                data={data ?? []}
+                data={membrosComNomeModificado}
                 progressPending={isLoading}
                 progressComponent="Carregando..."
                 noDataComponent="Nenhum membro foi encontrado"
                 columns={COLUNAS_MEMBROS_GRUPO_TRABALHO}
                 customStyles={dataTableStyle}></DataTable>
+            <span style={{ marginTop: '20px', display: 'inline-block' }}>
+                * Coordenador do Caso
+            </span>
             <ConvidarMembroGrupoModal
                 aberto={isModalConvidarAberto}
                 handleFecharModal={() => setModalConvidarAberto(false)}

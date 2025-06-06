@@ -2,6 +2,7 @@ import { TableColumn } from 'react-data-table-component';
 import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
 import BadgeStatus, { BadgeStatusTarefa } from '.';
 import React from 'react';
+import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
 
 export const TIPOS_STATUS = {
     CONCLUIDO: {

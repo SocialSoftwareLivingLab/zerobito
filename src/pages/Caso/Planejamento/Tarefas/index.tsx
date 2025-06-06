@@ -217,7 +217,7 @@ export default function AtoresReuniao() {
 
     return (
         <BoxContainer
-            titulo="Atores / Situação das ações"
+            titulo="Atores / Situação das Tarefas"
             acoesContainer={() => (
                 <div>
                     <Button action={() => setModalConvidarAberto(true)}>

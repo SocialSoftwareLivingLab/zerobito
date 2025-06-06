@@ -67,6 +67,7 @@ const useCadastroTokenViewModel = () => {
             const response = await register(nome, email, senha);
             setLoading(false);
             if (response.status === 201) {
+                const redirectTo = `/convites/${tokenEmail}`;
                 await Swal.fire({
                     title: 'Cadastro Realizado!',
                     text: 'Usuário foi criado com sucesso',
@@ -74,7 +75,7 @@ const useCadastroTokenViewModel = () => {
                     timer: 4000,
                     confirmButtonText: 'Continuar'
                 });
-                navigate('/login');
+                navigate(`/login?redirectTo=${redirectTo}`);
             }
         } catch (error) {
             setLoading(false);
