@@ -145,7 +145,6 @@ export default function ReunioesPlanejamento() {
                             </form>
                         </BoxContainer>
                     </div>
-                    <AtasAnteriores></AtasAnteriores>
                 </div>
             </div>
         </PlanejamentoContainer>

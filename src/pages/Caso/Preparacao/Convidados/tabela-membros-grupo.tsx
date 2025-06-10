@@ -5,18 +5,6 @@ import React from 'react';
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
 
 export const TIPOS_STATUS = {
-    CONCLUIDO: {
-        label: 'Pendente',
-        type: 'success'
-    },
-    ATRASADO: {
-        label: 'Atrasado',
-        type: 'danger'
-    },
-    EM_ANDAMENTO: {
-        label: 'Em andamento',
-        type: 'warning'
-    },
     PENDENTE: {
         label: 'Pendente',
         type: 'warning'
@@ -25,8 +13,8 @@ export const TIPOS_STATUS = {
         label: 'Aceito',
         type: 'success'
     },
-    MONITORANDO: {
-        label: 'Atrasado',
+    RECUSADO: {
+        label: 'Recusado',
         type: 'danger'
     }
 };

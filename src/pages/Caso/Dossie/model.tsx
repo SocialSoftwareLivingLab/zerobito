@@ -7,7 +7,7 @@ import { Tarefa } from '../../../contexts/minhas-tarefas';
 import { CalendarItem } from '../../../components/Calendario';
 import { getReunioes } from '../../../common/api/casos/planejamento/get-reunioes-marcadas';
 
-const useDossieViewModel = (id: number) => {
+export const useDossieViewModel = (id: number) => {
     const [eventos, setOcorrencias] = useState<OcorrenciaModel[]>([]);
     const [reunioes, setReunioes] = useState<CalendarItem[]>([]);
 

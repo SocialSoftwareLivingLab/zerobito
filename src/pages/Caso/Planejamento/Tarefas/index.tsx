@@ -55,6 +55,10 @@ const TIPOS_STATUS = {
     MONITORANDO: {
         label: 'Atrasado',
         type: 'danger'
+    },
+    RECUSADO: {
+        label: 'Recusado',
+        type: 'danger'
     }
 };
 

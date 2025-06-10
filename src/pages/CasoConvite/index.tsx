@@ -7,6 +7,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { UsuarioAutenticado } from '../../contexts/usuario-autenticado/model';
 import { buscarEmailConvite } from '../../common/api/casos/grupo-trabalho/get-email-convidado';
 import Swal from 'sweetalert2';
+import { recusarConviteMembroGrupo } from '../../common/api/casos/grupo-trabalho/recusar-convite';
 
 export default function CasoConvite() {
     const { token } = useParams();
@@ -28,8 +29,6 @@ export default function CasoConvite() {
             try {
                 const response = await buscarEmailConvite(token);
                 const emailDoConvite = response.email;
-                console.log(usuarioSalvo);
-                console.log(emailDoConvite);
 
                 if (!usuarioSalvo?.email || usuarioSalvo.email !== emailDoConvite) {
                     // Logout + redirecionar
@@ -39,7 +38,8 @@ export default function CasoConvite() {
                     alert('Por favor faça login com o e-mail convidado.');
                 }
             } catch (err) {
-                console.error('Erro ao verificar e-mail do convite:', err);
+                alert('Convite não encontrado.');
+                navigate('/login');
             }
         };
 
@@ -72,6 +72,26 @@ export default function CasoConvite() {
             alert('Erro ao aceitar convite.');
         }
     };
+    const handleRecusar = async () => {
+        const tokenArmazenado = localStorage.getItem('token');
+        if (!tokenArmazenado) {
+            navigate(`/login?redirectTo=${redirectTo}`);
+            return;
+        }
+
+        try {
+            await recusarConviteMembroGrupo(token);
+            await Swal.fire({
+                title: 'Convite recusado com sucesso',
+                icon: 'success',
+                timer: 4000,
+                confirmButtonText: 'Continuar para a home'
+            });
+            navigate('/home');
+        } catch (error) {
+            alert('Erro ao recusar convite.');
+        }
+    };
 
     return (
         <ConvitePageContainer>
@@ -97,7 +117,9 @@ export default function CasoConvite() {
                     <Button type="submit" action={handleAceitar}>
                         Aceitar
                     </Button>
-                    <Button type="cancel">Recusar</Button>
+                    <Button type="cancel" action={handleRecusar}>
+                        Recusar
+                    </Button>
                     <Button>Indicar outro ator</Button>
                 </section>
             </DadosConviteContainer>
