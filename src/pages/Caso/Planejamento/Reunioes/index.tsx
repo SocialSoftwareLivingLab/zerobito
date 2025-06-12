@@ -15,6 +15,7 @@ import {
 import AtasAnteriores from '../AtasAnteriores';
 import TarefasReuniao from './tarefas';
 import { salvarAtaReuniao } from '../../../../common/api/casos/grupo-trabalho/aceitar-ata';
+import AtoresReuniao from '../Tarefas';
 
 export interface DataReuniaoFormField {
     data: Date;
@@ -115,7 +116,7 @@ export default function ReunioesPlanejamento() {
                 </div>
                 <div className="column">
                     <div style={{ marginBottom: '20px' }}>
-                        <TarefasReuniao></TarefasReuniao>
+                        <AtoresReuniao></AtoresReuniao>
                     </div>
                     <div style={{ marginBottom: '20px' }}>
                         <BoxContainer titulo={''}>
