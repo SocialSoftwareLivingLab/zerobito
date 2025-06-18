@@ -1,0 +1,161 @@
+.bolinhas-container {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.bolinha {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+/* Container para o calendário e legenda */
+.calendario-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%; /* ou defina um valor fixo como 320px */
+}
+
+.tarefa {
+  background-color: orange;
+}
+
+.atrasada {
+  background-color: red;
+}
+
+.reuniao {
+  background-color: blue;
+}
+
+.react-calendar {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove bordas das células */
+.react-calendar__tile {
+  border: none !important;
+  background: none;
+}
+
+/* Remove bordas de navegação */
+.react-calendar__navigation {
+  border: none !important;
+  background-color: none !important;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+  align-items: center;
+  gap: 8px; /* Espaço entre o mês e as setas */
+  padding-left: 12px; /* Opcional: dá um recuo da borda */
+}
+
+
+.react-calendar__navigation button:disabled {
+  background-color: transparent !important;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: transparent;
+  color: #134780;
+}
+/* Remove bordas das labels (meses/dias da semana) */
+.react-calendar__month-view__weekdays {
+  border: none !important;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  border: none !important;
+  background: none;
+  color: #134780; 
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+/* Remove fundo do dia atual */
+.react-calendar__tile--now {
+  background: none !important;
+  color: #134780;
+  font-weight: normal;
+}
+
+.react-calendar__tile {
+  color: #134780;  /* Exemplo: cinza escuro */
+}
+
+/* Remove fundo do dia selecionado */
+.react-calendar__tile--active {
+  background: none !important;
+  color: #134780;
+  font-weight: normal;
+  border: none !important;
+}
+
+/* Evita hover mudar a cor também, opcional */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: none;
+  color: #134780;
+}
+
+/* Também remove efeitos de foco ou hover sobre o selecionado */
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: none !important;
+  color: #134780 !important;
+}
+
+.react-calendar__navigation__label {
+  pointer-events: none; /* impede clique para abrir ano/mês */
+  padding-top: 3px;
+  order: 1; /* nome do mês vem primeiro */
+  font-weight: bold;
+  text-transform: capitalize;
+  background-color: none !important;
+  font-size: 23px;
+  color: #134780;
+  width: fit-content !important;
+  flex-grow: 0 !important;
+}
+
+.react-calendar__navigation__label__labelText {
+  font-weight: bold;
+}
+
+
+.react-calendar__navigation__arrow {
+  font-size: 35px;
+  font-weight: bolder;
+  color: #134780;
+  order: 2; /* setas vêm depois */
+}
+
+/* Se quiser esconder os botões de duplo avanço/retrocesso */
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+.react-calendar__navigation__prev-button,
+.react-calendar__navigation__next-button {
+  margin-left: 4px; 
+  margin-bottom: 0px !important;
+}
+
+/* Remove mudança de cor ao passar o mouse ou tocar */
+.react-calendar__navigation__prev-button:hover,
+.react-calendar__navigation__prev-button:focus,
+.react-calendar__navigation__next-button:hover,
+.react-calendar__navigation__next-button:focus {
+  background: none !important;
+  color:  #134780;
+  outline: none !important;
+} 
+

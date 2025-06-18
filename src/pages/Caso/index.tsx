@@ -8,6 +8,7 @@ import Header from '../../components/Page-Header';
 import { CasoSelecionadoContextProvider } from '../../contexts/caso-selecionado';
 import { CasoContent, CasoHeader } from './styles';
 import { tituloPaginas } from './titulo-paginas';
+import { TarefasProvider } from '../../contexts/minhas-tarefas';
 
 export default function Caso() {
     const { id } = useParams<{ id: string }>();
@@ -29,13 +30,15 @@ export default function Caso() {
 
             {!isLoading && (
                 <CasoSelecionadoContextProvider caso={data}>
-                    <CasoHeader>
-                        <CasoInfo />
-                        <CasoNavegacao />
-                    </CasoHeader>
-                    <CasoContent>
-                        <Outlet />
-                    </CasoContent>
+                    <TarefasProvider>
+                        <CasoHeader>
+                            <CasoInfo />
+                            <CasoNavegacao />
+                        </CasoHeader>
+                        <CasoContent>
+                            <Outlet />
+                        </CasoContent>
+                    </TarefasProvider>
                 </CasoSelecionadoContextProvider>
             )}
         </>

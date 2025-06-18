@@ -4,7 +4,7 @@ import { Button } from '../../../../components/ui/Button';
 import { FaUserPlus } from 'react-icons/fa6';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { dataTableStyle } from '../../../../components/Tabelas/custom';
-import { COLUNAS_MEMBROS_GRUPO_TRABALHO } from './tabela-membros-grupo';
+import { COLUNAS_MEMBROS_GRUPO_TRABALHO, TIPOS_STATUS } from './tabela-membros-grupo';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -15,9 +15,17 @@ import ConvidarMembroGrupoModal, {
 } from '../../../../components/Caso/GrupoTrabalho/ConvidarMembroGrupoModal';
 import { enviarConviteMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/enviar-convite';
 import Swal from 'sweetalert2';
+import Badge from '../../../../components/ui/Badge';
+
+export function BadgeStatusTarefa({ status }: { status: string | null }) {
+    const tipo = TIPOS_STATUS[status];
+    return status && <Badge texto={tipo.label} type={tipo.type} />;
+}
 
 export default function ConvidadosGrupoTrabalho() {
     const { caso } = useCasoSelecionado();
+
+    const coordenador = caso.coordenador.nome;
 
     const { data, isLoading } = useQuery({
         queryKey: ['casos', 'membros-grupo-trabalho'],
@@ -40,17 +48,15 @@ export default function ConvidadosGrupoTrabalho() {
         onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: ['casos', 'membros-grupo-trabalho'] });
             setModalConvidarAberto(false);
-            await Swal.fire({
-                title: 'Convite enviado!',
-                text: 'Foi enviado um convite para participação ao grupo de trabalho para o e-mail informado',
-                icon: 'success',
-                timer: 4000,
-                confirmButtonText: 'Continuar'
-            });
         }
     });
 
     const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
+
+    const membrosComNomeModificado = (data ?? []).map((membro) => ({
+        ...membro,
+        nome: membro.nome === coordenador ? `* ${membro.nome}` : membro.nome
+    }));
 
     return (
         <BoxContainer
@@ -62,12 +68,15 @@ export default function ConvidadosGrupoTrabalho() {
                 </Button>
             )}>
             <DataTable
-                data={data ?? []}
+                data={membrosComNomeModificado}
                 progressPending={isLoading}
                 progressComponent="Carregando..."
                 noDataComponent="Nenhum membro foi encontrado"
                 columns={COLUNAS_MEMBROS_GRUPO_TRABALHO}
                 customStyles={dataTableStyle}></DataTable>
+            <span style={{ marginTop: '20px', display: 'inline-block' }}>
+                * Coordenador do Caso
+            </span>
             <ConvidarMembroGrupoModal
                 aberto={isModalConvidarAberto}
                 handleFecharModal={() => setModalConvidarAberto(false)}

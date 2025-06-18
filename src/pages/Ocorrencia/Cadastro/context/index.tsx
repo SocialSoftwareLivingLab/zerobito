@@ -34,6 +34,7 @@ export function CriarOcorrenciaWizardContextProvider({
             nomeEmpresa: '',
             cnpjEmpresa: '',
             tomadoraDeServicoCNPJ: '',
+            tomadoraDeServicoCNAE: '',
             tomadoraDeServicoNome: '',
             vinculoEmpresa: 'Desconhecido'
         },

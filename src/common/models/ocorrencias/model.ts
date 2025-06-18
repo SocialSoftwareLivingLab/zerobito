@@ -16,6 +16,7 @@ export interface OcorrenciaModel {
         tomadoraServico: {
             nome: string;
             cnpj?: string;
+            cnae?: string;
         };
     };
     relator: {

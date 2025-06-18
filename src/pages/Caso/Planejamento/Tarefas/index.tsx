@@ -55,6 +55,10 @@ const TIPOS_STATUS = {
     MONITORANDO: {
         label: 'Atrasado',
         type: 'danger'
+    },
+    RECUSADO: {
+        label: 'Recusado',
+        type: 'danger'
     }
 };
 
@@ -182,13 +186,6 @@ export default function AtoresReuniao() {
                 queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
             });
             setModalConvidarAberto(false);
-            await Swal.fire({
-                title: 'Convite enviado!',
-                text: 'Foi enviado um convite para participação ao grupo de trabalho para o e-mail informado',
-                icon: 'success',
-                timer: 4000,
-                confirmButtonText: 'Continuar'
-            });
         }
     });
 
@@ -224,9 +221,9 @@ export default function AtoresReuniao() {
 
     return (
         <BoxContainer
-            titulo="Atores / Situação das ações"
+            titulo="Atores / Situação das Tarefas"
             acoesContainer={() => (
-                <div>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <Button action={() => setModalConvidarAberto(true)}>
                         <FaUserPlus />
                         Convidar

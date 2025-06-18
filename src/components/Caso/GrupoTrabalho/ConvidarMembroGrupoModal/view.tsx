@@ -56,7 +56,7 @@ export default function ConvidarMembroGrupoModalView({
                     />
                     <Input
                         label="Instituição"
-                        placeholder="i.e orgão público x"
+                        placeholder="Informa a afiliação do convidado."
                         required
                         {...register('instituicao', { required: true })}
                     />

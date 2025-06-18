@@ -15,6 +15,7 @@ import { FaUserPlus } from 'react-icons/fa';
 import DataTable from 'react-data-table-component';
 import { dataTableStyle } from '../../../../../components/Tabelas/custom';
 import { COLUNAS_MEMBROS } from './tebela-membors-grupo';
+import { AxiosError } from 'axios';
 
 export function AcoesLinha({ row }: { row: MembroGrupoTrabalho }) {
     return (
@@ -35,25 +36,23 @@ export default function TarefasReuniao() {
     const queryClient = useQueryClient();
 
     const enviarConviteMutation = useMutation({
-        mutationFn: (data: ConvidarMembroGrupoFormData) => {
-            return enviarConviteMembroGrupo(caso.id, {
+        mutationFn: async (data: ConvidarMembroGrupoFormData) => {
+            const response = await enviarConviteMembroGrupo(caso.id, {
                 motivo: data.motivo,
                 convidado: {
                     nome: data.nome,
                     email: data.email
                 }
             });
+            await queryClient.invalidateQueries({
+                queryKey: ['casos', 'membros-grupo-trabalho']
+            });
+            setModalConvidarAberto(false);
+            console.log(response);
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: ['casos', 'membros-grupo-trabalho'] });
             setModalConvidarAberto(false);
-            await Swal.fire({
-                title: 'Convite enviado!',
-                text: 'Foi enviado um convite para participação ao grupo de trabalho para o e-mail informado',
-                icon: 'success',
-                timer: 4000,
-                confirmButtonText: 'Continuar'
-            });
         }
     });
 

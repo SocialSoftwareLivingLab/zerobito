@@ -23,6 +23,9 @@ import CasoConvite from '../../pages/CasoConvite';
 import Preparacao from '../../pages/Caso/Preparacao';
 import Planejamento from '../../pages/Caso/Planejamento';
 import ReunioesPlanejamento from '../../pages/Caso/Planejamento/Reunioes';
+import EsqueciSenha from '../../pages/EsqueciSenha';
+import RedefinirSenha from '../../pages/RedefinirSenha';
+import CadastroConvite from '../../pages/CadastroConvite';
 
 interface PrivateRouteConfig {
     path: string;
@@ -33,7 +36,9 @@ const publicRoutes: PrivateRouteConfig[] = [
     { path: '/login', Component: Login },
     { path: '/cadastro', Component: Cadastro },
     { path: '/sobre', Component: SobreNos },
-    { path: '/contato', Component: Contato }
+    { path: '/contato', Component: Contato },
+    { path: '/esqueci-minha-senha', Component: EsqueciSenha },
+    { path: '/redefinir-senha', Component: RedefinirSenha }
 ];
 
 const AppRoutes = () => {
@@ -65,12 +70,12 @@ const AppRoutes = () => {
                         />
                     </Route>
                 </Route>
+                <Route path="/convites/:token" element={<CasoConvite />} />
+                <Route path="/cadastro-convite/:tokenEmail" element={<CadastroConvite />} />
                 {/* Rotas Públicas */}
                 {publicRoutes.map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} />
                 ))}
-
-                <Route path="/convites/:token" element={<CasoConvite />} />
             </Routes>
         </BrowserRouter>
     );

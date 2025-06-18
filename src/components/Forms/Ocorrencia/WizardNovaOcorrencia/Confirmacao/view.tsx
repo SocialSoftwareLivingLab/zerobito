@@ -66,6 +66,9 @@ export default function ConfirmacaoOcorrenciaView({
                 {data.vitima.tomadoraDeServicoCNPJ && (
                     <p>CNPJ Tomadora de Serviço: {data.vitima.tomadoraDeServicoCNPJ}</p>
                 )}
+                {data.vitima.tomadoraDeServicoCNAE && (
+                    <p>CNAE Tomadora de Serviço: {data.vitima.tomadoraDeServicoCNAE}</p>
+                )}
             </Section>
 
             <Section>

@@ -76,7 +76,7 @@ export function DossieCard({ caso }: DossieCardProps) {
             if (response.length > 0) {
                 setProximaReuniao(
                     Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(
-                        new Date(response[0].dataReuniao)
+                        new Date(response[0].data)
                     )
                 );
             } else {
