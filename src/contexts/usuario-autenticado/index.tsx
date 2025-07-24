@@ -14,6 +14,8 @@ export function resetarDados() {
 }
 
 export function salvarDados(data: UsuarioAutenticado) {
+    console.log('oque estou tentando salvar: ');
+    console.log(data);
     localStorage.setItem('token', data.token);
     localStorage.setItem('usuario', JSON.stringify(data));
 }
@@ -21,6 +23,7 @@ export function salvarDados(data: UsuarioAutenticado) {
 export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoContextProviderProps) {
     const [usuarioLogado, setUsuarioLogado] = useState<UsuarioAutenticado>({
         token: null,
+        id: null,
         nome: null,
         email: null,
         perfil: null
