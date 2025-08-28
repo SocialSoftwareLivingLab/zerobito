@@ -1,7 +1,9 @@
+import { Perfil } from '.';
+
 export interface UsuarioAutenticado {
     id: number;
     nome: string;
-    perfil: 'USER' | 'ADMIN';
+    perfil: Perfil | null;
     email: string;
     token: string;
 }

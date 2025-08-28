@@ -60,5 +60,6 @@ export const TIPOS_STATUS = {
 
 export const LABELS_TIPO_OCORRENCIA = {
     OBITO: 'Óbito',
-    INCIDENTE_ALTO_POTENCIAL: 'Alto potencial'
+    INCIDENTE_ALTO_POTENCIAL: 'Alto potencial',
+    ATENDIMENTO_HOSPITALAR: 'Atendimento hospitalar'
 };

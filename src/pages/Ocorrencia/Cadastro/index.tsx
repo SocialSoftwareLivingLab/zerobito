@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {
     CondicaoVitima,
@@ -11,12 +11,16 @@ import { FormStepApi } from '../../../components/Forms/Ocorrencia/WizardNovaOcor
 import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from './context';
 import './style.css';
 import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
+import { useUsuarioAutenticado } from '../../../contexts/usuario-autenticado';
 
 function RegistrarOcorrenciaPage() {
     const formLocalRef = useRef<FormStepApi>(null);
     const formVitimaRef = useRef<FormStepApi>(null);
     const formDenuncianteRef = useRef<FormStepApi>(null);
     const formGravidadeRef = useRef<FormStepApi>(null);
+    const { data: usuario } = useUsuarioAutenticado();
+
+    const permissao = usuario?.perfil?.permissoes?.includes('ocorrencias:criar');
 
     const [currentStep, setCurrentStep] = useState(1);
 
@@ -99,6 +103,11 @@ function RegistrarOcorrenciaPage() {
 
         navigate('/home');
     }, [formData, navigate]);
+
+    if (!permissao) {
+        alert('Este perfil não possui permissão para criar um evento.');
+        return <Navigate to="/" replace />;
+    }
 
     const registrarOcorrenciaViewProps: RegistrarOcorrenciaViewProps = {
         handles: {

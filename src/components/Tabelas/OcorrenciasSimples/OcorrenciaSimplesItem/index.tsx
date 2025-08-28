@@ -19,7 +19,8 @@ const tipoFonte = {
 
 const tipoCondicao = {
     OBITO: 'Óbito',
-    INCIDENTE_ALTO_POTENCIAL: 'Incidente com alto potencial de óbito'
+    INCIDENTE_ALTO_POTENCIAL: 'Incidente com alto potencial de óbito',
+    ATENDIMENTO_HOSPITALAR: 'Incidente com atendimento hospitalar'
 };
 
 const tipoGravidade = {
