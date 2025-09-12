@@ -14,23 +14,7 @@ Antes de iniciar, certifique-se de ter instalado em seu sistema:
 
 ## Configuração Local
 
-### Instalação de Dependências
-
-Para instalar as dependências necessárias do projeto, execute o seguinte comando no console:
-
-```bash
-npm install
-```
-
-## Execução da Aplicação
-
-### Para iniciar a aplicação, primeiro é necessário subir o backend. Após isso, execute o comando:
-
-```bash
-yarn start
-```
-
-A aplicação estará disponível em: http://localhost:3000
+Acesso a documentação [Setup.md](https://github.com/SocialSoftwareLivingLab/zerobito/blob/feat/docs/setup.md)
 
 # Configuração na Máquina Virtual (VM)
 
