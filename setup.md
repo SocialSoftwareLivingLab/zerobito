@@ -52,6 +52,8 @@ Antes de iniciar, certifique-se de ter instalado em seu sistema:
     yarn start:dev
     ```
   - ℹ️ Na primeira execução, o servidor cria toda a base de dados. Após isso, pare o servidor e rode novamente para que ele consiga inicializar corretamente.
-- Há um usuário root default, criado pelo seed [usuario-administrador.seed.ts](https://github.com/SocialSoftwareLivingLab/zerobito-backend/blob/develop/src/app/usuarios/seeds/usuario-administrador.seed.ts).
+- Há um login de um usuário root default, disponível em [usuario-administrador.seed.ts](https://github.com/SocialSoftwareLivingLab/zerobito-backend/blob/develop/src/app/usuarios/seeds/usuario-administrador.seed.ts).
 
-**Agora a aplicação está pronta para teste em [http:localhost:3000/](http://localhost:3000/)**
+**Agora a aplicação está pronta para teste**
+**Frontend está em [http:localhost:3000/](http://localhost:3000/)**
+**Backend está em [http:localhost:3001/](http://localhost:3001/)**
