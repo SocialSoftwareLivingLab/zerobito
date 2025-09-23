@@ -4,10 +4,10 @@
 
 Antes de iniciar, certifique-se de ter instalado em seu sistema:
 
-- [React JS](https://react.dev/)
-- [Node.js (versão LTS)](https://nodejs.org/en)
-- [Yarn](https://yarnpkg.com/)
-- [Docker & Docker Compose](https://www.docker.com/)
+- [React JS](https://react.dev/) (versão 18.x ou superior)
+- [Node.js](https://nodejs.org/en) (versão 20.x ou superior - LTS recomendada)
+- [Yarn](https://yarnpkg.com/) (versão 1.22.x ou superior)
+- [Docker & Docker Compose](https://www.docker.com/) (Docker Engine 20.10+ e Compose v2.x)
 
 
 ## Repositório `zerobito` - Aplicação Frontend
