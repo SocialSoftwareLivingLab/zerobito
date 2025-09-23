@@ -42,7 +42,7 @@ Atualmente, aceitamos os seguintes tipos de contribuições:
 
 
 5. **Pull Requests** 
-   * contra a branch `develop` do repositório principal.
+   * contra a branch `main` do repositório principal.
    * Explique claramente **o que foi feito**.
    * Referencie a **issue correspondente**, se houver.
 
