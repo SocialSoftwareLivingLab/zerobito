@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { PlanejamentoContainer } from '../styles';
 import AcoesReuniao from '../Acoes';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
@@ -16,6 +16,10 @@ import AtasAnteriores from '../AtasAnteriores';
 import TarefasReuniao from './tarefas';
 import { salvarAtaReuniao } from '../../../../common/api/casos/grupo-trabalho/aceitar-ata';
 import AtoresReuniao from '../Tarefas';
+import { useParams } from 'react-router-dom';
+import { obterAtaReuniao } from '../../../../common/api/casos/grupo-trabalho/obter-ata';
+import { obterPermissoesUsuarioNoCaso } from '../../../../common/api/usuarios/permissoes/permissoes-user';
+import { useQuery } from '@tanstack/react-query';
 
 export interface DataReuniaoFormField {
     data: Date;
@@ -24,20 +28,59 @@ export interface DataReuniaoFormField {
 
 export default function ReunioesPlanejamento() {
     const { caso } = useCasoSelecionado();
+    const { id, dataReuniao } = useParams();
     const { register, handleSubmit } = useForm<DataReuniaoFormField>({});
 
     const [errorData, setErrorData] = useState<string | null>(null);
     const [data, setData] = useState<Date | null>(null);
     const [ataReuniao, setAtaReuniao] = useState('');
 
+    const { data: permissoes = [] } = useQuery({
+        queryKey: ['permissoes'],
+        queryFn: () => obterPermissoesUsuarioNoCaso(caso.id)
+    });
+
+    console.log(permissoes);
+
+    const [isAtaChanged, setAtaChanged] = useState(false);
+
+    useEffect(() => {
+        const carregarAta = async () => {
+            if (!dataReuniao) return;
+            try {
+                const response = await obterAtaReuniao(caso.id, dataReuniao);
+                console.log(response);
+                if (response.data && response.data !== '') {
+                    setAtaChanged(true);
+                }
+                // Assumindo que a API retorna { conteudo: string }
+                setAtaReuniao(response.data || '');
+            } catch (error) {
+                console.error('Erro ao carregar a ata:', error);
+                setAtaReuniao(''); // fallback
+            }
+        };
+
+        carregarAta();
+    }, [dataReuniao, caso.id]);
+
     const handleSalvarAta = async () => {
+        if (isAtaChanged && !permissoes.includes('casos:editar-ata')) {
+            alert('Somente coordenadores podem alterar atas');
+            return;
+        }
         if (!ataReuniao.trim()) {
             alert('Preencha a ata antes de salvar.');
             return;
         }
 
+        if (ataReuniao.trim().length < 150) {
+            alert('A ata deve conter no mínimo 150 caracteres.');
+            return;
+        }
+
         try {
-            await salvarAtaReuniao(ataReuniao, caso.id);
+            await salvarAtaReuniao(ataReuniao, caso.id, dataReuniao);
             setAtaReuniao('');
             Swal.fire('Sucesso', 'Ata salva com sucesso!', 'success');
         } catch (error) {
@@ -104,14 +147,18 @@ export default function ReunioesPlanejamento() {
                             value={ataReuniao}
                             onChange={(e) => setAtaReuniao(e.target.value)}
                         />
-                        <div className="botao-salvar">
-                            <form>
-                                <Button size="large" action={handleSalvarAta}>
-                                    <FaSave style={{ fontSize: '1.2rem', marginRight: '4px' }} />
-                                    Salvar
-                                </Button>
-                            </form>
-                        </div>
+                        {dataReuniao && (
+                            <div className="botao-salvar">
+                                <form>
+                                    <Button size="large" action={handleSalvarAta}>
+                                        <FaSave
+                                            style={{ fontSize: '1.2rem', marginRight: '4px' }}
+                                        />
+                                        Salvar
+                                    </Button>
+                                </form>
+                            </div>
+                        )}
                     </BoxContainer>
                 </div>
                 <div className="column">

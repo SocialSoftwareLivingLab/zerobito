@@ -64,8 +64,11 @@ const AppRoutes = () => {
                         <Route index path=":id/preparacao" element={<Preparacao />} />
                         <Route index path=":id/planejamento" element={<Planejamento />} />
                         <Route
-                            index
-                            path=":id/planejemento/reunioes"
+                            path=":id/planejamento/reunioes"
+                            element={<ReunioesPlanejamento />}
+                        />
+                        <Route
+                            path=":id/planejamento/reunioes/:dataReuniao"
                             element={<ReunioesPlanejamento />}
                         />
                     </Route>

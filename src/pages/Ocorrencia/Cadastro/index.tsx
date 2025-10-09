@@ -12,6 +12,8 @@ import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from
 import './style.css';
 import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
 import { useUsuarioAutenticado } from '../../../contexts/usuario-autenticado';
+import { obterPerfisUsuario } from '../../../common/api/usuarios/permissoes/permissoes-user';
+import { useQuery } from '@tanstack/react-query';
 
 function RegistrarOcorrenciaPage() {
     const formLocalRef = useRef<FormStepApi>(null);
@@ -20,7 +22,15 @@ function RegistrarOcorrenciaPage() {
     const formGravidadeRef = useRef<FormStepApi>(null);
     const { data: usuario } = useUsuarioAutenticado();
 
-    const permissao = usuario?.perfil?.permissoes?.includes('ocorrencias:criar');
+    const { data: perfis = [] } = useQuery({
+        queryKey: ['usuario', 'perfis'],
+        queryFn: obterPerfisUsuario
+    });
+    console.log(perfis);
+
+    const permissao = perfis.some((p) =>
+        p.perfil?.permissoes?.some((perm) => perm.codigo === 'ocorrencias:criar')
+    );
 
     const [currentStep, setCurrentStep] = useState(1);
 

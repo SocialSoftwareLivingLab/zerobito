@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { ConvidarMembroGrupoModalViewProps } from '../ConvidarMembroGrupoModal/view';
-import EditarTarefaGrupoModalView, { EditarTarefaGrupoModalViewProps } from './view';
+import EditarTarefaGrupoModalView from './view';
+import { EditarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/editar-tarefa';
+import { AxiosError } from 'axios';
 
 export interface EditarTarefaGrupoModalFormData {
     responsavel: string;
@@ -9,29 +10,85 @@ export interface EditarTarefaGrupoModalFormData {
     prazo: Date;
     status: string;
     comentario: string;
+    statusConclusao: string;
 }
 
-export interface EditarTarefaGrupoModalProps {
+interface Props {
+    idCaso: number;
+    idTarefa: number;
     aberto: boolean;
     handleFecharModal: () => void;
+    onTarefaAtualizada?: () => void;
 }
 
 export default function EditarTarefaGrupoModal({
+    idCaso,
+    idTarefa,
     aberto,
-    handleFecharModal
-}: EditarTarefaGrupoModalProps) {
-    const { register, reset } = useForm<EditarTarefaGrupoModalFormData>();
+    handleFecharModal,
+    onTarefaAtualizada
+}: Props) {
+    const { register, handleSubmit, reset } = useForm<EditarTarefaGrupoModalFormData>();
 
     useEffect(() => {
-        if (!aberto) {
-            reset();
-        }
+        if (!aberto) reset(); // limpa quando o modal fecha
     }, [aberto, reset]);
 
-    const props: EditarTarefaGrupoModalViewProps = {
-        aberto,
-        handleFecharModal,
-        register
+    const onSubmit = async (data: EditarTarefaGrupoModalFormData) => {
+        const sucesso = await EditarTarefaMembroGrupo(idCaso, idTarefa, {
+            nome: data.nome,
+            comentario: data.comentario,
+            prazo: data.prazo,
+            nomeMembro: data.responsavel,
+            statusCodigo: mapStatusToCodigo(data.status),
+            statusConclusaoCodigo: mapStatusConclusaoToCodigo(data.statusConclusao)
+        });
+
+        // Só fecha o modal se deu certo
+        if (sucesso) {
+            onTarefaAtualizada?.();
+            handleFecharModal();
+        }
     };
-    return <EditarTarefaGrupoModalView {...props} />;
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <EditarTarefaGrupoModalView
+                aberto={aberto}
+                handleFecharModal={handleFecharModal}
+                register={register}
+                handleSalvar={handleSubmit(onSubmit)}
+            />
+        </form>
+    );
+}
+
+// ----------------------
+// Funções auxiliares
+// ----------------------
+
+function mapStatusToCodigo(status: string): string | undefined {
+    switch (status?.toLowerCase()) {
+        case 'em andamento':
+            return 'EM_ANDAMENTO';
+        case 'atrasado':
+            return 'ATRASADO';
+        case 'concluído':
+            return 'REALIZADO';
+        default:
+            return undefined;
+    }
+}
+
+function mapStatusConclusaoToCodigo(statusConclusao: string): string | undefined {
+    switch (statusConclusao?.toLowerCase()) {
+        case 'com_exito':
+            return 'EXITO';
+        case 'satisfatoria':
+            return 'SATISFATORIO';
+        case 'sem_previsao':
+            return 'SEM_PREVISAO';
+        default:
+            return undefined;
+    }
 }

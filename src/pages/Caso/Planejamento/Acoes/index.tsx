@@ -17,7 +17,7 @@ function BotoesAcoesReuniao() {
 
     const onReunioesClick = useCallback(
         (caso: Caso) => {
-            navigate(`/casos/${caso.id}/planejemento/reunioes`);
+            navigate(`/casos/${caso.id}/planejamento/reunioes`);
         },
         [navigate]
     );

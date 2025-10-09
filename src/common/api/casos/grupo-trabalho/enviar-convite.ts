@@ -25,7 +25,7 @@ export async function enviarConviteMembroGrupo(idCaso: number, convite: EnviarCo
             });
         }
 
-        return response;
+        return response.data;
     } catch (error) {
         console.log('Erro em enviarConviteMembroGrupo:', error);
 

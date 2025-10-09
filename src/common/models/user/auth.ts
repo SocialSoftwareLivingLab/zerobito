@@ -31,7 +31,6 @@ interface LoginResponse {
         id: number;
         nome: string;
         email: string;
-        perfil: 'USER' | 'ADMIN';
     };
     id: number;
 }

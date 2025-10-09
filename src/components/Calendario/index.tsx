@@ -4,30 +4,32 @@ import 'react-calendar/dist/Calendar.css';
 import './style.css';
 import { Tarefa } from '../../contexts/minhas-tarefas';
 
-export type CalendarItem = { data: string };
+export type CalendarItem = { data: string }; // data com hora, ex: "2025-10-04T14:00:00Z"
 
 interface MeuCalendarioProps {
     tarefas?: Tarefa[];
     reunioes?: CalendarItem[];
+    onDiaClick?: (data: Date) => void;
 }
 
-export function MeuCalendario({ reunioes = [], tarefas = [] }: MeuCalendarioProps) {
-    const hojeStr = new Date().toISOString().split('T')[0];
-
+export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCalendarioProps) {
     const datasTarefasDetalhadas = tarefas.map((t) => {
         const dataStr = new Date(t.prazo).toISOString().split('T')[0];
         const atrasada = t.status === 'Atrasado';
         return { data: dataStr, atrasada };
     });
 
-    const datasReunioes = reunioes.map((r) => new Date(r.data).toISOString().split('T')[0]);
+    // 🔹 guarda todas as reuniões com hora
+    const datasReunioesDetalhadas = reunioes.map((r) => new Date(r.data));
+    // 🔹 só para marcar bolinhas (dia sem hora)
+    const datasReunioes = datasReunioesDetalhadas.map((d) => d.toISOString().split('T')[0]);
 
     return (
         <div className="calendario-wrapper">
             <Calendar
-                view="month" // mostra apenas os meses
-                minDetail="month" // impede seleção de ano
-                maxDetail="month" // impede seleção de dia/ano
+                view="month"
+                minDetail="month"
+                maxDetail="month"
                 prevLabel="‹"
                 nextLabel="›"
                 showNeighboringMonth={false}
@@ -56,6 +58,22 @@ export function MeuCalendario({ reunioes = [], tarefas = [] }: MeuCalendarioProp
                             )}
                         </div>
                     );
+                }}
+                onClickDay={(date) => {
+                    const dateStr = date.toISOString().split('T')[0];
+                    if (datasReunioes.includes(dateStr)) {
+                        // 🔹 pega TODAS reuniões desse dia
+                        const reunioesDoDia = datasReunioesDetalhadas.filter(
+                            (d) => d.toISOString().split('T')[0] === dateStr
+                        );
+                        // 🔹 ordena por hora
+                        reunioesDoDia.sort((a, b) => a.getTime() - b.getTime());
+                        // 🔹 pega a primeira reunião do dia
+                        if (reunioesDoDia.length > 0) {
+                            console.log(reunioesDoDia[0]);
+                            onDiaClick?.(reunioesDoDia[0]);
+                        }
+                    }
                 }}
             />
         </div>

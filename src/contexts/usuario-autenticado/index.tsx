@@ -31,8 +31,7 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
         token: null,
         id: null,
         nome: null,
-        email: null,
-        perfil: null
+        email: null
     });
 
     const logout = useCallback(() => {

@@ -11,6 +11,7 @@ import { tituloPaginas } from './titulo-paginas';
 import { TarefasProvider } from '../../contexts/minhas-tarefas';
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 import { buscarMembrosGrupo } from '../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
+import { obterPerfisUsuario } from '../../common/api/usuarios/permissoes/permissoes-user';
 
 export default function Caso() {
     const { id } = useParams<{ id: string }>();
@@ -31,16 +32,22 @@ export default function Caso() {
     const location = useLocation();
     const [matchedRoute] = matchRoutes(tituloPaginas, location);
 
-    // 🔒 1) Checando permissões do usuário
-    const temPermissaoVerTodos = usuario?.perfil?.permissoes?.includes(
-        'ocorrencias:visualizar-todos'
-    );
+    const { data: perfis = [] } = useQuery({
+        queryKey: ['usuario', 'perfis'],
+        queryFn: obterPerfisUsuario
+    });
+    console.log('perfis:');
+    console.log(perfis);
 
-    // 🔒 2) Checando se usuário é membro do caso
-    const ehMembro = membros?.some((m) => m.usuarioId === usuario?.id);
+    // Evita rodar a lógica antes de tudo estar carregado
+    if (isLoadingCaso || isLoadingMembros) {
+        return <div>Carregando...</div>;
+    }
 
-    // 🔒 3) Se não tem permissão nem é membro → redireciona pra home
-    if (!temPermissaoVerTodos && !ehMembro && !isLoadingMembros) {
+    const ehMembro = perfis?.some((p) => p.caso?.id === caso?.id);
+
+    // 🔒 Redireciona só depois de termos os dados
+    if (!ehMembro && !isLoadingMembros && !isLoadingCaso) {
         alert('Este perfil não tem permissão para entrar no caso.');
         return <Navigate to="/" replace />;
     }

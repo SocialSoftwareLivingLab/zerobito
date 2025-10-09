@@ -6,5 +6,9 @@ export interface Tarefa {
         codigo: string;
         nome: string;
     };
+    status_conclusao: {
+        codigo: string;
+        nome: string;
+    };
     prazo: Date;
 }

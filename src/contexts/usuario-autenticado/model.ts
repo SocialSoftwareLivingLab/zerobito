@@ -3,7 +3,6 @@ import { Perfil } from '.';
 export interface UsuarioAutenticado {
     id: number;
     nome: string;
-    perfil: Perfil | null;
     email: string;
     token: string;
 }
