@@ -36,8 +36,6 @@ export default function Caso() {
         queryKey: ['usuario', 'perfis'],
         queryFn: obterPerfisUsuario
     });
-    console.log('perfis:');
-    console.log(perfis);
 
     // Evita rodar a lógica antes de tudo estar carregado
     if (isLoadingCaso || isLoadingMembros) {

@@ -20,7 +20,6 @@ export async function EditarTarefaMembroGrupo(
             `/api/v1/casos/${idCaso}/grupo-trabalho/membros/tarefas/editar/${idTarefa}`,
             payload
         );
-        console.log(response);
         alert('✅ Tarefa editada com sucesso!');
         return true;
     } catch (error: unknown) {

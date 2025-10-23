@@ -26,7 +26,6 @@ function RegistrarOcorrenciaPage() {
         queryKey: ['usuario', 'perfis'],
         queryFn: obterPerfisUsuario
     });
-    console.log(perfis);
 
     const permissao = perfis.some((p) =>
         p.perfil?.permissoes?.some((perm) => perm.codigo === 'ocorrencias:criar')

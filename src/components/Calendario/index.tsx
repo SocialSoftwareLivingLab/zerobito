@@ -70,7 +70,6 @@ export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCa
                         reunioesDoDia.sort((a, b) => a.getTime() - b.getTime());
                         // 🔹 pega a primeira reunião do dia
                         if (reunioesDoDia.length > 0) {
-                            console.log(reunioesDoDia[0]);
                             onDiaClick?.(reunioesDoDia[0]);
                         }
                     }

@@ -27,8 +27,6 @@ export async function enviarConviteMembroGrupo(idCaso: number, convite: EnviarCo
 
         return response.data;
     } catch (error) {
-        console.log('Erro em enviarConviteMembroGrupo:', error);
-
         // Tenta extrair mensagem do backend (se for um AxiosError)
         const mensagemErro =
             (error as AxiosError)?.response?.data?.message ??

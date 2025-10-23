@@ -33,7 +33,6 @@ export const useDossieViewModel = (id: number) => {
                 if (id) {
                     const response = await getReunioes(id);
                     setReunioes(response); // ou apenas response, conforme sua API
-                    console.log(response);
                 }
             } catch (error) {
                 console.error('Erro ao buscar a próxima reunião:', error);

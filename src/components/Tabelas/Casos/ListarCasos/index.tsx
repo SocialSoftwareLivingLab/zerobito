@@ -12,7 +12,6 @@ export default function ListarCasosTable() {
     const { data: usuario } = useUsuarioAutenticado();
 
     useEffect(() => {
-        console.log(usuario);
         async function carregarCasos() {
             if (!usuario?.id) return;
 

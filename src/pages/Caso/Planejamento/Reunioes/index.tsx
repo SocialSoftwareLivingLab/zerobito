@@ -40,8 +40,6 @@ export default function ReunioesPlanejamento() {
         queryFn: () => obterPermissoesUsuarioNoCaso(caso.id)
     });
 
-    console.log(permissoes);
-
     const [isAtaChanged, setAtaChanged] = useState(false);
 
     useEffect(() => {
@@ -49,7 +47,6 @@ export default function ReunioesPlanejamento() {
             if (!dataReuniao) return;
             try {
                 const response = await obterAtaReuniao(caso.id, dataReuniao);
-                console.log(response);
                 if (response.data && response.data !== '') {
                     setAtaChanged(true);
                 }

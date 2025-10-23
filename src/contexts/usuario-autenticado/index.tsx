@@ -14,8 +14,6 @@ export function resetarDados() {
 }
 
 export function salvarDados(data: UsuarioAutenticado) {
-    console.log('oque estou tentando salvar: ');
-    console.log(data);
     localStorage.setItem('token', data.token);
     localStorage.setItem('usuario', JSON.stringify(data));
 }
