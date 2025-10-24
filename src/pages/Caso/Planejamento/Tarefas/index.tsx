@@ -27,6 +27,7 @@ import { buscarTarefasMembro } from '../../../../common/api/casos/grupo-trabalho
 import Badge from '../../../../components/ui/Badge';
 
 interface Tarefa {
+    id: number;
     nome: string;
     status: string;
 }
@@ -34,6 +35,10 @@ interface Tarefa {
 const TIPOS_STATUS = {
     CONCLUIDO: {
         label: 'Pendente',
+        type: 'success'
+    },
+    REALIZADO: {
+        label: 'Concluido',
         type: 'success'
     },
     ATRASADO: {
@@ -80,11 +85,6 @@ export interface MembroGrupo {
     tarefasCount: number;
 }
 
-const sampleTarefa: Tarefa[] = [
-    { nome: 'Task 1', status: 'Aceito' },
-    { nome: 'Task 2', status: 'Em andamento' },
-    { nome: 'Task 3', status: 'Atrasado' }
-];
 // Columns for tarefas DataTable
 const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
     {
@@ -105,8 +105,13 @@ const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
 const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
     const { caso } = useCasoSelecionado();
     const [isModalEditarAberto, setModalEditar] = useState(false);
+    const [tarefaSelecionada, setTarefaSelecionada] = useState<Tarefa | null>(null);
+    const queryClient = useQueryClient();
 
-    const abrirModal = (row: Tarefa) => setModalEditar(true);
+    const abrirModal = (row: Tarefa) => {
+        setTarefaSelecionada(row); // salva a tarefa clicada
+        setModalEditar(true);
+    };
 
     const { data: tarefas = [], isLoading } = useQuery({
         queryKey: ['tarefas', caso.id, id],
@@ -133,10 +138,22 @@ const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
                     noTableHead
                 />
             )}
-            <EditarTarefaGrupoModal
-                aberto={isModalEditarAberto}
-                handleFecharModal={() => setModalEditar(false)}
-            />
+            {tarefaSelecionada && (
+                <EditarTarefaGrupoModal
+                    aberto={isModalEditarAberto}
+                    handleFecharModal={() => setModalEditar(false)}
+                    idCaso={caso.id}
+                    idTarefa={tarefaSelecionada.id} // <-- precisa ter o id da tarefa real
+                    onTarefaAtualizada={() => {
+                        queryClient.invalidateQueries(['tarefas', caso.id, tarefaSelecionada.id]);
+                        queryClient.invalidateQueries([
+                            'casos',
+                            'membros-grupo-trabalho-com-tarefas',
+                            caso.id
+                        ]);
+                    }}
+                />
+            )}
         </div>
     );
 };
@@ -255,6 +272,11 @@ export default function AtoresReuniao() {
                 handleFecharModal={() => setModalTarefa(false)}
                 onSubmit={async (data) => {
                     enviarTarefaMutation.mutateAsync(data);
+                    queryClient.invalidateQueries([
+                        'casos',
+                        'membros-grupo-trabalho-com-tarefas',
+                        caso.id
+                    ]);
                     setModalTarefa(false);
                 }}
             />

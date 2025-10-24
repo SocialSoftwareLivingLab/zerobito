@@ -48,7 +48,6 @@ export default function TarefasReuniao() {
                 queryKey: ['casos', 'membros-grupo-trabalho']
             });
             setModalConvidarAberto(false);
-            console.log(response);
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: ['casos', 'membros-grupo-trabalho'] });

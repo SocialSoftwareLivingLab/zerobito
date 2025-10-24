@@ -3,6 +3,7 @@ import { TableColumn } from 'react-data-table-component';
 import { buscarCasos } from '../../../../common/api/casos/consultar-casos';
 import { Caso } from '../../../../common/models/caso/caso';
 import { SelecionarCasoTableView } from './view';
+import { useUsuarioAutenticado } from '../../../../contexts/usuario-autenticado';
 
 const colunas: TableColumn<Caso>[] = [
     {
@@ -35,15 +36,16 @@ export interface SelecionarCasoTableProps {
 
 export function SelecionarCasoTable({ handleCasoSelecionado }: SelecionarCasoTableProps) {
     const [casos, setCasos] = useState<Caso[]>([]);
+    const { data: usuario } = useUsuarioAutenticado();
 
     useEffect(() => {
         async function carregar() {
-            const response = await buscarCasos();
+            const response = await buscarCasos(usuario.id);
             setCasos(response);
         }
 
         carregar();
-    }, []);
+    }, [usuario.id]);
 
     const handleChange = ({ selectedRows }) => {
         handleCasoSelecionado(selectedRows[0]);

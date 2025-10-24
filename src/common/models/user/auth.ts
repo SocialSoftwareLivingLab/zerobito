@@ -31,8 +31,8 @@ interface LoginResponse {
         id: number;
         nome: string;
         email: string;
-        perfil: 'USER' | 'ADMIN';
     };
+    id: number;
 }
 
 export const login = async ({ email, senha }: { email: string; senha: string }) => {
@@ -41,7 +41,6 @@ export const login = async ({ email, senha }: { email: string; senha: string }) 
             email,
             senha
         });
-
         return data;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

@@ -18,12 +18,18 @@ export function salvarDados(data: UsuarioAutenticado) {
     localStorage.setItem('usuario', JSON.stringify(data));
 }
 
+export interface Perfil {
+    codigo: string;
+    nome: string;
+    permissoes: string[];
+}
+
 export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoContextProviderProps) {
     const [usuarioLogado, setUsuarioLogado] = useState<UsuarioAutenticado>({
         token: null,
+        id: null,
         nome: null,
-        email: null,
-        perfil: null
+        email: null
     });
 
     const logout = useCallback(() => {

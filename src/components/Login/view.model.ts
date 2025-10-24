@@ -34,7 +34,7 @@ const useLoginViewModel = () => {
                 token: response.token,
                 nome: response.usuario.nome,
                 email: response.usuario.email,
-                perfil: response.usuario.perfil
+                id: response.id
             });
             setLoading(false);
         } catch (error) {

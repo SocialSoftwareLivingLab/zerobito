@@ -17,7 +17,9 @@ export default function CriarCasoForm({ submit }: CriarCasoFormProps) {
     const loadOptions = async (inputValue: string) => {
         const response = await buscarCoordenador(inputValue);
 
-        return response.data.map((coordenador) => ({
+        const data = response?.data ?? [];
+
+        return data.map((coordenador) => ({
             value: coordenador.id,
             label: coordenador.nome
         }));
