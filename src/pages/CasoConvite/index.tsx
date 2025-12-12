@@ -35,10 +35,25 @@ export default function CasoConvite() {
                     localStorage.removeItem('token');
                     localStorage.removeItem('usuario');
                     setLogoutDone(true);
-                    alert('Por favor faça login com o e-mail convidado.');
+                    Swal.fire({
+                        text: 'Por favor faça login com o e-mail convidado.',
+                        icon: 'error',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        position: 'center',
+                        toast: true
+                    });
                 }
             } catch (err) {
-                alert('Convite não encontrado.');
+                Swal.fire({
+                    text: 'Convite não encontrado.',
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    position: 'center',
+                    toast: true
+                });
+
                 navigate('/login');
             }
         };
@@ -69,7 +84,14 @@ export default function CasoConvite() {
             });
             navigate('/home');
         } catch (error) {
-            alert('Erro ao aceitar convite.');
+            Swal.fire({
+                text: 'Erro ao aceitar convite.',
+                icon: 'error',
+                timer: 2000,
+                showConfirmButton: false,
+                position: 'center',
+                toast: true
+            });
         }
     };
     const handleRecusar = async () => {
@@ -89,7 +111,14 @@ export default function CasoConvite() {
             });
             navigate('/home');
         } catch (error) {
-            alert('Erro ao recusar convite.');
+            Swal.fire({
+                text: 'Erro ao recusar convite.',
+                icon: 'error',
+                timer: 2000,
+                showConfirmButton: false,
+                position: 'center',
+                toast: true
+            });
         }
     };
 

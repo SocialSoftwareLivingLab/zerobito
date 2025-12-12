@@ -21,9 +21,28 @@ function formatarData(data: string | Date): string {
 export default function Planejamento() {
     const { caso } = useCasoSelecionado();
     const { reunioes, proximosEventos, tarefas } = useDossieViewModel(caso.id);
+    const [diaSelecionado, setDiaSelecionado] = React.useState<Date | null>(null);
 
+    const [eventosDoDia, setEventosDoDia] = React.useState(proximosEventos.slice(0, 4));
+    React.useEffect(() => {
+        if (!diaSelecionado) {
+            setEventosDoDia(proximosEventos.slice(0, 4));
+        }
+    }, [proximosEventos, diaSelecionado]);
     const navigate = useNavigate();
     const location = useLocation();
+
+    const filtrarEventosDoDia = (data: Date) => {
+        setDiaSelecionado(data); // marca que foi clicado
+        const dia = data.toISOString().split('T')[0];
+
+        const filtrados = proximosEventos.filter((item) => {
+            const itemDia = new Date(item.data).toISOString().split('T')[0];
+            return itemDia === dia;
+        });
+
+        setEventosDoDia(filtrados);
+    };
 
     const navegarParaReuniao = (data: string | Date) => {
         const d = new Date(data);
@@ -47,7 +66,7 @@ export default function Planejamento() {
                         <div className="calendario-tarefas">
                             <div className="lista-tarefas">
                                 <h3>Calendário</h3>
-                                {proximosEventos.map((item, index) => (
+                                {eventosDoDia.map((item, index) => (
                                     <div
                                         key={index}
                                         className="card-tarefa"
@@ -79,7 +98,7 @@ export default function Planejamento() {
                             <CalendarioCustomizado
                                 reunioes={reunioes}
                                 tarefas={tarefas}
-                                onDiaClick={(data) => navegarParaReuniao(data)}
+                                onDiaClick={(data) => filtrarEventosDoDia(data)}
                             />
                         </div>
                     </div>

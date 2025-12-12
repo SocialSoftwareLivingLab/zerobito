@@ -12,41 +12,58 @@ import { TarefasProvider } from '../../contexts/minhas-tarefas';
 import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 import { buscarMembrosGrupo } from '../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
 import { obterPerfisUsuario } from '../../common/api/usuarios/permissoes/permissoes-user';
+import Swal from 'sweetalert2';
 
 export default function Caso() {
     const { id } = useParams<{ id: string }>();
+    const location = useLocation();
+
+    // Dados do usuário
     const { data: usuario } = useUsuarioAutenticado();
 
-    const { data: caso, isLoading: isLoadingCaso } = useQuery({
+    // Carrega caso
+    const { data: caso, isPending: isLoadingCaso } = useQuery({
         queryKey: ['caso', id],
         queryFn: () => buscarCaso(Number(id)),
         enabled: !!id
     });
 
-    const { data: membros, isLoading: isLoadingMembros } = useQuery({
+    // Carrega membros do grupo do caso
+    const { data: membros, isPending: isLoadingMembros } = useQuery({
         queryKey: ['membrosCaso', id],
         queryFn: () => buscarMembrosGrupo(Number(id)),
         enabled: !!id
     });
 
-    const location = useLocation();
-    const [matchedRoute] = matchRoutes(tituloPaginas, location);
-
-    const { data: perfis = [] } = useQuery({
+    // Carrega perfis do usuário
+    const { data: perfis = [], isPending: isLoadingPerfis } = useQuery({
         queryKey: ['usuario', 'perfis'],
         queryFn: obterPerfisUsuario
     });
 
-    // Evita rodar a lógica antes de tudo estar carregado
-    if (isLoadingCaso || isLoadingMembros) {
+    // Rotas para título/descrição
+    const [matchedRoute] = matchRoutes(tituloPaginas, location);
+
+    // Aguarda TODAS as queries
+    const carregando = isLoadingCaso || isLoadingMembros || isLoadingPerfis;
+
+    if (carregando) {
         return <div>Carregando...</div>;
     }
 
-    const ehMembro = perfis?.some((p) => p.caso?.id === caso?.id);
+    // Verifica permissão SOMENTE depois que tudo carregou
+    const ehMembro = perfis.some((p) => p.caso?.id === caso?.id);
 
-    // 🔒 Redireciona só depois de termos os dados
-    if (!ehMembro && !isLoadingMembros && !isLoadingCaso) {
-        alert('Este perfil não tem permissão para entrar no caso.');
+    if (!ehMembro) {
+        Swal.fire({
+            text: 'Este perfil não tem permissão para entrar no caso.',
+            icon: 'error',
+            timer: 2000,
+            toast: true,
+            position: 'center',
+            showConfirmButton: false
+        });
+
         return <Navigate to="/" replace />;
     }
 
@@ -54,21 +71,17 @@ export default function Caso() {
         <>
             <Header titulo={matchedRoute.route.titulo} explicacao={matchedRoute.route.explicacao} />
 
-            {(isLoadingCaso || isLoadingMembros) && <div>Carregando...</div>}
-
-            {!isLoadingCaso && !isLoadingMembros && (
-                <CasoSelecionadoContextProvider caso={caso}>
-                    <TarefasProvider>
-                        <CasoHeader>
-                            <CasoInfo />
-                            <CasoNavegacao />
-                        </CasoHeader>
-                        <CasoContent>
-                            <Outlet />
-                        </CasoContent>
-                    </TarefasProvider>
-                </CasoSelecionadoContextProvider>
-            )}
+            <CasoSelecionadoContextProvider caso={caso}>
+                <TarefasProvider>
+                    <CasoHeader>
+                        <CasoInfo />
+                        <CasoNavegacao />
+                    </CasoHeader>
+                    <CasoContent>
+                        <Outlet />
+                    </CasoContent>
+                </TarefasProvider>
+            </CasoSelecionadoContextProvider>
         </>
     );
 }

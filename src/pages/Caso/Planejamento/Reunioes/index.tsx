@@ -63,16 +63,40 @@ export default function ReunioesPlanejamento() {
 
     const handleSalvarAta = async () => {
         if (isAtaChanged && !permissoes.includes('casos:editar-ata')) {
-            alert('Somente coordenadores podem alterar atas');
+            Swal.fire({
+                text: 'Somente coordenadores podem alterar atas',
+                icon: 'error',
+                timer: 4000,
+                showConfirmButton: false,
+                position: 'center',
+                toast: true
+            });
+
             return;
         }
         if (!ataReuniao.trim()) {
-            alert('Preencha a ata antes de salvar.');
+            Swal.fire({
+                text: 'Preencha a ata antes de salvar.',
+                icon: 'error',
+                timer: 4000,
+                showConfirmButton: false,
+                position: 'center',
+                toast: true
+            });
+
             return;
         }
 
         if (ataReuniao.trim().length < 150) {
-            alert('A ata deve conter no mínimo 150 caracteres.');
+            Swal.fire({
+                text: 'A ata deve conter no mínimo 150 caracteres.',
+                icon: 'error',
+                timer: 4000,
+                showConfirmButton: false,
+                position: 'center',
+                toast: true
+            });
+
             return;
         }
 
@@ -82,7 +106,14 @@ export default function ReunioesPlanejamento() {
             Swal.fire('Sucesso', 'Ata salva com sucesso!', 'success');
         } catch (error) {
             const erro = 'Erro ao salvar a ata.';
-            alert(erro);
+            Swal.fire({
+                text: erro,
+                icon: 'error',
+                timer: 2000,
+                showConfirmButton: false,
+                position: 'center',
+                toast: true
+            });
         }
     };
 
@@ -110,7 +141,14 @@ export default function ReunioesPlanejamento() {
                 });
             } catch (error) {
                 const errorMessage = error.response?.data?.message;
-                alert(errorMessage);
+                Swal.fire({
+                    text: errorMessage,
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    position: 'center',
+                    toast: true
+                });
             }
         },
         [caso.id]

@@ -37,5 +37,10 @@ export const tituloPaginas: InfoPaginaCaso[] = [
         titulo: 'Sala de reuniões',
         explicacao:
             'Aqui o Coordenador Local consegue convidar atores para o caso consultar status do convite'
+    },
+    {
+        path: '/casos/:id/investigacao',
+        titulo: 'Investigação',
+        explicacao: 'Nesta tela o Coordenador Local acompanha as etapas de investigação do caso'
     }
 ];

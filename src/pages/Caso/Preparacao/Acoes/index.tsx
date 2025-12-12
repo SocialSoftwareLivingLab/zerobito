@@ -25,9 +25,23 @@ function BotoesAcoesPreparacao() {
             if (caso.status !== 'EM_PREPARACAO') {
                 // Lança um erro se a condição não for atendida
                 if (caso.status === 'Em Planejamento') {
-                    alert('O caso já está em planejamento');
+                    Swal.fire({
+                        text: 'O caso já está em planejamento',
+                        icon: 'error',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        position: 'center',
+                        toast: true
+                    });
                 } else {
-                    alert('O planejamento só pode ser iniciado se o caso estiver em preparação');
+                    Swal.fire({
+                        text: 'O planejamento só pode ser iniciado se o caso estiver em preparação',
+                        icon: 'error',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        position: 'center',
+                        toast: true
+                    });
                 }
                 return Promise.resolve();
             }

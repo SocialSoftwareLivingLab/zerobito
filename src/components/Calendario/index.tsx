@@ -60,19 +60,7 @@ export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCa
                     );
                 }}
                 onClickDay={(date) => {
-                    const dateStr = date.toISOString().split('T')[0];
-                    if (datasReunioes.includes(dateStr)) {
-                        // 🔹 pega TODAS reuniões desse dia
-                        const reunioesDoDia = datasReunioesDetalhadas.filter(
-                            (d) => d.toISOString().split('T')[0] === dateStr
-                        );
-                        // 🔹 ordena por hora
-                        reunioesDoDia.sort((a, b) => a.getTime() - b.getTime());
-                        // 🔹 pega a primeira reunião do dia
-                        if (reunioesDoDia.length > 0) {
-                            onDiaClick?.(reunioesDoDia[0]);
-                        }
-                    }
+                    onDiaClick?.(date);
                 }}
             />
         </div>

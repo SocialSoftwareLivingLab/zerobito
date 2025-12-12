@@ -56,8 +56,7 @@ export const useDossieViewModel = (id: number) => {
         }))
     ]
         .filter((item) => item.data >= hoje)
-        .sort((a, b) => a.data.getTime() - b.data.getTime())
-        .slice(0, 4);
+        .sort((a, b) => a.data.getTime() - b.data.getTime());
 
     return {
         eventos,
