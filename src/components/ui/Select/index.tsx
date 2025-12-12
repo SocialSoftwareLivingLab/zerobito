@@ -16,7 +16,7 @@ export function SelectOption({ value, label, disabled, selected }: SelectOptionP
     );
 }
 
-export interface SelectProps {
+export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     label: string;
     width?: 'auto' | 'full';
     children:

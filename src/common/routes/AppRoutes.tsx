@@ -26,6 +26,7 @@ import ReunioesPlanejamento from '../../pages/Caso/Planejamento/Reunioes';
 import EsqueciSenha from '../../pages/EsqueciSenha';
 import RedefinirSenha from '../../pages/RedefinirSenha';
 import CadastroConvite from '../../pages/CadastroConvite';
+import Investigacao from '../../pages/Caso/Investigacao';
 
 interface PrivateRouteConfig {
     path: string;
@@ -71,6 +72,7 @@ const AppRoutes = () => {
                             path=":id/planejamento/reunioes/:dataReuniao"
                             element={<ReunioesPlanejamento />}
                         />
+                        <Route index path=":id/investigacao" element={<Investigacao />} />
                     </Route>
                 </Route>
                 <Route path="/convites/:token" element={<CasoConvite />} />

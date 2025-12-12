@@ -8,7 +8,8 @@ import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 const statusLabel = {
     AGUARDANDO_NOTIFICACOES: 'Aguardando Notificações',
     EM_PLANEJAMENTO: 'Em Planejamento',
-    EM_PREPARACAO: 'Em Preparação'
+    EM_PREPARACAO: 'Em Preparação',
+    EM_INVESTIGACAO: 'Em Investigação'
 };
 
 export function CasoInfo() {

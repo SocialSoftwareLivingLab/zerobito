@@ -33,6 +33,12 @@ export async function enviarConviteMembroGrupo(idCaso: number, convite: EnviarCo
             'Erro desconhecido ao enviar convite.';
 
         // Lança erro com a mensagem limpa
-        alert(mensagemErro);
+        Swal.fire({
+            title: 'Convite não pode ser enviado.',
+            text: mensagemErro,
+            icon: 'error',
+            timer: 1250,
+            confirmButtonText: 'Continuar'
+        });
     }
 }

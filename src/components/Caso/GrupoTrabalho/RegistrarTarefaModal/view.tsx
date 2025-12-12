@@ -6,6 +6,7 @@ import Modal from '../../../ui/Modal';
 import TextArea from '../../../ui/TextArea';
 import { RegistrarTarefaGrupoModalFormData } from './index';
 import { Container } from './styles';
+import Swal from 'sweetalert2';
 
 export interface RegistrarTarefaGrupoModalViewProps {
     aberto: boolean;
@@ -32,7 +33,14 @@ export default function RegistrarTarefaGrupoModalView({
             } catch (error) {
                 console.error('Erro ao registrar tarefa:', error);
                 if (error.response.statusText === 'Not Found') {
-                    alert('Membro não encontrado no caso. Por favor, revise as informações.');
+                    Swal.fire({
+                        text: 'Membro não encontrado no caso. Por favor, revise as informações.',
+                        icon: 'error',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        position: 'center',
+                        toast: true
+                    });
                 }
             } finally {
                 setLoading(false);

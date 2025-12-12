@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import api from '../../../api';
+import Swal from 'sweetalert2';
 
 interface EditarTarefaRequest {
     nomeMembro?: string;
@@ -20,7 +21,14 @@ export async function EditarTarefaMembroGrupo(
             `/api/v1/casos/${idCaso}/grupo-trabalho/membros/tarefas/editar/${idTarefa}`,
             payload
         );
-        alert('✅ Tarefa editada com sucesso!');
+        Swal.fire({
+            text: 'Tarefa editada com sucesso!',
+            icon: 'success',
+            timer: 1800,
+            showConfirmButton: false,
+            position: 'center',
+            toast: true
+        });
         return true;
     } catch (error: unknown) {
         console.error('Erro ao editar tarefa:', error);
@@ -33,7 +41,14 @@ export async function EditarTarefaMembroGrupo(
         } else if (error instanceof Error) {
             mensagemErro = error.message;
         }
-        alert(`❌ Erro ao editar tarefa: ${mensagemErro}`);
+        Swal.fire({
+            text: `Erro ao editar tarefa: ${mensagemErro}`,
+            icon: 'error',
+            timer: 1800,
+            showConfirmButton: false,
+            position: 'center',
+            toast: true
+        });
         return false; // indica falha
     }
 }

@@ -10,6 +10,7 @@ import { Caso } from '../../../common/models/caso/caso';
 import CasoNavegacaoItem from './CasoNavegacaoItem';
 import { CasoNavegacaoContainer } from './styles';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
+import Swal from 'sweetalert2';
 
 interface MenuNavegacao {
     titulo: string;
@@ -73,15 +74,21 @@ export function CasoNavegacao() {
                     const url =
                         menu.titulo === 'Planejamento' &&
                         caso.status !== 'EM_PLANEJAMENTO' &&
+                        caso.status !== 'EM_INVESTIGACAO' &&
                         caso.status !== null
                             ? '#' // Retorna '#' para impedir navegação
                             : menu.url(caso); // URL normal para outros casos
 
                     // Adiciona ação ao clique para exibir o alerta, se aplicável
                     const InvalidAcess = () => {
-                        alert(
-                            'Não é possível acessar "Planejamento" enquanto o caso não está nessa etapa.'
-                        );
+                        Swal.fire({
+                            text: 'Não é possível acessar "Planejamento" enquanto o caso não está nessa etapa.',
+                            icon: 'error',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            position: 'center',
+                            toast: true
+                        });
                     };
 
                     return (
@@ -92,7 +99,9 @@ export function CasoNavegacao() {
                             icone={menu.icone}
                             url={url} // Usa a URL condicional
                             action={
-                                menu.titulo === 'Planejamento' && caso.status !== 'EM_PLANEJAMENTO'
+                                menu.titulo === 'Planejamento' &&
+                                caso.status !== 'EM_PLANEJAMENTO' &&
+                                caso.status !== 'EM_INVESTIGACAO'
                                     ? InvalidAcess
                                     : undefined
                             } // Define onClick somente para Planejamento

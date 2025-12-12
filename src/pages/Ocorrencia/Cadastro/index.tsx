@@ -53,7 +53,14 @@ function RegistrarOcorrenciaPage() {
                 handleNextFormWizard();
                 setCurrentStep((prev) => prev + 1);
             } else {
-                alert('Preencha todos os campos para continuar');
+                Swal.fire({
+                    text: 'Preencha todos os campos para continuar',
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    position: 'center',
+                    toast: true
+                });
             }
         },
         [currentStep, formLocalRef, formVitimaRef, formDenuncianteRef, formGravidadeRef]
@@ -114,7 +121,14 @@ function RegistrarOcorrenciaPage() {
     }, [formData, navigate]);
 
     if (!permissao) {
-        alert('Este perfil não possui permissão para criar um evento.');
+        Swal.fire({
+            text: 'Este perfil não possui permissão para criar um evento.',
+            icon: 'error',
+            timer: 2000,
+            showConfirmButton: false,
+            position: 'center',
+            toast: true
+        });
         return <Navigate to="/" replace />;
     }
 
