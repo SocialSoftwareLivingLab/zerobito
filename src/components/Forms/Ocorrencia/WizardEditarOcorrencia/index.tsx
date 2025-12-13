@@ -263,7 +263,7 @@ export function EditarOcorrenciaModal({
                         <h3>Vítima</h3>
 
                         <div className="form-group">
-                            <label htmlFor="numeroVitima">Número de Vítimas</label>
+                            <label htmlFor="numeroVitima">Número de Vítimas *</label>
                             <input
                                 id="numeroVitima"
                                 name="numeroVitima"
@@ -271,6 +271,7 @@ export function EditarOcorrenciaModal({
                                 value={formData.numeroVitima}
                                 onChange={handleChange}
                                 placeholder="Ex: 1, 2, Desconhecido"
+                                required
                             />
                         </div>
 
@@ -288,13 +289,12 @@ export function EditarOcorrenciaModal({
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="vinculoVitima">Vínculo Empregatício *</label>
+                                <label htmlFor="vinculoVitima">Vínculo Empregatício</label>
                                 <select
                                     id="vinculoVitima"
                                     name="vinculoVitima"
                                     value={formData.vinculoVitima}
-                                    onChange={handleChange}
-                                    required>
+                                    onChange={handleChange}>
                                     <option value="">Selecione...</option>
                                     <option value="CLT">CLT</option>
                                     <option value="PJ">PJ</option>
@@ -333,28 +333,26 @@ export function EditarOcorrenciaModal({
                         <h3>Empresa</h3>
 
                         <div className="form-group">
-                            <label htmlFor="nomeEmpresa">Nome da Empresa *</label>
+                            <label htmlFor="nomeEmpresa">Nome da Empresa</label>
                             <input
                                 id="nomeEmpresa"
                                 name="nomeEmpresa"
                                 type="text"
                                 value={formData.nomeEmpresa}
                                 onChange={handleChange}
-                                required
                                 placeholder="Razão Social"
                             />
                         </div>
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="cnpjEmpresa">CNPJ *</label>
+                                <label htmlFor="cnpjEmpresa">CNPJ</label>
                                 <input
                                     id="cnpjEmpresa"
                                     name="cnpjEmpresa"
                                     type="text"
                                     value={formData.cnpjEmpresa}
                                     onChange={handleChange}
-                                    required
                                     placeholder="00.000.000/0000-00"
                                 />
                             </div>
