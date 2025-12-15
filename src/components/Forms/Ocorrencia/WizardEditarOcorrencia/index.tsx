@@ -124,9 +124,8 @@ export function EditarOcorrenciaModal({
             };
 
             await editarOcorrencia(ocorrencia.id, payload);
-
             // ← TROCAR: toast.success('Ocorrência atualizada com sucesso!');
-            Swal.fire({
+            await Swal.fire({
                 title: 'Sucesso!',
                 text: 'Ocorrência atualizada com sucesso!',
                 icon: 'success',
