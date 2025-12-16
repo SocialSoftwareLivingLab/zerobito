@@ -42,5 +42,23 @@ export const tituloPaginas: InfoPaginaCaso[] = [
         path: '/casos/:id/investigacao',
         titulo: 'Investigação',
         explicacao: 'Nesta tela o Coordenador Local acompanha as etapas de investigação do caso'
+    },
+    {
+        path: '/casos/:id/intervencao',
+        titulo: 'Sala de reuniões',
+        explicacao:
+            'Aqui o Coordenador Local consegue gerenciar reuniões e ações de intervenção do caso'
+    },
+    {
+        path: '/casos/:id/intervencao/reunioes',
+        titulo: 'Sala de reuniões',
+        explicacao:
+            'Aqui o Coordenador Local consegue gerenciar reuniões e ações de intervenção do caso'
+    },
+    {
+        path: '/casos/:id/intervencao/reunioes/:dataReuniao',
+        titulo: 'Sala de reuniões',
+        explicacao:
+            'Aqui o Coordenador Local consegue gerenciar reuniões e ações de intervenção do caso'
     }
 ];

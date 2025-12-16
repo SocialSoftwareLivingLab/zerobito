@@ -71,16 +71,26 @@ export function CasoNavegacao() {
             <header>
                 {menus.map((menu, index) => {
                     // Define a URL condicional para "Planejamento"
-                    const url =
-                        menu.titulo === 'Planejamento' &&
-                        caso.status !== 'EM_PLANEJAMENTO' &&
-                        caso.status !== 'EM_INVESTIGACAO' &&
-                        caso.status !== null
-                            ? '#' // Retorna '#' para impedir navegação
-                            : menu.url(caso); // URL normal para outros casos
+                    // const isPlanejamentoRestricted =
+                    //     menu.titulo === 'Planejamento' &&
+                    //     caso.status !== 'EM_PLANEJAMENTO' &&
+                    //     caso.status !== 'EM_INVESTIGACAO' &&
+                    //     caso.status !== null;
+
+                    // Define a URL condicional para "Intervenção"
+                    // const isIntervencaoRestricted =
+                    //     menu.titulo === 'Intervenção' &&
+                    //     caso.status !== 'EM_INTERVENCAO' &&
+                    //     caso.status !== null;
+
+                    // const url = isPlanejamentoRestricted
+                    //     ? '#' // Retorna '#' para impedir navegação
+                    //     : menu.url(caso); // URL normal para outros casos
+
+                    const url = menu.url(caso);
 
                     // Adiciona ação ao clique para exibir o alerta, se aplicável
-                    const InvalidAcess = () => {
+                    const InvalidAcessPlanejamento = () => {
                         Swal.fire({
                             text: 'Não é possível acessar "Planejamento" enquanto o caso não está nessa etapa.',
                             icon: 'error',
@@ -91,6 +101,23 @@ export function CasoNavegacao() {
                         });
                     };
 
+                    const InvalidAcessIntervencao = () => {
+                        Swal.fire({
+                            text: 'Não é possível acessar "Intervenção" enquanto o caso não está nessa etapa.',
+                            icon: 'error',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            position: 'center',
+                            toast: true
+                        });
+                    };
+
+                    // Define a action baseada no menu
+                    // let action;
+                    // if (isPlanejamentoRestricted) {
+                    //     action = InvalidAcessPlanejamento;
+                    // }
+
                     return (
                         <CasoNavegacaoItem
                             key={index}
@@ -98,13 +125,6 @@ export function CasoNavegacao() {
                             titulo={menu.titulo}
                             icone={menu.icone}
                             url={url} // Usa a URL condicional
-                            action={
-                                menu.titulo === 'Planejamento' &&
-                                caso.status !== 'EM_PLANEJAMENTO' &&
-                                caso.status !== 'EM_INVESTIGACAO'
-                                    ? InvalidAcess
-                                    : undefined
-                            } // Define onClick somente para Planejamento
                         />
                     );
                 })}
