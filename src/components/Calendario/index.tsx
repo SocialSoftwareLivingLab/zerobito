@@ -13,16 +13,23 @@ interface MeuCalendarioProps {
 }
 
 export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCalendarioProps) {
+    const formatarDataLocal = (d: Date) => {
+        const ano = d.getFullYear();
+        const mes = String(d.getMonth() + 1).padStart(2, '0');
+        const dia = String(d.getDate()).padStart(2, '0');
+        return `${ano}-${mes}-${dia}`;
+    };
+
     const datasTarefasDetalhadas = tarefas.map((t) => {
-        const dataStr = new Date(t.prazo).toISOString().split('T')[0];
-        const atrasada = t.status === 'Atrasado';
+        const dataStr = formatarDataLocal(new Date(t.prazo));
+        const atrasada = t.status === 'Atrasado' || t.status === 'Atrasada';
         return { data: dataStr, atrasada };
     });
 
     // 🔹 guarda todas as reuniões com hora
     const datasReunioesDetalhadas = reunioes.map((r) => new Date(r.data));
     // 🔹 só para marcar bolinhas (dia sem hora)
-    const datasReunioes = datasReunioesDetalhadas.map((d) => d.toISOString().split('T')[0]);
+    const datasReunioes = datasReunioesDetalhadas.map((d) => formatarDataLocal(d));
 
     return (
         <div className="calendario-wrapper">
@@ -39,7 +46,7 @@ export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCa
                 }
                 tileContent={({ date, view }) => {
                     if (view !== 'month') return null;
-                    const dateStr = date.toISOString().split('T')[0];
+                    const dateStr = formatarDataLocal(date);
 
                     const tarefaDoDia = datasTarefasDetalhadas.find((t) => t.data === dateStr);
                     const hasTarefa = !!tarefaDoDia;

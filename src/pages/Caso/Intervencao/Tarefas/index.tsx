@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import { FaUserPlus } from 'react-icons/fa6';
@@ -15,61 +15,97 @@ import ConvidarMembroGrupoModal, {
 import { enviarConviteMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/enviar-convite';
 import Swal from 'sweetalert2';
 import { COLUNAS_MEMBROS_GRUPO_TRABALHO } from './tabela-membros-grupo';
-import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
-import { ColunaAcao } from './styles';
-import EditarTarefaGrupoModal from '../../../../components/Caso/GrupoTrabalho/EditarTarefaModal';
-import RegistrarTarefaGrupoModalView from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal/view';
-import RegistrarTarefaGrupoModal, {
-    RegistrarTarefaGrupoModalFormData
-} from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal';
-import { RegistrarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/registrar-tarefa';
-import { buscarTarefasMembro } from '../../../../common/api/casos/grupo-trabalho/tarefas-membro';
+import EditarAcaoModal from './EditarAcaoModal';
+import RegistrarAcaoModal, { RegistrarAcaoFormData } from './RegistrarAcaoModal';
+import { buscarAcoesMembro } from '../../../../common/api/casos/intervencao/buscar-acoes';
+import { criarAcao } from '../../../../common/api/casos/intervencao/criar-acao';
 import Badge from '../../../../components/ui/Badge';
 
-interface Tarefa {
+interface Acao {
     id: number;
     nome: string;
     status: string;
 }
 
-const TIPOS_STATUS = {
-    CONCLUIDO: {
+const TIPOS_STATUS: Record<
+    string,
+    { label: string; type: 'success' | 'danger' | 'warning' | 'info' }
+> = {
+    PENDENTE: {
         label: 'Pendente',
-        type: 'success' as const
-    },
-    REALIZADO: {
-        label: 'Concluido',
-        type: 'success' as const
-    },
-    ATRASADO: {
-        label: 'Atrasado',
-        type: 'danger' as const
+        type: 'warning'
     },
     EM_ANDAMENTO: {
         label: 'Em andamento',
-        type: 'warning' as const
+        type: 'warning'
     },
-    PENDENTE: {
-        label: 'Pendente',
-        type: 'warning' as const
+    ATRASADA: {
+        label: 'Atrasada',
+        type: 'danger'
+    },
+    ATRASADO: {
+        label: 'Atrasada',
+        type: 'danger'
+    },
+    CANCELADA: {
+        label: 'Cancelada',
+        type: 'danger'
+    },
+    CONCLUIDA: {
+        label: 'Concluída',
+        type: 'success'
+    },
+    CONCLUÍDA: {
+        label: 'Concluída',
+        type: 'success'
+    },
+    CONCLUÍDA_COM_ÊXITO: {
+        label: 'Concluída com êxito',
+        type: 'success'
+    },
+    CONCLUÍDA_SATISFATÓRIA: {
+        label: 'Concluída satisfatória',
+        type: 'success'
+    },
+    CONCLUÍDA_PARCIAL: {
+        label: 'Concluída parcial',
+        type: 'info'
+    },
+    NÃO_CONCLUÍDA: {
+        label: 'Não concluída',
+        type: 'danger'
+    },
+    REALIZADO: {
+        label: 'Concluído',
+        type: 'success'
     },
     ACEITO: {
         label: 'Aceito',
-        type: 'success' as const
+        type: 'success'
     },
     MONITORANDO: {
-        label: 'Atrasado',
-        type: 'danger' as const
+        label: 'Monitorando',
+        type: 'warning'
     },
     RECUSADO: {
         label: 'Recusado',
-        type: 'danger' as const
+        type: 'danger'
     }
 };
 
-export function BadgeStatusTarefa({ status }: { status: string | null }) {
+function normalizarChaveStatus(status: string): string {
+    return status
+        .toUpperCase()
+        .replace(/\s+/g, '_')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+}
+
+export function BadgeStatusAcao({ status }: { status: string | null }) {
     if (!status) return null;
-    const tipo = TIPOS_STATUS[status as keyof typeof TIPOS_STATUS];
+    const chave = status.toUpperCase().replace(/\s+/g, '_');
+    const chaveNormalizada = normalizarChaveStatus(status);
+    const tipo = TIPOS_STATUS[chave] || TIPOS_STATUS[chaveNormalizada];
     return tipo ? <Badge texto={tipo.label} type={tipo.type} /> : null;
 }
 
@@ -83,11 +119,11 @@ export interface MembroGrupo {
         codigo: string;
         nome: string;
     };
-    tarefasCount: number;
+    acoesCount: number;
 }
 
-// Columns for tarefas DataTable
-const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
+// Columns for acoes DataTable
+const ACOES_COLUMNS: TableColumn<Acao>[] = [
     {
         selector: (row) => row.nome,
         sortable: true,
@@ -95,8 +131,7 @@ const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
     },
     {
         cell: (row) => {
-            const statusKey = row.status.toUpperCase().replace(/\s+/g, '_');
-            return <BadgeStatusTarefa status={statusKey} />;
+            return <BadgeStatusAcao status={row.status} />;
         },
         sortable: true,
         wrap: true
@@ -106,51 +141,55 @@ const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
 const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
     const { caso } = useCasoSelecionado();
     const [isModalEditarAberto, setModalEditar] = useState(false);
-    const [tarefaSelecionada, setTarefaSelecionada] = useState<Tarefa | null>(null);
+    const [acaoSelecionada, setAcaoSelecionada] = useState<Acao | null>(null);
     const queryClient = useQueryClient();
 
-    const abrirModal = (row: Tarefa) => {
-        setTarefaSelecionada(row); // salva a tarefa clicada
+    const abrirModal = (row: Acao) => {
+        setAcaoSelecionada(row);
         setModalEditar(true);
     };
 
-    const { data: tarefas = [], isLoading } = useQuery({
-        queryKey: ['tarefas', caso.id, id],
-        queryFn: () => buscarTarefasMembro(caso.id, id),
+    const { data: acoes = [], isLoading } = useQuery({
+        queryKey: ['acoes-intervencao-membro', caso.id, id],
+        queryFn: () => buscarAcoesMembro(caso.id, id),
         select: (result) =>
-            result.map((tarefa) => ({
-                ...tarefa,
-                status: tarefa.status.nome // transforma status em string
+            result.map((acao) => ({
+                id: acao.id,
+                nome: acao.nome,
+                status: acao.statusConclusao?.nome || acao.status.nome
             }))
     });
 
     return (
         <div style={{ padding: '10px', backgroundColor: '#f9f9f9' }}>
             {isLoading ? (
-                <div>Carregando tarefas...</div>
+                <div>Carregando ações...</div>
             ) : (
                 <DataTable
-                    data={tarefas}
-                    columns={TAREFAS_COLUMNS}
+                    data={acoes}
+                    columns={ACOES_COLUMNS}
                     customStyles={dataTableStyle}
-                    noDataComponent="Nenhuma tarefa encontrada"
+                    noDataComponent="Nenhuma ação encontrada"
                     onRowClicked={abrirModal}
                     noHeader
                     noTableHead
                 />
             )}
-            {tarefaSelecionada && (
-                <EditarTarefaGrupoModal
+            {acaoSelecionada && (
+                <EditarAcaoModal
                     aberto={isModalEditarAberto}
                     handleFecharModal={() => setModalEditar(false)}
                     idCaso={caso.id}
-                    idTarefa={tarefaSelecionada.id} // <-- precisa ter o id da tarefa real
-                    onTarefaAtualizada={() => {
+                    idAcao={acaoSelecionada.id}
+                    onAcaoAtualizada={() => {
                         queryClient.invalidateQueries({
-                            queryKey: ['tarefas', caso.id, tarefaSelecionada.id]
+                            queryKey: ['acoes-intervencao-membro', caso.id, id]
                         });
                         queryClient.invalidateQueries({
-                            queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
+                            queryKey: ['casos', 'membros-grupo-trabalho-com-acoes', caso.id]
+                        });
+                        queryClient.invalidateQueries({
+                            queryKey: ['acoes-intervencao', caso.id]
                         });
                     }}
                 />
@@ -163,28 +202,28 @@ export default function AtoresReuniao() {
     const { caso } = useCasoSelecionado();
     const queryClient = useQueryClient();
 
-    const { data: membrosWithTaskCount = [], isLoading } = useQuery({
-        queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id],
+    const { data: membrosWithActionCount = [], isLoading } = useQuery({
+        queryKey: ['casos', 'membros-grupo-trabalho-com-acoes', caso.id],
         queryFn: async () => {
             const membros = await buscarMembrosGrupo(caso.id);
-            const membrosComTarefas = await Promise.all(
+            const membrosComAcoes = await Promise.all(
                 membros.map(async (membro) => {
                     try {
-                        const tarefas = await buscarTarefasMembro(caso.id, membro.id);
+                        const acoes = await buscarAcoesMembro(caso.id, membro.id);
                         return {
                             ...membro,
-                            tarefasCount: tarefas.length
+                            acoesCount: acoes.length
                         };
                     } catch (error) {
-                        console.error(`Erro ao buscar tarefas do membro ${membro.id}:`, error);
+                        console.error(`Erro ao buscar ações do membro ${membro.id}:`, error);
                         return {
                             ...membro,
-                            tarefasCount: 0
+                            acoesCount: 0
                         };
                     }
                 })
             );
-            return membrosComTarefas;
+            return membrosComAcoes;
         }
     });
 
@@ -201,15 +240,15 @@ export default function AtoresReuniao() {
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({
-                queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
+                queryKey: ['casos', 'membros-grupo-trabalho-com-acoes', caso.id]
             });
             setModalConvidarAberto(false);
         }
     });
 
-    const enviarTarefaMutation = useMutation({
-        mutationFn: (data: RegistrarTarefaGrupoModalFormData) => {
-            return RegistrarTarefaMembroGrupo(caso.id, {
+    const enviarAcaoMutation = useMutation({
+        mutationFn: async (data: RegistrarAcaoFormData) => {
+            return criarAcao(caso.id, {
                 nomeMembro: data.responsavel,
                 comentario: data.comentario,
                 nome: data.nome,
@@ -218,42 +257,58 @@ export default function AtoresReuniao() {
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({
-                queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
+                queryKey: ['casos', 'membros-grupo-trabalho-com-acoes', caso.id]
             });
             await queryClient.invalidateQueries({
-                queryKey: ['tarefas', caso.id],
+                queryKey: ['acoes-intervencao-membro'],
                 exact: false
             });
+            await queryClient.invalidateQueries({
+                queryKey: ['acoes-intervencao', caso.id]
+            });
             await Swal.fire({
-                title: 'Tarefa registrada!',
-                text: 'Uma nova tarefa foi registrada com sucesso.',
+                title: 'Ação registrada!',
+                text: 'Uma nova ação foi registrada com sucesso.',
                 icon: 'success',
                 timer: 4000,
                 confirmButtonText: 'Continuar'
+            });
+            setModalAcao(false);
+        },
+        onError: (error: unknown) => {
+            const errorMessage =
+                (error as { response?: { data?: { message?: string } } })?.response?.data
+                    ?.message ||
+                (error as Error).message ||
+                'Erro ao registrar ação';
+            Swal.fire({
+                title: 'Erro!',
+                text: errorMessage,
+                icon: 'error'
             });
         }
     });
 
     const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
-    const [isModalTarefaAberto, setModalTarefa] = useState(false);
+    const [isModalAcaoAberto, setModalAcao] = useState(false);
 
     return (
         <BoxContainer
-            titulo="Atores / Situação das Tarefas"
+            titulo="Atores / Situação das Ações"
             acoesContainer={() => (
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <Button action={() => setModalConvidarAberto(true)}>
                         <FaUserPlus />
                         Convidar
                     </Button>
-                    <Button action={() => setModalTarefa(true)}>
+                    <Button action={() => setModalAcao(true)}>
                         <FaUserPlus />
-                        Registrar Tarefa
+                        Registrar Ação
                     </Button>
                 </div>
             )}>
             <DataTable
-                data={membrosWithTaskCount ?? []}
+                data={membrosWithActionCount ?? []}
                 progressPending={isLoading}
                 progressComponent="Carregando..."
                 noDataComponent="Nenhum membro foi encontrado"
@@ -268,15 +323,11 @@ export default function AtoresReuniao() {
                 handleFecharModal={() => setModalConvidarAberto(false)}
                 onSubmit={(data) => enviarConviteMutation.mutateAsync(data)}
             />
-            <RegistrarTarefaGrupoModal
-                aberto={isModalTarefaAberto}
-                handleFecharModal={() => setModalTarefa(false)}
+            <RegistrarAcaoModal
+                aberto={isModalAcaoAberto}
+                handleFecharModal={() => setModalAcao(false)}
                 onSubmit={async (data) => {
-                    enviarTarefaMutation.mutateAsync(data);
-                    queryClient.invalidateQueries({
-                        queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
-                    });
-                    setModalTarefa(false);
+                    await enviarAcaoMutation.mutateAsync(data);
                 }}
             />
         </BoxContainer>

@@ -9,7 +9,9 @@ const statusLabel = {
     AGUARDANDO_NOTIFICACOES: 'Aguardando Notificações',
     EM_PLANEJAMENTO: 'Em Planejamento',
     EM_PREPARACAO: 'Em Preparação',
-    EM_INVESTIGACAO: 'Em Investigação'
+    EM_INVESTIGACAO: 'Em Investigação',
+    EM_INTERVENCAO: 'Em Intervenção',
+    FINALIZADO: 'Finalizado'
 };
 
 export function CasoInfo() {

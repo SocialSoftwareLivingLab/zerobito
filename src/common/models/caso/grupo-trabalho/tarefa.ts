@@ -1,4 +1,5 @@
 export interface Tarefa {
+    id: number;
     identificador: string;
     comentario: string;
     nome: string;

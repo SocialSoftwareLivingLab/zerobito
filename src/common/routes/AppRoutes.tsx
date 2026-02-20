@@ -23,6 +23,8 @@ import CasoConvite from '../../pages/CasoConvite';
 import Preparacao from '../../pages/Caso/Preparacao';
 import Planejamento from '../../pages/Caso/Planejamento';
 import ReunioesPlanejamento from '../../pages/Caso/Planejamento/Reunioes';
+import Intervencao from '../../pages/Caso/Intervencao';
+import ReunioesIntervencao from '../../pages/Caso/Intervencao/Reunioes';
 import EsqueciSenha from '../../pages/EsqueciSenha';
 import RedefinirSenha from '../../pages/RedefinirSenha';
 import CadastroConvite from '../../pages/CadastroConvite';
@@ -73,6 +75,12 @@ const AppRoutes = () => {
                             element={<ReunioesPlanejamento />}
                         />
                         <Route index path=":id/investigacao" element={<Investigacao />} />
+                        <Route index path=":id/intervencao" element={<Intervencao />} />
+                        <Route path=":id/intervencao/reunioes" element={<ReunioesIntervencao />} />
+                        <Route
+                            path=":id/intervencao/reunioes/:dataReuniao"
+                            element={<ReunioesIntervencao />}
+                        />
                     </Route>
                 </Route>
                 <Route path="/convites/:token" element={<CasoConvite />} />
