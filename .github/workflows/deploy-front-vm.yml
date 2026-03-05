@@ -24,14 +24,19 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Definir nome da imagem
+        run: |
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          echo "OWNER=$OWNER" >> $GITHUB_ENV
 
       - name: Build da imagem do frontend
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/zerobito-frontend:latest .
+          docker build -t ghcr.io/$OWNER/zerobito-frontend:latest .
 
       - name: Push para GHCR
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/zerobito-frontend:latest
+          docker push ghcr.io/$OWNER/zerobito-frontend:latest
 
       - name: Deploy na VM
         uses: appleboy/ssh-action@v1.0.3
