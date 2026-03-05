@@ -21,6 +21,6 @@ COPY nginx.conf /etc/nginx/conf.d
 # Copia build do React
 COPY --from=builder /app/build /usr/share/nginx/html
 
-EXPOSE 3002
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
