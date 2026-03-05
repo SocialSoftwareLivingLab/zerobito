@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  frontend:
+    container_name: zerobito-frontend
+    build: .
+    ports:
+      - "3002:3002"
+    restart: unless-stopped
