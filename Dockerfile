@@ -16,7 +16,7 @@ FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 # Copia config custom
-COPY nginx.conf /etc/nginx/conf.d
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copia build do React
 COPY --from=builder /app/build /usr/share/nginx/html
