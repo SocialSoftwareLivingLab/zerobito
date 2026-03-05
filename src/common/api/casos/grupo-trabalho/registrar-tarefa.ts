@@ -6,6 +6,7 @@ interface RegistrarTarefaRequest {
     nome: string;
     prazo: Date;
 }
+// teste deploy
 
 export async function RegistrarTarefaMembroGrupo(idCaso: number, payload: RegistrarTarefaRequest) {
     const response = await api.post(
