@@ -1,6 +1,7 @@
 name: Build e Deploy Frontend - teste
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -12,19 +13,15 @@ jobs:
 
     permissions:
       contents: read
-      packages: write   # 🔥 ESSENCIAL para GHCR
+      packages: write   
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Login no GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Definir nome da imagem
         run: |
           OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
@@ -47,5 +44,6 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           script: |
             cd /opt/apps/frontend
-            sudo docker compose pull
-            sudo docker compose up -d --force-recreate
+            sudo docker compose pull image: ghcr.io/$OWNER/zerobito-frontend:latest
+            sudo docker compose up -d
+            sudo docker image prune -f
