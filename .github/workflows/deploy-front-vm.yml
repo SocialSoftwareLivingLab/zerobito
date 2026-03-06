@@ -33,7 +33,9 @@ jobs:
 
       - name: Build da imagem do frontend
         run: |
-          docker build -t ghcr.io/$OWNER/zerobito-frontend:latest .
+          docker build \
+            --build-arg REACT_APP_BACKEND_URL=http://143.106.73.48:3001 \
+            -t ghcr.io/$OWNER/zerobito-frontend:latest .
 
       - name: Push para GHCR
         run: |
