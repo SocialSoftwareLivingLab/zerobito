@@ -238,7 +238,7 @@ export default function AtoresReuniao() {
 
     return (
         <BoxContainer
-            titulo="Atores aaaa/ Situação das Tarefas"
+            titulo="Atores / Situação das Tarefas"
             acoesContainer={() => (
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <Button action={() => setModalConvidarAberto(true)}>
