@@ -12,7 +12,7 @@ export interface RegistrarTarefaGrupoModalViewProps {
     aberto: boolean;
     handleFecharModal: () => void;
     register: UseFormRegister<RegistrarTarefaGrupoModalFormData>;
-    onSubmitForm: () => Promise<void>;
+    onSubmitForm: (e?: React.BaseSyntheticEvent) => Promise<void>;
 }
 
 export default function RegistrarTarefaGrupoModalView({
@@ -24,23 +24,27 @@ export default function RegistrarTarefaGrupoModalView({
     const [loading, setLoading] = useState(false);
 
     const onSubmitFormComReset = useCallback(
-        async (evt: React.FormEvent) => {
+        async (evt?: React.BaseSyntheticEvent) => {
             setLoading(true);
-            evt.preventDefault();
 
             try {
-                const response = await onSubmitForm();
-            } catch (error) {
+                await onSubmitForm(evt);
+            } catch (error: unknown) {
                 console.error('Erro ao registrar tarefa:', error);
-                if (error.response.statusText === 'Not Found') {
-                    Swal.fire({
-                        text: 'Membro não encontrado no caso. Por favor, revise as informações.',
-                        icon: 'error',
-                        timer: 2000,
-                        showConfirmButton: false,
-                        position: 'center',
-                        toast: true
-                    });
+
+                if (typeof error === 'object' && error !== null && 'response' in error) {
+                    const err = error as { response?: { statusText?: string } };
+
+                    if (err.response?.statusText === 'Not Found') {
+                        Swal.fire({
+                            text: 'Membro não encontrado no caso. Por favor, revise as informações.',
+                            icon: 'error',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            position: 'center',
+                            toast: true
+                        });
+                    }
                 }
             } finally {
                 setLoading(false);
@@ -48,6 +52,7 @@ export default function RegistrarTarefaGrupoModalView({
         },
         [onSubmitForm]
     );
+
     return (
         <Modal titulo="Registrar Tarefa" aberto={aberto} handleFecharModal={handleFecharModal}>
             <Container>
@@ -59,6 +64,7 @@ export default function RegistrarTarefaGrupoModalView({
                         required
                         {...register('responsavel', { required: true })}
                     />
+
                     <Input
                         label="Nome da tarefa"
                         placeholder="Tarefa ..."
@@ -66,22 +72,26 @@ export default function RegistrarTarefaGrupoModalView({
                         required
                         {...register('nome', { required: true })}
                     />
+
                     <Input
                         label="Prazo"
                         type="date"
                         required
                         {...register('prazo', { required: true })}
                     />
+
                     <TextArea
                         label="Comentários"
                         placeholder="Digite alguma coisa..."
                         required
                         {...register('comentario', { required: true })}
                     />
+
                     <footer>
                         <Button type="default" action={() => handleFecharModal()}>
                             Cancelar
                         </Button>
+
                         <Button type="submit" loading={loading}>
                             Registrar
                         </Button>

@@ -238,7 +238,7 @@ export default function AtoresReuniao() {
 
     return (
         <BoxContainer
-            titulo="Atores / Situação das Tarefas"
+            titulo="Atores aaaa/ Situação das Tarefas"
             acoesContainer={() => (
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <Button action={() => setModalConvidarAberto(true)}>
@@ -272,11 +272,9 @@ export default function AtoresReuniao() {
                 handleFecharModal={() => setModalTarefa(false)}
                 onSubmit={async (data) => {
                     enviarTarefaMutation.mutateAsync(data);
-                    queryClient.invalidateQueries([
-                        'casos',
-                        'membros-grupo-trabalho-com-tarefas',
-                        caso.id
-                    ]);
+                    queryClient.invalidateQueries({
+                        queryKey: ['casos', 'membros-grupo-trabalho-com-tarefas', caso.id]
+                    });
                     setModalTarefa(false);
                 }}
             />

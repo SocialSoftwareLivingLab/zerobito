@@ -3,20 +3,16 @@ import { BoxContainerStyle } from './styles';
 
 interface BoxContainerProps {
     titulo: string;
-    acoesContainer?: React.ComponentType;
+    acoesContainer?: () => React.ReactNode;
     children: React.ReactNode | React.ReactNode[];
 }
 
-export function BoxContainer({
-    titulo,
-    acoesContainer: AcoesContainer,
-    children
-}: BoxContainerProps) {
+export function BoxContainer({ titulo, acoesContainer, children }: BoxContainerProps) {
     return (
         <BoxContainerStyle>
             <header>
                 <h2>{titulo}</h2>
-                {AcoesContainer && <AcoesContainer />}
+                {acoesContainer && acoesContainer()}
             </header>
             {children}
         </BoxContainerStyle>

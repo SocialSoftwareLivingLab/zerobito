@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
-import { useForm, UseFormRegister } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import RegistrarTarefaGrupoModalView, { RegistrarTarefaGrupoModalViewProps } from './view';
+import { useEffect } from 'react';
 
 export interface RegistrarTarefaGrupoModalFormData {
     responsavel: string;
