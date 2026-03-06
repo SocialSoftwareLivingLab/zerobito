@@ -44,6 +44,6 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           script: |
             cd /opt/apps/frontend
-            sudo docker compose pull image: ghcr.io/$OWNER/zerobito-frontend:latest
+            sudo docker compose pull
             sudo docker compose up -d
             sudo docker image prune -f
