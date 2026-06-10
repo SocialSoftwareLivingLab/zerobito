@@ -32,8 +32,8 @@ export const buttonColors: ButtonColorTypes = {
     },
     default: {
         background: '#fff',
-        hover: '#eee',
-        text: '#acb8c4'
+        hover: '#f1f5f9',
+        text: '#475569'
     }
 };
 
@@ -78,6 +78,6 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     ${(props) =>
         props.type === 'default' &&
         css`
-            border: 2px solid #acb8c4;
+            border: 2px solid #475569;
         `}
 `;

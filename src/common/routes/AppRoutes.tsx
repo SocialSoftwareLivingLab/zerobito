@@ -27,6 +27,9 @@ import EsqueciSenha from '../../pages/EsqueciSenha';
 import RedefinirSenha from '../../pages/RedefinirSenha';
 import CadastroConvite from '../../pages/CadastroConvite';
 import Investigacao from '../../pages/Caso/Investigacao';
+import Intervencao from '../../pages/Caso/Intervencao';
+import NovaIntervencao from '../../pages/Caso/Intervencao/NovaIntervencao';
+import EditarIntervencao from '../../pages/Caso/Intervencao/EditarIntervencao';
 
 interface PrivateRouteConfig {
     path: string;
@@ -73,6 +76,12 @@ const AppRoutes = () => {
                             element={<ReunioesPlanejamento />}
                         />
                         <Route index path=":id/investigacao" element={<Investigacao />} />
+                        <Route index path=":id/intervencao" element={<Intervencao />} />
+                        <Route path=":id/intervencao/nova" element={<NovaIntervencao />} />
+                        <Route
+                            path=":id/intervencao/:intervencaoId/editar"
+                            element={<EditarIntervencao />}
+                        />
                     </Route>
                 </Route>
                 <Route path="/convites/:token" element={<CasoConvite />} />

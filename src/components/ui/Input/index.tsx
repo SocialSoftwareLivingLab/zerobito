@@ -1,10 +1,7 @@
 import React, { InputHTMLAttributes, forwardRef } from 'react';
 import { InputArea, InputLabel, InputStyle } from './styles';
 
-export interface InputProps {
-    type?: InputHTMLAttributes<HTMLInputElement>['type'];
-    placeholder?: string;
-    required?: boolean;
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'width'> {
     label: string;
     width?: 'auto' | 'full';
 }

@@ -31,6 +31,7 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
         nome: null,
         email: null
     });
+    const [isLoading, setIsLoading] = useState(true);
 
     const logout = useCallback(() => {
         resetarDados();
@@ -50,22 +51,15 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
     }, [usuarioLogado?.token]);
 
     useEffect(() => {
-        if (!history) return;
-
         const token = localStorage.getItem('token');
         const usuarioSalvo = JSON.parse(localStorage.getItem('usuario') || '{}') as Exclude<
             UsuarioAutenticado,
             'token'
         >;
-        if (!token) {
-            redirect(`/login?redirectTo=${window.location.pathname ?? '/'}`);
-            return;
+        if (token) {
+            setUsuarioLogado({ ...usuarioSalvo, token });
         }
-
-        setUsuarioLogado({
-            ...usuarioSalvo,
-            token
-        });
+        setIsLoading(false);
     }, []);
 
     return (
@@ -74,7 +68,8 @@ export function UsuarioAutenticadoContextProvider(props: UsuarioAutenticadoConte
                 data: usuarioLogado,
                 login,
                 logout,
-                isAutenticado
+                isAutenticado,
+                isLoading
             }}>
             {props.children}
         </UsuarioAutenticadoContext.Provider>

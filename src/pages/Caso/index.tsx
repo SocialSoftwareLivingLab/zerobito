@@ -42,7 +42,8 @@ export default function Caso() {
     });
 
     // Rotas para título/descrição
-    const [matchedRoute] = matchRoutes(tituloPaginas, location);
+    const routeMatches = matchRoutes(tituloPaginas, location);
+    const matchedRoute = routeMatches?.[0];
 
     // Aguarda TODAS as queries
     const carregando = isLoadingCaso || isLoadingMembros || isLoadingPerfis;
@@ -51,8 +52,8 @@ export default function Caso() {
         return <div>Carregando...</div>;
     }
 
-    // Verifica permissão SOMENTE depois que tudo carregou
-    const ehMembro = perfis.some((p) => p.caso?.id === caso?.id);
+    // Verifica permissão: perfil vinculado ao caso OU perfil global (sem caso, ex: ROOT)
+    const ehMembro = perfis.some((p) => p.caso?.id === caso?.id || !p.caso);
 
     if (!ehMembro) {
         Swal.fire({
@@ -69,7 +70,10 @@ export default function Caso() {
 
     return (
         <>
-            <Header titulo={matchedRoute.route.titulo} explicacao={matchedRoute.route.explicacao} />
+            <Header
+                titulo={matchedRoute?.route?.titulo ?? ''}
+                explicacao={matchedRoute?.route?.explicacao ?? ''}
+            />
 
             <CasoSelecionadoContextProvider caso={caso}>
                 <TarefasProvider>

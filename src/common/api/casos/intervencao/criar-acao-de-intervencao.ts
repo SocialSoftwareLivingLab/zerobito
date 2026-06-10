@@ -6,14 +6,22 @@ export enum AcoesIntervencaoStatusEnum {
     SEM_PREVISAO = 'Ação sem previsão de conclusão.'
 }
 
+export enum NivelIntervencaoEnum {
+    MICRO = 'MICRO',
+    MESO = 'MESO',
+    MACRO = 'MACRO'
+}
+
 export interface CriarIntervencaoRequest {
     name: string;
     recursos: string;
-    prazo: Date;
+    prazo: string;
     prioridade: number;
-    status: AcoesIntervencaoStatusEnum;
+    nivel?: NivelIntervencaoEnum;
+    autorNome: string;
 }
 
 export async function CriarIntervencao(idCaso: number, intervencao: CriarIntervencaoRequest) {
+    console.log('aaaa');
     await api.post(`/api/v1/casos/${idCaso}/intervencoes`, intervencao);
 }

@@ -42,5 +42,20 @@ export const tituloPaginas: InfoPaginaCaso[] = [
         path: '/casos/:id/investigacao',
         titulo: 'Investigação',
         explicacao: 'Nesta tela o Coordenador Local acompanha as etapas de investigação do caso'
+    },
+    {
+        path: '/casos/:id/intervencao',
+        titulo: 'Intervenção',
+        explicacao: 'Nesta tela o Coordenador Local registra e acompanha as ações de intervenção'
+    },
+    {
+        path: '/casos/:id/intervencao/nova',
+        titulo: 'Nova Intervenção',
+        explicacao: 'Registre uma nova ação de intervenção para o caso'
+    },
+    {
+        path: '/casos/:id/intervencao/:intervencaoId/editar',
+        titulo: 'Editar Intervenção',
+        explicacao: 'Edite os dados da ação de intervenção'
     }
 ];

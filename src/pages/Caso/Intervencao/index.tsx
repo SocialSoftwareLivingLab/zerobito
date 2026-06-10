@@ -1,109 +1,153 @@
-import React from 'react';
-import { IntervencaoContainer } from './styles';
-import AcoesReuniao from './Acoes';
-import AtoresReuniao from './Tarefas';
-import useDossieViewModel from '../Dossie/model';
-import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
-import CalendarioCustomizado from '../../../components/Calendario';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { BoxContainer } from '../../../components/ui/BoxContainer';
+import { Button } from '../../../components/ui/Button';
+import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
+import {
+    ListarIntervencoesAgrupadoPorAutor,
+    ListarIntervencoesCalendario
+} from '../../../common/api/casos/intervencao/buscar-acoes-intervencao';
 import AcoesIntervencao from './Acoes';
+import { IntervencaoContainer } from './styles';
+import CalendarioCustomizado from '../../../components/Calendario';
+import Badge from '../../../components/ui/Badge';
+import { FaPencilAlt } from 'react-icons/fa';
+import { AcoesIntervencaoStatusEnum } from '../../../common/api/casos/intervencao/criar-acao-de-intervencao';
 
-function formatarData(data: string | Date): string {
-    const d = new Date(data);
-    return d.toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
+const STATUS_BADGE: Record<string, { label: string; type: string }> = {
+    [AcoesIntervencaoStatusEnum.EXITO]: { label: 'Êxito', type: 'success' },
+    [AcoesIntervencaoStatusEnum.SATISFATORIA]: { label: 'Satisfatória', type: 'warning' },
+    [AcoesIntervencaoStatusEnum.SEM_PREVISAO]: { label: 'Sem previsão', type: 'danger' }
+};
+
+const NIVEL_LABEL: Record<string, string> = {
+    MICRO: 'Micro',
+    MESO: 'Meso',
+    MACRO: 'Macro'
+};
+
+function formatarData(data: string): string {
+    const datePart = data.split('T')[0];
+    const [year, month, day] = datePart.split('-');
+    return `${day}/${month}/${year}`;
 }
 
-export default function Planejamento() {
+export default function Intervencao() {
     const { caso } = useCasoSelecionado();
-    const { reunioes, proximosEventos, tarefas } = useDossieViewModel(caso.id);
-    const [diaSelecionado, setDiaSelecionado] = React.useState<Date | null>(null);
-
-    const [eventosDoDia, setEventosDoDia] = React.useState(proximosEventos.slice(0, 4));
-    React.useEffect(() => {
-        if (!diaSelecionado) {
-            setEventosDoDia(proximosEventos.slice(0, 4));
-        }
-    }, [proximosEventos, diaSelecionado]);
     const navigate = useNavigate();
     const location = useLocation();
 
-    const filtrarEventosDoDia = (data: Date) => {
-        setDiaSelecionado(data); // marca que foi clicado
-        const dia = data.toISOString().split('T')[0];
+    const basePath = location.pathname.replace(/\/intervencao.*$/, '');
 
-        const filtrados = proximosEventos.filter((item) => {
-            const itemDia = new Date(item.data).toISOString().split('T')[0];
-            return itemDia === dia;
-        });
+    const { data: agrupado = {}, isLoading } = useQuery({
+        queryKey: ['intervencoes-agrupado', caso.id],
+        queryFn: () => ListarIntervencoesAgrupadoPorAutor(caso.id)
+    });
 
-        setEventosDoDia(filtrados);
-    };
+    const { data: calendario = [] } = useQuery({
+        queryKey: ['intervencoes-calendario', caso.id],
+        queryFn: () => ListarIntervencoesCalendario(caso.id)
+    });
 
-    const navegarParaReuniao = (data: string | Date) => {
-        const d = new Date(data);
-        const dataISO = d.toISOString(); // ex: "2025-10-04T14:00:00.000Z"
+    const grupos = Object.values(agrupado) as Array<{
+        autor: { id: number; membro: { nome: string } };
+        intervencoes: Array<{
+            id: number;
+            name: string;
+            nivel: string;
+            status: string;
+            prazo: string;
+            prioridade: number;
+        }>;
+    }>;
 
-        const basePath = location.pathname.split('/planejamento')[0];
-        navigate(`${basePath}/planejamento/reunioes/${encodeURIComponent(dataISO)}`);
-    };
+    const reunioesCalendario = calendario.map(
+        (item: { id: number; prazo: string; status: string }) => ({
+            data: item.prazo,
+            titulo: 'Intervenção'
+        })
+    );
 
     return (
         <IntervencaoContainer>
             <AcoesIntervencao />
-            <div className="row">
-                <div className="column">
-                    <div style={{ marginBottom: '20px' }}>
-                        <AtoresReuniao />
-                    </div>
-                </div>
-                <div className="column">
-                    <div style={{ marginBottom: '20px' }}>
-                        <div className="calendario-tarefas">
-                            <div className="lista-tarefas">
-                                <h3>Calendário</h3>
-                                {eventosDoDia.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className="card-tarefa"
-                                        onClick={() =>
-                                            item.tipo === 'reuniao' && navegarParaReuniao(item.data)
-                                        }
-                                        style={{
-                                            cursor: item.tipo === 'reuniao' ? 'pointer' : 'default'
-                                        }}>
-                                        <div>
-                                            <strong>
-                                                {item.tipo === 'tarefa' ? 'Tarefa' : 'Reunião'}
-                                            </strong>
-                                            <div>{formatarData(item.data)}</div>
-                                        </div>
-                                        {item.tipo === 'tarefa' && (
-                                            <span
-                                                className={`status ${item.status
-                                                    .replace(/\s+/g, '-')
-                                                    .toLowerCase()}`}>
-                                                {item.status === 'Atrasado'
-                                                    ? 'Atrasada'
-                                                    : item.status}
-                                            </span>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                            <CalendarioCustomizado
-                                reunioes={reunioes}
-                                tarefas={tarefas}
-                                onDiaClick={(data) => filtrarEventosDoDia(data)}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            <BoxContainer
+                titulo="Intervenções por Ator"
+                acoesContainer={() => (
+                    <Button action={() => navigate(`${basePath}/intervencao/nova`)}>
+                        + Nova Intervenção
+                    </Button>
+                )}>
+                {isLoading ? (
+                    <p>Carregando...</p>
+                ) : grupos.length === 0 ? (
+                    <p>Nenhuma intervenção registrada.</p>
+                ) : (
+                    <table className="tabela-intervencoes">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Nível</th>
+                                <th>Prazo</th>
+                                <th>Status</th>
+                                <th />
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {grupos.map((grupo) => (
+                                <>
+                                    <tr key={`autor-${grupo.autor.id}`} className="tr-autor">
+                                        <td colSpan={5}>{grupo.autor.membro?.nome ?? '—'}</td>
+                                    </tr>
+                                    {grupo.intervencoes.map((item) => {
+                                        const badge = STATUS_BADGE[item.status];
+                                        return (
+                                            <tr key={item.id}>
+                                                <td>{item.name}</td>
+                                                <td>{NIVEL_LABEL[item.nivel] ?? item.nivel}</td>
+                                                <td>{formatarData(item.prazo)}</td>
+                                                <td>
+                                                    {badge && (
+                                                        <Badge
+                                                            texto={badge.label}
+                                                            type={
+                                                                badge.type as
+                                                                    | 'success'
+                                                                    | 'warning'
+                                                                    | 'danger'
+                                                            }
+                                                        />
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    <button
+                                                        className="btn-editar"
+                                                        onClick={() =>
+                                                            navigate(
+                                                                `${basePath}/intervencao/${item.id}/editar`
+                                                            )
+                                                        }>
+                                                        <FaPencilAlt />
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </BoxContainer>
+
+            <BoxContainer titulo="Calendário de Intervenções">
+                <CalendarioCustomizado
+                    reunioes={reunioesCalendario}
+                    tarefas={[]}
+                    onDiaClick={() => {}}
+                />
+            </BoxContainer>
         </IntervencaoContainer>
     );
 }

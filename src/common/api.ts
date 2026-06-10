@@ -19,6 +19,7 @@ api.interceptors.response.use(
             });
             return { data: null, status: 403, erro: true };
         }
+        return Promise.reject(error);
     }
 );
 

@@ -21,11 +21,11 @@ export const CasoNavegacaoItemContainer = styled(Link)<{ ativo: boolean }>`
     div {
         display: flex;
         flex-direction: column;
+        align-items: center;
         text-align: center;
         justify-content: center;
         svg {
             margin-top: 18px;
-            margin-left: 40%;
             font-size: 2rem;
             font-weight: 800;
         }

@@ -4,12 +4,19 @@ import 'react-calendar/dist/Calendar.css';
 import './style.css';
 import { Tarefa } from '../../contexts/minhas-tarefas';
 
-export type CalendarItem = { data: string }; // data com hora, ex: "2025-10-04T14:00:00Z"
+export type CalendarItem = { data: string; titulo?: string };
 
 interface MeuCalendarioProps {
     tarefas?: Tarefa[];
     reunioes?: CalendarItem[];
     onDiaClick?: (data: Date) => void;
+}
+
+function localDateStr(d: Date): string {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
 }
 
 export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCalendarioProps) {
@@ -19,10 +26,11 @@ export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCa
         return { data: dataStr, atrasada };
     });
 
-    // 🔹 guarda todas as reuniões com hora
-    const datasReunioesDetalhadas = reunioes.map((r) => new Date(r.data));
-    // 🔹 só para marcar bolinhas (dia sem hora)
-    const datasReunioes = datasReunioesDetalhadas.map((d) => d.toISOString().split('T')[0]);
+    const reunioesPorData = new Map<string, CalendarItem>();
+    reunioes.forEach((r) => {
+        const key = r.data.split('T')[0];
+        reunioesPorData.set(key, r);
+    });
 
     return (
         <div className="calendario-wrapper">
@@ -39,12 +47,12 @@ export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCa
                 }
                 tileContent={({ date, view }) => {
                     if (view !== 'month') return null;
-                    const dateStr = date.toISOString().split('T')[0];
+                    const dateStr = localDateStr(date);
 
                     const tarefaDoDia = datasTarefasDetalhadas.find((t) => t.data === dateStr);
                     const hasTarefa = !!tarefaDoDia;
                     const isAtrasada = tarefaDoDia?.atrasada;
-                    const hasReuniao = datasReunioes.includes(dateStr);
+                    const reuniaoDoDia = reunioesPorData.get(dateStr);
 
                     return (
                         <div className="bolinhas-container">
@@ -53,8 +61,10 @@ export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCa
                                     className={`bolinha ${isAtrasada ? 'atrasada' : 'tarefa'}`}
                                     title={isAtrasada ? 'Tarefa Atrasada' : 'Tarefa'}></span>
                             )}
-                            {hasReuniao && (
-                                <span className="bolinha reuniao" title="Reunião"></span>
+                            {reuniaoDoDia && (
+                                <span
+                                    className="bolinha reuniao"
+                                    title={reuniaoDoDia.titulo ?? 'Reunião'}></span>
                             )}
                         </div>
                     );

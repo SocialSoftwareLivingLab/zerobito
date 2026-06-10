@@ -22,7 +22,7 @@ function RegistrarOcorrenciaPage() {
     const formGravidadeRef = useRef<FormStepApi>(null);
     const { data: usuario } = useUsuarioAutenticado();
 
-    const { data: perfis = [] } = useQuery({
+    const { data: perfis = [], isPending: isLoadingPerfis } = useQuery({
         queryKey: ['usuario', 'perfis'],
         queryFn: obterPerfisUsuario
     });
@@ -119,6 +119,8 @@ function RegistrarOcorrenciaPage() {
 
         navigate('/home');
     }, [formData, navigate]);
+
+    if (isLoadingPerfis) return null;
 
     if (!permissao) {
         Swal.fire({

@@ -1,9 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
-import { FaChevronDown, FaChevronUp, FaCompress } from 'react-icons/fa';
+import {
+    FaCheckCircle,
+    FaChevronDown,
+    FaChevronUp,
+    FaCompress,
+    FaExclamationTriangle,
+    FaTimesCircle
+} from 'react-icons/fa';
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
-import Badge from '../../../../components/ui/Badge';
 import { MapaEtapaEnum } from '../enum/mapa-etapa-enum';
 import { MapaEtapaStatusEnum } from '../enum/mapa-etapa-status-enum';
 import { buscarMapaEtapas } from '../../../../common/api/casos/investigacao/buscar-acoes-localizacao';
@@ -21,14 +27,26 @@ export interface MapaEtapa {
 
 /** Badge visual de status */
 function BadgeStatusEtapa({ status }: { status: MapaEtapaStatusEnum }) {
-    const statusMap: Record<string, { label: string; type: 'success' | 'warning' | 'danger' }> = {
-        [MapaEtapaStatusEnum.EM_ELABORACAO]: { label: 'Em elaboração', type: 'warning' },
-        [MapaEtapaStatusEnum.BLOQUEADA]: { label: 'Bloqueada', type: 'danger' },
-        [MapaEtapaStatusEnum.FINALIZADA]: { label: 'Finalizada', type: 'success' }
+    const statusMap: Record<string, { label: string; icon: JSX.Element }> = {
+        [MapaEtapaStatusEnum.EM_ELABORACAO]: {
+            label: 'Em elaboração',
+            icon: <FaExclamationTriangle style={{ color: '#d97706', fontSize: '1.1rem' }} />
+        },
+        [MapaEtapaStatusEnum.BLOQUEADA]: {
+            label: 'Bloqueada',
+            icon: <FaTimesCircle style={{ color: '#dc2626', fontSize: '1.1rem' }} />
+        },
+        [MapaEtapaStatusEnum.FINALIZADA]: {
+            label: 'Finalizada',
+            icon: <FaCheckCircle style={{ color: '#16a34a', fontSize: '1.1rem' }} />
+        }
     };
 
-    const tipo = statusMap[status] ?? { label: status ?? 'Desconhecido', type: 'warning' };
-    return <Badge texto={tipo.label} type={tipo.type} />;
+    const tipo = statusMap[status] ?? {
+        label: status ?? 'Desconhecido',
+        icon: <FaExclamationTriangle style={{ color: '#d97706' }} />
+    };
+    return <span title={tipo.label}>{tipo.icon}</span>;
 }
 
 export default function MapaInvestigacao(): JSX.Element {
@@ -93,7 +111,7 @@ export default function MapaInvestigacao(): JSX.Element {
 
     return (
         <BoxContainer
-            titulo="Mapa de Investigação"
+            titulo="MAPA de Investigação"
             acoesContainer={() => (
                 <Button action={colapsarTodas}>
                     <FaCompress className="mr-2" />
@@ -106,14 +124,12 @@ export default function MapaInvestigacao(): JSX.Element {
                         const aberta = abertas.includes(etapa.id);
 
                         return (
-                            <div
-                                key={etapa.id}
-                                className="border rounded-2xl p-4 shadow-sm bg-white">
+                            <div key={etapa.id} className="etapa-item">
                                 {/* Cabeçalho */}
                                 <div
-                                    className="flex justify-between items-center cursor-pointer"
+                                    className="etapa-cabecalho"
                                     onClick={() => alternarAbertura(etapa.id)}>
-                                    <div className="flex items-center gap-2 font-medium">
+                                    <div className="etapa-titulo">
                                         <span>
                                             {index + 1}. {etapa.name}
                                         </span>
@@ -124,7 +140,7 @@ export default function MapaInvestigacao(): JSX.Element {
 
                                 {/* Conteúdo expandido */}
                                 {aberta && (
-                                    <div className="mt-3 border-t pt-3 text-sm text-gray-700 whitespace-pre-line">
+                                    <div className="etapa-conteudo">
                                         <textarea
                                             className="descricao-etapa"
                                             value={etapa.descricao ?? ''}
@@ -164,6 +180,12 @@ export default function MapaInvestigacao(): JSX.Element {
                                                 />
                                             </Select>
 
+                                            <Button
+                                                type="default"
+                                                action={() => alternarAbertura(etapa.id)}
+                                                disabled={isAlterando}>
+                                                Cancelar
+                                            </Button>
                                             <Button
                                                 action={() => salvarEtapa(etapa)}
                                                 disabled={isAlterando}>

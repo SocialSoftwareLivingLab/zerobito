@@ -5,11 +5,13 @@ import { CasoInfoContainer } from './styles';
 import CasoInfoItem from './CasoInfoItem';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 
-const statusLabel = {
+const statusLabel: Record<string, string> = {
     AGUARDANDO_NOTIFICACOES: 'Aguardando Notificações',
-    EM_PLANEJAMENTO: 'Em Planejamento',
     EM_PREPARACAO: 'Em Preparação',
-    EM_INVESTIGACAO: 'Em Investigação'
+    EM_PLANEJAMENTO: 'Em Planejamento',
+    EM_INVESTIGACAO: 'Em Investigação',
+    EM_INTERVENCAO: 'Em Intervenção',
+    INTERVENCAO_FINALIZADA: 'Intervenção Finalizada'
 };
 
 export function CasoInfo() {

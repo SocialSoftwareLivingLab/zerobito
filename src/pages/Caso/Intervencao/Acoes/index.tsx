@@ -1,39 +1,76 @@
 import React, { useCallback } from 'react';
 import { Button } from '../../../../components/ui/Button';
-import { FiLogOut } from 'react-icons/fi';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { SeparadorAcoes } from './styles';
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
 import { IoMdAddCircle } from 'react-icons/io';
-import { FaCircleQuestion, FaGraduationCap } from 'react-icons/fa6';
-import { FaSearch } from 'react-icons/fa';
-import { Caso } from '../../../../common/models/caso/caso';
-import { useNavigate } from 'react-router-dom';
+import { FaFlagCheckered } from 'react-icons/fa';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
+import { podeFinalizarIntervencao } from '../../../../common/api/casos/intervencao/pode-finalizar-intervencao';
 import { finalizarIntervencao } from '../../../../common/api/casos/intervencao/finalizar-intervencao';
+import Swal from 'sweetalert2';
 
 function BotoesAcoesIntervencao() {
     const { caso } = useCasoSelecionado();
-
+    const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
+    const location = useLocation();
+    const queryClient = useQueryClient();
 
-    const onIntervencaoClick = useCallback(
-        (caso: Caso) => {
-            navigate(`/casos/${caso.id}/intervencao/nova-intervencao`);
-        },
-        [navigate]
-    );
+    const basePath = location.pathname.replace(/\/intervencao.*$/, '');
+
+    const handleFinalizar = useCallback(async () => {
+        const pode = await podeFinalizarIntervencao(caso.id);
+
+        if (!pode) {
+            Swal.fire({
+                text: 'Para finalizar é necessário ter ao menos uma ação concluída com êxito ou de forma satisfatória.',
+                icon: 'warning',
+                confirmButtonText: 'Entendido'
+            });
+            return;
+        }
+
+        const result = await Swal.fire({
+            title: 'Finalizar Intervenção?',
+            text: 'Esta ação marcará a fase de intervenção como concluída.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Finalizar',
+            cancelButtonText: 'Cancelar'
+        });
+
+        if (!result.isConfirmed) return;
+
+        try {
+            await finalizarIntervencao(caso.id);
+            await queryClient.invalidateQueries({ queryKey: ['caso', id] });
+            Swal.fire({
+                title: 'Intervenção finalizada!',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                text: 'Erro ao finalizar intervenção.',
+                icon: 'error',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        }
+    }, [caso.id, id, queryClient]);
+
     return (
         <SeparadorAcoes>
-            <Button action={() => onIntervencaoClick(caso)}>
+            <Button action={() => navigate(`${basePath}/intervencao/nova`)}>
                 <IoMdAddCircle />
-                Reuniões
+                Nova Intervenção
             </Button>
-            <Button action={() => console.log(caso)}>
-                <FaCircleQuestion />
-                Ajuda com o caso
-            </Button>
-            <Button action={() => finalizarIntervencao(caso.id)}>
-                <FaSearch />
+            <Button action={handleFinalizar}>
+                <FaFlagCheckered />
                 Finalizar Intervenção
             </Button>
         </SeparadorAcoes>
