@@ -2,11 +2,11 @@ import React from 'react';
 import { FieldsetContainer } from './styles';
 
 export interface FieldsetProps {
-    legend: string;
-    children: React.ReactElement | React.ReactElement[];
+    readonly legend: string;
+    readonly children: React.ReactElement | React.ReactElement[];
 }
 
-export default function Fieldset({ legend, children }: FieldsetProps) {
+export default function Fieldset({ legend, children }: Readonly<FieldsetProps>) {
     return (
         <FieldsetContainer>
             <legend>{legend}</legend>

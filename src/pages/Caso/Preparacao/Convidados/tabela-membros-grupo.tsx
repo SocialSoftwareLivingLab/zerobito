@@ -1,8 +1,6 @@
 import { TableColumn } from 'react-data-table-component';
 import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
-import BadgeStatus, { BadgeStatusTarefa } from '.';
-import React from 'react';
-import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
+import { BadgeStatusTarefa } from '.';
 
 export const TIPOS_STATUS = {
     PENDENTE: {

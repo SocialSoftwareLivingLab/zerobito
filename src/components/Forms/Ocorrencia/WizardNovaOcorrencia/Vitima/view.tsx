@@ -10,10 +10,10 @@ import { validarCNPJ } from '../../../../../common/Errors/MascaraCNPJ';
 import { validarCNAE } from '../../../../../common/Errors/MascaraCNAE';
 
 export interface VitimaViewProps {
-    submitForm: () => void;
-    errors: FieldErrors<VitimaFormFields>;
-    register: UseFormRegister<VitimaFormFields>;
-    tomadoraDeServicoNome?: string;
+    readonly submitForm: () => void;
+    readonly errors: FieldErrors<VitimaFormFields>;
+    readonly register: UseFormRegister<VitimaFormFields>;
+    readonly tomadoraDeServicoNome?: string;
 }
 
 export default function VitimaView({
@@ -21,7 +21,7 @@ export default function VitimaView({
     errors,
     register,
     tomadoraDeServicoNome
-}: VitimaViewProps) {
+}: Readonly<VitimaViewProps>) {
     return (
         <FormContainer>
             <form onSubmit={submitForm}>

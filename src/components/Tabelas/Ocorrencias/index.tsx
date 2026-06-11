@@ -63,8 +63,8 @@ export function AcoesLinhaComEdicao({
     row,
     onEditarClick
 }: {
-    row: OcorrenciaModel;
-    onEditarClick: (ocorrencia: OcorrenciaModel) => void;
+    readonly row: OcorrenciaModel;
+    readonly onEditarClick: (ocorrencia: OcorrenciaModel) => void;
 }) {
     const navigate = useNavigate();
 
@@ -108,7 +108,7 @@ export function AcoesLinhaComEdicao({
 }
 
 interface TabelaOcorrenciaNovoProps {
-    ocorrencias: OcorrenciaModel[];
+    readonly ocorrencias: OcorrenciaModel[];
 }
 
 export default function TabelaOcorrenciaNovo({ ocorrencias }: Readonly<TabelaOcorrenciaNovoProps>) {

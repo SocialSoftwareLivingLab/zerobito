@@ -9,10 +9,10 @@ import { Container } from './styles';
 import Swal from 'sweetalert2';
 
 export interface RegistrarTarefaGrupoModalViewProps {
-    aberto: boolean;
-    handleFecharModal: () => void;
-    register: UseFormRegister<RegistrarTarefaGrupoModalFormData>;
-    onSubmitForm: (e?: React.BaseSyntheticEvent) => Promise<void>;
+    readonly aberto: boolean;
+    readonly handleFecharModal: () => void;
+    readonly register: UseFormRegister<RegistrarTarefaGrupoModalFormData>;
+    readonly onSubmitForm: (e?: React.BaseSyntheticEvent) => Promise<void>;
 }
 
 export default function RegistrarTarefaGrupoModalView({
@@ -20,7 +20,7 @@ export default function RegistrarTarefaGrupoModalView({
     handleFecharModal,
     register,
     onSubmitForm
-}: RegistrarTarefaGrupoModalViewProps) {
+}: Readonly<RegistrarTarefaGrupoModalViewProps>) {
     const [loading, setLoading] = useState(false);
 
     const onSubmitFormComReset = useCallback(

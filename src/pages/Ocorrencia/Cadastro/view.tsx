@@ -13,12 +13,12 @@ import { OcorrenciaFormData } from './model';
 import './style.css';
 
 export interface RegistrarOcorrenciaViewProps {
-    handles: {
+    readonly handles: {
         handleCompleteWizard: (data: OcorrenciaFormData) => void;
         handleNextStep: (handleNext: () => void) => void;
         handlePreviousStep: (handleBack: () => void) => void;
     };
-    refs: {
+    readonly refs: {
         formLocalRef: React.RefObject<FormStepApi>;
         formVitimaRef: React.RefObject<FormStepApi>;
         formDenuncianteRef: React.RefObject<FormStepApi>;
@@ -26,7 +26,10 @@ export interface RegistrarOcorrenciaViewProps {
     };
 }
 
-export default function RegistrarOcorrenciaView({ handles, refs }: RegistrarOcorrenciaViewProps) {
+export default function RegistrarOcorrenciaView({
+    handles,
+    refs
+}: Readonly<RegistrarOcorrenciaViewProps>) {
     return (
         <>
             <Header

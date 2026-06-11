@@ -1,10 +1,5 @@
-import React from 'react';
 import { PulseLoader } from 'react-spinners';
-import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
-import useQuerySearch from '../../hooks/use-query-search.hook';
 import './style.css';
-import { Navigate } from 'react-router-dom';
-import { AiOutlineEye } from 'react-icons/ai';
 import useEsqueciSenhaViewModel from './view.model';
 
 const EsqueciSenhaCard = () => {

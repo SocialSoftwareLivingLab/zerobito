@@ -1,13 +1,7 @@
-import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { buscarTarefasMembro } from '../../../common/api/casos/grupo-trabalho/tarefas-membro';
 import { BoxContainer } from '../../ui/BoxContainer';
 import Badge from '../../ui/Badge';
 import { dataTableStyle } from '../custom';
-import { useUsuarioAutenticado } from '../../../contexts/usuario-autenticado';
-import { buscarMembrosGrupo } from '../../../common/api/casos/grupo-trabalho/consultar-membros-grupo';
 import { useTarefas } from '../../../contexts/minhas-tarefas';
 
 interface Tarefa {

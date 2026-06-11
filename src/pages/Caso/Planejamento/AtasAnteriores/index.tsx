@@ -1,4 +1,3 @@
-import React, { useCallback, useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import DataTable from 'react-data-table-component';

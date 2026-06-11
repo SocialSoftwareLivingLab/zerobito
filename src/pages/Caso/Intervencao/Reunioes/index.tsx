@@ -12,7 +12,6 @@ import {
     agendarReuniao,
     AgendarReuniaoRequest
 } from '../../../../common/api/casos/planejamento/agendar-reuniao';
-import TarefasReuniao from './tarefas';
 import { salvarAtaReuniao } from '../../../../common/api/casos/grupo-trabalho/aceitar-ata';
 import AtoresReuniao from '../Tarefas';
 import { useParams } from 'react-router-dom';
@@ -27,7 +26,7 @@ export interface DataReuniaoFormField {
 
 export default function ReunioesPlanejamento() {
     const { caso } = useCasoSelecionado();
-    const { id, dataReuniao } = useParams();
+    const { dataReuniao } = useParams();
     const { register, handleSubmit } = useForm<DataReuniaoFormField>({});
 
     const [errorData, setErrorData] = useState<string | null>(null);

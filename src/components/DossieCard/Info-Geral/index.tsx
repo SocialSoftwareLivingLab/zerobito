@@ -60,7 +60,7 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
                 comentarios: formData.Comentario
             };
 
-            const response = await editInfoGeral(payload, caso.id);
+            await editInfoGeral(payload, caso.id);
         },
         [caso.id]
     );

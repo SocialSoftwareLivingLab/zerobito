@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import EditarTarefaGrupoModalView from './view';
 import { EditarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/editar-tarefa';
-import { AxiosError } from 'axios';
 
 export interface EditarTarefaGrupoModalFormData {
     responsavel: string;

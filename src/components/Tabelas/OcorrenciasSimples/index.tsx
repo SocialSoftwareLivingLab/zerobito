@@ -22,10 +22,10 @@ function OcorrenciaExpandida({ data }: { data: OcorrenciaModel }) {
 }
 
 interface TabelaOcorrenciaNovoProps {
-    ocorrencias: OcorrenciaModel[];
+    readonly ocorrencias: OcorrenciaModel[];
 }
 
-export function TabelaOcorrenciaSimplesNovo(props: TabelaOcorrenciaNovoProps) {
+export function TabelaOcorrenciaSimplesNovo(props: Readonly<TabelaOcorrenciaNovoProps>) {
     return (
         <BoxContainer titulo="Eventos relacionados ao caso">
             <DataTable

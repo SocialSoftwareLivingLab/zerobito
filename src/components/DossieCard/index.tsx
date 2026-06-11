@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BsPaperclip } from 'react-icons/bs';
 import { FaFileAlt, FaInfoCircle, FaEdit } from 'react-icons/fa';
-import { FaLocationDot } from 'react-icons/fa6';
 import { Caso } from '../../common/models/caso/caso';
 import { InfoGeralDossieCard } from './Info-Geral';
 import { PalavrasDossieCard } from './palavrasChave';
 import { DossieCardStyle } from './styles';
-import { listarCausas } from '../../common/api/casos/listarCausas';
 import LocalizacaoCard from './LocalizacaoCard';
 import Input from '../ui/Input';
 import { Button } from '../ui/Button';

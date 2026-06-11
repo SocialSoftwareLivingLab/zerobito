@@ -5,8 +5,8 @@ import { Section } from './styles';
 import { UsuarioAutenticado } from '../../../../../contexts/usuario-autenticado/model';
 
 export interface ConfirmacaoOcorrenciaViewProps {
-    data: OcorrenciaFormData;
-    usuario: UsuarioAutenticado;
+    readonly data: OcorrenciaFormData;
+    readonly usuario: UsuarioAutenticado;
 }
 
 const labelCondicao = {
@@ -29,7 +29,7 @@ const labelTipoDenunciante = {
 export default function ConfirmacaoOcorrenciaView({
     data,
     usuario
-}: ConfirmacaoOcorrenciaViewProps) {
+}: Readonly<ConfirmacaoOcorrenciaViewProps>) {
     const dateFormat = Intl.DateTimeFormat('pt-br');
     return (
         <FormContainer>

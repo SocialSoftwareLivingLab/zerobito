@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MembroGrupoTrabalho } from '../../../../../common/models/caso/grupo-trabalho/membro';
 import { ColunaAcao } from '../../Tarefas/styles';
 import { Button } from '../../../../../components/ui/Button';
@@ -9,13 +9,11 @@ import ConvidarMembroGrupoModal, {
     ConvidarMembroGrupoFormData
 } from '../../../../../components/Caso/GrupoTrabalho/ConvidarMembroGrupoModal';
 import { enviarConviteMembroGrupo } from '../../../../../common/api/casos/grupo-trabalho/enviar-convite';
-import Swal from 'sweetalert2';
 import { BoxContainer } from '../../../../../components/ui/BoxContainer';
 import { FaUserPlus } from 'react-icons/fa';
 import DataTable from 'react-data-table-component';
 import { dataTableStyle } from '../../../../../components/Tabelas/custom';
 import { COLUNAS_MEMBROS } from './tebela-membors-grupo';
-import { AxiosError } from 'axios';
 
 export function AcoesLinha({ row }: { row: MembroGrupoTrabalho }) {
     return (

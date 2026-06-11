@@ -62,7 +62,7 @@ export default function CasoConvite() {
     }, [token, navigate, redirectTo]);
 
     if (logoutDone) {
-        window.location.href = `/login?redirectTo=${redirectTo}`;
+        globalThis.location.href = `/login?redirectTo=${redirectTo}`;
         return null;
     }
 

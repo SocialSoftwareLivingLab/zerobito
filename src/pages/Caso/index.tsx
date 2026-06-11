@@ -19,7 +19,7 @@ export default function Caso() {
     const location = useLocation();
 
     // Dados do usuário
-    const { data: usuario } = useUsuarioAutenticado();
+    useUsuarioAutenticado();
 
     // Carrega caso
     const { data: caso, isPending: isLoadingCaso } = useQuery({
@@ -29,7 +29,7 @@ export default function Caso() {
     });
 
     // Carrega membros do grupo do caso
-    const { data: membros, isPending: isLoadingMembros } = useQuery({
+    const { isPending: isLoadingMembros } = useQuery({
         queryKey: ['membrosCaso', id],
         queryFn: () => buscarMembrosGrupo(Number(id)),
         enabled: !!id
