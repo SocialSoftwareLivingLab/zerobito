@@ -37,6 +37,7 @@ const useHomeViewModel = () => {
                     setOcorrencias(response?.data ?? []);
                 }
             } catch (error) {
+                console.error(error);
                 if (mounted) setOcorrencias([]);
             } finally {
                 if (mounted) setLoading(false);

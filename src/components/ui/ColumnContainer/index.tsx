@@ -6,6 +6,6 @@ interface ColumnContainerProps {
     className?: string;
 }
 
-export function ColumnContainer({ children, className }: ColumnContainerProps) {
+export function ColumnContainer({ children, className }: Readonly<ColumnContainerProps>) {
     return <ColumnContainerStyle className={className}>{children}</ColumnContainerStyle>;
 }

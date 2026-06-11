@@ -1,4 +1,4 @@
-import React, { useCallback, createContext, useContext, useState } from 'react';
+import React, { useCallback, createContext, useContext, useMemo, useState } from 'react';
 import {
     CriarOcorrenciaWizardContextData,
     DenuncianteData,
@@ -16,7 +16,7 @@ export interface CriarOcorrenciaWizardContextProviderProps {
 
 export function CriarOcorrenciaWizardContextProvider({
     children
-}: CriarOcorrenciaWizardContextProviderProps) {
+}: Readonly<CriarOcorrenciaWizardContextProviderProps>) {
     const [formData, setFormData] = useState<OcorrenciaFormData>({
         informacoesBasicas: {
             data: new Date(),
@@ -89,15 +89,19 @@ export function CriarOcorrenciaWizardContextProvider({
         [formData]
     );
 
+    const contextValue = useMemo(
+        () => ({
+            formData,
+            setInformacoesBasicas,
+            setVitimaData,
+            setDenuncianteData,
+            setGravidadeData
+        }),
+        [formData, setInformacoesBasicas, setVitimaData, setDenuncianteData, setGravidadeData]
+    );
+
     return (
-        <CriarOcorrenciaWizardContext.Provider
-            value={{
-                formData,
-                setInformacoesBasicas,
-                setVitimaData,
-                setDenuncianteData,
-                setGravidadeData
-            }}>
+        <CriarOcorrenciaWizardContext.Provider value={contextValue}>
             {children}
         </CriarOcorrenciaWizardContext.Provider>
     );

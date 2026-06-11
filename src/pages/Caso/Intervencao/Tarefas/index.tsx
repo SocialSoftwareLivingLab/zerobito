@@ -77,7 +77,7 @@ export interface MembroGrupo {
     identificador: string;
     nome: string;
     email: string;
-    instituicao: string;
+    instituicao: string | null;
     status: {
         codigo: string;
         nome: string;
@@ -157,6 +157,10 @@ const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
         </div>
     );
 };
+
+function ExpandableRow({ data }: { data: MembroGrupo }) {
+    return <ExpandableRowComponent id={data.id} />;
+}
 
 export default function AtoresReuniao() {
     const { caso } = useCasoSelecionado();
@@ -260,7 +264,7 @@ export default function AtoresReuniao() {
                 customStyles={dataTableStyle}
                 expandableRows
                 expandOnRowClicked
-                expandableRowsComponent={({ data }) => <ExpandableRowComponent id={data.id} />}
+                expandableRowsComponent={ExpandableRow}
             />
             <ConvidarMembroGrupoModal
                 aberto={isModalConvidarAberto}

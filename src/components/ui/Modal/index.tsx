@@ -11,7 +11,12 @@ export interface ModalProps {
     handleFecharModal: () => void;
 }
 
-export default function Modal({ children, titulo, aberto, handleFecharModal }: ModalProps) {
+export default function Modal({
+    children,
+    titulo,
+    aberto,
+    handleFecharModal
+}: Readonly<ModalProps>) {
     return (
         <ReactModal
             isOpen={aberto}

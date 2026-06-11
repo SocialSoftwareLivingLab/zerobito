@@ -12,6 +12,35 @@ interface MeuCalendarioProps {
     onDiaClick?: (data: Date) => void;
 }
 
+interface TileConteudoProps {
+    date: Date;
+    view: string;
+    datasTarefasDetalhadas: { data: string; atrasada: boolean }[];
+    reunioesPorData: Map<string, CalendarItem>;
+}
+
+function TileConteudo({ date, view, datasTarefasDetalhadas, reunioesPorData }: TileConteudoProps) {
+    if (view !== 'month') return null;
+    const dateStr = localDateStr(date);
+    const tarefaDoDia = datasTarefasDetalhadas.find((t) => t.data === dateStr);
+    const hasTarefa = !!tarefaDoDia;
+    const isAtrasada = tarefaDoDia?.atrasada;
+    const reuniaoDoDia = reunioesPorData.get(dateStr);
+
+    return (
+        <div className="bolinhas-container">
+            {hasTarefa && (
+                <span
+                    className={`bolinha ${isAtrasada ? 'atrasada' : 'tarefa'}`}
+                    title={isAtrasada ? 'Tarefa Atrasada' : 'Tarefa'}></span>
+            )}
+            {reuniaoDoDia && (
+                <span className="bolinha reuniao" title={reuniaoDoDia.titulo ?? 'Reunião'}></span>
+            )}
+        </div>
+    );
+}
+
 function localDateStr(d: Date): string {
     const y = d.getFullYear();
     const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -45,30 +74,14 @@ export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCa
                 formatShortWeekday={(locale, date) =>
                     date.toLocaleDateString(locale, { weekday: 'short' }).charAt(0).toUpperCase()
                 }
-                tileContent={({ date, view }) => {
-                    if (view !== 'month') return null;
-                    const dateStr = localDateStr(date);
-
-                    const tarefaDoDia = datasTarefasDetalhadas.find((t) => t.data === dateStr);
-                    const hasTarefa = !!tarefaDoDia;
-                    const isAtrasada = tarefaDoDia?.atrasada;
-                    const reuniaoDoDia = reunioesPorData.get(dateStr);
-
-                    return (
-                        <div className="bolinhas-container">
-                            {hasTarefa && (
-                                <span
-                                    className={`bolinha ${isAtrasada ? 'atrasada' : 'tarefa'}`}
-                                    title={isAtrasada ? 'Tarefa Atrasada' : 'Tarefa'}></span>
-                            )}
-                            {reuniaoDoDia && (
-                                <span
-                                    className="bolinha reuniao"
-                                    title={reuniaoDoDia.titulo ?? 'Reunião'}></span>
-                            )}
-                        </div>
-                    );
-                }}
+                tileContent={({ date, view }) => (
+                    <TileConteudo
+                        date={date}
+                        view={view}
+                        datasTarefasDetalhadas={datasTarefasDetalhadas}
+                        reunioesPorData={reunioesPorData}
+                    />
+                )}
                 onClickDay={(date) => {
                     onDiaClick?.(date);
                 }}

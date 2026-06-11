@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LoginCard from '../../components/Login';
 import useQuerySearch from '../../hooks/use-query-search.hook';
 

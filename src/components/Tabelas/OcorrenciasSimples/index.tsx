@@ -38,7 +38,6 @@ export function TabelaOcorrenciaSimplesNovo(props: TabelaOcorrenciaNovoProps) {
                 pointerOnHover
                 expandableRows
                 noDataComponent="Nenhum registro encontrado"
-                // expandableRowExpanded={(row) => !!row}
                 expandOnRowClicked
                 expandableRowsComponent={OcorrenciaExpandida}
                 dense

@@ -50,22 +50,20 @@ const LoginCard = () => {
 
                             <div>
                                 <label htmlFor="password">Senha:</label>
-                                <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    name="senha"
-                                    value={senha}
-                                    onChange={handleChangeSenha}
-                                    required
-                                />
-                                <span
-                                    onClick={toggleShowPassword}
-                                    style={{
-                                        overflow: 'visible',
-                                        marginLeft: '-3em',
-                                        marginRight: '2em'
-                                    }}>
-                                    <AiOutlineEye style={{ verticalAlign: 'middle' }} />
-                                </span>
+                                <div className="password-wrapper">
+                                    <input
+                                        type={showPassword ? 'text' : 'password'}
+                                        name="senha"
+                                        value={senha}
+                                        onChange={handleChangeSenha}
+                                        required
+                                    />
+                                    <span
+                                        onClick={toggleShowPassword}
+                                        className="btn-toggle-password">
+                                        <AiOutlineEye />
+                                    </span>
+                                </div>
                             </div>
 
                             <PulseLoader

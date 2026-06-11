@@ -43,7 +43,7 @@ const RedefinirSenhaCard = () => {
                                                 'Mínimo de 8 dígitos, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial'
                                             }
                                         />
-                                    </span>
+                                    </span>{' '}
                                     Senha:
                                 </label>
                                 <input

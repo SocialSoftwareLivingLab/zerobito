@@ -3,7 +3,7 @@ import { ConvitePageContainer, DadosConviteContainer } from './styles';
 import { Button } from '../../components/ui/Button';
 import { MdOutgoingMail } from 'react-icons/md';
 import { aceitarConviteMembroGrupo } from '../../common/api/casos/grupo-trabalho/aceitar-convite';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { UsuarioAutenticado } from '../../contexts/usuario-autenticado/model';
 import { buscarEmailConvite } from '../../common/api/casos/grupo-trabalho/get-email-convidado';
 import Swal from 'sweetalert2';

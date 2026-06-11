@@ -26,6 +26,10 @@ const NIVEL_LABEL: Record<string, string> = {
     MACRO: 'Macro'
 };
 
+function BotaoNovaIntervencao({ onClick }: { onClick: () => void }) {
+    return <Button action={onClick}>+ Nova Intervenção</Button>;
+}
+
 function formatarData(data: string): string {
     const datePart = data.split('T')[0];
     const [year, month, day] = datePart.split('-');
@@ -75,9 +79,9 @@ export default function Intervencao() {
             <BoxContainer
                 titulo="Intervenções por Ator"
                 acoesContainer={() => (
-                    <Button action={() => navigate(`${basePath}/intervencao/nova`)}>
-                        + Nova Intervenção
-                    </Button>
+                    <BotaoNovaIntervencao
+                        onClick={() => navigate(`${basePath}/intervencao/nova`)}
+                    />
                 )}>
                 {isLoading ? (
                     <p>Carregando...</p>

@@ -82,7 +82,7 @@ export default function EditarIntervencao() {
                 name,
                 recursos,
                 prazo,
-                prioridade: parseFloat(prioridade),
+                prioridade: Number.parseFloat(prioridade),
                 nivel,
                 status,
                 autorNome

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import {
@@ -26,7 +26,7 @@ export interface MapaEtapa {
 }
 
 /** Badge visual de status */
-function BadgeStatusEtapa({ status }: { status: MapaEtapaStatusEnum }) {
+function BadgeStatusEtapa({ status }: Readonly<{ status: MapaEtapaStatusEnum }>) {
     const statusMap: Record<string, { label: string; icon: JSX.Element }> = {
         [MapaEtapaStatusEnum.EM_ELABORACAO]: {
             label: 'Em elaboração',

@@ -1,5 +1,4 @@
 import { TableColumn } from 'react-data-table-component';
-import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
 import { BadgeStatusTarefa, MembroGrupo } from '.';
 import React from 'react';
 

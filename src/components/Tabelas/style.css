@@ -29,6 +29,7 @@ button:hover {
     border-radius: 0.2em;
     width: 100%;
     margin-bottom: 80px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .table-header {
@@ -69,10 +70,6 @@ button:hover {
 }
 
 .table-container thead {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.table-container {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 

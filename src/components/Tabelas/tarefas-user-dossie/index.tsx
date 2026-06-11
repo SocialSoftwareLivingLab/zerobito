@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import { useQuery, useQueryClient } from '@tanstack/react-query';

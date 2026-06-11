@@ -20,8 +20,6 @@ function RegistrarOcorrenciaPage() {
     const formVitimaRef = useRef<FormStepApi>(null);
     const formDenuncianteRef = useRef<FormStepApi>(null);
     const formGravidadeRef = useRef<FormStepApi>(null);
-    const { data: usuario } = useUsuarioAutenticado();
-
     const { data: perfis = [], isPending: isLoadingPerfis } = useQuery({
         queryKey: ['usuario', 'perfis'],
         queryFn: obterPerfisUsuario

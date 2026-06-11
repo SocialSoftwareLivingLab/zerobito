@@ -87,7 +87,6 @@ export default function AlterarLocalizacaoCasoForm({
                 <Controller
                     name="coordenada"
                     control={control}
-                    // rules={{ required: true }}
                     render={({ field }) => (
                         <div>
                             <SelectAsync

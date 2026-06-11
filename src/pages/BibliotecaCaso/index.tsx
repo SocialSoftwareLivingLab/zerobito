@@ -38,14 +38,14 @@ function BibliotecaCasos() {
                     <h1>Casos que você acompanha</h1>
                 </div>
                 <div className="indices-casos">
-                    <input type="checkbox" />
-                    <label>Data</label>
-                    <label>Denúncia</label>
-                    <label>Causa</label>
-                    <label>Gravidade</label>
-                    <label>Status</label>
-                    <label>Cidade</label>
-                    <label>Região</label>
+                    <input type="checkbox" id="check-casos" />
+                    <label htmlFor="check-casos">Data</label>
+                    <span>Denúncia</span>
+                    <span>Causa</span>
+                    <span>Gravidade</span>
+                    <span>Status</span>
+                    <span>Cidade</span>
+                    <span>Região</span>
                     <button type="submit">Ver release</button>
                 </div>
                 <div className="lista-casos-acompanhados"></div>

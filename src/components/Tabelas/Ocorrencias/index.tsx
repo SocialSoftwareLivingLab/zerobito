@@ -111,7 +111,7 @@ interface TabelaOcorrenciaNovoProps {
     ocorrencias: OcorrenciaModel[];
 }
 
-export default function TabelaOcorrenciaNovo({ ocorrencias }: TabelaOcorrenciaNovoProps) {
+export default function TabelaOcorrenciaNovo({ ocorrencias }: Readonly<TabelaOcorrenciaNovoProps>) {
     // ← ADICIONAR ESTES ESTADOS
     const [ocorrenciaParaEditar, setOcorrenciaParaEditar] = useState<OcorrenciaModel | null>(null);
     const [modalAberto, setModalAberto] = useState(false);
