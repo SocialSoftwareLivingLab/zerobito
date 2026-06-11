@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import { FaUserPlus } from 'react-icons/fa6';
-import DataTable, { TableColumn } from 'react-data-table-component';
+import DataTable from 'react-data-table-component';
 import { dataTableStyle } from '../../../../components/Tabelas/custom';
 import { COLUNAS_MEMBROS_GRUPO_TRABALHO, TIPOS_STATUS } from './tabela-membros-grupo';
 
@@ -14,7 +14,6 @@ import ConvidarMembroGrupoModal, {
     ConvidarMembroGrupoFormData
 } from '../../../../components/Caso/GrupoTrabalho/ConvidarMembroGrupoModal';
 import { enviarConviteMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/enviar-convite';
-import Swal from 'sweetalert2';
 import Badge from '../../../../components/ui/Badge';
 
 export function BadgeStatusTarefa({ status }: { status: string | null }) {

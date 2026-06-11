@@ -41,10 +41,10 @@ function Material() {
                     <h1>Listas de cursos abertos</h1>
                 </div>
                 <div className="indices-cursos">
-                    <input type="checkbox" />
-                    <label>Lista</label>
-                    <label>Data</label>
-                    <label>Descrição</label>
+                    <input type="checkbox" id="check-lista" />
+                    <label htmlFor="check-lista">Lista</label>
+                    <span>Data</span>
+                    <span>Descrição</span>
                     <button type="submit">Baixar</button>
                 </div>
                 <div className="lista-cursos"></div>

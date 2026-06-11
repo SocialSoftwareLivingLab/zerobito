@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { CSSProperties, useEffect, useState } from 'react';
-import { redirect, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import { ValidateError } from '../../common/Errors/ValidateError';
 import { register } from '../../common/models/user/create.user';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { buscarEmailConvite } from '../../common/api/casos/grupo-trabalho/get-email-convidado';
-// TODO: OBTER-EMAIL ATRAVÉS DE TOKEN + CHAMADA API.
+
 const useCadastroTokenViewModel = () => {
     const navigate = useNavigate();
     const [error, setError] = useState<string>();
@@ -31,7 +31,6 @@ const useCadastroTokenViewModel = () => {
         const fetchEmail = async () => {
             if (!tokenEmail) return;
 
-            // setEmail('teste@exemplo.com');
             try {
                 const response = await buscarEmailConvite(tokenEmail);
                 setEmail(response.email);

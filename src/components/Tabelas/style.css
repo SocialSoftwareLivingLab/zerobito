@@ -43,6 +43,7 @@ button:hover {
 
 .table-container table {
     width: 100%;
+    table-layout: fixed;
 }
 
 .table-container table th {
@@ -73,10 +74,6 @@ button:hover {
 
 .table-container {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.table-container table {
-    table-layout: fixed;
 }
 
 .table-container table td {

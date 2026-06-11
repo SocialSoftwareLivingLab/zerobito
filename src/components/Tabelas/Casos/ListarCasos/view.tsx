@@ -4,12 +4,16 @@ import DataTable, { TableColumn } from 'react-data-table-component';
 import { Paginacao, dataTableStyle } from '../../custom';
 
 export interface ListarCasoTableViewProps {
-    casos: Caso[];
-    colunas: TableColumn<Caso>[];
-    onRowClick: (row: Caso) => void;
+    readonly casos: Caso[];
+    readonly colunas: TableColumn<Caso>[];
+    readonly onRowClick: (row: Caso) => void;
 }
 
-export function ListarCasosTableView({ casos, colunas, onRowClick }: ListarCasoTableViewProps) {
+export function ListarCasosTableView({
+    casos,
+    colunas,
+    onRowClick
+}: Readonly<ListarCasoTableViewProps>) {
     return (
         <DataTable
             data={casos}

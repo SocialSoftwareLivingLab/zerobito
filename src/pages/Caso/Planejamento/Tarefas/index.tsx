@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import { FaUserPlus } from 'react-icons/fa6';
@@ -15,10 +15,7 @@ import ConvidarMembroGrupoModal, {
 import { enviarConviteMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/enviar-convite';
 import Swal from 'sweetalert2';
 import { COLUNAS_MEMBROS_GRUPO_TRABALHO } from './tabela-membros-grupo';
-import { MembroGrupoTrabalho } from '../../../../common/models/caso/grupo-trabalho/membro';
-import { ColunaAcao } from './styles';
 import EditarTarefaGrupoModal from '../../../../components/Caso/GrupoTrabalho/EditarTarefaModal';
-import RegistrarTarefaGrupoModalView from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal/view';
 import RegistrarTarefaGrupoModal, {
     RegistrarTarefaGrupoModalFormData
 } from '../../../../components/Caso/GrupoTrabalho/RegistrarTarefaModal';

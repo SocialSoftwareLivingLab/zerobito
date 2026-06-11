@@ -25,6 +25,15 @@ export function AcoesLinha({ row }: { row: MembroGrupoTrabalho }) {
     );
 }
 
+function BotaoConvidar({ onConvidar }: { onConvidar: () => void }) {
+    return (
+        <Button action={onConvidar}>
+            <FaUserPlus />
+            Convidar
+        </Button>
+    );
+}
+
 export default function TarefasReuniao() {
     const { caso } = useCasoSelecionado();
 
@@ -60,12 +69,7 @@ export default function TarefasReuniao() {
     return (
         <BoxContainer
             titulo="Tarefas"
-            acoesContainer={() => (
-                <Button action={() => setModalConvidarAberto(true)}>
-                    <FaUserPlus />
-                    Convidar
-                </Button>
-            )}>
+            acoesContainer={() => <BotaoConvidar onConvidar={() => setModalConvidarAberto(true)} />}>
             <DataTable
                 data={data ?? []}
                 progressPending={isLoading}

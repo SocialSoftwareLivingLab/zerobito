@@ -113,6 +113,30 @@ export const DossieCardStyle = styled.div`
             }
         }
     }
+    .btn-edit-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        width: auto;
+        margin: 0;
+        font-size: 18px;
+        vertical-align: middle;
+        color: inherit;
+    }
+
+    .btn-date {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        width: auto;
+        margin-top: 10px;
+        font: inherit;
+        color: inherit;
+        display: block;
+    }
+
     span {
         margin-top: 10px;
     }

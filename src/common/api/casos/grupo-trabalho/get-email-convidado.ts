@@ -1,5 +1,5 @@
 import api from '../../../api';
-interface emailResponse {
+interface EmailResponse {
     email: string;
 }
 

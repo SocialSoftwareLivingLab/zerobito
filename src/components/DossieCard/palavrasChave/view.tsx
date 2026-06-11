@@ -7,14 +7,14 @@ import { UseFormRegister, UseFormReset } from 'react-hook-form';
 import { Button } from '../../ui/Button';
 
 export interface PalavrasDossieViewProps {
-    palavras: PalavraChaveCaso[];
-    isModoAdicionarPalavra: boolean;
-    setModoAdicionarPalavra: (value: boolean) => void;
-    excluirPalavra: (id: number) => void;
-    handleSubmit: (e: React.FormEvent) => void;
-    register: UseFormRegister<PalavrasFormData>;
-    onEnterPress: KeyboardEventHandler<HTMLInputElement>;
-    reset: UseFormReset<PalavrasFormData>;
+    readonly palavras: PalavraChaveCaso[];
+    readonly isModoAdicionarPalavra: boolean;
+    readonly setModoAdicionarPalavra: (value: boolean) => void;
+    readonly excluirPalavra: (id: number) => void;
+    readonly handleSubmit: (e: React.FormEvent) => void;
+    readonly register: UseFormRegister<PalavrasFormData>;
+    readonly onEnterPress: KeyboardEventHandler<HTMLInputElement>;
+    readonly reset: UseFormReset<PalavrasFormData>;
 }
 
 export function PalavrasDossieView({
@@ -26,7 +26,7 @@ export function PalavrasDossieView({
     register,
     onEnterPress,
     reset
-}: PalavrasDossieViewProps) {
+}: Readonly<PalavrasDossieViewProps>) {
     return (
         <div className="chave">
             {palavras.map((palavra) => (

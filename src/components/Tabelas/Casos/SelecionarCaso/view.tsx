@@ -4,16 +4,16 @@ import { Caso } from '../../../../common/models/caso/caso';
 import { dataTableStyle } from '../../custom';
 
 export interface SelecionarCasoTableViewProps {
-    casos: Caso[];
-    colunas: TableColumn<Caso>[];
-    handleChange: ({ selectedRows }: { selectedRows: Caso[] }) => void;
+    readonly casos: Caso[];
+    readonly colunas: TableColumn<Caso>[];
+    readonly handleChange: ({ selectedRows }: { selectedRows: Caso[] }) => void;
 }
 
 export function SelecionarCasoTableView({
     casos,
     colunas,
     handleChange
-}: SelecionarCasoTableViewProps) {
+}: Readonly<SelecionarCasoTableViewProps>) {
     return (
         <DataTable
             data={casos}

@@ -33,7 +33,8 @@ export default function VitimaView({
                         required: 'Campo Obrigatório',
                         validate: {
                             isNumber: (value) =>
-                                !isNaN(Number(value)) || 'Quantidade precisa ser um número válido',
+                                !Number.isNaN(Number(value)) ||
+                                'Quantidade precisa ser um número válido',
                             minOne: (value) =>
                                 Number(value) >= 1 || 'Quantidade deve ser maior ou igual a 1'
                         }

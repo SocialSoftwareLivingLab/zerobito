@@ -3,26 +3,24 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+ARG REACT_APP_BACKEND_URL
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+
 COPY package.json yarn.lock ./
 RUN yarn install
 
 COPY . .
 
-
-ARG REACT_APP_BACKEND_URL
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 RUN yarn build
+
 
 # ---------- NGINX ----------
 FROM nginx:alpine
 
-# Remove config default
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Copia config custom
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copia build do React
 COPY --from=builder /app/build /usr/share/nginx/html
 
 EXPOSE 3000

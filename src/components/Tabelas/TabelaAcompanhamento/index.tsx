@@ -3,6 +3,13 @@ import { LuEye } from 'react-icons/lu';
 import './style.css';
 import { GoInfo } from 'react-icons/go';
 
+const GRAVIDADE_CLASS: Record<string, string> = {
+    'Muito Urgente': 'vermelho',
+    Emergencial: 'vinho',
+    'Pouca Urgência': 'amarelo-claro',
+    Urgência: 'amarelo'
+};
+
 const TabelaAcompanhamento = ({ eventos }) => {
     const itemsPerPage = 6;
     const [currentPage, setCurrentPage] = useState(1);
@@ -48,7 +55,7 @@ const TabelaAcompanhamento = ({ eventos }) => {
                             <td>{evento.condicaoAcidentado}</td>
                             <td>
                                 <span
-                                    className={`quadrado ${evento.gravidade === 'Muito Urgente' ? 'vermelho' : evento.gravidade === 'Emergencial' ? 'vinho' : evento.gravidade === 'Pouca Urgência' ? 'amarelo-claro' : evento.gravidade === 'Urgência' ? 'amarelo' : 'vazio'}`}>
+                                    className={`quadrado ${GRAVIDADE_CLASS[evento.gravidade] ?? 'vazio'}`}>
                                     {evento.gravidade}
                                     {evento.gravidade && (
                                         <>

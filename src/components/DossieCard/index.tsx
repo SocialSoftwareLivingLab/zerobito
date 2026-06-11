@@ -124,12 +124,14 @@ export function DossieCard({ caso }: DossieCardProps) {
 
             <div className="row">
                 <div className="column">
-                    <h3 onClick={handleEditDataObitoClick} style={{ cursor: 'pointer' }}>
+                    <h3>
                         Data de Óbito{' '}
-                        <FaEdit
-                            style={{ cursor: 'pointer', fontSize: '18px' }}
+                        <button
+                            type="button"
                             onClick={handleEditDataObitoClick}
-                        />
+                            className="btn-edit-icon">
+                            <FaEdit />
+                        </button>
                     </h3>
                     <form onSubmit={handleSubmit(handleCompleteEditDataObito)}>
                         {isEditingDataObito ? (
@@ -154,21 +156,26 @@ export function DossieCard({ caso }: DossieCardProps) {
                             </>
                         ) : (
                             dataObitoSelecionada && (
-                                <span onClick={handleEditDataObitoClick}>
+                                <button
+                                    type="button"
+                                    onClick={handleEditDataObitoClick}
+                                    className="btn-date">
                                     {Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(
                                         new Date(dataObito)
                                     )}
-                                </span>
+                                </button>
                             )
                         )}
                     </form>
 
-                    <h3 onClick={handleEditDataClick} style={{ cursor: 'pointer' }}>
+                    <h3>
                         Data do Acidente{' '}
-                        <FaEdit
-                            style={{ cursor: 'pointer', fontSize: '18px' }}
+                        <button
+                            type="button"
                             onClick={handleEditDataClick}
-                        />
+                            className="btn-edit-icon">
+                            <FaEdit />
+                        </button>
                     </h3>
                     <form onSubmit={handleSubmit(handleCompleteEditData)}>
                         {isEditingData ? (
@@ -193,11 +200,14 @@ export function DossieCard({ caso }: DossieCardProps) {
                             </>
                         ) : (
                             dataSelecionada && (
-                                <span onClick={handleEditDataClick}>
+                                <button
+                                    type="button"
+                                    onClick={handleEditDataClick}
+                                    className="btn-date">
                                     {Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(
                                         new Date(data)
                                     )}
-                                </span>
+                                </button>
                             )
                         )}
                     </form>

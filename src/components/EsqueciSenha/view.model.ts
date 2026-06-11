@@ -1,6 +1,4 @@
 import { CSSProperties, useState } from 'react';
-import { login } from '../../common/models/user/auth';
-import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 import { esqueciSenha } from '../../common/models/user/forgot.user';
 import Swal from 'sweetalert2';
 

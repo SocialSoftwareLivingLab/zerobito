@@ -37,7 +37,7 @@ export default function TarefasReuniao() {
 
     const enviarConviteMutation = useMutation({
         mutationFn: async (data: ConvidarMembroGrupoFormData) => {
-            const response = await enviarConviteMembroGrupo(caso.id, {
+            await enviarConviteMembroGrupo(caso.id, {
                 motivo: data.motivo,
                 convidado: {
                     nome: data.nome,

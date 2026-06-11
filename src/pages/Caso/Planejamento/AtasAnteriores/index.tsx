@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
-import { FaUserPlus } from 'react-icons/fa6';
-import DataTable, { TableColumn } from 'react-data-table-component';
+import DataTable from 'react-data-table-component';
 import { dataTableStyle } from '../../../../components/Tabelas/custom';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
 import { buscarMembrosGrupo } from '../../../../common/api/casos/grupo-trabalho/consultar-membros-grupo';

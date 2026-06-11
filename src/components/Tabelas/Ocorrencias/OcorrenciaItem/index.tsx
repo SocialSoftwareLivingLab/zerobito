@@ -3,7 +3,7 @@ import { OcorrenciaModel } from '../../../../common/models/ocorrencias/model';
 import { OcorrenciaItemContainer, SecaoItemOcorrencia } from './styles';
 
 interface OcorrenciaExpandidaProps {
-    data: OcorrenciaModel;
+    readonly data: OcorrenciaModel;
 }
 
 const tipoFonte = {
@@ -30,7 +30,7 @@ const tipoGravidade = {
     POUCO_URGENTE: 'Pouco Urgente'
 };
 
-export default function OcorrenciaItem({ data }: OcorrenciaExpandidaProps) {
+export default function OcorrenciaItem({ data }: Readonly<OcorrenciaExpandidaProps>) {
     const dateFormat = Intl.DateTimeFormat('pt-br');
 
     return (

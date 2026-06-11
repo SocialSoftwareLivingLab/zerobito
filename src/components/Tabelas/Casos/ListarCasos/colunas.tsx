@@ -1,9 +1,5 @@
-import React, { useCallback } from 'react';
 import { TableColumn } from 'react-data-table-component';
 import { Caso } from '../../../../common/models/caso/caso';
-import { Button } from '../../../ui/Button';
-import { FaEye } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 
 export const ColunasTabelaListarCasos: TableColumn<Caso>[] = [
     {

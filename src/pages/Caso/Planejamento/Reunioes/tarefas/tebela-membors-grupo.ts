@@ -1,5 +1,4 @@
 import { TableColumn } from 'react-data-table-component';
-import { AcoesLinha } from '.';
 import { MembroGrupoTrabalho } from '../../../../../common/models/caso/grupo-trabalho/membro';
 
 export const COLUNAS_MEMBROS: TableColumn<MembroGrupoTrabalho>[] = [

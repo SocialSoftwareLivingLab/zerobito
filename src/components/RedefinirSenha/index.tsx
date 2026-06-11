@@ -53,15 +53,12 @@ const RedefinirSenhaCard = () => {
                                     onChange={handleChangeSenha}
                                     required
                                 />
-                                <span
+                                <button
+                                    type="button"
                                     onClick={toggleShowPassword}
-                                    style={{
-                                        overflow: 'visible',
-                                        marginLeft: '-3em',
-                                        marginRight: '2em'
-                                    }}>
+                                    className="btn-toggle-password">
                                     <AiOutlineEye style={{ verticalAlign: 'middle' }} />
-                                </span>
+                                </button>
                             </div>
 
                             <div>
@@ -73,15 +70,12 @@ const RedefinirSenhaCard = () => {
                                     onChange={handleChangeSenhaValidation}
                                     required
                                 />
-                                <span
+                                <button
+                                    type="button"
                                     onClick={toggleShowConfirmPassword}
-                                    style={{
-                                        overflow: 'visible',
-                                        marginLeft: '-3em',
-                                        marginRight: '2em'
-                                    }}>
+                                    className="btn-toggle-password">
                                     <AiOutlineEye style={{ verticalAlign: 'middle' }} />
-                                </span>
+                                </button>
                             </div>
 
                             <PulseLoader

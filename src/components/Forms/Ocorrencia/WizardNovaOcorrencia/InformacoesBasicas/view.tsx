@@ -19,9 +19,9 @@ export default function InformacoesBasicasView({
     register
 }: InformacoesBasicasViewProps) {
     const onSubmitForm = useCallback(
-        async (evt: React.FormEvent) => {
+        (evt: React.FormEvent) => {
             evt.preventDefault();
-            await submitForm();
+            submitForm();
         },
         [submitForm]
     );

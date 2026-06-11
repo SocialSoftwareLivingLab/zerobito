@@ -39,6 +39,7 @@ const useLoginViewModel = () => {
             setLoading(false);
         } catch (error) {
             setLoading(false);
+            console.error(error);
             setError('E-mail e/ou senha incorretos');
         }
     };

@@ -104,13 +104,13 @@ const TAREFAS_COLUMNS: TableColumn<Tarefa>[] = [
 
 const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
     const { caso } = useCasoSelecionado();
-    const [isModalEditarAberto, setModalEditar] = useState(false);
+    const [isModalEditarAberto, setIsModalEditarAberto] = useState(false);
     const [tarefaSelecionada, setTarefaSelecionada] = useState<Tarefa | null>(null);
     const queryClient = useQueryClient();
 
     const abrirModal = (row: Tarefa) => {
         setTarefaSelecionada(row); // salva a tarefa clicada
-        setModalEditar(true);
+        setIsModalEditarAberto(true);
     };
 
     const { data: tarefas = [], isLoading } = useQuery({
@@ -141,7 +141,7 @@ const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
             {tarefaSelecionada && (
                 <EditarTarefaGrupoModal
                     aberto={isModalEditarAberto}
-                    handleFecharModal={() => setModalEditar(false)}
+                    handleFecharModal={() => setIsModalEditarAberto(false)}
                     idCaso={caso.id}
                     idTarefa={tarefaSelecionada.id} // <-- precisa ter o id da tarefa real
                     onTarefaAtualizada={() => {
@@ -234,7 +234,7 @@ export default function AtoresReuniao() {
     });
 
     const [isModalConvidarAberto, setModalConvidarAberto] = useState(false);
-    const [isModalTarefaAberto, setModalTarefa] = useState(false);
+    const [isModalTarefaAberto, setIsModalTarefaAberto] = useState(false);
 
     return (
         <BoxContainer
@@ -245,7 +245,7 @@ export default function AtoresReuniao() {
                         <FaUserPlus />
                         Convidar
                     </Button>
-                    <Button action={() => setModalTarefa(true)}>
+                    <Button action={() => setIsModalTarefaAberto(true)}>
                         <FaUserPlus />
                         Registrar Tarefa
                     </Button>
@@ -269,7 +269,7 @@ export default function AtoresReuniao() {
             />
             <RegistrarTarefaGrupoModal
                 aberto={isModalTarefaAberto}
-                handleFecharModal={() => setModalTarefa(false)}
+                handleFecharModal={() => setIsModalTarefaAberto(false)}
                 onSubmit={async (data) => {
                     enviarTarefaMutation.mutateAsync(data);
                     queryClient.invalidateQueries([
@@ -277,7 +277,7 @@ export default function AtoresReuniao() {
                         'membros-grupo-trabalho-com-tarefas',
                         caso.id
                     ]);
-                    setModalTarefa(false);
+                    setIsModalTarefaAberto(false);
                 }}
             />
         </BoxContainer>

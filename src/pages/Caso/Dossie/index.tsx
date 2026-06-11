@@ -1,19 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { DossieCard } from '../../../components/DossieCard';
-import { BoxContainer } from '../../../components/ui/BoxContainer';
 import { ColumnContainer } from '../../../components/ui/ColumnContainer';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import { DossieContainer } from './styles';
-import { TabelaOcorrenciaNovo } from '../../../components/Tabelas/Ocorrencias';
 import useDossieViewModel from './model';
 import { TabelaOcorrenciaSimplesNovo } from '../../../components/Tabelas/OcorrenciasSimples';
 import SuasTarefas from '../../../components/Tabelas/tarefas-user-dossie';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { Value } from 'react-calendar/dist/esm/shared/types.js';
 import CalendarioCustomizado, { CalendarItem } from '../../../components/Calendario';
-import { getReunioes } from '../../../common/api/casos/planejamento/get-reunioes-marcadas';
-import { useTarefas } from '../../../contexts/minhas-tarefas';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function formatarData(data: string | Date): string {

@@ -16,6 +16,11 @@ export function BadgeStatus({ status }: { status: string | null }) {
 
     return status && <Badge texto={tipo.label} type={tipo.type} />;
 }
+
+function OcorrenciaExpandida({ data }: { data: OcorrenciaModel }) {
+    return <OcorrenciaItemSimples data={data} />;
+}
+
 interface TabelaOcorrenciaNovoProps {
     ocorrencias: OcorrenciaModel[];
 }
@@ -35,7 +40,7 @@ export function TabelaOcorrenciaSimplesNovo(props: TabelaOcorrenciaNovoProps) {
                 noDataComponent="Nenhum registro encontrado"
                 // expandableRowExpanded={(row) => !!row}
                 expandOnRowClicked
-                expandableRowsComponent={({ data }) => <OcorrenciaItemSimples data={data} />}
+                expandableRowsComponent={OcorrenciaExpandida}
                 dense
             />
         </BoxContainer>

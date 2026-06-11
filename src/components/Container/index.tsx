@@ -2,9 +2,9 @@ import React from 'react';
 import { ContainerStyle } from './styles';
 
 export interface ContainerProps extends React.HTMLProps<HTMLDivElement> {
-    children: React.ReactNode;
+    readonly children: React.ReactNode;
 }
 
-export default function Container({ children, ...rest }: ContainerProps) {
+export default function Container({ children, ...rest }: Readonly<ContainerProps>) {
     return <ContainerStyle {...rest}>{children}</ContainerStyle>;
 }

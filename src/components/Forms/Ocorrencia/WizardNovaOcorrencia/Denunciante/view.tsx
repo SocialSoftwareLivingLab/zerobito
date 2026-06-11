@@ -9,10 +9,10 @@ import { DenuncianteFormInput } from './model';
 import TextArea from '../../../../ui/TextArea';
 
 export interface DenuncianteViewProps {
-    submitForm: () => void;
-    errors: FieldErrors<DenuncianteFormInput>;
-    register: UseFormRegister<DenuncianteFormInput>;
-    tipoDenuncianteSelecionado: string;
+    readonly submitForm: () => void;
+    readonly errors: FieldErrors<DenuncianteFormInput>;
+    readonly register: UseFormRegister<DenuncianteFormInput>;
+    readonly tipoDenuncianteSelecionado: string;
 }
 
 export default function DenuncianteView({
@@ -20,7 +20,7 @@ export default function DenuncianteView({
     submitForm,
     tipoDenuncianteSelecionado,
     errors
-}: DenuncianteViewProps) {
+}: Readonly<DenuncianteViewProps>) {
     return (
         <>
             <FormContainer>

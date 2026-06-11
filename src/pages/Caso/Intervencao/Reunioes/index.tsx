@@ -12,7 +12,6 @@ import {
     agendarReuniao,
     AgendarReuniaoRequest
 } from '../../../../common/api/casos/planejamento/agendar-reuniao';
-import AtasAnteriores from '../AtasAnteriores';
 import TarefasReuniao from './tarefas';
 import { salvarAtaReuniao } from '../../../../common/api/casos/grupo-trabalho/aceitar-ata';
 import AtoresReuniao from '../Tarefas';

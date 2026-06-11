@@ -19,10 +19,10 @@ export interface LocalizacaoFormField {
 }
 
 export interface AlterarLocalizacaoCasoFormProps {
-    localizacao: Localizacao;
-    handleFecharForm: () => void;
-    handleLocalizacaoSelecionada(longitude: number, latitude: number): void;
-    handleSubmitEdicao: (data: LocalizacaoFormField, e?: unknown) => void;
+    readonly localizacao: Localizacao;
+    readonly handleFecharForm: () => void;
+    readonly handleLocalizacaoSelecionada: (longitude: number, latitude: number) => void;
+    readonly handleSubmitEdicao: (data: LocalizacaoFormField, e?: unknown) => void;
 }
 
 export default function AlterarLocalizacaoCasoForm({
@@ -30,7 +30,7 @@ export default function AlterarLocalizacaoCasoForm({
     handleFecharForm,
     handleLocalizacaoSelecionada,
     handleSubmitEdicao
-}: AlterarLocalizacaoCasoFormProps) {
+}: Readonly<AlterarLocalizacaoCasoFormProps>) {
     const { register, watch, control, setValue, handleSubmit } = useForm<LocalizacaoFormField>({
         defaultValues: {
             cidade: localizacao.cidade,

@@ -49,6 +49,15 @@ function BadgeStatusEtapa({ status }: { status: MapaEtapaStatusEnum }) {
     return <span title={tipo.label}>{tipo.icon}</span>;
 }
 
+function BotaoColapsarTodas({ onColapsar }: { onColapsar: () => void }) {
+    return (
+        <Button action={onColapsar}>
+            <FaCompress className="mr-2" />
+            Colapsar todas
+        </Button>
+    );
+}
+
 export default function MapaInvestigacao(): JSX.Element {
     const { caso } = useCasoSelecionado();
 
@@ -112,12 +121,7 @@ export default function MapaInvestigacao(): JSX.Element {
     return (
         <BoxContainer
             titulo="MAPA de Investigação"
-            acoesContainer={() => (
-                <Button action={colapsarTodas}>
-                    <FaCompress className="mr-2" />
-                    Colapsar todas
-                </Button>
-            )}>
+            acoesContainer={() => <BotaoColapsarTodas onColapsar={colapsarTodas} />}>
             {etapas.length > 0 ? (
                 <MapaContainer>
                     {etapas.map((etapa, index) => {

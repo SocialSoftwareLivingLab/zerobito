@@ -93,10 +93,10 @@ export default function AceitarOcorrenciaPageView({
 }
 
 interface DadosOcorrenciaViewProps {
-    ocorrencia: OcorrenciaModel;
+    readonly ocorrencia: OcorrenciaModel;
 }
 
-function DadosOcorrenciaView({ ocorrencia }: DadosOcorrenciaViewProps) {
+function DadosOcorrenciaView({ ocorrencia }: Readonly<DadosOcorrenciaViewProps>) {
     return (
         <>
             <OcorrenciaItem data={ocorrencia} />

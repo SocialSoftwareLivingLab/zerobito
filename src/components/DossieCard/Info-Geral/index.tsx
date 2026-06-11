@@ -75,17 +75,9 @@ export function InfoGeralDossieCard({ caso }: InfoGeralDossieCardProps) {
         }
     }, [causaPrimariaSelecionada, causaSecundariaSelecionada, resetField]);
 
-    // TODO: Verificar a necessidade desse trecho
-    // useEffect(() => {
-    //     const data: DossieForm = {
-    //         CausaPrimaria: formData.CausaPrimaria,
-    //         CausaSecundaria: formData.CausaSecundaria,
-    //         Diagnostico: formData.Diagnostico,
-    //         Comentario: formData.Comentario
-    //     };
-
-    //     reset(data);A
-    // }, [formData, reset]);
+    useEffect(() => {
+        reset(formatData(caso));
+    }, [caso, reset]);
 
     const viewProps: InfoGeralDossieViewProps = {
         register,

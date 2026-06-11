@@ -17,9 +17,9 @@ api.interceptors.response.use(
         return response;
     },
     async (error) => {
-        if (error.response.status === 401) {
+        if (error.response?.status === 401) {
             resetarDados();
-            return (window.location.href = '/login');
+            return (globalThis.location.href = '/login');
         }
         return Promise.reject(error);
     }
@@ -44,6 +44,6 @@ export const login = async ({ email, senha }: { email: string; senha: string }) 
         return data;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-        return Promise.reject(error.response.data.error);
+        return Promise.reject(error.response?.data?.error ?? error.message ?? error);
     }
 };
