@@ -3,13 +3,18 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+RUN chown node:node /app
+
 ARG REACT_APP_BACKEND_URL
 ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
-COPY package.json yarn.lock ./
+COPY --chown=node:node package.json yarn.lock ./
+
+USER node
+
 RUN yarn install
 
-COPY . .
+COPY --chown=node:node . .
 
 RUN yarn build
 

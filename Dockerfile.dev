@@ -2,10 +2,15 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+RUN chown node:node /app
+
+COPY --chown=node:node package.json yarn.lock ./
+
+USER node
+
 RUN yarn install
 
-COPY . .
+COPY --chown=node:node . .
 
 EXPOSE 3000
 
