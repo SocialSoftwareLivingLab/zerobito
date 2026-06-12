@@ -132,7 +132,13 @@ export default function MapaInvestigacao(): JSX.Element {
                                 {/* Cabeçalho */}
                                 <div
                                     className="etapa-cabecalho"
-                                    onClick={() => alternarAbertura(etapa.id)}>
+                                    onClick={() => alternarAbertura(etapa.id)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ')
+                                            alternarAbertura(etapa.id);
+                                    }}
+                                    role="button"
+                                    tabIndex={0}>
                                     <div className="etapa-titulo">
                                         <span>
                                             {index + 1}. {etapa.name}

@@ -73,6 +73,12 @@ export default function Planejamento() {
                                         onClick={() =>
                                             item.tipo === 'reuniao' && navegarParaReuniao(item.data)
                                         }
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && item.tipo === 'reuniao')
+                                                navegarParaReuniao(item.data);
+                                        }}
+                                        role={item.tipo === 'reuniao' ? 'button' : undefined}
+                                        tabIndex={item.tipo === 'reuniao' ? 0 : undefined}
                                         style={{
                                             cursor: item.tipo === 'reuniao' ? 'pointer' : 'default'
                                         }}>

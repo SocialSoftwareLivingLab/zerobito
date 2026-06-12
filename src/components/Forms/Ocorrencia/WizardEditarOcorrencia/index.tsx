@@ -158,8 +158,20 @@ export function EditarOcorrenciaModal({
     if (!isOpen) return null;
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+            className="modal-overlay"
+            onClick={onClose}
+            onKeyDown={(e) => {
+                if (e.key === 'Escape') onClose();
+            }}
+            role="button"
+            tabIndex={0}>
+            <div
+                className="modal-content"
+                onClick={(e) => e.stopPropagation()}
+                onKeyDown={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true">
                 <div className="modal-header">
                     <h2>Editar Comunicação de Evento</h2>
                     <button className="modal-close" onClick={onClose}>
