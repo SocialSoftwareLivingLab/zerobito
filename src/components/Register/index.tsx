@@ -81,7 +81,8 @@ function SignupCard() {
                                 <button
                                     type="button"
                                     onClick={toggleShowPassword}
-                                    className="btn-toggle-password">
+                                    className="btn-toggle-password"
+                                    aria-label="Mostrar senha">
                                     <AiOutlineEye style={{ verticalAlign: 'middle' }} />
                                 </button>
                             </div>
@@ -98,7 +99,8 @@ function SignupCard() {
                                 <button
                                     type="button"
                                     onClick={toggleShowConfirmPassword}
-                                    className="btn-toggle-password">
+                                    className="btn-toggle-password"
+                                    aria-label="Mostrar confirmar senha">
                                     <AiOutlineEye style={{ verticalAlign: 'middle' }} />
                                 </button>
                             </div>

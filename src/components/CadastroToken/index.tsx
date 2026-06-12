@@ -56,7 +56,7 @@ function SignupTokenCard() {
                                             }
                                         />
                                     </span>
-                                    Senha:
+                                    <span>Senha:</span>
                                 </label>
                                 <input
                                     type={showPassword ? 'text' : 'password'}
@@ -68,7 +68,8 @@ function SignupTokenCard() {
                                 <button
                                     type="button"
                                     onClick={toggleShowPassword}
-                                    className="btn-toggle-password">
+                                    className="btn-toggle-password"
+                                    aria-label="Mostrar senha">
                                     <AiOutlineEye style={{ verticalAlign: 'middle' }} />
                                 </button>
                             </div>
@@ -85,7 +86,8 @@ function SignupTokenCard() {
                                 <button
                                     type="button"
                                     onClick={toggleShowConfirmPassword}
-                                    className="btn-toggle-password">
+                                    className="btn-toggle-password"
+                                    aria-label="Mostrar confirmar senha">
                                     <AiOutlineEye style={{ verticalAlign: 'middle' }} />
                                 </button>
                             </div>

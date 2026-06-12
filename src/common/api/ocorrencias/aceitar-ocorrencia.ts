@@ -29,5 +29,5 @@ export async function aceitarOcorrenciaComoCaso(data: AceitarOcorrenciaRequest) 
             instituicao: data.caso.instituicao
         }
     };
-    const response = await api.post(`/api/v1/ocorrencias/${data.ocorrencia.id}/aceitar`, body);
+    await api.post(`/api/v1/ocorrencias/${data.ocorrencia.id}/aceitar`, body);
 }

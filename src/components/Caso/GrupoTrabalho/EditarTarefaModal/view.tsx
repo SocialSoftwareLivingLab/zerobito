@@ -72,9 +72,7 @@ export default function EditarTarefaGrupoModalView({
                             {...register('prazo')}
                         />
                         <StatusConclusao>
-                            <label>
-                                <strong>Status de conclusão</strong>
-                            </label>
+                            <strong>Status de conclusão</strong>
 
                             <div className="radio-group">
                                 <label>
@@ -83,7 +81,7 @@ export default function EditarTarefaGrupoModalView({
                                         value="com_exito"
                                         {...register('statusConclusao')}
                                     />
-                                    Ação concluída com êxito
+                                    <span>Ação concluída com êxito</span>
                                 </label>
                                 <label>
                                     <input
@@ -91,7 +89,7 @@ export default function EditarTarefaGrupoModalView({
                                         value="satisfatoria"
                                         {...register('statusConclusao')}
                                     />
-                                    Ação concluída de forma satisfatória
+                                    <span>Ação concluída de forma satisfatória</span>
                                 </label>
                                 <label>
                                     <input
@@ -99,7 +97,7 @@ export default function EditarTarefaGrupoModalView({
                                         value="sem_previsao"
                                         {...register('statusConclusao')}
                                     />
-                                    Ação sem previsão de conclusão
+                                    <span>Ação sem previsão de conclusão</span>
                                 </label>
                             </div>
                         </StatusConclusao>
