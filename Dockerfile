@@ -14,7 +14,9 @@ USER node
 
 RUN yarn install
 
-COPY --chown=node:node . .
+COPY src/ ./src/
+COPY public/ ./public/
+COPY tsconfig.json .eslintrc.json .prettierrc.json ./
 
 RUN yarn build
 
