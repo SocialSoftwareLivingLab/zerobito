@@ -8,7 +8,7 @@ RUN chown node:node /app
 ARG REACT_APP_BACKEND_URL
 ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
-COPY --chown=node:node package.json yarn.lock ./
+COPY package.json yarn.lock ./
 
 USER node
 
