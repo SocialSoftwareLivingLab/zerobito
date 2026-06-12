@@ -26,7 +26,7 @@ const NIVEL_LABEL: Record<string, string> = {
     MACRO: 'Macro'
 };
 
-function BotaoNovaIntervencao({ onClick }: { onClick: () => void }) {
+function BotaoNovaIntervencao({ onClick }: Readonly<{ onClick: () => void }>) {
     return <Button action={onClick}>+ Nova Intervenção</Button>;
 }
 

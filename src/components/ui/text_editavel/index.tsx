@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { Button } from '../Button';
 import { Select, SelectOption } from '../Select';
@@ -17,8 +17,8 @@ export interface TextEditavelProps {
 const formatOption = (option) => {
     return option
         .toLowerCase()
-        .replace(/_/g, ' ')
-        .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
+        .replaceAll(/_/g, ' ')
+        .replaceAll(/(?:^|\s)\S/g, (a) => a.toUpperCase());
 };
 
 export const TextEditavel = forwardRef<HTMLSelectElement, TextEditavelProps>(

@@ -7,7 +7,7 @@ import useDossieViewModel from './model';
 import { TabelaOcorrenciaSimplesNovo } from '../../../components/Tabelas/OcorrenciasSimples';
 import SuasTarefas from '../../../components/Tabelas/tarefas-user-dossie';
 import 'react-calendar/dist/Calendar.css';
-import CalendarioCustomizado, { CalendarItem } from '../../../components/Calendario';
+import CalendarioCustomizado from '../../../components/Calendario';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function formatarData(data: string | Date): string {

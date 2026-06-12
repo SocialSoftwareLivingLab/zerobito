@@ -51,7 +51,7 @@ export default function NovaIntervencao() {
                 name,
                 recursos,
                 prazo,
-                prioridade: parseFloat(prioridade),
+                prioridade: Number.parseFloat(prioridade),
                 nivel,
                 autorNome
             });

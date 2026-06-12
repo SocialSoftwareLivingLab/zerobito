@@ -1,22 +1,19 @@
-import React from 'react';
 import { TextEditavel } from '../../ui/text_editavel';
 
 import { UseFormRegister, UseFormReset } from 'react-hook-form';
 import { InfoGeralFormData } from './model';
 import { CommentEditavel } from '../../ui/comentEditavel';
-import { listarCausas } from '../../../common/api/casos/listarCausas';
-import { Caso } from '../../../common/models/caso/caso';
 
 export interface InfoGeralDossieViewProps {
-    register: UseFormRegister<InfoGeralFormData>;
-    handleCompleteEdit: () => void;
-    causaPrimariaSelecionada: string;
-    causaSecundariaSelecionada: string;
-    diagnosticoSelecionado: string;
-    comentarioSelecionado: string;
-    causas: string[];
-    diagnosticos: string[];
-    reset: UseFormReset<InfoGeralFormData>;
+    readonly register: UseFormRegister<InfoGeralFormData>;
+    readonly handleCompleteEdit: () => void;
+    readonly causaPrimariaSelecionada: string;
+    readonly causaSecundariaSelecionada: string;
+    readonly diagnosticoSelecionado: string;
+    readonly comentarioSelecionado: string;
+    readonly causas: string[];
+    readonly diagnosticos: string[];
+    readonly reset: UseFormReset<InfoGeralFormData>;
 }
 
 export function InfoGeralDossieView({
@@ -29,7 +26,7 @@ export function InfoGeralDossieView({
     causas,
     diagnosticos,
     reset
-}: InfoGeralDossieViewProps) {
+}: Readonly<InfoGeralDossieViewProps>) {
     return (
         <form onSubmit={handleCompleteEdit}>
             <h3>Causa Primária</h3>

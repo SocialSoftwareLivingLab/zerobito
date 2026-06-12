@@ -49,7 +49,7 @@ function BadgeStatusEtapa({ status }: Readonly<{ status: MapaEtapaStatusEnum }>)
     return <span title={tipo.label}>{tipo.icon}</span>;
 }
 
-function BotaoColapsarTodas({ onColapsar }: { onColapsar: () => void }) {
+function BotaoColapsarTodas({ onColapsar }: Readonly<{ onColapsar: () => void }>) {
     return (
         <Button action={onColapsar}>
             <FaCompress className="mr-2" />

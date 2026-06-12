@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
-import { set, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { consultarTiposNotificacoes } from '../../../../common/api/casos/notificacoes/consultar-tipos-notificacoes';
 import CriarNotificacaoModalView, { CriarNotificacaoModalViewProps } from './view';
 import { NotificacaoCaso } from '../../../../common/models/caso/notificacao';

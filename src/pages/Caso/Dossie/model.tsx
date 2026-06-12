@@ -1,9 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { listarOcorrencias } from '../../../common/api/casos/consultarOcorrencias';
 import { OcorrenciaModel } from '../../../common/models/ocorrencias/model';
 import { buscarTarefasCaso } from '../../../common/api/casos/grupo-trabalho/tarefas';
 import { useQuery } from '@tanstack/react-query';
-import { Tarefa } from '../../../contexts/minhas-tarefas';
 import { CalendarItem } from '../../../components/Calendario';
 import { getReunioes } from '../../../common/api/casos/planejamento/get-reunioes-marcadas';
 

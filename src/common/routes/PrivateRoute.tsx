@@ -5,7 +5,7 @@ import { useUsuarioAutenticado } from '../../contexts/usuario-autenticado';
 export default function PrivateRoute() {
     const { isAutenticado, isLoading } = useUsuarioAutenticado();
 
-    const redirectTo = window.location.pathname;
+    const redirectTo = globalThis.location.pathname;
 
     if (isLoading) return null;
 

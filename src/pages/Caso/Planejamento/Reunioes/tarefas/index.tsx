@@ -15,7 +15,7 @@ import DataTable from 'react-data-table-component';
 import { dataTableStyle } from '../../../../../components/Tabelas/custom';
 import { COLUNAS_MEMBROS } from './tebela-membors-grupo';
 
-export function AcoesLinha({ row }: { row: MembroGrupoTrabalho }) {
+export function AcoesLinha({ row }: Readonly<{ row: MembroGrupoTrabalho }>) {
     return (
         <ColunaAcao>
             <Button>Aceitar</Button>

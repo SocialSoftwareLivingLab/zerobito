@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { Navigate, redirect, useNavigate } from 'react-router-dom';
+import { useCallback, useRef, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {
     CondicaoVitima,
@@ -11,7 +11,6 @@ import { FormStepApi } from '../../../components/Forms/Ocorrencia/WizardNovaOcor
 import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from './context';
 import './style.css';
 import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
-import { useUsuarioAutenticado } from '../../../contexts/usuario-autenticado';
 import { obterPerfisUsuario } from '../../../common/api/usuarios/permissoes/permissoes-user';
 import { useQuery } from '@tanstack/react-query';
 

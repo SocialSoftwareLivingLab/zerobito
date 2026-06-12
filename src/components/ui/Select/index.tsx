@@ -2,13 +2,13 @@ import React, { forwardRef } from 'react';
 import { SelectArea, SelectField, SelectLabel } from './styles';
 
 export interface SelectOptionProps {
-    value?: string;
-    label?: string;
-    disabled?: boolean;
-    selected?: boolean;
+    readonly value?: string;
+    readonly label?: string;
+    readonly disabled?: boolean;
+    readonly selected?: boolean;
 }
 
-export function SelectOption({ value, label, disabled, selected }: SelectOptionProps) {
+export function SelectOption({ value, label, disabled, selected }: Readonly<SelectOptionProps>) {
     return (
         <option value={value} disabled={disabled} selected={selected}>
             {label}

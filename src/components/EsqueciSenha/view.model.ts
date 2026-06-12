@@ -23,7 +23,7 @@ const useEsqueciSenhaViewModel = () => {
         setError('');
         setLoading(true);
         try {
-            const response = await esqueciSenha(email);
+            await esqueciSenha(email);
             setLoading(false);
             await Swal.fire({
                 title: 'Email enviado!',

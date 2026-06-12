@@ -8,16 +8,16 @@ import { FormContainer } from '../styles';
 import Fieldset from '../../../../ui/Fieldset';
 
 export interface InformacoesBasicasViewProps {
-    submitForm: () => void;
-    errors: FieldErrors<InformacoesBasicasFormFields>;
-    register: UseFormRegister<InformacoesBasicasFormFields>;
+    readonly submitForm: () => void;
+    readonly errors: FieldErrors<InformacoesBasicasFormFields>;
+    readonly register: UseFormRegister<InformacoesBasicasFormFields>;
 }
 
 export default function InformacoesBasicasView({
     submitForm,
     errors,
     register
-}: InformacoesBasicasViewProps) {
+}: Readonly<InformacoesBasicasViewProps>) {
     const onSubmitForm = useCallback(
         (evt: React.FormEvent) => {
             evt.preventDefault();
