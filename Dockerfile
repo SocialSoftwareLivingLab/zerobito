@@ -22,9 +22,7 @@ RUN yarn build
 
 
 # ---------- NGINX ----------
-FROM nginx:alpine
-
-RUN rm /etc/nginx/conf.d/default.conf
+FROM nginxinc/nginx-unprivileged:alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
