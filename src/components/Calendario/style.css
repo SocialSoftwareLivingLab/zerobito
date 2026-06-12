@@ -42,6 +42,7 @@
 .react-calendar__tile {
   border: none !important;
   background: none;
+  color: #134780;
 }
 
 /* Remove bordas de navegação */
@@ -84,10 +85,6 @@
   background: none !important;
   color: #134780;
   font-weight: normal;
-}
-
-.react-calendar__tile {
-  color: #134780;  /* Exemplo: cinza escuro */
 }
 
 /* Remove fundo do dia selecionado */

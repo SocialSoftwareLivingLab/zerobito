@@ -14,10 +14,10 @@ export interface CriarNotificacaoForm {
 }
 
 export interface CriarNotificacaoModalProps {
-    aberto: boolean;
-    handleFecharModal: () => void;
-    onSubmit: (data: CriarNotificacaoForm) => Promise<void>;
-    notificacao?: NotificacaoCaso | null;
+    readonly aberto: boolean;
+    readonly handleFecharModal: () => void;
+    readonly onSubmit: (data: CriarNotificacaoForm) => Promise<void>;
+    readonly notificacao?: NotificacaoCaso | null;
 }
 
 export default function CriarNotificacaoModal({
@@ -25,7 +25,7 @@ export default function CriarNotificacaoModal({
     handleFecharModal,
     onSubmit,
     notificacao
-}: CriarNotificacaoModalProps) {
+}: Readonly<CriarNotificacaoModalProps>) {
     const { isLoading, data: tiposNotificacoes } = useQuery({
         queryKey: ['casos', 'tipos-notificacoes'],
         queryFn: () => consultarTiposNotificacoes()

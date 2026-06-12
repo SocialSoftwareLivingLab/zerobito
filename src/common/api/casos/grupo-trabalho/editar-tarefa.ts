@@ -17,7 +17,7 @@ export async function EditarTarefaMembroGrupo(
     payload: EditarTarefaRequest
 ): Promise<boolean> {
     try {
-        const response = await api.put(
+        await api.put(
             `/api/v1/casos/${idCaso}/grupo-trabalho/membros/tarefas/editar/${idTarefa}`,
             payload
         );

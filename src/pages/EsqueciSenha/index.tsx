@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
-import LoginCard from '../../components/Login';
 import EsqueciSenhaCard from '../../components/EsqueciSenha';
 
 const EsqueciSenhaView: React.FC = () => {

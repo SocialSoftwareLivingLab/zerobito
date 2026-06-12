@@ -1,5 +1,3 @@
-import { Perfil } from '.';
-
 export interface UsuarioAutenticado {
     id: number;
     nome: string;

@@ -2,6 +2,21 @@ import { useState, useEffect } from 'react';
 import { carregarOcorrencias } from '../../common/models/ocorrencias/get.ocorrencia';
 import { OcorrenciaModel } from '../../common/models/ocorrencias/model';
 
+function waitForToken(): Promise<string | null> {
+    const t = localStorage.getItem('token');
+    if (t) return Promise.resolve(t);
+
+    return new Promise<string | null>((resolve) => {
+        const interval = setInterval(() => {
+            const tokenInterval = localStorage.getItem('token');
+            if (tokenInterval) {
+                clearInterval(interval);
+                resolve(tokenInterval);
+            }
+        }, 50);
+    });
+}
+
 const useHomeViewModel = () => {
     const [eventos, setOcorrencias] = useState<OcorrenciaModel[]>([]);
     const [loading, setLoading] = useState(true);
@@ -10,19 +25,7 @@ const useHomeViewModel = () => {
         let mounted = true;
 
         const fetchOcorrencias = async () => {
-            // Espera o token estar carregado
-            const token = await new Promise<string | null>((resolve) => {
-                const t = localStorage.getItem('token');
-                if (t) return resolve(t);
-
-                const interval = setInterval(() => {
-                    const tokenInterval = localStorage.getItem('token');
-                    if (tokenInterval) {
-                        clearInterval(interval);
-                        resolve(tokenInterval);
-                    }
-                }, 50);
-            });
+            const token = await waitForToken();
 
             if (!token) {
                 console.warn('Token não carregado, requisição ignorada');

@@ -11,10 +11,10 @@ import { removerPalavraChave } from '../../../common/api/casos/palavras-chave/re
 import { PalavraChaveCaso } from '../../../common/models/caso/palavra-chave';
 
 export interface PalavrasDossieCardProps {
-    caso: Caso;
+    readonly caso: Caso;
 }
 
-export function PalavrasDossieCard({ caso }: PalavrasDossieCardProps) {
+export function PalavrasDossieCard({ caso }: Readonly<PalavrasDossieCardProps>) {
     const { data, isLoading } = useQuery({
         queryKey: ['casos', 'palavras-chave', caso.id],
         queryFn: () => buscarPalavrasChave(caso.id)

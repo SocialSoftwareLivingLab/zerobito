@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { vincularOcorrenciaAoCaso } from '../../../../common/api/ocorrencias/vincular-ocorrencia';
@@ -10,10 +10,12 @@ import { Secao } from '../styles';
 import { ConfirmacaoButtonGroup } from './styles';
 
 export interface VincularOcorrenciaAoCasoPageProps {
-    ocorrencia: OcorrenciaModel;
+    readonly ocorrencia: OcorrenciaModel;
 }
 
-export default function VincularOcorrenciaAoCasoPage(data: VincularOcorrenciaAoCasoPageProps) {
+export default function VincularOcorrenciaAoCasoPage(
+    data: Readonly<VincularOcorrenciaAoCasoPageProps>
+) {
     const [casoSelecionado, setCasoSelecionado] = useState<Caso | null>(null);
 
     const navigate = useNavigate();

@@ -1,7 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React, { useCallback } from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-// import "../style.css";
 import { InformacoesBasicasFormFields } from './model';
 import Input from '../../../../ui/Input';
 import { FormContainer } from '../styles';

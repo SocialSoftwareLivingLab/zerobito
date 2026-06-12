@@ -129,7 +129,7 @@ export default function TabelaOcorrenciaNovo({ ocorrencias }: Readonly<TabelaOco
 
     const handleSucesso = useCallback(() => {
         // Recarregar a página para atualizar a lista
-        window.location.reload();
+        globalThis.location.reload();
     }, []);
 
     const expandableRowsComponent = useCallback((data: { data: OcorrenciaModel }) => {

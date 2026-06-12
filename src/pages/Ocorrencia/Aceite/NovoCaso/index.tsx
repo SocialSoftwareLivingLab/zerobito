@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { aceitarOcorrenciaComoCaso } from '../../../../common/api/ocorrencias/aceitar-ocorrencia';
@@ -8,10 +7,10 @@ import { CriarCasoFormData } from '../../../../components/Forms/Caso/Registro/mo
 import { Secao } from '../styles';
 
 export interface NovoCasoPageProps {
-    ocorrencia: OcorrenciaModel;
+    readonly ocorrencia: OcorrenciaModel;
 }
 
-export default function NovoCasoPage({ ocorrencia }: NovoCasoPageProps) {
+export default function NovoCasoPage({ ocorrencia }: Readonly<NovoCasoPageProps>) {
     const navigate = useNavigate();
     const submit = async (data: CriarCasoFormData) => {
         await aceitarOcorrenciaComoCaso({

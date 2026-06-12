@@ -17,10 +17,10 @@ import {
 import { Select, SelectOption } from '../../../ui/Select';
 
 export interface EditarTarefaGrupoModalViewProps {
-    aberto: boolean;
-    handleFecharModal: () => void;
-    register: UseFormRegister<EditarTarefaGrupoModalFormData>;
-    handleSalvar?: () => void;
+    readonly aberto: boolean;
+    readonly handleFecharModal: () => void;
+    readonly register: UseFormRegister<EditarTarefaGrupoModalFormData>;
+    readonly handleSalvar?: () => void;
 }
 
 export default function EditarTarefaGrupoModalView({
@@ -28,7 +28,7 @@ export default function EditarTarefaGrupoModalView({
     handleFecharModal,
     register,
     handleSalvar
-}: EditarTarefaGrupoModalViewProps) {
+}: Readonly<EditarTarefaGrupoModalViewProps>) {
     const statusOptions = ['Em andamento', 'Atrasado', 'Concluído'];
 
     return (

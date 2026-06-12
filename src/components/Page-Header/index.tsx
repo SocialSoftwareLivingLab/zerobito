@@ -1,13 +1,12 @@
-import React from 'react';
 import './style.css';
 import Container from '../Container';
 
 interface HeaderProps {
-    titulo: string;
-    explicacao: string;
+    readonly titulo: string;
+    readonly explicacao: string;
 }
 
-function Header({ titulo: title, explicacao }: HeaderProps): JSX.Element {
+function Header({ titulo: title, explicacao }: Readonly<HeaderProps>): JSX.Element {
     return (
         <div>
             <Container className="container-header">

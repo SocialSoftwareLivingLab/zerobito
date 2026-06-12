@@ -47,7 +47,7 @@ function BotoesAcoesPreparacao() {
 
     return (
         <SeparadorAcoes>
-            <Button action={() => (window.location.href = 'mailto:testando@teste.com')}>
+            <Button action={() => (globalThis.location.href = 'mailto:testando@teste.com')}>
                 <FaCircleQuestion />
                 Ajuda com o caso
             </Button>

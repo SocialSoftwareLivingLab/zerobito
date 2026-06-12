@@ -19,9 +19,9 @@ api.interceptors.response.use(
     async (error) => {
         if (error.response?.status === 401) {
             resetarDados();
-            return (window.location.href = '/login');
+            return (globalThis.location.href = '/login');
         }
-        return Promise.reject(error);
+        throw error;
     }
 );
 

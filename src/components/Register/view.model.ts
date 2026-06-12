@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { CSSProperties, useState } from 'react';
-import { redirect } from 'react-router';
 import Swal from 'sweetalert2';
 import { ValidateError } from '../../common/Errors/ValidateError';
 import { register } from '../../common/models/user/create.user';

@@ -2,12 +2,12 @@ import React from 'react';
 import { BoxContainerStyle } from './styles';
 
 interface BoxContainerProps {
-    titulo: string;
-    acoesContainer?: () => React.ReactNode;
-    children: React.ReactNode | React.ReactNode[];
+    readonly titulo: string;
+    readonly acoesContainer?: () => React.ReactNode;
+    readonly children: React.ReactNode | React.ReactNode[];
 }
 
-export function BoxContainer({ titulo, acoesContainer, children }: BoxContainerProps) {
+export function BoxContainer({ titulo, acoesContainer, children }: Readonly<BoxContainerProps>) {
     return (
         <BoxContainerStyle>
             <header>

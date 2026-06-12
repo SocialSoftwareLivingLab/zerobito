@@ -12,7 +12,7 @@ import { recusarConviteMembroGrupo } from '../../common/api/casos/grupo-trabalho
 export default function CasoConvite() {
     const { token } = useParams();
     const navigate = useNavigate();
-    const redirectTo = window.location.pathname;
+    const redirectTo = globalThis.location.pathname;
 
     const [logoutDone, setLogoutDone] = React.useState(false);
 

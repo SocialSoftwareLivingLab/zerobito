@@ -1,6 +1,5 @@
 import { TableColumn } from 'react-data-table-component';
 import { NotificacaoCaso } from '../../../../common/models/caso/notificacao';
-import { FaCheckCircle, FaRegCircle } from 'react-icons/fa';
 
 const dateFormat = Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' });
 

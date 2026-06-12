@@ -10,16 +10,16 @@ export interface ConvidarMembroGrupoFormData {
 }
 
 export interface ConvidarMembroGrupoModalProps {
-    aberto: boolean;
-    handleFecharModal: () => void;
-    onSubmit: (data: ConvidarMembroGrupoFormData) => Promise<void>;
+    readonly aberto: boolean;
+    readonly handleFecharModal: () => void;
+    readonly onSubmit: (data: ConvidarMembroGrupoFormData) => Promise<void>;
 }
 
 export default function ConvidarMembroGrupoModal({
     aberto,
     handleFecharModal,
     onSubmit
-}: ConvidarMembroGrupoModalProps) {
+}: Readonly<ConvidarMembroGrupoModalProps>) {
     const { register, handleSubmit, reset } = useForm<ConvidarMembroGrupoFormData>();
 
     useEffect(() => {

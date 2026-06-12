@@ -1,5 +1,4 @@
 import api from '../../../api';
-import { MembroGrupoTrabalho } from '../../../models/caso/grupo-trabalho/membro';
 import { Tarefa } from '../../../models/caso/grupo-trabalho/tarefa';
 
 export async function buscarTarefasMembro(idCaso: number, payload: number) {

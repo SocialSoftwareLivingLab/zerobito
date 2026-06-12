@@ -17,9 +17,9 @@ export interface MarcadorLocalizacaoMapa {
 }
 
 export interface MapaGeograficoProps {
-    scrollAumentaZoom?: boolean;
-    marcadores?: MarcadorLocalizacaoMapa[];
-    handleMarkerDragEnd: (longitude: number, latitude: number) => void;
+    readonly scrollAumentaZoom?: boolean;
+    readonly marcadores?: MarcadorLocalizacaoMapa[];
+    readonly handleMarkerDragEnd: (longitude: number, latitude: number) => void;
 }
 
 const RecenterAutomatically = ({ lat, lng }: { lat: number; lng: number }) => {
@@ -36,7 +36,7 @@ export default function MapaGeografico({
     scrollAumentaZoom = false,
     marcadores = [],
     handleMarkerDragEnd
-}: MapaGeograficoProps) {
+}: Readonly<MapaGeograficoProps>) {
     const ref = useRef<Map>(null);
 
     const iconeCustomizado = new Icon({
