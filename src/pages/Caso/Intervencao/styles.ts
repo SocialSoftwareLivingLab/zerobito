@@ -44,6 +44,42 @@ export const IntervencaoContainer = styled.section`
         }
     }
 
+    .calendario-intervencoes {
+        display: flex;
+        gap: 32px;
+        align-items: flex-start;
+    }
+
+    .lista-intervencoes {
+        width: 55%;
+    }
+
+    .lista-intervencoes h3 {
+        margin-bottom: 25px;
+        padding-top: 12px;
+        font-size: 23px;
+        color: #134780;
+    }
+
+    .card-intervencao {
+        background-color: #134780;
+        color: white;
+        padding: 12px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        strong {
+            font-size: 14px;
+        }
+
+        div {
+            font-size: 12px;
+        }
+    }
+
     .btn-editar {
         background: none;
         border: none;

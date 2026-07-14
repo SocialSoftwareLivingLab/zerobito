@@ -52,6 +52,16 @@ export const MapaContainer = styled.div`
         }
     }
 
+    @media print {
+        .acoes-etapa {
+            display: none;
+        }
+
+        .etapa-conteudo {
+            background-color: #f8fafc;
+        }
+    }
+
     .acoes-etapa {
         display: flex;
         align-items: center;

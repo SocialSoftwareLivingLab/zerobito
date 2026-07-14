@@ -58,13 +58,13 @@ const LoginCard = () => {
                                         onChange={handleChangeSenha}
                                         required
                                     />
-                                    <button
-                                        type="button"
+                                    <span
                                         onClick={toggleShowPassword}
                                         className="btn-toggle-password"
-                                        aria-label="Mostrar senha">
+                                        aria-label="Mostrar senha"
+                                        role="button">
                                         <AiOutlineEye />
-                                    </button>
+                                    </span>
                                 </div>
                             </div>
 

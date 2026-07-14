@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
@@ -37,6 +37,8 @@ export default function EditarIntervencao() {
     const basePath = location.pathname.replace(/\/intervencao.*$/, '');
     const idIntervencao = Number(intervencaoId);
 
+    const queryClient = useQueryClient();
+
     const { data: membros = [] } = useQuery({
         queryKey: ['membros-grupo', caso.id],
         queryFn: () => buscarMembrosGrupo(caso.id)
@@ -62,9 +64,9 @@ export default function EditarIntervencao() {
     const [autorNome, setAutorNome] = useState('');
     const [salvando, setSalvando] = useState(false);
     const [uploadAberto, setUploadAberto] = useState(false);
-    const [inicializado, setInicializado] = useState(false);
 
-    if (intervencao && !inicializado) {
+    useEffect(() => {
+        if (!intervencao) return;
         setName(intervencao.name ?? '');
         setRecursos(intervencao.recursos ?? '');
         setPrazo(intervencao.prazo ? intervencao.prazo.split('T')[0] : '');
@@ -72,10 +74,46 @@ export default function EditarIntervencao() {
         setNivel(intervencao.nivel ?? NivelIntervencaoEnum.MACRO);
         setStatus(intervencao.status ?? AcoesIntervencaoStatusEnum.SEM_PREVISAO);
         setAutorNome(intervencao.autor?.membro?.nome ?? '');
-        setInicializado(true);
-    }
+    }, [intervencao?.id]);
 
     const handleSubmit = async () => {
+        if (!name.trim()) {
+            Swal.fire({
+                text: 'O campo "Nome da ação" é obrigatório.',
+                icon: 'warning',
+                timer: 2500,
+                showConfirmButton: false
+            });
+            return;
+        }
+        if (!autorNome) {
+            Swal.fire({
+                text: 'O campo "Responsável" é obrigatório.',
+                icon: 'warning',
+                timer: 2500,
+                showConfirmButton: false
+            });
+            return;
+        }
+        if (!prazo) {
+            Swal.fire({
+                text: 'O campo "Prazo" é obrigatório.',
+                icon: 'warning',
+                timer: 2500,
+                showConfirmButton: false
+            });
+            return;
+        }
+        if (prazo <= new Date().toISOString().split('T')[0]) {
+            Swal.fire({
+                text: 'O "Prazo" deve ser uma data futura.',
+                icon: 'warning',
+                timer: 2500,
+                showConfirmButton: false
+            });
+            return;
+        }
+
         try {
             setSalvando(true);
             await atualizarIntervencao(caso.id, idIntervencao, {
@@ -87,6 +125,8 @@ export default function EditarIntervencao() {
                 status,
                 autorNome
             });
+            await queryClient.invalidateQueries({ queryKey: ['intervencoes', caso.id] });
+            await queryClient.invalidateQueries({ queryKey: ['intervencoes-agrupado', caso.id] });
             await Swal.fire({
                 title: 'Intervenção atualizada!',
                 icon: 'success',
@@ -94,10 +134,13 @@ export default function EditarIntervencao() {
                 showConfirmButton: false
             });
             navigate(`${basePath}/intervencao`);
-        } catch (err) {
+        } catch (err: unknown) {
             console.error(err);
+            const mensagem =
+                (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
+                'Erro ao atualizar intervenção.';
             Swal.fire({
-                text: 'Erro ao atualizar intervenção.',
+                text: mensagem,
                 icon: 'error',
                 timer: 3000,
                 showConfirmButton: false

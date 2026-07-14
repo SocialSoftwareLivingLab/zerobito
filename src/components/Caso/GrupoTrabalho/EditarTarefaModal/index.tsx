@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import EditarTarefaGrupoModalView from './view';
 import { EditarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trabalho/editar-tarefa';
@@ -6,10 +6,19 @@ import { EditarTarefaMembroGrupo } from '../../../../common/api/casos/grupo-trab
 export interface EditarTarefaGrupoModalFormData {
     responsavel: string;
     nome: string;
-    prazo: Date;
+    prazo: string;
     status: string;
     comentario: string;
     statusConclusao: string;
+}
+
+export interface TarefaInicial {
+    nome?: string;
+    status?: string;
+    comentario?: string;
+    prazo?: string;
+    statusConclusao?: string;
+    responsavel?: string;
 }
 
 interface Props {
@@ -18,6 +27,7 @@ interface Props {
     aberto: boolean;
     handleFecharModal: () => void;
     onTarefaAtualizada?: () => void;
+    tarefaInicial?: TarefaInicial;
 }
 
 export default function EditarTarefaGrupoModal({
@@ -25,19 +35,22 @@ export default function EditarTarefaGrupoModal({
     idTarefa,
     aberto,
     handleFecharModal,
-    onTarefaAtualizada
+    onTarefaAtualizada,
+    tarefaInicial
 }: Props) {
     const { register, handleSubmit, reset } = useForm<EditarTarefaGrupoModalFormData>();
+    const tarefaInicialRef = useRef(tarefaInicial);
+    tarefaInicialRef.current = tarefaInicial;
 
     useEffect(() => {
-        if (!aberto) reset(); // limpa quando o modal fecha
+        reset(tarefaInicialRef.current ?? {});
     }, [aberto, reset]);
 
     const onSubmit = async (data: EditarTarefaGrupoModalFormData) => {
         const sucesso = await EditarTarefaMembroGrupo(idCaso, idTarefa, {
             nome: data.nome,
             comentario: data.comentario,
-            prazo: data.prazo,
+            prazo: data.prazo ? new Date(data.prazo) : undefined,
             nomeMembro: data.responsavel,
             statusCodigo: mapStatusToCodigo(data.status),
             statusConclusaoCodigo: mapStatusConclusaoToCodigo(data.statusConclusao)

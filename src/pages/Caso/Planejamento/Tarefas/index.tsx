@@ -27,6 +27,9 @@ interface Tarefa {
     id: number;
     nome: string;
     status: string;
+    comentario?: string;
+    prazo?: string;
+    status_conclusao?: { codigo: string; nome: string };
 }
 
 const TIPOS_STATUS = {
@@ -63,6 +66,19 @@ const TIPOS_STATUS = {
         type: 'danger'
     }
 };
+
+function mapConclusaoParaForm(codigo?: string): string | undefined {
+    switch (codigo) {
+        case 'EXITO':
+            return 'com_exito';
+        case 'SATISFATORIO':
+            return 'satisfatoria';
+        case 'SEM_PREVISAO':
+            return 'sem_previsao';
+        default:
+            return undefined;
+    }
+}
 
 export function BadgeStatusTarefa({ status }: { status: string | null }) {
     const tipo = TIPOS_STATUS[status];
@@ -140,7 +156,18 @@ const ExpandableRowComponent: React.FC<{ id: number }> = ({ id }) => {
                     aberto={isModalEditarAberto}
                     handleFecharModal={() => setModalEditar(false)}
                     idCaso={caso.id}
-                    idTarefa={tarefaSelecionada.id} // <-- precisa ter o id da tarefa real
+                    idTarefa={tarefaSelecionada.id}
+                    tarefaInicial={{
+                        nome: tarefaSelecionada.nome,
+                        status: tarefaSelecionada.status,
+                        comentario: tarefaSelecionada.comentario,
+                        prazo: tarefaSelecionada.prazo
+                            ? tarefaSelecionada.prazo.split('T')[0]
+                            : undefined,
+                        statusConclusao: mapConclusaoParaForm(
+                            tarefaSelecionada.status_conclusao?.codigo
+                        )
+                    }}
                     onTarefaAtualizada={() => {
                         queryClient.invalidateQueries(['tarefas', caso.id, tarefaSelecionada.id]);
                         queryClient.invalidateQueries([

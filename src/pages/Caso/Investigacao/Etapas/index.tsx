@@ -7,6 +7,7 @@ import {
     FaChevronUp,
     FaCompress,
     FaExclamationTriangle,
+    FaFilePdf,
     FaTimesCircle
 } from 'react-icons/fa';
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
@@ -62,6 +63,7 @@ export default function MapaInvestigacao(): JSX.Element {
     const { caso } = useCasoSelecionado();
 
     const [etapas, setEtapas] = useState<MapaEtapa[]>([]);
+    const [etapasServidor, setEtapasServidor] = useState<MapaEtapa[]>([]);
     const [abertas, setAbertas] = useState<number[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isAlterando, setIsAlterando] = useState<boolean>(false);
@@ -73,6 +75,7 @@ export default function MapaInvestigacao(): JSX.Element {
             setErro(null);
             const response = await buscarMapaEtapas(caso.id);
             setEtapas(response);
+            setEtapasServidor(response);
         } catch (err) {
             console.error(err);
             setErro('Erro ao carregar etapas do mapa.');
@@ -105,11 +108,65 @@ export default function MapaInvestigacao(): JSX.Element {
         }
     };
 
+    const cancelarEtapa = (id: number): void => {
+        const original = etapasServidor.find((e) => e.id === id);
+        if (original) {
+            setEtapas((prev) => prev.map((e) => (e.id === id ? { ...original } : e)));
+        }
+        setAbertas((prev) => prev.filter((x) => x !== id));
+    };
+
     /** Controle de colapso */
     const alternarAbertura = (id: number): void => {
         setAbertas((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
     };
     const colapsarTodas = (): void => setAbertas([]);
+
+    const baixarPDF = (): void => {
+        const statusLabel: Record<string, string> = {
+            EM_ELABORACAO: 'Em elaboração',
+            FINALIZADA: 'Finalizada',
+            BLOQUEADA: 'Bloqueada'
+        };
+
+        const linhas = etapas
+            .map(
+                (etapa, i) => `
+                <div class="etapa">
+                    <div class="etapa-titulo">${i + 1}. ${etapa.name} — <span class="status">${statusLabel[etapa.status] ?? etapa.status}</span></div>
+                    <div class="etapa-descricao">${etapa.descricao ? etapa.descricao.replace(/\n/g, '<br>') : '<em>Sem descrição</em>'}</div>
+                </div>`
+            )
+            .join('');
+
+        const script =
+            '<script>window.onload=function(){window.print();window.close();}</' + 'script>';
+        const html = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Mapa de Investigação</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 13px; color: #1a202c; margin: 2cm; }
+    h1 { font-size: 18px; color: #134780; margin-bottom: 1.5rem; border-bottom: 2px solid #134780; padding-bottom: 0.5rem; }
+    .etapa { border: 1px solid #cbd5e0; border-radius: 4px; margin-bottom: 1rem; overflow: hidden; }
+    .etapa-titulo { background: #134780; color: #fff; padding: 0.6rem 1rem; font-weight: 700; font-size: 14px; }
+    .status { font-weight: 400; font-size: 12px; opacity: 0.9; }
+    .etapa-descricao { padding: 0.75rem 1rem; background: #f8fafc; min-height: 40px; }
+    @page { margin: 1.5cm; }
+  </style>
+</head>
+<body>
+  <h1>Mapa de Investigação</h1>
+  ${linhas}
+  ${script}
+</body>
+</html>`;
+
+        const blob = new Blob([html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+    };
 
     useEffect(() => {
         if (caso?.id) carregarEtapas();
@@ -121,7 +178,15 @@ export default function MapaInvestigacao(): JSX.Element {
     return (
         <BoxContainer
             titulo="MAPA de Investigação"
-            acoesContainer={() => <BotaoColapsarTodas onColapsar={colapsarTodas} />}>
+            acoesContainer={() => (
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <BotaoColapsarTodas onColapsar={colapsarTodas} />
+                    <Button action={baixarPDF}>
+                        <FaFilePdf className="mr-2" />
+                        Baixar PDF
+                    </Button>
+                </div>
+            )}>
             {etapas.length > 0 ? (
                 <MapaContainer>
                     {etapas.map((etapa, index) => {
@@ -192,7 +257,7 @@ export default function MapaInvestigacao(): JSX.Element {
 
                                             <Button
                                                 type="default"
-                                                action={() => alternarAbertura(etapa.id)}
+                                                action={() => cancelarEtapa(etapa.id)}
                                                 disabled={isAlterando}>
                                                 Cancelar
                                             </Button>

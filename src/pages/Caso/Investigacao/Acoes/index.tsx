@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { Button } from '../../../../components/ui/Button';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { FaCircleQuestion, FaGraduationCap } from 'react-icons/fa6';
-import { FaSearch } from 'react-icons/fa';
+import { IoMdDownload } from 'react-icons/io';
 import { iniciarIntervencao } from '../../../../common/api/casos/intervencao/iniciar-intervencao';
 import { SeparadorAcoes } from './styles';
 
@@ -55,7 +55,7 @@ function BotoesAcoesInvestigacao() {
                 Formação
             </Button>
             <Button action={handleIniciarIntervencao}>
-                <FaSearch />
+                <IoMdDownload />
                 Iniciar Intervenção
             </Button>
         </SeparadorAcoes>

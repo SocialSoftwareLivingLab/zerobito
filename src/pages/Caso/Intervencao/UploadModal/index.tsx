@@ -5,7 +5,8 @@ import { Button } from '../../../../components/ui/Button';
 import {
     listarAnexosIntervencao,
     uploadAnexoIntervencao,
-    removerAnexoIntervencao
+    removerAnexoIntervencao,
+    downloadAnexoIntervencao
 } from '../../../../common/api/casos/intervencao/anexos-intervencao';
 import Swal from 'sweetalert2';
 import styled from 'styled-components';
@@ -36,10 +37,19 @@ const AnexoItem = styled.li`
     font-size: 0.9rem;
 
     .nome {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
         color: #134780;
-        text-decoration: none;
+        text-align: left;
         &:hover {
             text-decoration: underline;
+        }
+        &:disabled {
+            opacity: 0.6;
+            cursor: default;
         }
     }
 
@@ -59,6 +69,24 @@ export default function UploadModal({ aberto, onFechar, idCaso, idIntervencao }:
     const queryClient = useQueryClient();
     const inputRef = useRef<HTMLInputElement>(null);
     const [enviando, setEnviando] = useState(false);
+    const [baixando, setBaixando] = useState<string | null>(null);
+
+    const handleDownload = async (arquivoId: string, filename: string) => {
+        try {
+            setBaixando(arquivoId);
+            await downloadAnexoIntervencao(idCaso, idIntervencao, arquivoId, filename);
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                text: 'Erro ao baixar arquivo.',
+                icon: 'error',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        } finally {
+            setBaixando(null);
+        }
+    };
 
     const { data: anexos = [], isLoading } = useQuery({
         queryKey: ['anexos-intervencao', idCaso, idIntervencao],
@@ -125,9 +153,15 @@ export default function UploadModal({ aberto, onFechar, idCaso, idIntervencao }:
                 <p style={{ color: '#64748b', marginBottom: '1rem' }}>Nenhum documento anexado.</p>
             ) : (
                 <AnexoLista>
-                    {(anexos as { id: string; nomeOriginal?: string }[]).map((a) => (
+                    {(anexos as { id: string; filename: string }[]).map((a) => (
                         <AnexoItem key={a.id}>
-                            <span className="nome">{a.nomeOriginal ?? a.id}</span>
+                            <button
+                                className="nome"
+                                onClick={() => handleDownload(a.id, a.filename)}
+                                disabled={baixando === a.id}
+                                title="Clique para baixar">
+                                {baixando === a.id ? 'Baixando...' : a.filename}
+                            </button>
                             <button className="remover" onClick={() => handleRemover(a.id)}>
                                 Remover
                             </button>

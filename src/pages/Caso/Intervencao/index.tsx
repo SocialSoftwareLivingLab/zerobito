@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { BoxContainer } from '../../../components/ui/BoxContainer';
@@ -43,6 +44,8 @@ export default function Intervencao() {
 
     const basePath = location.pathname.replace(/\/intervencao.*$/, '');
 
+    const [diaSelecionado, setDiaSelecionado] = useState<string | null>(null);
+
     const { data: agrupado = {}, isLoading } = useQuery({
         queryKey: ['intervencoes-agrupado', caso.id],
         queryFn: () => ListarIntervencoesAgrupadoPorAutor(caso.id)
@@ -64,6 +67,17 @@ export default function Intervencao() {
             prioridade: number;
         }>;
     }>;
+
+    const todasIntervencoes = grupos.flatMap((grupo) =>
+        grupo.intervencoes.map((item) => ({
+            ...item,
+            autorNome: grupo.autor.membro?.nome ?? '—'
+        }))
+    );
+
+    const intervencoesFiltradas = diaSelecionado
+        ? todasIntervencoes.filter((item) => item.prazo.split('T')[0] === diaSelecionado)
+        : todasIntervencoes;
 
     const reunioesCalendario = calendario.map(
         (item: { id: number; prazo: string; status: string }) => ({
@@ -146,11 +160,48 @@ export default function Intervencao() {
             </BoxContainer>
 
             <BoxContainer titulo="Calendário de Intervenções">
-                <CalendarioCustomizado
-                    reunioes={reunioesCalendario}
-                    tarefas={[]}
-                    onDiaClick={() => {}}
-                />
+                <div className="calendario-intervencoes">
+                    <div className="lista-intervencoes">
+                        <h3>
+                            {diaSelecionado
+                                ? `Intervenções em ${formatarData(diaSelecionado + 'T00:00:00')}`
+                                : 'Todas as Intervenções'}
+                        </h3>
+                        {intervencoesFiltradas.length === 0 ? (
+                            <p>Nenhuma intervenção nesta data.</p>
+                        ) : (
+                            intervencoesFiltradas.map((item) => {
+                                const badge = STATUS_BADGE[item.status];
+                                return (
+                                    <div key={item.id} className="card-intervencao">
+                                        <div>
+                                            <strong>{item.name}</strong>
+                                            <div>
+                                                {item.autorNome} · {formatarData(item.prazo)}
+                                            </div>
+                                        </div>
+                                        {badge && (
+                                            <Badge
+                                                texto={badge.label}
+                                                type={
+                                                    badge.type as 'success' | 'warning' | 'danger'
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                );
+                            })
+                        )}
+                    </div>
+                    <CalendarioCustomizado
+                        reunioes={reunioesCalendario}
+                        tarefas={[]}
+                        onDiaClick={(data) => {
+                            const dia = data.toISOString().split('T')[0];
+                            setDiaSelecionado((prev) => (prev === dia ? null : dia));
+                        }}
+                    />
+                </div>
             </BoxContainer>
         </IntervencaoContainer>
     );

@@ -28,18 +28,45 @@ export default function NovaIntervencao() {
 
     const [name, setName] = useState('');
     const [recursos, setRecursos] = useState('');
-    const [prazo, setPrazo] = useState('');
+    const [prazo, setPrazo] = useState(() => new Date().toISOString().split('T')[0]);
     const [prioridade, setPrioridade] = useState('0.5');
     const [nivel, setNivel] = useState<NivelIntervencaoEnum>(NivelIntervencaoEnum.MACRO);
     const [autorNome, setAutorNome] = useState('');
     const [salvando, setSalvando] = useState(false);
 
     const handleSubmit = async () => {
+        if (!name.trim()) {
+            Swal.fire({
+                text: 'O campo "Nome da ação" é obrigatório.',
+                icon: 'warning',
+                timer: 2500,
+                showConfirmButton: false
+            });
+            return;
+        }
         if (!autorNome) {
             Swal.fire({
-                text: 'Selecione um responsável.',
+                text: 'O campo "Responsável" é obrigatório.',
                 icon: 'warning',
-                timer: 2000,
+                timer: 2500,
+                showConfirmButton: false
+            });
+            return;
+        }
+        if (!prazo) {
+            Swal.fire({
+                text: 'O campo "Prazo" é obrigatório.',
+                icon: 'warning',
+                timer: 2500,
+                showConfirmButton: false
+            });
+            return;
+        }
+        if (prazo <= new Date().toISOString().split('T')[0]) {
+            Swal.fire({
+                text: 'O "Prazo" deve ser uma data futura.',
+                icon: 'warning',
+                timer: 2500,
                 showConfirmButton: false
             });
             return;
@@ -62,14 +89,12 @@ export default function NovaIntervencao() {
                 showConfirmButton: false
             });
             navigate(`${basePath}/intervencao`);
-        } catch (err) {
+        } catch (err: unknown) {
             console.error(err);
-            Swal.fire({
-                text: 'Erro ao criar intervenção.',
-                icon: 'error',
-                timer: 3000,
-                showConfirmButton: false
-            });
+            const mensagem =
+                (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
+                'Erro ao criar intervenção.';
+            Swal.fire({ text: mensagem, icon: 'error', timer: 3000, showConfirmButton: false });
         } finally {
             setSalvando(false);
         }
