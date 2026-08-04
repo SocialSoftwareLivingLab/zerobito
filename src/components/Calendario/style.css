@@ -21,16 +21,20 @@
   width: 40%; /* ou defina um valor fixo como 320px */
 }
 
-.tarefa {
-  background-color: orange;
+.bolinha-success {
+  background-color: #28a745;
 }
 
-.atrasada {
-  background-color: red;
+.bolinha-warning {
+  background-color: #fba52b;
 }
 
-.reuniao {
-  background-color: blue;
+.bolinha-danger {
+  background-color: #dc3545;
+}
+
+.bolinha-reuniao {
+  background-color: #134780;
 }
 
 .react-calendar {

@@ -31,6 +31,22 @@ export const CasoNavegacaoItemContainer = styled(Link)<{ ativo: boolean }>`
         }
     }
 
+    .circulo-icone {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #134780;
+        border-radius: 50%;
+        width: 2.2rem;
+        height: 2.2rem;
+        margin-top: 14px;
+        svg {
+            margin-top: 0;
+            font-size: 1.4rem;
+            color: #fff !important;
+        }
+    }
+
     &:not(:last-of-type) {
         margin-right: 28px;
     }

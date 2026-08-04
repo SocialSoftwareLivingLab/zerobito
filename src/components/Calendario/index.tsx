@@ -12,30 +12,49 @@ interface MeuCalendarioProps {
     onDiaClick?: (data: Date) => void;
 }
 
+type TipoBadge = 'success' | 'warning' | 'danger';
+
+const STATUS_BADGE: Record<string, TipoBadge> = {
+    CONCLUIDO: 'success',
+    REALIZADO: 'success',
+    ACEITO: 'success',
+    ATRASADO: 'danger',
+    MONITORANDO: 'danger',
+    RECUSADO: 'danger',
+    EM_ANDAMENTO: 'warning',
+    PENDENTE: 'warning'
+};
+
+const BADGE_ORDER: TipoBadge[] = ['danger', 'warning', 'success'];
+
 interface TileConteudoProps {
     date: Date;
     view: string;
-    datasTarefasDetalhadas: { data: string; atrasada: boolean }[];
+    tarefasPorData: Map<string, Set<TipoBadge>>;
     reunioesPorData: Map<string, CalendarItem>;
 }
 
-function TileConteudo({ date, view, datasTarefasDetalhadas, reunioesPorData }: TileConteudoProps) {
+function TileConteudo({
+    date,
+    view,
+    tarefasPorData,
+    reunioesPorData
+}: Readonly<TileConteudoProps>) {
     if (view !== 'month') return null;
     const dateStr = localDateStr(date);
-    const tarefaDoDia = datasTarefasDetalhadas.find((t) => t.data === dateStr);
-    const hasTarefa = !!tarefaDoDia;
-    const isAtrasada = tarefaDoDia?.atrasada;
+    const tipos = tarefasPorData.get(dateStr);
     const reuniaoDoDia = reunioesPorData.get(dateStr);
 
     return (
         <div className="bolinhas-container">
-            {hasTarefa && (
-                <span
-                    className={`bolinha ${isAtrasada ? 'atrasada' : 'tarefa'}`}
-                    title={isAtrasada ? 'Tarefa Atrasada' : 'Tarefa'}></span>
-            )}
+            {tipos &&
+                BADGE_ORDER.filter((t) => tipos.has(t)).map((tipo) => (
+                    <span key={tipo} className={`bolinha bolinha-${tipo}`} title={tipo}></span>
+                ))}
             {reuniaoDoDia && (
-                <span className="bolinha reuniao" title={reuniaoDoDia.titulo ?? 'Reunião'}></span>
+                <span
+                    className="bolinha bolinha-reuniao"
+                    title={reuniaoDoDia.titulo ?? 'Reunião'}></span>
             )}
         </div>
     );
@@ -49,10 +68,15 @@ function localDateStr(d: Date): string {
 }
 
 export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCalendarioProps) {
-    const datasTarefasDetalhadas = tarefas.map((t) => {
+    const tarefasPorData = new Map<string, Set<TipoBadge>>();
+    tarefas.forEach((t) => {
         const dataStr = new Date(t.prazo).toISOString().split('T')[0];
-        const atrasada = t.status === 'Atrasado';
-        return { data: dataStr, atrasada };
+        const codigoStatus = t.status.toUpperCase().replace(/\s+/g, '_');
+        const tipo: TipoBadge = STATUS_BADGE[codigoStatus] ?? 'warning';
+        if (!tarefasPorData.has(dataStr)) {
+            tarefasPorData.set(dataStr, new Set<TipoBadge>());
+        }
+        tarefasPorData.get(dataStr)!.add(tipo);
     });
 
     const reunioesPorData = new Map<string, CalendarItem>();
@@ -78,7 +102,7 @@ export function MeuCalendario({ reunioes = [], tarefas = [], onDiaClick }: MeuCa
                     <TileConteudo
                         date={date}
                         view={view}
-                        datasTarefasDetalhadas={datasTarefasDetalhadas}
+                        tarefasPorData={tarefasPorData}
                         reunioesPorData={reunioesPorData}
                     />
                 )}

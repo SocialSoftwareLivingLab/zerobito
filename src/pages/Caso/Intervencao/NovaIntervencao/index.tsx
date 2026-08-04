@@ -62,7 +62,7 @@ export default function NovaIntervencao() {
             });
             return;
         }
-        if (prazo <= new Date().toISOString().split('T')[0]) {
+        if (prazo < new Date().toISOString().split('T')[0]) {
             Swal.fire({
                 text: 'O "Prazo" deve ser uma data futura.',
                 icon: 'warning',

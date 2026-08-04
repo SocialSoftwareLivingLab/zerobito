@@ -1,7 +1,6 @@
-import React from 'react';
-import { BiCheckDouble, BiSolidHelpCircle } from 'react-icons/bi';
-import { BsFillGearFill } from 'react-icons/bs';
-import { FaBell } from 'react-icons/fa';
+import { BiCheckDouble } from 'react-icons/bi';
+import { FaBell, FaSearch } from 'react-icons/fa';
+import { PiCirclesThreeFill } from 'react-icons/pi';
 import { IoMdDownload, IoMdMap } from 'react-icons/io';
 import { RiShieldCheckFill } from 'react-icons/ri';
 import { TfiMenuAlt } from 'react-icons/tfi';
@@ -48,19 +47,23 @@ const menus: MenuNavegacao[] = [
     },
     {
         titulo: 'Preparação',
-        icone: <BsFillGearFill />,
+        icone: (
+            <span className="circulo-icone">
+                <PiCirclesThreeFill style={{ color: 'white' }} />
+            </span>
+        ),
         url: (caso) => `${caso.id}/preparacao`,
         minStatus: null
     },
     {
         titulo: 'Planejamento',
-        icone: <BiSolidHelpCircle />,
+        icone: <IoMdMap />,
         url: (caso) => `${caso.id}/planejamento`,
         minStatus: 'EM_PLANEJAMENTO'
     },
     {
         titulo: 'Investigação',
-        icone: <IoMdMap />,
+        icone: <FaSearch style={{ fontSize: '1.5rem' }} />,
         url: (caso) => `${caso.id}/investigacao`,
         minStatus: 'EM_INVESTIGACAO'
     },
