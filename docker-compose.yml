@@ -1,0 +1,10 @@
+services:
+  frontend:
+    container_name: zerobito-frontend
+    build:
+      context: .
+      args:
+        REACT_APP_BACKEND_URL: http://localhost:3001
+    ports:
+      - "3000:3000"
+    restart: unless-stopped

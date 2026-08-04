@@ -1,0 +1,26 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "jest": true
+    },
+    "extends": ["@rocketseat/eslint-config/react"],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "commonjs"
+    },
+    "plugins": ["react"],
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/display-name": "off",
+        "react/jsx-uses-react": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "tabWidth": 4,
+                "endOfLine": "auto"
+            }
+        ]
+    }
+}

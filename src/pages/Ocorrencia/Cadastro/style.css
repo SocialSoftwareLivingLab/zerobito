@@ -1,0 +1,11 @@
+.wizard-card-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 10px;
+}
+
+.swal-button{
+    width: auto;
+}
+

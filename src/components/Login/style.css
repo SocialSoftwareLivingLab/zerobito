@@ -1,58 +1,97 @@
 .container-body {
     display: flex;
     justify-content: center;
-    align-items: center;
     margin: 0 auto;
-    margin-top: 20rem;
 }
 
-.container{
-    width: 25rem;
-    height: 21rem;
-    border-radius:.2rem;
+.container {
+    width: 30rem;
+    border-radius: 0.2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
-.header-card{
-    color:aliceblue;
-    font-size: 2rem;
-    background-color: rgba(19,71,128,1);
-    text-align: center;
-    width: 100%;
-    height: 8rem;
-    padding-top: 2.5rem;
-    border-radius: .2em .2em 0 0;
-}
-
-.body-card{
-    padding: 1rem;
-}
-
-.body-card button{
-    width: 6rem;
-    height: 2.5rem;
-    background-color: rgba(19,71,128,1);
-    border-radius: 0.5rem;
-    border: none;
+.header-card {
     color: aliceblue;
-    font:bold;
+    font-size: 2rem;
+    background-color: rgba(19, 71, 128, 1);
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 5rem;
+    padding-top: 2.5rem;
+    border-radius: 0.2em 0.2em 0 0;
 }
 
-.body-card button:hover{
-    background-color: rgba(12, 43, 77, 0.8);
+.content {
+    padding: 1rem 1rem;
 }
 
-.body-card input{
+.content label {
+    display: inline-block;
+    width: 60px;
+}
+
+.password-wrapper {
+    display: inline-block;
+    position: relative;
+    margin: 1rem 1rem;
+}
+
+.password-wrapper input {
+    display: block;
+    background-color: rgb(226, 227, 228);
+    border-radius: 0.2rem;
+    border: none;
+    width: 15rem;
+    height: 2rem;
+    margin: 0;
+    padding-left: 8px;
+    padding-right: 2rem;
+}
+
+.content input {
+    display: inline-block;
     background-color: rgb(226, 227, 228);
     border-radius: 0.2rem;
     border: none;
     width: 15rem;
     height: 2rem;
     margin: 1rem 1rem;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.content button {
+    width: 6rem;
+    height: 2.5rem;
+    background-color: rgba(19, 71, 128, 1);
+    border-radius: 0.5rem;
+    border: none;
+    color: aliceblue;
+    font: bold;
+    margin-top: 15px;
+}
+
+.content button:hover {
+    background-color: rgba(12, 43, 77, 0.8);
+}
+
+.btn-toggle-password {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #555;
+    user-select: none;
+}
+
+.error_login {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: red;
 }

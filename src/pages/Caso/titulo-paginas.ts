@@ -1,0 +1,61 @@
+export interface InfoPaginaCaso {
+    path: string;
+    titulo: string;
+    explicacao: string;
+}
+
+export const tituloPaginas: InfoPaginaCaso[] = [
+    {
+        path: '/casos/:id/dossie',
+        titulo: 'Dossiê',
+        explicacao: 'Aqui você encontra informações detalhadas sobre o caso.'
+    },
+    {
+        path: '/casos/:id/notificacoes',
+        titulo: 'Documentação Oficial',
+        explicacao: 'Aqui você encontra documentos oficiais para a qualificação do caso.'
+    },
+    {
+        path: '/casos/:id/preparacao',
+        titulo: 'Preparação/Formação do Grupo de Trabalho',
+        explicacao: 'Aqui você consegue convidar atores para o caso e consultar status do convite.'
+    },
+    {
+        path: '/casos/:id/planejamento',
+        titulo: 'Sala de reuniões',
+        explicacao:
+            'Aqui o Coordenador Local consegue convidar atores para o caso consultar status do convite'
+    },
+    {
+        path: '/casos/:id/planejamento/reunioes',
+        titulo: 'Sala de reuniões',
+        explicacao:
+            'Aqui o Coordenador Local consegue convidar atores para o caso consultar status do convite'
+    },
+    {
+        path: '/casos/:id/planejamento/reunioes/:dataReuniao',
+        titulo: 'Sala de reuniões',
+        explicacao:
+            'Aqui o Coordenador Local consegue convidar atores para o caso consultar status do convite'
+    },
+    {
+        path: '/casos/:id/investigacao',
+        titulo: 'Investigação',
+        explicacao: 'Nesta tela o Coordenador Local acompanha as etapas de investigação do caso'
+    },
+    {
+        path: '/casos/:id/intervencao',
+        titulo: 'Intervenção',
+        explicacao: 'Nesta tela o Coordenador Local registra e acompanha as ações de intervenção'
+    },
+    {
+        path: '/casos/:id/intervencao/nova',
+        titulo: 'Nova Intervenção',
+        explicacao: 'Registre uma nova ação de intervenção para o caso'
+    },
+    {
+        path: '/casos/:id/intervencao/:intervencaoId/editar',
+        titulo: 'Editar Intervenção',
+        explicacao: 'Edite os dados da ação de intervenção'
+    }
+];

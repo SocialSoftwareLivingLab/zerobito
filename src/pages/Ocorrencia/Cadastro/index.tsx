@@ -1,0 +1,157 @@
+import { useCallback, useRef, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import {
+    CondicaoVitima,
+    CriarOcorrenciaRequest,
+    TipoFonteDenuncia,
+    criarOcorrencia
+} from '../../../common/api/ocorrencias/criar-ocorrencia';
+import { FormStepApi } from '../../../components/Forms/Ocorrencia/WizardNovaOcorrencia/interface';
+import { CriarOcorrenciaWizardContextProvider, useOcorrenciaWizardContext } from './context';
+import './style.css';
+import RegistrarOcorrenciaView, { RegistrarOcorrenciaViewProps } from './view';
+import { obterPerfisUsuario } from '../../../common/api/usuarios/permissoes/permissoes-user';
+import { useQuery } from '@tanstack/react-query';
+
+function RegistrarOcorrenciaPage() {
+    const formLocalRef = useRef<FormStepApi>(null);
+    const formVitimaRef = useRef<FormStepApi>(null);
+    const formDenuncianteRef = useRef<FormStepApi>(null);
+    const formGravidadeRef = useRef<FormStepApi>(null);
+    const { data: perfis = [], isPending: isLoadingPerfis } = useQuery({
+        queryKey: ['usuario', 'perfis'],
+        queryFn: obterPerfisUsuario
+    });
+
+    const permissao = perfis.some((p) =>
+        p.perfil?.permissoes?.some((perm) => perm.codigo === 'ocorrencias:criar')
+    );
+
+    const [currentStep, setCurrentStep] = useState(1);
+
+    const { formData } = useOcorrenciaWizardContext();
+
+    const navigate = useNavigate();
+
+    const handleNextStep = useCallback(
+        (handleNextFormWizard: () => void) => {
+            const refMapping = {
+                1: formLocalRef,
+                2: formVitimaRef,
+                3: formDenuncianteRef,
+                4: formGravidadeRef
+            };
+
+            const currentFormRef = refMapping[currentStep];
+
+            if (currentFormRef.current?.validate()) {
+                currentFormRef.current?.submitForm();
+                handleNextFormWizard();
+                setCurrentStep((prev) => prev + 1);
+            } else {
+                Swal.fire({
+                    text: 'Preencha todos os campos para continuar',
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    position: 'center',
+                    toast: true
+                });
+            }
+        },
+        [currentStep, formLocalRef, formVitimaRef, formDenuncianteRef, formGravidadeRef]
+    );
+
+    const handlePreviousStep = useCallback(
+        (handlePreviousFormWizard: () => void) => {
+            setCurrentStep((prev) => prev - 1);
+            handlePreviousFormWizard();
+        },
+        [setCurrentStep]
+    );
+
+    const handleCompleteWizard = useCallback(async () => {
+        const payload: CriarOcorrenciaRequest = {
+            data: formData.informacoesBasicas.data,
+            descricao: formData.informacoesBasicas.descricao,
+            titulo: formData.informacoesBasicas.titulo,
+            local: {
+                estado: formData.informacoesBasicas.local.estado,
+                cidade: formData.informacoesBasicas.local.cidade,
+                logradouro: formData.informacoesBasicas.local.logradouro
+            },
+            empresa: {
+                cnpj: formData.vitima.cnpjEmpresa,
+                nome: formData.vitima.nomeEmpresa,
+                cnae: formData.vitima.cnaeEmpresa,
+                tomadoraServico: {
+                    cnpj: formData.vitima.tomadoraDeServicoCNPJ,
+                    nome: formData.vitima.tomadoraDeServicoNome,
+                    cnae: formData.vitima.tomadoraDeServicoCNAE
+                }
+            },
+            fonte: {
+                outroTipo: formData.denunciante.outro,
+                tipo: formData.denunciante.tipo as TipoFonteDenuncia,
+                detalhe: formData.denunciante.adicionais
+            },
+            vitima: {
+                numero: formData.vitima.quantidade,
+                nome: formData.vitima.nome,
+                vinculo: formData.vitima.vinculoEmpresa,
+                condicao: formData.gravidade.obito as CondicaoVitima
+            }
+        };
+
+        await criarOcorrencia(payload);
+
+        await Swal.fire({
+            title: 'Ocorrência registrada com sucesso!',
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: '#134780',
+            icon: 'success',
+            buttonsStyling: true
+        });
+
+        navigate('/home');
+    }, [formData, navigate]);
+
+    if (isLoadingPerfis) return null;
+
+    if (!permissao) {
+        Swal.fire({
+            text: 'Este perfil não possui permissão para criar um evento.',
+            icon: 'error',
+            timer: 2000,
+            showConfirmButton: false,
+            position: 'center',
+            toast: true
+        });
+        return <Navigate to="/" replace />;
+    }
+
+    const registrarOcorrenciaViewProps: RegistrarOcorrenciaViewProps = {
+        handles: {
+            handleCompleteWizard,
+            handleNextStep,
+            handlePreviousStep
+        },
+        refs: {
+            formLocalRef,
+            formVitimaRef,
+            formDenuncianteRef,
+            formGravidadeRef
+        }
+    };
+
+    return <RegistrarOcorrenciaView {...registrarOcorrenciaViewProps} />;
+}
+
+export default function RegistrarOcorrencia() {
+    return (
+        <CriarOcorrenciaWizardContextProvider>
+            <RegistrarOcorrenciaPage />
+        </CriarOcorrenciaWizardContextProvider>
+    );
+}

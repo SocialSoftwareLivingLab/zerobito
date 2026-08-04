@@ -1,9 +1,11 @@
 {
+    "include": ["./src/custom.d.ts"],
     "compilerOptions": {
         "target": "esnext",
-        "moduleResolution": "node",
+        "moduleResolution": "Bundler",
+        "noEmit": true,
         "allowImportingTsExtensions": true,
         "allowSyntheticDefaultImports": true,
         "jsx": "react"
-      }
+    }
 }

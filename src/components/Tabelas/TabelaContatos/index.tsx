@@ -6,31 +6,31 @@ const contato = [
         id: 1,
         name: 'Ministério Público',
         phoneNumber: '(XX) XXXX-XXXX',
-        email: '',
+        email: ''
     },
     {
         id: 2,
         name: 'Emergência em Saúde Pública',
         phoneNumber: '192',
-        email: '',
+        email: ''
     },
     {
         id: 3,
         name: 'Ceres Regional',
         phoneNumber: '(XX) XXXX-XXXX',
-        email: '',
+        email: ''
     },
     {
         id: 4,
         name: 'Anvisa',
         phoneNumber: '(XX) XXXX-XXXX',
-        email: '',
-    },
+        email: ''
+    }
 ];
 
 const TabelaContatos = () => {
     return (
-        <div className='table-container'>
+        <div className="table-container">
             <center>
                 <h2>Contatos Importantes</h2>
             </center>
@@ -54,6 +54,6 @@ const TabelaContatos = () => {
             </table>
         </div>
     );
-}
+};
 
 export default TabelaContatos;

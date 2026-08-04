@@ -1,32 +1,64 @@
-import { useState } from "react";
-import { useHistory } from "react-router";
-import { register } from "../../common/models/user/create.user";
+import axios from 'axios';
+import { CSSProperties, useState } from 'react';
+import Swal from 'sweetalert2';
+import { ValidateError } from '../../common/Errors/ValidateError';
+import { register } from '../../common/models/user/create.user';
+import { useNavigate } from 'react-router-dom';
 
 const useRegisterViewModel = () => {
-    const history = useHistory();
-    const [error, setError] = useState<string>("");
-    const [nome, setNome] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [senha, setSenha] = useState<string>("");
-    const [senhaValidation, setSenhaValidation] = useState<string>("");
+    const navigate = useNavigate();
+    const [error, setError] = useState<string>();
+    const [nome, setNome] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
+    const [senhaValidation, setSenhaValidation] = useState<string>('');
+    const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const toggleShowConfirmPassword = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
+
+    const override: CSSProperties = {
+        display: 'block',
+        margin: '0 auto',
+        textAlign: 'center',
+        justifyContent: 'center',
+        overflow: 'auto',
+        position: 'relative',
+        transform: 'transalate(-50%, -50%)'
+    };
 
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (senha !== senhaValidation) {
-            setError(String("Senha diverge da confirmação"));
-            return;
-        }
-
         try {
-            const response = await register(nome, email, senha);
-            if (response.status === 200) {
-                history.replace("/");
+            setError('');
+            setLoading(true);
+            if (senha !== senhaValidation) {
+                setError('Senhas não coincidem');
+                throw new Error('Senhas não coincidem');
             }
-        } catch (error: any) {
-            setError(
-                String(error.response.data?.error ?? error.response.data.message)
-            );
+            const response = await register(nome, email, senha);
+            setLoading(false);
+            if (response.status === 201) {
+                await Swal.fire({
+                    title: 'Cadastro Realizado!',
+                    text: 'Usuário foi criado com sucesso',
+                    icon: 'success',
+                    timer: 4000,
+                    confirmButtonText: 'Continuar'
+                });
+                navigate('/login');
+            }
+        } catch (error) {
+            setLoading(false);
+            if (axios.isAxiosError<ValidateError, Record<string, unknown>>(error)) {
+                setError(String(error.response.data.message));
+            }
         }
     };
 
@@ -48,20 +80,22 @@ const useRegisterViewModel = () => {
         setSenha(value);
     };
 
-    const handleChangeSenhaValidation = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleChangeSenhaValidation = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
         setSenhaValidation(value);
     };
-
 
     return {
         nome,
         email,
         senha,
         senhaValidation,
+        error,
+        loading,
+        override,
+        showPassword,
+        showConfirmPassword,
         setNome,
         setEmail,
         setSenha,
@@ -70,7 +104,9 @@ const useRegisterViewModel = () => {
         handleChangeNome,
         handleChangeEmail,
         handleChangeSenha,
-        handleChangeSenhaValidation
+        handleChangeSenhaValidation,
+        toggleShowPassword,
+        toggleShowConfirmPassword
     };
 };
 

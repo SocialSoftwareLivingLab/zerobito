@@ -1,0 +1,19 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN chown node:node /app
+
+COPY package.json yarn.lock ./
+
+USER node
+
+RUN yarn install
+
+COPY src/ ./src/
+COPY public/ ./public/
+COPY tsconfig.json .eslintrc.json .prettierrc.json ./
+
+EXPOSE 3000
+
+CMD ["yarn", "start"]

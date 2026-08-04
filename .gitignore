@@ -1,1 +1,10 @@
 node_modules
+
+/dist
+/build
+
+# env files — commit only the example, never real values
+.env*
+!.env.example
+
+/.vscode

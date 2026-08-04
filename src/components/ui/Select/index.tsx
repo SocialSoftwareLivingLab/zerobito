@@ -1,0 +1,41 @@
+import React, { forwardRef } from 'react';
+import { SelectArea, SelectField, SelectLabel } from './styles';
+
+export interface SelectOptionProps {
+    readonly value?: string;
+    readonly label?: string;
+    readonly disabled?: boolean;
+    readonly selected?: boolean;
+}
+
+export function SelectOption({ value, label, disabled, selected }: Readonly<SelectOptionProps>) {
+    return (
+        <option value={value} disabled={disabled} selected={selected}>
+            {label}
+        </option>
+    );
+}
+
+export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+    label: string;
+    width?: 'auto' | 'full';
+    children:
+        | React.ReactElement<SelectOptionProps>[]
+        | React.ReactElement<SelectOptionProps>
+        | React.ReactNode;
+}
+
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+    ({ label, width = 'auto', children, ...rest }: SelectProps, ref) => {
+        return (
+            <SelectArea>
+                <SelectLabel>{label}</SelectLabel>
+                <SelectField ref={ref} width={width} {...rest}>
+                    {children}
+                </SelectField>
+            </SelectArea>
+        );
+    }
+);
+
+Select.displayName = 'Select';

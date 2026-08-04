@@ -1,8 +1,46 @@
-
-export interface OcorrenciaModel{
-    denuncia: string;
-    data: string;
-    condicao: string;
-    gravidade: string;
-    status: string;
+export interface OcorrenciaModel {
+    id: number;
+    data: Date;
+    descricao: string;
+    titulo: string;
+    status: {
+        descricao: string;
+        sigla: string;
+    };
+    dataAlteracao: string;
+    dataCriacao: string;
+    empresa: {
+        nome: string;
+        cnpj: string;
+        cnae: string;
+        tomadoraServico: {
+            nome: string;
+            cnpj?: string;
+            cnae?: string;
+        };
+    };
+    relator: {
+        id: number;
+        nome: string;
+        email: string;
+    };
+    fonte: {
+        tipo: string;
+        outroTipo?: string;
+        detalhe?: string;
+    };
+    local: {
+        latitude?: number;
+        longitude?: number;
+        cidade: string;
+        estado: string;
+        logradouro: string;
+    };
+    vitima: {
+        numero: string;
+        nome: string;
+        vinculo: string;
+        condicao: string;
+        gravidade?: string;
+    };
 }

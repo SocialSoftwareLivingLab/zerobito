@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1257.433" height="450.873" viewBox="0 0 1257.433 450.873">
+  <g id="Grupo_16336" data-name="Grupo 16336" transform="translate(313.158 40.702)">
+    <g id="Grupo_16337" data-name="Grupo 16337">
+      <g id="Grupo_16335" data-name="Grupo 16335" transform="translate(217.913 -63.437) rotate(30)">
+        <g id="Grupo_16334" data-name="Grupo 16334" transform="translate(0 0)">
+          <path id="Caminho_78644" data-name="Caminho 78644" d="M138.725,46.156a157.1,157.1,0,0,1,25.957,6.79,148.824,148.824,0,0,1,45.124,26.129L82.6,299.368a105.915,105.915,0,0,0,28.278,3.7h.344a106.1,106.1,0,0,0,22-2.235,96.687,96.687,0,0,0,39.366-18.222l39.881,36.615q-34.637,30.084-79.247,36.013v42.718H81.654V354.2l.086-.086h-.086a145.434,145.434,0,0,1-26.473-7.22,149.237,149.237,0,0,1-44.695-26.731L80.708,198.375l.945.86v-2.493l55.524-96.093q-1.975-.516-3.954-.86a105.565,105.565,0,0,0-22.347-2.321h-1.719a107,107,0,0,0-27.5,3.954q-23.465,6.789-42.2,24.926L0,90.163a2.762,2.762,0,0,1,.344-.43q35.068-35.068,81.31-43.319V0h51.571V45.382Q135.976,45.728,138.725,46.156ZM82.6,299.368a4.5,4.5,0,0,1-.945-.258V301Z" transform="translate(45.468 0)" fill="#fba52b" fill-rule="evenodd"/>
+          <path id="Caminho_78645" data-name="Caminho 78645" d="M68.933,47.531q-15.386,23.98-15.385,54.407,0,27.675,12.807,50.11l-29.4,50.883Q0,160.042,0,101.938,0,50.455,29.051,10.916Zm206.8,155.486-39.538-36.271q22.864-27.678,22.863-64.807,0-28.452-13.408-51.313L274.872,0q37.819,43.147,37.818,101.938Q312.69,160.128,275.731,203.016Z" transform="translate(0 98.328)" fill="#00274f" fill-rule="evenodd"/>
+        </g>
+      </g>
+    </g>
+    <text id="ZER" transform="translate(-313.158 274.616)" fill="#00274f" font-size="249" font-family="CenturyGothic-Bold, Century Gothic" font-weight="700"><tspan x="0" y="0">ZER</tspan></text>
+    <text id="BITO" transform="translate(422.274 271.616)" fill="#00274f" font-size="246" font-family="CenturyGothic-Bold, Century Gothic" font-weight="700"><tspan x="0" y="0">BITO</tspan></text>
+  </g>
+</svg>
