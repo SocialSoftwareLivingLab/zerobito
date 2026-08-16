@@ -17,7 +17,8 @@ const STATUS_ORDER = [
     'EM_PLANEJAMENTO',
     'EM_INVESTIGACAO',
     'EM_INTERVENCAO',
-    'INTERVENCAO_FINALIZADA'
+    'INTERVENCAO_FINALIZADA',
+    'EM_FINALIZACAO'
 ];
 
 function statusIndex(status: string): number {
@@ -77,13 +78,13 @@ const menus: MenuNavegacao[] = [
         titulo: 'Finalização',
         icone: <BiCheckDouble />,
         url: (caso) => `${caso.id}/finalizacao`,
-        minStatus: 'INTERVENCAO_FINALIZADA'
+        minStatus: 'EM_FINALIZACAO'
     },
     {
         titulo: 'Avaliação Externa',
         icone: <RiShieldCheckFill />,
         url: (caso) => `${caso.id}/avaliacao-externa`,
-        minStatus: 'INTERVENCAO_FINALIZADA'
+        minStatus: 'EM_FINALIZACAO'
     }
 ];
 

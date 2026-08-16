@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import {
@@ -66,8 +66,15 @@ export default function MapaInvestigacao(): JSX.Element {
     const [etapasServidor, setEtapasServidor] = useState<MapaEtapa[]>([]);
     const [abertas, setAbertas] = useState<number[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [isAlterando, setIsAlterando] = useState<boolean>(false);
+    const [salvandoIds, setSalvandoIds] = useState<Set<number>>(new Set());
     const [erro, setErro] = useState<string | null>(null);
+
+    const etapasRef = useRef<MapaEtapa[]>([]);
+    const debounceTimers = useRef<Map<number, ReturnType<typeof setTimeout>>>(new Map());
+
+    useEffect(() => {
+        etapasRef.current = etapas;
+    }, [etapas]);
 
     const carregarEtapas = useCallback(async (): Promise<void> => {
         try {
@@ -84,36 +91,49 @@ export default function MapaInvestigacao(): JSX.Element {
         }
     }, [caso.id]);
 
-    /** Atualiza uma etapa localmente (sem enviar ao backend ainda) */
     const atualizarEtapaLocal = (id: number, data: Partial<MapaEtapa>): void => {
         setEtapas((prev) => prev.map((etapa) => (etapa.id === id ? { ...etapa, ...data } : etapa)));
     };
 
-    /** Salva alterações no backend apenas quando clicado */
-    const salvarEtapa = async (etapa: MapaEtapa): Promise<void> => {
+    const autoSalvarEtapa = async (etapa: MapaEtapa): Promise<void> => {
+        setSalvandoIds((prev) => new Set(prev).add(etapa.id));
         try {
-            setIsAlterando(true);
             await alterarMapaEtapa({
                 idCaso: caso.id,
                 name: etapa.name,
                 novoStatus: etapa.status,
                 descricao: etapa.descricao ?? undefined
             });
-            await carregarEtapas();
+            setEtapasServidor((prev) => prev.map((e) => (e.id === etapa.id ? { ...etapa } : e)));
         } catch (err) {
             console.error(err);
             setErro('Erro ao salvar alterações da etapa.');
         } finally {
-            setIsAlterando(false);
+            setSalvandoIds((prev) => {
+                const next = new Set(prev);
+                next.delete(etapa.id);
+                return next;
+            });
         }
     };
 
-    const cancelarEtapa = (id: number): void => {
-        const original = etapasServidor.find((e) => e.id === id);
-        if (original) {
-            setEtapas((prev) => prev.map((e) => (e.id === id ? { ...original } : e)));
-        }
-        setAbertas((prev) => prev.filter((x) => x !== id));
+    const handleDescricaoChange = (id: number, valor: string): void => {
+        atualizarEtapaLocal(id, { descricao: valor });
+        const timer = debounceTimers.current.get(id);
+        if (timer) clearTimeout(timer);
+        debounceTimers.current.set(
+            id,
+            setTimeout(() => {
+                const etapa = etapasRef.current.find((e) => e.id === id);
+                if (etapa) autoSalvarEtapa({ ...etapa, descricao: valor });
+            }, 800)
+        );
+    };
+
+    const handleStatusChange = (id: number, novoStatus: MapaEtapaStatusEnum): void => {
+        atualizarEtapaLocal(id, { status: novoStatus });
+        const etapa = etapasRef.current.find((e) => e.id === id);
+        if (etapa) autoSalvarEtapa({ ...etapa, status: novoStatus });
     };
 
     /** Controle de colapso */
@@ -221,9 +241,7 @@ export default function MapaInvestigacao(): JSX.Element {
                                             value={etapa.descricao ?? ''}
                                             placeholder="Adicione uma descrição..."
                                             onChange={(e) =>
-                                                atualizarEtapaLocal(etapa.id, {
-                                                    descricao: e.target.value
-                                                })
+                                                handleDescricaoChange(etapa.id, e.target.value)
                                             }
                                         />
 
@@ -234,12 +252,12 @@ export default function MapaInvestigacao(): JSX.Element {
                                             <Select
                                                 label=""
                                                 value={etapa.status}
-                                                disabled={isAlterando}
+                                                disabled={salvandoIds.has(etapa.id)}
                                                 onChange={(e) =>
-                                                    atualizarEtapaLocal(etapa.id, {
-                                                        status: e.target
-                                                            .value as MapaEtapaStatusEnum
-                                                    })
+                                                    handleStatusChange(
+                                                        etapa.id,
+                                                        e.target.value as MapaEtapaStatusEnum
+                                                    )
                                                 }>
                                                 <SelectOption
                                                     label="Em elaboração"
@@ -254,18 +272,11 @@ export default function MapaInvestigacao(): JSX.Element {
                                                     value={MapaEtapaStatusEnum.BLOQUEADA}
                                                 />
                                             </Select>
-
-                                            <Button
-                                                type="default"
-                                                action={() => cancelarEtapa(etapa.id)}
-                                                disabled={isAlterando}>
-                                                Cancelar
-                                            </Button>
-                                            <Button
-                                                action={() => salvarEtapa(etapa)}
-                                                disabled={isAlterando}>
-                                                Salvar
-                                            </Button>
+                                            {salvandoIds.has(etapa.id) && (
+                                                <span style={{ fontSize: '0.8rem', color: '#888' }}>
+                                                    Salvando...
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                 )}

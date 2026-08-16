@@ -11,7 +11,8 @@ const statusLabel: Record<string, string> = {
     EM_PLANEJAMENTO: 'Em Planejamento',
     EM_INVESTIGACAO: 'Em Investigação',
     EM_INTERVENCAO: 'Em Intervenção',
-    INTERVENCAO_FINALIZADA: 'Intervenção Finalizada'
+    INTERVENCAO_FINALIZADA: 'Intervenção Finalizada',
+    EM_FINALIZACAO: 'Finalização'
 };
 
 export function CasoInfo() {
