@@ -21,11 +21,11 @@ function BotoesAcoesIntervencao() {
     const basePath = location.pathname.replace(/\/intervencao.*$/, '');
 
     const handleFinalizar = useCallback(async () => {
-        const pode = await podeFinalizarIntervencao(caso.id);
+        const { podeFinalizar, mensagem } = await podeFinalizarIntervencao(caso.id);
 
-        if (!pode) {
+        if (!podeFinalizar) {
             Swal.fire({
-                text: 'Para finalizar é necessário ter ao menos uma ação concluída com êxito ou de forma satisfatória.',
+                text: mensagem,
                 icon: 'warning',
                 confirmButtonText: 'Entendido'
             });

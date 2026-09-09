@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 import { editDataObito } from '../../common/api/casos/datas-dossie/alterar-data-obito';
 import { editData } from '../../common/api/casos/datas-dossie/alterar-data';
 import { getReunioes } from '../../common/api/casos/planejamento/get-reunioes-marcadas';
+import ArquivosCaso from '../../pages/Caso/Dossie/ArquivosCaso';
 
 interface DossieCardProps {
     caso: Caso;
@@ -255,6 +256,9 @@ export function DossieCard({ caso }: DossieCardProps) {
                     {' '}
                     <BsPaperclip /> Arquivos
                 </h3>
+            </div>
+            <div>
+                <ArquivosCaso idCaso={caso.id} />
             </div>
 
             <div className="blue-line">
