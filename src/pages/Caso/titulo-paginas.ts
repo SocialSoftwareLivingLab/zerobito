@@ -57,5 +57,11 @@ export const tituloPaginas: InfoPaginaCaso[] = [
         path: '/casos/:id/intervencao/:intervencaoId/editar',
         titulo: 'Editar Intervenção',
         explicacao: 'Edite os dados da ação de intervenção'
+    },
+    {
+        path: '/casos/:id/finalizacao',
+        titulo: 'Avaliação Final',
+        explicacao:
+            'Aqui o Coordenador Local tem uma visão geral sobre o caso e pode decidir por finalizá-lo.'
     }
 ];

@@ -30,6 +30,7 @@ import Investigacao from '../../pages/Caso/Investigacao';
 import Intervencao from '../../pages/Caso/Intervencao';
 import NovaIntervencao from '../../pages/Caso/Intervencao/NovaIntervencao';
 import EditarIntervencao from '../../pages/Caso/Intervencao/EditarIntervencao';
+import Finalizacao from '../../pages/Caso/Finalizacao';
 
 interface PrivateRouteConfig {
     path: string;
@@ -82,6 +83,7 @@ const AppRoutes = () => {
                             path=":id/intervencao/:intervencaoId/editar"
                             element={<EditarIntervencao />}
                         />
+                        <Route path=":id/finalizacao" element={<Finalizacao />} />
                     </Route>
                 </Route>
                 <Route path="/convites/:token" element={<CasoConvite />} />
