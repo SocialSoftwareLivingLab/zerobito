@@ -10,6 +10,10 @@ import CasoNavegacaoItem from './CasoNavegacaoItem';
 import { CasoNavegacaoContainer } from './styles';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import Swal from 'sweetalert2';
+import {
+    MENSAGEM_BLOQUEIO_FINALIZACAO,
+    useAcessoFinalizacao
+} from '../../../pages/Caso/Finalizacao/use-acesso-finalizacao';
 
 const STATUS_ORDER = [
     'AGUARDANDO_NOTIFICACOES',
@@ -92,13 +96,26 @@ export function CasoNavegacao() {
     const { caso } = useCasoSelecionado();
     const location = useLocation();
     const currentStatusIdx = statusIndex(caso.status);
+    const acessoFinalizacao = useAcessoFinalizacao(
+        currentStatusIdx >= statusIndex('EM_FINALIZACAO')
+    );
 
     return (
         <CasoNavegacaoContainer>
             <header>
                 {menus.map((menu, index) => {
-                    const isAccessible =
+                    const atingiuEtapa =
                         menu.minStatus === null || currentStatusIdx >= statusIndex(menu.minStatus);
+                    const bloqueadoNaFinalizacao =
+                        menu.titulo === 'Finalização' &&
+                        !acessoFinalizacao.carregando &&
+                        !acessoFinalizacao.liberado;
+                    const isAccessible = atingiuEtapa && !bloqueadoNaFinalizacao;
+
+                    const mensagemBloqueio =
+                        atingiuEtapa && bloqueadoNaFinalizacao && acessoFinalizacao.motivo
+                            ? MENSAGEM_BLOQUEIO_FINALIZACAO[acessoFinalizacao.motivo]
+                            : `Não é possível acessar "${menu.titulo}" enquanto o caso não está nessa etapa.`;
 
                     const url = isAccessible ? menu.url(caso) : '#';
 
@@ -106,7 +123,7 @@ export function CasoNavegacao() {
                         ? undefined
                         : () =>
                               Swal.fire({
-                                  text: `Não é possível acessar "${menu.titulo}" enquanto o caso não está nessa etapa.`,
+                                  text: mensagemBloqueio,
                                   icon: 'error',
                                   timer: 2000,
                                   showConfirmButton: false,

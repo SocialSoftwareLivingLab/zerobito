@@ -1,17 +1,22 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FaFileAlt, FaSort } from 'react-icons/fa';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
+import { useUsuarioAutenticado } from '../../../../contexts/usuario-autenticado';
 import {
     atualizarAtorRelatorioFinalizacao,
     AtorRelatorioFinalizacao,
     buscarRelatorioFinalizacao,
+    listarComentariosRelatorio,
     RelatorioFinalizacao,
     StatusRelatorioFinalizacaoEnum
 } from '../../../../common/api/casos/finalizacao/relatorio-finalizacao';
 import { MapaContainer } from '../../Investigacao/Etapas/styles';
+import { usePermissoesFinalizacao } from '../use-permissoes-finalizacao';
+import ComentarioAtor from './ComentarioAtor';
+import ListaComentarios from './ListaComentarios';
 
 const STATUS_EDITAVEIS = [
     StatusRelatorioFinalizacaoEnum.RASCUNHO,
@@ -20,6 +25,7 @@ const STATUS_EDITAVEIS = [
 
 export default function AtoresFinalizacao(): JSX.Element {
     const { caso } = useCasoSelecionado();
+    const { data: usuario } = useUsuarioAutenticado();
     const queryClient = useQueryClient();
     const queryKey = ['relatorio-finalizacao', caso.id];
 
@@ -29,6 +35,7 @@ export default function AtoresFinalizacao(): JSX.Element {
     const [erro, setErro] = useState<string | null>(null);
 
     const debounceTimers = useRef<Map<number, ReturnType<typeof setTimeout>>>(new Map());
+    const expandiuInicial = useRef(false);
 
     const {
         data: relatorio,
@@ -39,9 +46,31 @@ export default function AtoresFinalizacao(): JSX.Element {
         queryFn: () => buscarRelatorioFinalizacao(caso.id)
     });
 
+    const {
+        podeVisualizar,
+        podeEditar,
+        podeComentar: comentaNoRelatorio
+    } = usePermissoesFinalizacao();
+
+    const { data: comentarios = [], isLoading: isLoadingComentarios } = useQuery({
+        queryKey: ['relatorio-finalizacao', 'comentarios', caso.id],
+        queryFn: () => listarComentariosRelatorio(caso.id),
+        enabled: podeVisualizar
+    });
+
     const atores = relatorio?.atores ?? [];
-    const editavel = !!relatorio && STATUS_EDITAVEIS.includes(relatorio.status);
+    const editavel = podeEditar && !!relatorio && STATUS_EDITAVEIS.includes(relatorio.status);
+    const podeComentar =
+        comentaNoRelatorio && relatorio?.status === StatusRelatorioFinalizacaoEnum.REVISAO;
     const todosAbertos = atores.length > 0 && abertos.length === atores.length;
+
+    // O membro do GT chega para revisar e comentar, então os atores já abrem expandidos.
+    useEffect(() => {
+        if (comentaNoRelatorio && relatorio && !expandiuInicial.current) {
+            expandiuInicial.current = true;
+            setAbertos(relatorio.atores.map((a) => a.id));
+        }
+    }, [comentaNoRelatorio, relatorio]);
 
     const textoAtual = (ator: AtorRelatorioFinalizacao): string =>
         textos[ator.id] ?? ator.descricao ?? '';
@@ -91,7 +120,8 @@ export default function AtoresFinalizacao(): JSX.Element {
         setAbertos(todosAbertos ? [] : atores.map((a) => a.id));
     };
 
-    if (isLoading) return <p>Carregando relatório de finalização...</p>;
+    if (isLoading || (podeVisualizar && isLoadingComentarios))
+        return <p>Carregando relatório de finalização...</p>;
     if (isError) return <p className="text-red-500">Erro ao carregar relatório de finalização.</p>;
 
     return (
@@ -114,6 +144,11 @@ export default function AtoresFinalizacao(): JSX.Element {
                 <MapaContainer>
                     {atores.map((ator, index) => {
                         const aberto = abertos.includes(ator.id);
+                        const comentariosDoAtor = comentarios.filter(
+                            (c) => String(c.atorId) === String(ator.id)
+                        );
+                        const ehMeu = (c: (typeof comentarios)[number]) =>
+                            String(c.autor.id) === String(usuario?.id);
 
                         return (
                             <div key={ator.id} className="etapa-item">
@@ -136,27 +171,77 @@ export default function AtoresFinalizacao(): JSX.Element {
 
                                 {aberto && (
                                     <div className="etapa-conteudo">
+                                        {comentaNoRelatorio && (
+                                            <span
+                                                style={{
+                                                    display: 'block',
+                                                    color: '#134780',
+                                                    fontWeight: 600,
+                                                    fontSize: '0.85rem'
+                                                }}>
+                                                Descrição do coordenador
+                                            </span>
+                                        )}
                                         <textarea
                                             className="descricao-etapa"
                                             value={textoAtual(ator)}
-                                            disabled={!editavel}
-                                            placeholder={`Descreva as informações sobre ${ator.ator.toLowerCase()}...`}
-                                            onChange={(e) =>
-                                                handleDescricaoChange(ator.id, e.target.value)
+                                            readOnly={!editavel}
+                                            style={
+                                                editavel
+                                                    ? undefined
+                                                    : {
+                                                          backgroundColor: '#f8fafc',
+                                                          color: '#475569',
+                                                          resize: 'none',
+                                                          cursor: 'default'
+                                                      }
                                             }
+                                            placeholder={
+                                                editavel
+                                                    ? `Descreva as informações sobre ${ator.ator.toLowerCase()}...`
+                                                    : 'O coordenador ainda não descreveu este item.'
+                                            }
+                                            onChange={(e) => {
+                                                if (editavel)
+                                                    handleDescricaoChange(ator.id, e.target.value);
+                                            }}
                                         />
-                                        <div className="acoes-etapa">
-                                            <span
-                                                style={{
-                                                    fontSize: '0.8rem',
-                                                    color: '#888',
-                                                    visibility: salvandoIds.has(ator.id)
-                                                        ? 'visible'
-                                                        : 'hidden'
-                                                }}>
-                                                Salvando...
-                                            </span>
-                                        </div>
+                                        {comentaNoRelatorio ? (
+                                            <>
+                                                <ComentarioAtor
+                                                    idCaso={caso.id}
+                                                    idAtor={ator.id}
+                                                    idUsuario={usuario?.id}
+                                                    comentario={comentariosDoAtor.find(ehMeu)}
+                                                    habilitado={podeComentar}
+                                                />
+                                                <ListaComentarios
+                                                    titulo="Comentários de outros membros"
+                                                    comentarios={comentariosDoAtor.filter(
+                                                        (c) => !ehMeu(c)
+                                                    )}
+                                                />
+                                            </>
+                                        ) : (
+                                            <div className="acoes-etapa">
+                                                <span
+                                                    style={{
+                                                        fontSize: '0.8rem',
+                                                        color: '#888',
+                                                        visibility: salvandoIds.has(ator.id)
+                                                            ? 'visible'
+                                                            : 'hidden'
+                                                    }}>
+                                                    Salvando...
+                                                </span>
+                                            </div>
+                                        )}
+                                        {podeVisualizar && !comentaNoRelatorio && (
+                                            <ListaComentarios
+                                                titulo="Comentários do grupo de trabalho"
+                                                comentarios={comentariosDoAtor}
+                                            />
+                                        )}
                                     </div>
                                 )}
                             </div>
