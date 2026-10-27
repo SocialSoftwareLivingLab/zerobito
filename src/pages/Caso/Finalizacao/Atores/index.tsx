@@ -14,7 +14,7 @@ import {
     StatusRelatorioFinalizacaoEnum
 } from '../../../../common/api/casos/finalizacao/relatorio-finalizacao';
 import { MapaContainer } from '../../Investigacao/Etapas/styles';
-import { usePapelNoCaso } from '../use-papel-no-caso';
+import { usePermissoesFinalizacao } from '../use-permissoes-finalizacao';
 import ComentarioAtor from './ComentarioAtor';
 import ListaComentarios from './ListaComentarios';
 
@@ -46,29 +46,31 @@ export default function AtoresFinalizacao(): JSX.Element {
         queryFn: () => buscarRelatorioFinalizacao(caso.id)
     });
 
-    const papel = usePapelNoCaso();
-    const ehMembroGrupoTrabalho = papel === 'membro';
+    const {
+        podeVisualizar,
+        podeEditar,
+        podeComentar: comentaNoRelatorio
+    } = usePermissoesFinalizacao();
 
     const { data: comentarios = [], isLoading: isLoadingComentarios } = useQuery({
         queryKey: ['relatorio-finalizacao', 'comentarios', caso.id],
         queryFn: () => listarComentariosRelatorio(caso.id),
-        enabled: papel !== null
+        enabled: podeVisualizar
     });
 
     const atores = relatorio?.atores ?? [];
-    const editavel =
-        papel === 'coordenador' && !!relatorio && STATUS_EDITAVEIS.includes(relatorio.status);
+    const editavel = podeEditar && !!relatorio && STATUS_EDITAVEIS.includes(relatorio.status);
     const podeComentar =
-        ehMembroGrupoTrabalho && relatorio?.status === StatusRelatorioFinalizacaoEnum.REVISAO;
+        comentaNoRelatorio && relatorio?.status === StatusRelatorioFinalizacaoEnum.REVISAO;
     const todosAbertos = atores.length > 0 && abertos.length === atores.length;
 
     // O membro do GT chega para revisar e comentar, então os atores já abrem expandidos.
     useEffect(() => {
-        if (ehMembroGrupoTrabalho && relatorio && !expandiuInicial.current) {
+        if (comentaNoRelatorio && relatorio && !expandiuInicial.current) {
             expandiuInicial.current = true;
             setAbertos(relatorio.atores.map((a) => a.id));
         }
-    }, [ehMembroGrupoTrabalho, relatorio]);
+    }, [comentaNoRelatorio, relatorio]);
 
     const textoAtual = (ator: AtorRelatorioFinalizacao): string =>
         textos[ator.id] ?? ator.descricao ?? '';
@@ -118,7 +120,7 @@ export default function AtoresFinalizacao(): JSX.Element {
         setAbertos(todosAbertos ? [] : atores.map((a) => a.id));
     };
 
-    if (isLoading || (papel !== null && isLoadingComentarios))
+    if (isLoading || (podeVisualizar && isLoadingComentarios))
         return <p>Carregando relatório de finalização...</p>;
     if (isError) return <p className="text-red-500">Erro ao carregar relatório de finalização.</p>;
 
@@ -169,7 +171,7 @@ export default function AtoresFinalizacao(): JSX.Element {
 
                                 {aberto && (
                                     <div className="etapa-conteudo">
-                                        {ehMembroGrupoTrabalho && (
+                                        {comentaNoRelatorio && (
                                             <span
                                                 style={{
                                                     display: 'block',
@@ -204,7 +206,7 @@ export default function AtoresFinalizacao(): JSX.Element {
                                                     handleDescricaoChange(ator.id, e.target.value);
                                             }}
                                         />
-                                        {ehMembroGrupoTrabalho ? (
+                                        {comentaNoRelatorio ? (
                                             <>
                                                 <ComentarioAtor
                                                     idCaso={caso.id}
@@ -234,7 +236,7 @@ export default function AtoresFinalizacao(): JSX.Element {
                                                 </span>
                                             </div>
                                         )}
-                                        {papel === 'coordenador' && (
+                                        {podeVisualizar && !comentaNoRelatorio && (
                                             <ListaComentarios
                                                 titulo="Comentários do grupo de trabalho"
                                                 comentarios={comentariosDoAtor}

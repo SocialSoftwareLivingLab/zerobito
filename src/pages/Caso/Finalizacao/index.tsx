@@ -4,20 +4,20 @@ import AtoresFinalizacao from './Atores';
 import StatusFinalizacao from './Status';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { usePapelNoCaso } from './use-papel-no-caso';
-import { useAcessoFinalizacao } from './use-acesso-finalizacao';
+import { usePermissoesFinalizacao } from './use-permissoes-finalizacao';
+import { MENSAGEM_BLOQUEIO_FINALIZACAO, useAcessoFinalizacao } from './use-acesso-finalizacao';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 
 export default function Finalizacao() {
     const { caso } = useCasoSelecionado();
-    const papel = usePapelNoCaso();
-    const { liberado, carregando } = useAcessoFinalizacao();
+    const { podeEditar } = usePermissoesFinalizacao();
+    const { liberado, carregando, motivo } = useAcessoFinalizacao();
 
     if (carregando) return <p>Carregando...</p>;
 
     if (!liberado) {
         Swal.fire({
-            text: 'A finalização estará disponível quando o relatório for submetido ao GT.',
+            text: MENSAGEM_BLOQUEIO_FINALIZACAO[motivo ?? 'sem-permissao'],
             icon: 'error',
             timer: 2000,
             showConfirmButton: false,
@@ -31,7 +31,7 @@ export default function Finalizacao() {
     return (
         <FinalizacaoContainer>
             <StatusFinalizacao />
-            {papel === 'coordenador' && <AcoesFinalizacao />}
+            {podeEditar && <AcoesFinalizacao />}
             <AtoresFinalizacao />
         </FinalizacaoContainer>
     );

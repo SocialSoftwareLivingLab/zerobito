@@ -10,7 +10,10 @@ import CasoNavegacaoItem from './CasoNavegacaoItem';
 import { CasoNavegacaoContainer } from './styles';
 import { useCasoSelecionado } from '../../../contexts/caso-selecionado';
 import Swal from 'sweetalert2';
-import { useAcessoFinalizacao } from '../../../pages/Caso/Finalizacao/use-acesso-finalizacao';
+import {
+    MENSAGEM_BLOQUEIO_FINALIZACAO,
+    useAcessoFinalizacao
+} from '../../../pages/Caso/Finalizacao/use-acesso-finalizacao';
 
 const STATUS_ORDER = [
     'AGUARDANDO_NOTIFICACOES',
@@ -103,13 +106,15 @@ export function CasoNavegacao() {
                 {menus.map((menu, index) => {
                     const atingiuEtapa =
                         menu.minStatus === null || currentStatusIdx >= statusIndex(menu.minStatus);
-                    const bloqueadoAteSubmissao =
-                        menu.titulo === 'Finalização' && !acessoFinalizacao.liberado;
-                    const isAccessible = atingiuEtapa && !bloqueadoAteSubmissao;
+                    const bloqueadoNaFinalizacao =
+                        menu.titulo === 'Finalização' &&
+                        !acessoFinalizacao.carregando &&
+                        !acessoFinalizacao.liberado;
+                    const isAccessible = atingiuEtapa && !bloqueadoNaFinalizacao;
 
                     const mensagemBloqueio =
-                        atingiuEtapa && bloqueadoAteSubmissao
-                            ? 'A finalização estará disponível quando o relatório for submetido ao GT.'
+                        atingiuEtapa && bloqueadoNaFinalizacao && acessoFinalizacao.motivo
+                            ? MENSAGEM_BLOQUEIO_FINALIZACAO[acessoFinalizacao.motivo]
                             : `Não é possível acessar "${menu.titulo}" enquanto o caso não está nessa etapa.`;
 
                     const url = isAccessible ? menu.url(caso) : '#';
