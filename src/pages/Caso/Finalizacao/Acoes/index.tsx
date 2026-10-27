@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
-import { FaCommentAlt, FaFileAlt, FaGavel, FaShieldAlt } from 'react-icons/fa';
+import { FaFileAlt, FaGavel, FaShieldAlt } from 'react-icons/fa';
 import { BoxContainer } from '../../../../components/ui/BoxContainer';
 import { Button } from '../../../../components/ui/Button';
 import { useCasoSelecionado } from '../../../../contexts/caso-selecionado';
@@ -21,6 +22,16 @@ function BotoesAcoesFinalizacao() {
     });
 
     const handleSubmeterAoGT = async () => {
+        if (relatorio?.status !== StatusRelatorioFinalizacaoEnum.RASCUNHO) {
+            Swal.fire({
+                title: 'Não é possível submeter ao GT',
+                text: 'Somente relatórios em rascunho podem ser submetidos ao GT.',
+                icon: 'error',
+                confirmButtonText: 'Entendido'
+            });
+            return;
+        }
+
         const confirm = await Swal.fire({
             title: 'Submeter ao GT?',
             text: 'O relatório passará para o estado de revisão.',
@@ -41,12 +52,13 @@ function BotoesAcoesFinalizacao() {
                 timer: 2000,
                 showConfirmButton: false
             });
-        } catch {
+        } catch (err) {
+            const mensagem = (err as AxiosError<{ message?: string }>).response?.data?.message;
             Swal.fire({
-                text: 'Erro ao submeter relatório ao GT.',
+                title: 'Não é possível submeter ao GT',
+                text: mensagem ?? 'Erro ao submeter relatório ao GT.',
                 icon: 'error',
-                timer: 3000,
-                showConfirmButton: false
+                confirmButtonText: 'Entendido'
             });
         }
     };
@@ -57,15 +69,9 @@ function BotoesAcoesFinalizacao() {
                 <FaFileAlt />
                 Rever Termo
             </Button>
-            <Button
-                action={handleSubmeterAoGT}
-                disabled={relatorio?.status !== StatusRelatorioFinalizacaoEnum.RASCUNHO}>
+            <Button action={handleSubmeterAoGT}>
                 <FaGavel />
                 Submeter ao GT
-            </Button>
-            <Button>
-                <FaCommentAlt />
-                Comentários
             </Button>
             <Button>
                 <FaShieldAlt />

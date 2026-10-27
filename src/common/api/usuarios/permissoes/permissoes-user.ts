@@ -6,6 +6,7 @@ export interface Permissoes {
 
 export interface Perfil {
     id: number;
+    codigo: string;
     nome: string;
     permissoes: Permissoes[];
 }
