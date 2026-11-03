@@ -49,3 +49,32 @@ export async function atualizarAtorRelatorioFinalizacao(
 export async function submeterRelatorioFinalizacaoAoGT(idCaso: number) {
     await api.post(`/api/v1/casos/${idCaso}/finalizacao/relatorio/submeter-gt`);
 }
+
+export interface ComentarioAtorRelatorio {
+    id: number;
+    atorId: number;
+    texto: string;
+    autor: { id: number; nome: string };
+    dataAtualizacao: string;
+}
+
+export async function listarComentariosRelatorio(
+    idCaso: number
+): Promise<ComentarioAtorRelatorio[]> {
+    const { data } = await api.get<ComentarioAtorRelatorio[]>(
+        `/api/v1/casos/${idCaso}/finalizacao/relatorio/comentarios`
+    );
+    return data;
+}
+
+export async function salvarComentarioAtorRelatorio(
+    idCaso: number,
+    idAtor: number,
+    texto: string
+): Promise<ComentarioAtorRelatorio | null> {
+    const { data } = await api.put<ComentarioAtorRelatorio | null>(
+        `/api/v1/casos/${idCaso}/finalizacao/relatorio/atores/${idAtor}/comentario`,
+        { texto }
+    );
+    return data || null;
+}
